@@ -4,6 +4,21 @@
     "status": "Waiting",
     "regridCount": 1,
     "activeSide": null,
-    "lastHistory": "[탈거] 일시:2026-06-09 14 | 라인:5-1 | 유닛:Upper | 작업자:JY | 비고:"
+    "lastHistory": "[íê±°] ì¼ì:2026-06-09 14 | ë¼ì¸:5-1 | ì ë:Upper | ììì:JY | ë¹ê³ :"
+  },
+  {
+    "id": "LCAJHY1001CU656X1.8",
+    "toolType": "",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 생산 라인 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T06:28:52.110Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
