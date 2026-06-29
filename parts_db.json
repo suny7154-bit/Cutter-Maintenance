@@ -73,9 +73,9 @@
     "id": "LCAJHY4000CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "regridCount": 0,
-    "lastHistory": "[탈거] 일시:2026-06-29 04시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-06-25 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-06-29T08:09:08.640Z",
@@ -91,6 +91,11 @@
         "timestamp": "2026-06-29T08:53:32.564Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-06-29 04시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-06-29T08:55:35.452Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-06-25 | 비고:"
       }
     ]
   },
