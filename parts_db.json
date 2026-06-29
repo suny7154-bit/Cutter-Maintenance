@@ -75,5 +75,20 @@
         "log": "[탈거] 일시:2026-06-30 02 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
       }
     ]
+  },
+  {
+    "id": "LCAJYJ1001FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "유진",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 생산 라인 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T06:49:11.824Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
