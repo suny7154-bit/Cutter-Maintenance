@@ -3,140 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (Excel 통합판)</title>
-    <!-- 엑셀 파일 생성을 위한 라이브러리 로드 -->
+    <title>⚙️ 부품 생애주기 시스템 (Grid-Input 통합판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
-        :root {
-            --bg-color: #f4f6f9;
-            --card-color: #ffffff;
-            --text-color: #333333;
-            --primary-color: #007bff;
-            --border-color: #dddddd;
-        }
+        :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; }
         .login-banner { background: #343a40; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; }
-        .login-banner input { width: 200px; padding: 8px; border: none; border-radius: 4px; }
+        .login-banner input { width: 180px; padding: 8px; border: none; border-radius: 4px; }
         .login-banner button { background: #17a2b8; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; display: flex; gap: 20px; }
         .sidebar { width: 280px; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .main-content { flex: 1; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        h1, h2, h3 { margin-top: 0; }
-        .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 15px; transition: all 0.2s; }
+        h2, h3 { margin-top: 0; }
+        .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s; font-weight: bold; }
         .menu-btn:hover, .menu-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .form-group { margin-bottom: 15px; border: 1px dashed #ccc; padding: 15px; border-radius: 6px; background: #fafafa; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], select { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; }
-        button.action-btn { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button.action-btn:hover { background: #218838; }
-        .type-badge { inline-size: max-content; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: bold; margin-top: 5px; display: none; }
-        .badge-18 { background: #e3f2fd; color: #0d47a1; display: inline-block; }
-        .badge-12 { background: #f3e5f5; color: #4a148c; display: inline-block; }
-        .badge-lw { background: #fff3e0; color: #e65100; display: inline-block; }
+        
+        /* 테이블 그리드 스타일 */
+        .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
+        .grid-table th { background: #e9ecef; font-size: 14px; }
+        .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; }
+        .grid-table input[readonly] { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; }
+        
+        .btn-row-control { padding: 4px 10px; font-size: 12px; cursor: pointer; margin-right: 5px; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
+        .btn-row-control:hover { background: #e2e6ea; }
+        
+        button.action-btn { color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-right: 10px; }
         .status-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .status-table th, .status-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; }
+        .status-table th, .status-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
         .status-table th { background: #f8f9fa; }
-        .summary-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
-        .summary-card { background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid var(--border-color); }
-        .summary-card h4 { margin: 0 0 5px 0; color: #666; }
-        .summary-card p { margin: 0; font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; }
         .loading { display: none; color: #d9534f; font-weight: bold; margin-bottom: 15px; padding: 10px; background: #f2dede; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<!-- 상단 로그인 바 (보안 우회용) -->
 <div class="login-banner">
-    🔑 <strong>GitHub 연동 로그인:</strong>
-    <input type="password" id="cfg-token" placeholder="GitHub 토큰 입력">
+    🔑 <strong>GitHub DB 연동:</strong>
+    <input type="password" id="cfg-token" placeholder="GitHub 토큰">
     <input type="text" id="cfg-owner" placeholder="GitHub 유저명">
-    <input type="text" id="cfg-repo" placeholder="레포지토리 이름">
+    <input type="text" id="cfg-repo" placeholder="레포지토리명">
     <button onclick="connectDB()">DB 연결</button>
 </div>
 
 <div class="container">
     <div class="sidebar">
-        <h2>⚙️ 부품 시스템</h2>
-        <button class="menu-btn active" onclick="switchMenu('home')">📊 0. Home (통계)</button>
-        <button class="menu-btn" onclick="switchMenu('register')">🆕 1. 신규 부품 등록</button>
-        <button class="menu-btn" onclick="switchMenu('equip')">🔧 2. 장비 장착/탈거</button>
-        <button class="menu-btn" onclick="switchMenu('excel-io')">📥 3. 엑셀 업로드/편집</button>
+        <h2>부품 제어 센터</h2>
+        <button class="menu-btn active" onclick="switchMenu('home')">📊 0. 실시간 현황 요약</button>
+        <button class="menu-btn" onclick="switchMenu('register')">🆕 1. 신규 부품 일괄 등록</button>
+        <button class="menu-btn" onclick="switchMenu('equip')">🔧 2. 장비 장착 / 탈거 실행</button>
+        <button class="menu-btn" onclick="switchMenu('ship-out')">🚛 3. 연마 출하 관리</button>
+        <button class="menu-btn" onclick="switchMenu('ship-in')">📥 4. 연마 입고 관리</button>
+        <button class="menu-btn" onclick="switchMenu('excel-io')">💾 5. 마스터 엑셀 Export/Import</button>
     </div>
 
     <div class="main-content">
-        <div id="loading-indicator" class="loading">⚠️ GitHub DB 통신 및 락(Lock) 체크 중... 창을 닫지 마세요.</div>
+        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 자물쇠(Lock) 확인 중... 창을 이동하지 마세요.</div>
         
         <!-- 0. HOME 화면 -->
         <div id="menu-home" class="menu-section">
-            <h2>📊 부품 재고 통계 Summary</h2>
-            <div class="summary-box">
-                <div class="summary-card"><h4>1.8도 상도 (*X1.8)</h4><p id="count-18">0 EA</p></div>
-                <div class="summary-card"><h4>1.2도 상도 (*X1.2)</h4><p id="count-12">0 EA</p></div>
-                <div class="summary-card"><h4>LW (하도 *10.0/*20.0)</h4><p id="count-lw">0 EA</p></div>
-            </div>
-            <h3>■ 전체 커터 현황 리스트</h3>
+            <h2>📊 부품 마스터 실시간 현황</h2>
             <table class="status-table">
                 <thead>
                     <tr>
-                        <th>부품 ID</th>
-                        <th>커터 타입</th>
+                        <th>Tool ID</th>
+                        <th>Tool Type</th>
+                        <th>제작사</th>
                         <th>현재 상태</th>
                         <th>누적 연마 횟수</th>
-                        <th>하도 사용면</th>
+                        <th>최근 변경 이력</th>
                     </tr>
                 </thead>
                 <tbody id="summary-table-body">
-                    <tr><td colspan="5">상단에 GitHub 정보를 입력한 후 [DB 연결]을 눌러주세요.</td></tr>
+                    <tr><td colspan="6">상단에 GitHub 정보를 입력한 후 [DB 연결]을 눌러주세요.</td></tr>
                 </tbody>
             </table>
         </div>
 
         <!-- 1. 신규 부품 등록 -->
         <div id="menu-register" class="menu-section" style="display:none;">
-            <h2>🆕 1. 신규 부품 등록</h2>
-            <div class="form-group">
-                <label for="reg-id">부품 고유 일련번호(ID) 입력</label>
-                <input type="text" id="reg-id" placeholder="ID 규칙: 끝자리에 X1.8, X1.2, 10.0, 20.0 포함 필수" oninput="detectCutterType(this, 'reg-type-div')">
-                <div id="reg-type-div"></div>
+            <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
+            <p style="font-size:13px; color:#666;">※ Tool ID를 정해진 규칙대로 입력하면 Tool Type이 실시간 자동 계산됩니다.</p>
+            <div>
+                <button class="btn-row-control" onclick="addGridRow('register')">➕ 행 추가</button>
             </div>
-            <button class="action-btn" onclick="registerPart()">부품 등록하기</button>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Tool ID</th>
+                        <th style="width: 25%;">Tool Type (자동)</th>
+                        <th style="width: 25%;">제작사</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-register-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#28a745;" onclick="submitBulkRegister()">🚀 신규 부품 일괄 등록 실행</button>
         </div>
 
         <!-- 2. 장비 장착/탈거 -->
         <div id="menu-equip" class="menu-section" style="display:none;">
-            <h2>🔧 2. 부품 장비 장착 / 탈거 및 면 뒤집기</h2>
-            <div class="form-group">
-                <label for="eq-id">부품 ID 입력</label>
-                <input type="text" id="eq-id" placeholder="부품 ID를 입력하세요" oninput="checkCurrentStatus(this)">
-                <div id="eq-type-div"></div>
+            <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
+            <div>
+                <button class="btn-row-control" onclick="addGridRow('equip')">➕ 행 추가</button>
             </div>
-            <div id="current-status-info" style="margin: 15px 0; font-weight: bold; color: #007bff;"></div>
-            
-            <div style="display: flex; gap: 10px;">
-                <button class="action-btn" id="btn-mount" onclick="updateStatus('Using')" style="background:#007bff;">장비 장착</button>
-                <button class="action-btn" id="btn-unmount" onclick="updateStatus('Waiting')" style="background:#ffc107; color:#333;">장비 탈거 (연마대기)</button>
-                <button class="action-btn" id="btn-flip" onclick="flipLwSide()" style="background:#6c757d; display:none;">🔄 하도 면 뒤집기</button>
-            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th>Tool ID</th>
+                        <th>Tool Type</th>
+                        <th>일시 (연/월/일/시)</th>
+                        <th>라인</th>
+                        <th>Unit</th>
+                        <th>작업자</th>
+                        <th>Comment</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-equip-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#007bff;" onclick="submitBulkEquip('Using')">🛠️ 일괄 장비 장착 승인</button>
+            <button class="action-btn" style="background:#ffc107; color:#333;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
 
-        <!-- 3. 엑셀 일괄 편집 UI -->
+        <!-- 3. 연마 출하 -->
+        <div id="menu-ship-out" class="menu-section" style="display:none;">
+            <h2>🚛 3. 연마 출하 관리 (대기 → 외주 연마 공장)</h2>
+            <p style="font-size:13px; color:#666;">※ 장비에서 탈거되어 'Waiting(연마대기)' 상태인 부품만 출하 리스트에 등록할 수 있습니다.</p>
+            <div>
+                <button class="btn-row-control" onclick="addGridRow('ship-out')">➕ 행 추가</button>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Tool ID</th>
+                        <th style="width: 30%;">출하 담당자</th>
+                        <th style="width: 20%;">출하 비고</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-ship-out-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#fd7e14;" onclick="submitBulkShipment('Out_Polishing')">🚛 외주 연마 일괄 출하 처리</button>
+        </div>
+
+        <!-- 4. 연마 입고 -->
+        <div id="menu-ship-in" class="menu-section" style="display:none;">
+            <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고 부러짐 현상 방지)</h2>
+            <p style="font-size:13px; color:#666;">※ 현재 외주 공장에 나가 있는 'Out_Polishing(연마중)' 상태인 부품만 다시 가공 창고로 입고 처리됩니다.</p>
+            <div>
+                <button class="btn-row-control" onclick="addGridRow('ship-in')">➕ 행 추가</button>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Tool ID</th>
+                        <th style="width: 30%;">검수자</th>
+                        <th style="width: 20%;">입고 상태 비고</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-ship-in-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#198754;" onclick="submitBulkShipment('Storage')">📥 검수 완료 및 가공 창고 입고</button>
+        </div>
+
+        <!-- 5. 엑셀 백업 UI -->
         <div id="menu-excel-io" class="menu-section" style="display:none;">
-            <h2>📥 3. 엑셀 다운로드 및 마스터 업로드 (일괄 편집)</h2>
-            <p style="color:#666; font-size:14px;">재고가 맞지 않거나 대량 등록이 필요할 때 사용하는 화면입니다. 양식을 다운받아 편집 후 다시 업로드하세요.</p>
-            
-            <div class="form-group">
-                <label>📍 Step 1: 현재 마스터 데이터 내보내기</label>
-                <button class="action-btn" onclick="downloadExcel()" style="background:#495057;">📊 현재 재고 엑셀 다운로드(.xlsx)</button>
-            </div>
-
-            <div class="form-group">
-                <label>📍 Step 2: 수정한 엑셀 파일 일괄 덮어쓰기</label>
-                <input type="file" id="excel-file-input" accept=".xlsx, .xls" style="margin-bottom: 10px;">
-                <br>
-                <button class="action-btn" onclick="uploadExcel()" style="background:#dc3545;">🚀 엑셀 데이터로 DB 전체 덮어쓰기 (위험)</button>
+            <h2>💾 5. 마스터 데이터 데이터베이스 엑셀 백업 및 대량 복구</h2>
+            <button class="action-btn" onclick="downloadExcel()" style="background:#495057;">📊 현시점 DB 마스터 엑셀 다운로드</button>
+            <br><br>
+            <div style="border: 1px dashed #ccc; padding:15px; background:#fafafa;">
+                <label style="display:block; margin-bottom:5px; font-weight:bold;">⚠️ 전체 원본 덮어쓰기 복구</label>
+                <input type="file" id="excel-file-input" accept=".xlsx, .xls"><br><br>
+                <button class="action-btn" onclick="uploadExcel()" style="background:#dc3545;">🚀 엑셀 데이터 파일 원본 강제 복구</button>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -146,32 +188,105 @@
     const DB_FILE = "parts_db.json";
     const LOCK_FILE = "db.lock";
 
-    // 자동 타입 인식 엔진 (1.8, 1.2, LW)
-    function getCutterType(id) {
-        if (!id) return null;
-        if (id.endsWith("X1.8")) return "1.8";
-        if (id.endsWith("X1.2")) return "1.2";
-        if (id.endsWith("10.0") || id.endsWith("20.0")) return "LW";
-        return "미분류";
-    }
-
-    function detectCutterType(inputEl, targetDivId) {
-        const id = inputEl.value.trim();
-        const type = getCutterType(id);
-        const targetDiv = document.getElementById(targetDivId);
-        if(!type) { targetDiv.innerHTML = ""; return; }
+    // --- Tool ID 인터락 정밀 분석 검증 엔진 ---
+    function parseAndValidateToolId(id) {
+        if (!id) return { valid: false, type: "" };
         
-        if (type === "1.8") targetDiv.innerHTML = `<span class="type-badge badge-18">확인: 1.8도 상도</span>`;
-        else if (type === "1.2") targetDiv.innerHTML = `<span class="type-badge badge-12">확인: 1.2도 상도</span>`;
-        else if (type === "LW") targetDiv.innerHTML = `<span class="type-badge badge-lw">확인: LW (하도 양면)</span>`;
-        else targetDiv.innerHTML = `<span class="type-badge" style="background:#eee; color:#666; display:inline-block;">규칙 미매칭 (업로드 시 미분류 처리됨)</span>`;
+        // 1. 기본 정규식 규격 확인 인터락
+        const regex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|01.0|02.0)$/;
+        if(!regex.test(id)) return { valid: false, type: "규격 미달" };
+        
+        // 2. 세부 조건 관계 연동 인터락 검증
+        const middleType = id.substring(8, 10); // CU, FU, CL
+        const numCode = id.substring(10, 13);    // 656, 718
+        const tailCode = id.substring(13);       // X1.8, X1.2, 01.0, 02.0
+        
+        if ((middleType === "CU" || middleType === "FU") && numCode !== "656") return { valid: false, type: "조합 에러" };
+        if (middleType === "CL" && numCode !== "718") return { valid: false, type: "조합 에러" };
+        
+        if (middleType === "CU" && tailCode !== "X1.8") return { valid: false, type: "조합 에러" };
+        if (middleType === "FU" && tailCode !== "X1.2") return { valid: false, type: "조합 에러" };
+        if (middleType === "CL" && tailCode !== "01.0" && tailCode !== "02.0") return { valid: false, type: "조합 에러" };
+        
+        // 3. Tool Type 정의 (01.0, 02.0 하도는 LW 하나의 부품으로 동일하게 관리 처리)
+        let toolType = "";
+        if (tailCode === "X1.8") toolType = "1.8도 상도";
+        else if (tailCode === "X1.2") toolType = "1.2도 상도";
+        else if (tailCode === "01.0" || tailCode === "02.0") toolType = "LW (하도)";
+        
+        return { valid: true, type: toolType };
     }
 
-    // 초기 연결
-    function connectDB() {
-        fetchDatabase();
+    // --- 라인 제약조건 검증 인터락 (1-1 ~ 6-4) ---
+    function validateLine(lineStr) {
+        const regex = /^([1-5])-[1-3]$|^6-[1-4]$/;
+        return regex.test(lineStr);
     }
 
+    // --- 일시 포맷 제약조건 검증 인터락 (YYYY-MM-DD HH) ---
+    function validateDateTime(dtStr) {
+        const regex = /^\d{4}-\d{2}-\d{2}\s\d{2}$/;
+        return regex.test(dtStr);
+    }
+
+    // 그리드 행 추가 엔진
+    function addGridRow(menu) {
+        const tbody = document.getElementById(`grid-${menu}-body`);
+        const tr = document.createElement('tr');
+        
+        if (menu === 'register') {
+            tr.innerHTML = `
+                <td><input type="text" placeholder="LCAJHY1000CU656X1.8" oninput="handleIdInputLive(this)"></td>
+                <td><input type="text" readonly placeholder="자동 계산"></td>
+                <td><input type="text" placeholder="제작사 입력"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+        } else if (menu === 'equip') {
+            tr.innerHTML = `
+                <td><input type="text" placeholder="ID 입력" oninput="handleIdInputLive(this)"></td>
+                <td><input type="text" readonly placeholder="자동 계산"></td>
+                <td><input type="text" placeholder="2026-06-29 14"></td>
+                <td><input type="text" placeholder="예: 1-1, 6-4"></td>
+                <td>
+                    <select>
+                        <option value="Upper">Upper</option>
+                        <option value="Center">Center</option>
+                        <option value="Final">Final</option>
+                    </select>
+                </td>
+                <td><input type="text" placeholder="작업자"></td>
+                <td><input type="text" placeholder="비고"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+        } else if (menu === 'ship-out' || menu === 'ship-in') {
+            tr.innerHTML = `
+                <td><input type="text" placeholder="ID 입력"></td>
+                <td><input type="text" placeholder="담당자"></td>
+                <td><input type="text" placeholder="비고"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+        }
+        tbody.appendChild(tr);
+    }
+
+    function handleIdInputLive(inputEl) {
+        const id = inputEl.value.trim().toUpperCase();
+        inputEl.value = id; 
+        const res = parseAndValidateToolId(id);
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.cells[1].querySelector('input');
+        
+        if (id && !res.valid) {
+            inputEl.classList.add('invalid-cell');
+            typeInput.value = "규격 오류 (" + res.type + ")";
+        } else {
+            inputEl.classList.remove('invalid-cell');
+            typeInput.value = res.type;
+        }
+    }
+
+    // 기본 계정 제어 및 메뉴 스위칭
+    function connectDB() { fetchDatabase(); }
     function getCredentials() {
         return {
             token: document.getElementById("cfg-token").value.trim(),
@@ -179,19 +294,20 @@
             repo: document.getElementById("cfg-repo").value.trim()
         };
     }
-
     function switchMenu(menuId) {
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
         event.target.classList.add('active');
         document.getElementById(`menu-${menuId}`).style.display = 'block';
+        
+        // 메뉴 이동 시 액티브 데이터 그리드 청소 및 1개 기본행 추가
+        const tbody = document.getElementById(`grid-${menuId}-body`);
+        if(tbody) { tbody.innerHTML = ""; addGridRow(menuId); }
         if(menuId === 'home') fetchDatabase();
     }
 
-    // --- GITHUB API 통신 및 동시 입력 자물쇠 인터락 ---
-    async function showLoading(show) {
-        document.getElementById('loading-indicator').style.display = show ? 'block' : 'none';
-    }
+    // --- GITHUB 데이터베이스 입출력 및 분산락 통제 회로 ---
+    async function showLoading(show) { document.getElementById('loading-indicator').style.display = show ? 'block' : 'none'; }
 
     async function fetchDatabase() {
         const creds = getCredentials();
@@ -209,225 +325,217 @@
                 globalData = [];
                 renderUI();
             }
-        } catch (e) {
-            alert("DB 로드 실패. GitHub 자격 정보를 다시 확인하세요.");
-        }
+        } catch (e) { alert("데이터 로드 실패. 자격 토큰을 점검하세요."); }
         showLoading(false);
     }
 
     async function saveDatabase(newData) {
         const creds = getCredentials();
-        if(!creds.token) { alert("GitHub 토큰이 필요합니다."); return false; }
+        if(!creds.token) { alert("토큰이 누락되었습니다."); return false; }
         showLoading(true);
-        
         const headers = { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" };
         const lockUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${LOCK_FILE}`;
         
-        // 1. 자물쇠 체크
         const lockCheck = await fetch(lockUrl, { headers });
         if (lockCheck.status === 200) {
-            alert("🔒 [동시성 충돌 방지] 다른 사용자가 수정 중입니다. 잠시 후 다시 시도하세요.");
-            showLoading(false);
-            return false;
+            alert("🔒 다른 시스템 이용자가 원격 데이터를 변경 중입니다. 잠시 후 재수행하세요.");
+            showLoading(false); return false;
         }
-
-        // 2. 자물쇠 잠그기
         const lockPayload = { message: "🔒 lock", content: btoa("locked") };
         const createLock = await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify(lockPayload) });
         const lockData = await createLock.json();
         const lockSha = lockData.content.sha;
 
         try {
-            // 3. 데이터 커밋
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
             const dbPayload = {
-                message: "🔄 데이터 마스터 업데이트",
+                message: "🔄 부품 상태 마스터 데이터 변동 사항 반영",
                 content: btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2)))),
                 sha: dbSha
             };
             const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify(dbPayload) });
-            
-            // 4. 자물쇠 해제
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
-            
             if(saveRes.status === 200 || saveRes.status === 201) {
-                globalData = newData;
-                fetchDatabase();
-                showLoading(false);
-                return true;
+                globalData = newData; renderUI(); showLoading(false); return true;
             }
         } catch (e) {
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
         }
-        showLoading(false);
-        return false;
+        showLoading(false); return false;
     }
 
     function renderUI() {
-        let c18 = 0, c12 = 0, cLw = 0;
         let html = "";
-
         globalData.forEach(p => {
-            const type = getCutterType(p.id);
-            if (type === "1.8") c18++;
-            if (type === "1.2") c12++;
-            if (type === "LW") cLw++;
-            const side = type === "LW" ? (p.activeSide || "A면") : "-";
-            html += `<tr><td>${p.id}</td><td><b>${type}</b></td><td>${p.status}</td><td>${p.regridCount}회</td><td>${side}</td></tr>`;
+            html += `<tr>
+                <td>${p.id}</td>
+                <td><b>${p.toolType}</b></td>
+                <td>${p.maker || '-'}</td>
+                <td><span style="padding:3px 6px; border-radius:4px; font-weight:bold; background:#eee;">${p.status}</span></td>
+                <td>${p.regridCount || 0}회</td>
+                <td>${p.lastHistory || '-'}</td>
+            </tr>`;
         });
-
-        document.getElementById("count-18").innerText = c18 + " EA";
-        document.getElementById("count-12").innerText = c12 + " EA";
-        document.getElementById("count-lw").innerText = cLw + " EA";
-        document.getElementById("summary-table-body").innerHTML = html || `<tr><td colspan="5">등록된 부품 데이터가 없습니다.</td></tr>`;
+        document.getElementById("summary-table-body").innerHTML = html || `<tr><td colspan="6">조회된 마스터 데이터 부품이 존재하지 않습니다.</td></tr>`;
     }
 
-    // 1번 메뉴 기능
-    async function registerPart() {
-        const id = document.getElementById("reg-id").value.trim();
-        const type = getCutterType(id);
-        if(!id || type === "미분류") { alert("올바른 부품 ID 규칙을 따르세요."); return; }
-        if(globalData.some(p => p.id === id)) { alert("이미 존재하는 ID입니다."); return; }
+    // --- 1. 일괄 신규 등록 비즈니스 로직 ---
+    async function submitBulkRegister() {
+        const rows = document.querySelectorAll("#grid-register-body tr");
+        let tempArr = [...globalData];
+        let addedCount = 0;
 
-        const newPart = { id: id, status: "Storage", regridCount: 0, activeSide: type === "LW" ? "A면" : null };
-        if(await saveDatabase([...globalData, newPart])) {
-            alert(`등록 성공: [${id}]`);
-            document.getElementById("reg-id").value = "";
+        for(let row of rows) {
+            const id = row.cells[0].querySelector('input').value.trim();
+            const maker = row.cells[2].querySelector('input').value.trim();
+            if(!id) continue;
+
+            const vRes = parseAndValidateToolId(id);
+            if(!vRes.valid) { alert(`[오류] ${id}는 지정된 ID 명명 인터락 규칙에 어긋납니다.`); return; }
+            if(tempArr.some(p => p.id === id)) { alert(`[중복 오류] ${id}는 이미 시스템에 등록되어 있는 부품 번호입니다.`); return; }
+
+            tempArr.push({
+                id: id,
+                toolType: vRes.type,
+                maker: maker,
+                status: "Storage",
+                regridCount: 0,
+                lastHistory: "신규 생산 라인 등록 입고"
+            });
+            addedCount++;
+        }
+
+        if(addedCount === 0) return;
+        if(await saveDatabase(tempArr)) {
+            alert(`성공적으로 총 ${addedCount}건의 신규 공구가 마스터에 반영되었습니다.`);
+            switchMenu('home');
         }
     }
 
-    // 2번 메뉴 기능
-    function checkCurrentStatus(inputEl) {
-        const id = inputEl.value.trim();
-        detectCutterType(inputEl, 'eq-type-div');
-        const part = globalData.find(p => p.id === id);
-        const infoDiv = document.getElementById("current-status-info");
-        const flipBtn = document.getElementById("btn-flip");
+    // --- 2. 일괄 장착 / 탈거 비즈니스 로직 ---
+    async function submitBulkEquip(targetStatus) {
+        const rows = document.querySelectorAll("#grid-equip-body tr");
+        let tempArr = [...globalData];
+        let updatedCount = 0;
 
-        if(!part) { infoDiv.innerText = "조회 결과 없음"; flipBtn.style.display = "none"; return; }
-        const type = getCutterType(id);
-        let txt = `상태: ${part.status} / 연마: ${part.regridCount}회`;
-        if(type === "LW") {
-            txt += ` / 현재 면: ${part.activeSide || 'A면'}`;
-            flipBtn.style.display = "inline-block";
-        } else { flipBtn.style.display = "none"; }
-        infoDiv.innerText = txt;
-    }
+        for(let row of rows) {
+            const id = row.cells[0].querySelector('input').value.trim();
+            const dt = row.cells[2].querySelector('input').value.trim();
+            const line = row.cells[3].querySelector('input').value.trim();
+            const unit = row.cells[4].querySelector('select').value;
+            const op = row.cells[5].querySelector('input').value.trim();
+            const comment = row.cells[6].querySelector('input').value.trim();
+            if(!id) continue;
 
-    async function updateStatus(nextStatus) {
-        const id = document.getElementById("eq-id").value.trim();
-        const idx = globalData.findIndex(p => p.id === id);
-        if(idx === -1) return;
-        const part = globalData[idx];
+            if(!validateDateTime(dt)) { alert(`[일시 규칙 위반] ${id}의 일시는 YYYY-MM-DD HH 형태로 써야 합니다. (예시: 2026-06-29 14)`); return; }
+            if(!validateLine(line)) { alert(`[라인 범위 이탈] ${id}의 라인은 1-1부터 6-4 규칙 범위 이내 규격이어야 합니다.`); return; }
 
-        if(nextStatus === 'Using' && part.status !== 'Storage') { alert("Storage 상태의 커터만 장착 가능합니다."); return; }
-        if(nextStatus === 'Waiting' && part.status !== 'Using') { alert("Using 상태의 커터만 탈거 가능합니다."); return; }
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`[미등록 오류] 마스터 데이터에 존재하지 않는 Tool ID(${id}) 입니다.`); return; }
+            
+            const currentPart = tempArr[pIdx];
+            if(targetStatus === 'Using' && currentPart.status !== 'Storage') { alert(`[장착 거부] ${id}는 현재 Storage 상태가 아니므로 설비 장착이 불가능합니다.`); return; }
+            if(targetStatus === 'Waiting' && currentPart.status !== 'Using') { alert(`[탈거 거부] ${id}는 현재 Using 상태가 아니므로 설비 탈거 처리가 불가합니다.`); return; }
 
-        const updated = [...globalData];
-        updated[idx].status = nextStatus;
-        if(nextStatus === 'Waiting') updated[idx].regridCount += 1; // 탈거 시 연마 카운트 증가
+            // 데이터 가공 및 상태 천이
+            tempArr[pIdx].status = targetStatus;
+            if(targetStatus === 'Waiting') {
+                tempArr[pIdx].regridCount = (tempArr[pIdx].regridCount || 0) + 1; // 설비 탈거 시 카운팅 처리 연동
+            }
+            tempArr[pIdx].lastHistory = `[${targetStatus === 'Using'?'장착':'탈거'}] 일시:${dt} | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
+            updatedCount++;
+        }
 
-        if(await saveDatabase(updated)) {
-            alert("변경 완료");
-            document.getElementById("eq-id").value = "";
+        if(updatedCount === 0) return;
+        if(await saveDatabase(tempArr)) {
+            alert(`총 ${updatedCount}건의 설비 조작 변동 사항이 일괄 반영 처리 완료되었습니다.`);
+            switchMenu('home');
         }
     }
 
-    async function flipLwSide() {
-        const id = document.getElementById("eq-id").value.trim();
-        const idx = globalData.findIndex(p => p.id === id);
-        if(idx === -1) return;
-        
-        const part = globalData[idx];
-        const nextSide = (part.activeSide || "A면") === "A면" ? "B면" : "A면";
-        if(!confirm(`현재 부품을 뒤집어 ${nextSide}으로 세팅하시겠습니까?`)) return;
+    // --- 3 & 4. 연마 출하 / 연마 입고 일괄 통제 엔진 ---
+    async function submitBulkShipment(nextStatus) {
+        let menuKey = nextStatus === 'Out_Polishing' ? 'ship-out' : 'ship-in';
+        const rows = document.querySelectorAll(`#grid-${menuKey}-body tr`);
+        let tempArr = [...globalData];
+        let processedCount = 0;
 
-        const updated = [...globalData];
-        updated[idx].activeSide = nextSide;
-        updated[idx].status = "Storage"; // 뒤집으면 재사용 가능하므로 Storage행
+        for(let row of rows) {
+            const id = row.cells[0].querySelector('input').value.trim();
+            const user = row.cells[1].querySelector('input').value.trim();
+            const note = row.cells[2].querySelector('input').value.trim();
+            if(!id) continue;
 
-        if(await saveDatabase(updated)) {
-            alert(`🔄 하도 뒤집기 완료 (${nextSide} 활성화)`);
-            document.getElementById("eq-id").value = "";
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`등록되지 않은 부품 ID: ${id}`); return; }
+
+            if(nextStatus === 'Out_Polishing' && tempArr[pIdx].status !== 'Waiting') {
+                alert(`[출하 불가] ${id} 부품은 Waiting(탈거 대기) 상태여야 출하할 수 있습니다.`); return;
+            }
+            if(nextStatus === 'Storage' && tempArr[pIdx].status !== 'Out_Polishing') {
+                alert(`[입고 불가] ${id} 부품은 현재 외주 연마 공장(Out_Polishing)에 가 있는 상태여야 입고가 가능합니다.`); return;
+            }
+
+            tempArr[pIdx].status = nextStatus;
+            tempArr[pIdx].lastHistory = `[연마 ${nextStatus === 'Out_Polishing'?'출하':'입고 완료'}] 담당:${user} | 비고:${note}`;
+            processedCount++;
+        }
+
+        if(processedCount === 0) return;
+        if(await saveDatabase(tempArr)) {
+            alert(`총 ${processedCount}건의 공구 연마 이동 내역 처리가 성료되었습니다.`);
+            switchMenu('home');
         }
     }
 
-    // ==========================================
-    // 📊 대량 편집용 EXCEL 다운로드/업로드 핵심 엔진
-    // ==========================================
-    
-    // 엑셀 내보내기 (Download)
+    // --- 5. 백업 엑셀 파일 입출력 변환 가공 모듈 ---
     function downloadExcel() {
-        if(globalData.length === 0) { alert("다운로드할 데이터가 없습니다."); return; }
-        
-        // 엑셀 저장용 데이터 포맷 가공 (사용자가 직관적으로 보기 쉽게 변환)
+        if(globalData.length === 0) { alert("백업 데이터가 전무합니다."); return; }
         const excelRows = globalData.map(p => ({
-            "부품 고유 ID": p.id,
-            "커터 타입": getCutterType(p.id),
-            "현재 상태(Storage/Using/Waiting)": p.status,
+            "Tool ID": p.id,
+            "Tool Type": p.toolType,
+            "제작사": p.maker || "",
+            "현재 상태": p.status,
             "누적 연마 횟수": p.regridCount,
-            "하도 활성면(A면/B면)": p.activeSide || "-"
+            "최근 변경 히스토리": p.lastHistory || ""
         }));
-
         const worksheet = XLSX.utils.json_to_sheet(excelRows);
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "부품재고마스터");
-        
-        // 파일 다운로드 트리거
-        XLSX.writeFile(workbook, `Cutter_Master_DB_${new Date().toISOString().slice(0,10)}.xlsx`);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "공구마스터DB");
+        XLSX.writeFile(workbook, `Tool_Master_Backup_${new Date().toISOString().slice(0,10)}.xlsx`);
     }
 
-    // 엑셀 가져오기 (Upload 일괄 덮어쓰기)
     function uploadExcel() {
         const fileInput = document.getElementById("excel-file-input");
-        if(!fileInput.files.length) { alert("업로드할 엑셀 파일을 선택해 주세요."); return; }
-
+        if(!fileInput.files.length) { alert("복구할 소스 엑셀 파일을 업로드 하세요."); return; }
         const file = fileInput.files[0];
         const reader = new FileReader();
-
         reader.onload = async function(e) {
             try {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, { type: 'array' });
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 const excelRows = XLSX.utils.sheet_to_json(worksheet);
 
-                if(!confirm(`⚠️ 경고: 업로드하신 엑셀 내용(${excelRows.length}건)으로 시스템 DB를 전체 덮어씁니다. 진행하시겠습니까?`)) return;
+                if(!confirm(`🚨 대량 마스터 덮어쓰기 복구를 실행합니까? 기존 원격 데이터가 손실됩니다.`)) return;
 
-                // 엑셀 열 이름 매핑 및 데이터 유효성 검사 검증 후 JSON 구조로 환원
-                const parsedNewData = excelRows.map(row => {
-                    const id = String(row["부품 고유 ID"] || "").trim();
-                    const status = String(row["현재 상태(Storage/Using/Waiting)"] || "Storage").trim();
-                    const regridCount = parseInt(row["누적 연마 횟수"]) || 0;
-                    const rawSide = String(row["하도 활성면(A면/B면)"] || "-").trim();
-                    
-                    const type = getCutterType(id);
+                const parsedNewData = excelRows.map(row => ({
+                    id: String(row["Tool ID"] || "").trim(),
+                    toolType: String(row["Tool Type"] || "").trim(),
+                    maker: String(row["제작사"] || "").trim(),
+                    status: String(row["현재 상태"] || "Storage").trim(),
+                    regridCount: parseInt(row["누적 연마 횟수"]) || 0,
+                    lastHistory: String(row["최근 변경 히스토리"] || "엑셀 강제 일괄 복구 가공")
+                })).filter(p => p.id !== "");
 
-                    return {
-                        id: id,
-                        status: status,
-                        regridCount: regridCount,
-                        activeSide: type === "LW" ? (rawSide !== "-" ? rawSide : "A면") : null
-                    };
-                }).filter(p => p.id !== ""); // 빈 행 제거
-
-                if(parsedNewData.length === 0) { alert("해석된 유효한 부품 데이터가 없습니다."); return; }
-
-                // GitHub DB로 동시성 인터락을 거쳐 전송
                 if(await saveDatabase(parsedNewData)) {
-                    alert(`🚀 엑셀 데이터 일괄 업데이트 완료! 총 ${parsedNewData.length}건의 데이터가 반영되었습니다.`);
-                    fileInput.value = "";
-                    switchMenu('home');
+                    alert(`총 ${parsedNewData.length}건의 백업 시트 복구가 성공적으로 마스터에 오버라이트 되었습니다.`);
+                    fileInput.value = ""; switchMenu('home');
                 }
-            } catch (err) {
-                alert("엑셀 파일 해석 중 오류가 발생했습니다. 양식을 확인하세요: " + err);
-            }
+            } catch (err) { alert("엑셀 분석 프로세싱 중 치명적 오류: " + err); }
         };
-
         reader.readAsArrayBuffer(file);
     }
 </script>
-
 </body>
 </html>
