@@ -1,0 +1,5 @@
+# .gitignore
+*.db
+*.db-journal
+__pycache__/
+*.exe
