@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (인터락 강화판)</title>
+    <title>⚙️ 부품 생애주기 시스템 (집계 수정 및 호기별 현황판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -11,7 +11,7 @@
         .login-banner { background: #343a40; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; }
         .login-banner input { width: 180px; padding: 8px; border: none; border-radius: 4px; }
         .login-banner button { background: #17a2b8; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .container { max-width: 1400px; margin: 0 auto; display: flex; gap: 20px; }
+        .container { max-width: 1500px; margin: 0 auto; display: flex; gap: 20px; }
         .sidebar { width: 280px; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .main-content { flex: 1; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         h2, h3 { margin-top: 0; }
@@ -25,26 +25,30 @@
         .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; }
         .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
         
-        /* 날짜/시간 입력창 나란히 배치용 */
+        /* 대시보드 집계 판넬 */
+        .summary-dashboard { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+        .summary-box-v2 { flex: 1; min-width: 300px; background: #fafafa; border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; }
+        .summary-box-v2 h4 { margin: 0 0 10px 0; padding-bottom: 5px; border-bottom: 2px solid #6c757d; font-size: 15px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .summary-item { background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 4px; text-align: center; }
+        .summary-item span { display: block; font-size: 12px; color: #666; font-weight: bold; }
+        .summary-item strong { font-size: 18px; color: #333; }
+        
+        /* 현황판 매트릭스 스타일 */
+        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; }
+        .matrix-table th { background: #495057; color: white; font-size: 14px; }
+        .matrix-table tr:nth-child(even) { background-color: #f8f9fa; }
+        .active-tool { background-color: #e3f2fd !important; font-weight: bold; color: #0d47a1; border: 2px solid #90caf9 !important; border-radius: 4px; padding: 4px; display: inline-block; word-break: break-all; }
+        .empty-tool { color: #adb5bd; font-style: italic; font-size: 13px; }
+
         .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
         .datetime-container input { width: 48% !important; padding: 5px; }
-
         .btn-row-control { padding: 4px 10px; font-size: 12px; cursor: pointer; margin-right: 5px; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
         .btn-row-control:hover { background: #e2e6ea; }
-        
         button.action-btn { color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-right: 10px; }
-        .status-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .status-table th, .status-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
-        .status-table th { background: #f8f9fa; }
         .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; }
         .loading { display: none; color: #d9534f; font-weight: bold; margin-bottom: 15px; padding: 10px; background: #f2dede; border-radius: 4px; }
-
-        .summary-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
-        .summary-card { background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid var(--border-color); }
-        .summary-card h4 { margin: 0 0 5px 0; color: #666; font-size: 14px; }
-        .summary-card p { margin: 0; font-size: 24px; font-weight: bold; color: var(--primary-color); }
-        
-        /* 알림 텍스트 스타일 */
         .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; }
     </style>
 </head>
@@ -61,52 +65,53 @@
 <div class="container">
     <div class="sidebar">
         <h2>부품 제어 센터</h2>
-        <button class="menu-btn active" onclick="switchMenu('home')">📊 0. 실시간 현황 요약</button>
+        <button class="menu-btn active" onclick="switchMenu('home')">📊 0. 실시간 수량 집계</button>
         <button class="menu-btn" onclick="switchMenu('register')">🆕 1. 신규 부품 일괄 등록</button>
         <button class="menu-btn" onclick="switchMenu('equip')">🔧 2. 장비 장착 / 탈거 실행</button>
         <button class="menu-btn" onclick="switchMenu('ship-out')">🚛 3. 연마 출하 관리</button>
         <button class="menu-btn" onclick="switchMenu('ship-in')">📥 4. 연마 입고 관리</button>
-        <button class="menu-btn" onclick="switchMenu('excel-io')">💾 5. 마스터 엑셀 Export/Import</button>
+        <button class="menu-btn" onclick="switchMenu('excel-io')">💾 5. 마스터 엑셀 변환</button>
+        <button class="menu-btn" onclick="switchMenu('matrix')">🖥️ 6. 호기별 장착 현황판</button>
     </div>
 
     <div class="main-content">
-        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 자물쇠(Lock) 확인 중... 창을 이동하지 마세요.</div>
+        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 확인 중... 잠시만 기다려주세요.</div>
         
-        <!-- 0. HOME 화면 -->
+        <!-- 0. HOME 수량 집계 화면 -->
         <div id="menu-home" class="menu-section">
-            <h2>📊 부품 마스터 실시간 현황</h2>
+            <h2>📊 마스터 데이터 실시간 수량 집계</h2>
             
-            <div class="summary-box">
-                <div class="summary-card"><h4>1.8도 상도 총 재고</h4><p id="count-18">0 EA</p></div>
-                <div class="summary-card"><h4>1.2도 상도 총 재고</h4><p id="count-12">0 EA</p></div>
-                <div class="summary-card"><h4>LW (하도 통합) 총 재고</h4><p id="count-lw">0 EA</p></div>
-            </div>
+            <div class="summary-dashboard">
+                <!-- 제작사별 집계 -->
+                <div class="summary-box-v2">
+                    <h4>■ 제작사별 보유 수량</h4>
+                    <div class="summary-grid">
+                        <div class="summary-item"><span>HYTC</span><strong id="stat-maker-hytc">0 EA</strong></div>
+                        <div class="summary-item"><span>유진 (YJ)</span><strong id="stat-maker-yj">0 EA</strong></div>
+                        <div class="summary-item"><span>기타 / 미분류</span><strong id="stat-maker-etc">0 EA</strong></div>
+                        <div class="summary-item" style="background:#e9ecef;"><span>총 합계</span><strong id="stat-maker-total">0 EA</strong></div>
+                    </div>
+                </div>
 
-            <h3>■ 전체 커터 세부 리스트</h3>
-            <table class="status-table">
-                <thead>
-                    <tr>
-                        <th>Tool ID</th>
-                        <th>Tool Type</th>
-                        <th>제작사</th>
-                        <th>현재 상태</th>
-                        <th>누적 연마 횟수</th>
-                        <th>최근 변경 이력</th>
-                    </tr>
-                </thead>
-                <tbody id="summary-table-body">
-                    <tr><td colspan="6">상단에 GitHub 정보를 입력한 후 [DB 연결]을 눌러주세요.</td></tr>
-                </tbody>
-            </table>
+                <!-- 상태별 집계 -->
+                <div class="summary-box-v2">
+                    <h4>■ Cutter 현재 상태별 수량</h4>
+                    <div class="summary-grid">
+                        <div class="summary-item"><span>보유고 재고 (Storage)</span><strong id="stat-status-storage">0 EA</strong></div>
+                        <div class="summary-item"><span>장비 장착 중 (Using)</span><strong id="stat-status-using">0 EA</strong></div>
+                        <div class="summary-item"><span>탈거 대기 (Waiting)</span><strong id="stat-status-waiting">0 EA</strong></div>
+                        <div class="summary-item"><span>외주 연마 중 (Out_Polishing)</span><strong id="stat-status-polishing">0 EA</strong></div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:13px; color:#666;">※ 상단에 GitHub 정보를 입력한 후 [DB 연결]을 완료하면 원격 실시간 수치가 정밀 동기화됩니다.</p>
         </div>
 
         <!-- 1. 신규 부품 등록 -->
         <div id="menu-register" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
-            <p style="font-size:13px; color:#666;">※ Tool ID의 끝자리를 인식하여 Tool Type과 제작사가 실시간 자동 완성됩니다.</p>
-            <div>
-                <button class="btn-row-control" onclick="addGridRow('register')">➕ 행 추가</button>
-            </div>
+            <p style="font-size:13px; color:#666;">※ Tool ID 열에 엑셀 데이터를 대량 복사(Ctrl+V)하여 붙여넣으면 행이 자동으로 확장됩니다.</p>
+            <div><button class="btn-row-control" onclick="addGridRow('register')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
@@ -124,10 +129,7 @@
         <!-- 2. 장비 장착/탈거 -->
         <div id="menu-equip" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#666; margin-bottom: 15px;">※ <b>[탈거 승인]</b> 진행 시, Tool ID를 입력하면 직전 장착되었던 라인/유닛 정보가 <b>자동으로 역추적 바인딩</b>되어 오입력을 차단합니다.</p>
-            <div>
-                <button class="btn-row-control" onclick="addGridRow('equip')">➕ 행 추가</button>
-            </div>
+            <div><button class="btn-row-control" onclick="addGridRow('equip')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
@@ -150,9 +152,7 @@
         <!-- 3. 연마 출하 -->
         <div id="menu-ship-out" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 출하 관리 (대기 → 외주 연마 공장)</h2>
-            <div>
-                <button class="btn-row-control" onclick="addGridRow('ship-out')">➕ 행 추가</button>
-            </div>
+            <div><button class="btn-row-control" onclick="addGridRow('ship-out')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
@@ -170,9 +170,7 @@
         <!-- 4. 연마 입고 -->
         <div id="menu-ship-in" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
-            <div>
-                <button class="btn-row-control" onclick="addGridRow('ship-in')">➕ 행 추가</button>
-            </div>
+            <div><button class="btn-row-control" onclick="addGridRow('ship-in')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
@@ -190,7 +188,7 @@
 
         <!-- 5. 엑셀 백업 UI -->
         <div id="menu-excel-io" class="menu-section" style="display:none;">
-            <h2>💾 5. 마스터 데이터 데이터베이스 엑셀 백업 및 대량 복구</h2>
+            <h2>💾 5. 데이터 백업 마스터 엑셀 다운로드 및 업로드</h2>
             <button class="action-btn" onclick="downloadExcel()" style="background:#495057;">📊 현시점 DB 마스터 엑셀 다운로드</button>
             <br><br>
             <div style="border: 1px dashed #ccc; padding:15px; background:#fafafa;">
@@ -198,6 +196,26 @@
                 <input type="file" id="excel-file-input" accept=".xlsx, .xls"><br><br>
                 <button class="action-btn" onclick="uploadExcel()" style="background:#dc3545;">🚀 엑셀 데이터 파일 원본 강제 복구</button>
             </div>
+        </div>
+
+        <!-- 6. 신규 분리된 호기별/Unit별 장착 현황판 화면 -->
+        <div id="menu-matrix" class="menu-section" style="display:none;">
+            <h2>🖥️ 6. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
+            <p style="font-size:13px; color:#666;">※ 현재 설비 내부 라인에 장착되어 가동 중(Using)인 Tool ID가 실시간 매핑 표출됩니다.</p>
+            
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 16%;">설비 호기 (Line)</th>
+                        <th style="width: 28%;">Upper Unit</th>
+                        <th style="width: 28%;">Center Unit</th>
+                        <th style="width: 28%;">Final Unit</th>
+                    </tr>
+                </thead>
+                <tbody id="matrix-table-body">
+                    <!-- JavaScript가 호기별 로우를 빌드합니다 -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -208,28 +226,46 @@
     const DB_FILE = "parts_db.json";
     const LOCK_FILE = "db.lock";
 
-    function utf8_to_b64(str) {
-        return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
-    }
-    function b64_to_utf8(str) {
-        return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0)));
-    }
+    function utf8_to_b64(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
+    function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
 
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
-        
         let toolType = "";
         if (id.endsWith("X1.8")) toolType = "1.8도 상도";
         else if (id.endsWith("X1.2")) toolType = "1.2도 상도";
         else if (id.endsWith("01.0") || id.endsWith("02.0")) toolType = "LW (하도)";
         
         const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|01.0|02.0)$/;
-        const isValidFormat = fullRegex.test(id);
+        return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "분석 중..." : "") };
+    }
 
-        return { 
-            valid: isValidFormat, 
-            type: toolType || (id.length > 10 ? "분석 중..." : "") 
-        };
+    // 클립보드 엔터 구분 대량 데이터 붙여넣기 모듈
+    function setupPasteInterceptor(inputEl, menuType) {
+        inputEl.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+            const lines = clipboardData.split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0);
+            if (lines.length === 0) return;
+
+            const tr = inputEl.closest('tr');
+            const tbody = tr.parentNode;
+            
+            inputEl.value = lines[0].toUpperCase();
+            if (menuType === 'equip') handleEquipIdChange(inputEl);
+            else handleIdInputLive(inputEl, menuType === 'ship-in');
+
+            for (let i = 1; i < lines.length; i++) {
+                addGridRow(menuType);
+                const nextTr = tbody.lastChild;
+                const nextInput = nextTr.querySelector('.tool-id-input');
+                if (nextInput) {
+                    nextInput.value = lines[i].toUpperCase();
+                    if (menuType === 'equip') handleEquipIdChange(nextInput);
+                    else handleIdInputLive(nextInput, menuType === 'ship-in');
+                }
+            }
+        });
     }
 
     function addGridRow(menu) {
@@ -244,6 +280,7 @@
                 <td><input type="text" class="maker-input" placeholder="자동 완성"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'register');
         } else if (menu === 'equip') {
             const now = new Date();
             const localDate = now.toISOString().split('T')[0];
@@ -251,18 +288,14 @@
 
             let lineOptions = "";
             for(let i=1; i<=5; i++) {
-                for(let j=1; j<=3; j++) {
-                    lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`;
-                }
+                for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
             }
-            for(let j=1; j<=4; j++) {
-                lineOptions += `<option value="6-${j}">6-${j} 라인</option>`;
-            }
+            for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
 
             tr.innerHTML = `
                 <td>
-                    <input type="text" class="tool-id-input" placeholder="ID 입력 후 엔터 또는 클릭 시 매핑" onchange="handleEquipIdChange(this)" onkeyup="if(event.keyCode===13) handleEquipIdChange(this)">
-                    <span class="info-text" class="msg-span"></span>
+                    <input type="text" class="tool-id-input" placeholder="ID 입력 또는 Ctrl+V 다중 입력" onchange="handleEquipIdChange(this)">
+                    <span class="info-text"></span>
                 </td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
                 <td>
@@ -271,11 +304,7 @@
                         <input type="time" class="equip-time-input" value="${localHour}">
                     </div>
                 </td>
-                <td>
-                    <select class="equip-line-select">
-                        ${lineOptions}
-                    </select>
-                </td>
+                <td><select class="equip-line-select">${lineOptions}</select></td>
                 <td>
                     <select class="equip-unit-select">
                         <option value="Upper">Upper</option>
@@ -287,6 +316,7 @@
                 <td><input type="text" class="equip-comment-input" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'equip');
         } else if (menu === 'ship-out') {
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this, false)"></td>
@@ -294,6 +324,7 @@
                 <td><input type="text" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'ship-out');
         } else if (menu === 'ship-in') {
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this, true)"></td>
@@ -302,6 +333,7 @@
                 <td><input type="text" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'ship-in');
         }
         tbody.appendChild(tr);
     }
@@ -315,16 +347,14 @@
         const makerInput = tr.querySelector('.maker-input');
         
         if (typeInput) typeInput.value = res.type;
-
         if (makerInput) {
             if (id.includes("HY")) makerInput.value = "HYTC";
             else if (id.includes("YJ")) makerInput.value = "유진";
             else makerInput.value = "";
         }
         
-        if (id.length >= 21 && !res.valid) {
-            inputEl.classList.add('invalid-cell');
-        } else {
+        if (id.length >= 21 && !res.valid) inputEl.classList.add('invalid-cell');
+        else {
             inputEl.classList.remove('invalid-cell');
             if (isShipIn && res.valid) {
                 const matched = globalData.find(p => p.id === id);
@@ -336,18 +366,15 @@
         }
     }
 
-    // --- 🔧 [신규 추가] 장착 및 탈거 전용 Tool ID 매핑 엔진 ---
     function handleEquipIdChange(inputEl) {
         const id = inputEl.value.trim().toUpperCase();
         inputEl.value = id;
-        
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
         const lineSelect = tr.querySelector('.equip-line-select');
         const unitSelect = tr.querySelector('.equip-unit-select');
         const msgSpan = tr.querySelector('.info-text');
 
-        // 기본 규격 검증
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
 
@@ -358,53 +385,34 @@
         }
         inputEl.classList.remove('invalid-cell');
 
-        // 마스터 데이터 매칭 검증 시작
         const matchedPart = globalData.find(p => p.id === id);
         if (!matchedPart) {
             if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ 미등록 부품</span>";
             return;
         }
 
-        // 현재 상태가 설비 작동 중(Using) 상태라면 -> 히스토리에서 가장 최신 장착(Using) 정보 추적
         if (matchedPart.status === 'Using') {
-            let foundLine = "";
-            let foundUnit = "";
-
+            let foundLine = ""; let foundUnit = "";
             if (matchedPart.historyLog && matchedPart.historyLog.length > 0) {
-                // historyLog를 최신순(역순)으로 탐색하여 장착 로그 파싱
                 for (let i = matchedPart.historyLog.length - 1; i >= 0; i--) {
                     const logObj = matchedPart.historyLog[i];
                     if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
                         try {
-                            // 로그 문자열 예시: "[장착] 일시:2026-06-29 05 | 라인:4-3 | 유닛:Upper ..."
-                            const linePart = logObj.log.split('라인:')[1].split('|')[0].trim();
-                            const unitPart = logObj.log.split('유닛:')[1].split('|')[0].trim();
-                            foundLine = linePart;
-                            foundUnit = unitPart;
+                            foundLine = logObj.log.split('라인:')[1].split('|')[0].trim();
+                            foundUnit = logObj.log.split('유닛:')[1].split('|')[0].trim();
                             break;
-                        } catch(e) { console.error("히스토리 파싱 실패", e); }
+                        } catch(e) {}
                     }
                 }
             }
-
-            // 역추적된 값이 세렉트 박스에 존재하면 자동 세팅 및 강제 고정(락)처리
             if (foundLine && foundUnit) {
-                lineSelect.value = foundLine;
-                unitSelect.value = foundUnit;
-                lineSelect.disabled = true; // 유저 임의 변경 불가능하게 제어
-                unitSelect.disabled = true;
-                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 완료 (${foundLine} / ${foundUnit})`;
-            } else {
-                // 구조 문제 등으로 못 찾을 경우 활성화하여 수동 유도
-                lineSelect.disabled = false;
-                unitSelect.disabled = false;
-                if(msgSpan) msgSpan.innerHTML = "⚠️ 장착 로그를 찾지 못해 수동 선택 필요";
+                lineSelect.value = foundLine; unitSelect.value = foundUnit;
+                lineSelect.disabled = true; unitSelect.disabled = true;
+                if(msgSpan) msgSpan.innerHTML = `🟢 장착 상태 연동 (${foundLine} / ${foundUnit})`;
             }
         } else {
-            // Storage 상태이거나 기타인 경우 신규 장착이므로 잠금 해제 및 초기화
-            lineSelect.disabled = false;
-            unitSelect.disabled = false;
-            if(msgSpan) msgSpan.innerHTML = `📦 현재 창고 내 재고 상태 (신규 장착 가능)`;
+            lineSelect.disabled = false; unitSelect.disabled = false;
+            if(msgSpan) msgSpan.innerHTML = `📦 창고 내 재고 (장착 가능)`;
         }
     }
 
@@ -416,6 +424,7 @@
             repo: document.getElementById("cfg-repo").value.trim()
         };
     }
+    
     function switchMenu(menuId) {
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
@@ -424,10 +433,10 @@
         
         const tbody = document.getElementById(`grid-${menuId}-body`);
         if(tbody) { tbody.innerHTML = ""; addGridRow(menuId); }
-        if(menuId === 'home') fetchDatabase();
+        if(menuId === 'home' || menuId === 'matrix') fetchDatabase();
     }
 
-    async function showLoading(show) { document.getElementById('loading-indicator').style.display = show ? 'block' : 'none'; }
+    function showLoading(show) { document.getElementById('loading-indicator').style.display = show ? 'block' : 'none'; }
 
     async function fetchDatabase() {
         const creds = getCredentials();
@@ -440,13 +449,92 @@
                 const json = await res.json();
                 dbSha = json.sha;
                 globalData = JSON.parse(b64_to_utf8(json.content));
-                renderUI();
-            } else if (res.status === 404) {
-                globalData = [];
-                renderUI();
+                calculateCalculations();
+                renderMatrixBoard();
             }
-        } catch (e) { alert("데이터 로드 실패. 자격 토큰을 점검하세요."); }
+        } catch (e) { alert("DB 데이터 동기화 실패."); }
         showLoading(false);
+    }
+
+    // --- 📊 [수정 반영] 제작사별 및 상태별 카운트 정확한 연산 집계 로직 ---
+    function calculateCalculations() {
+        let makerHYTC = 0, makerYJ = 0, makerETC = 0;
+        let statusStorage = 0, statusUsing = 0, statusWaiting = 0, statusPolishing = 0;
+
+        globalData.forEach(p => {
+            // 1. 제작사별 분류 판정
+            const id = p.id.toUpperCase();
+            if (p.maker === "HYTC" || id.includes("HY")) { makerHYTC++; }
+            else if (p.maker === "유진" || id.includes("YJ")) { makerYJ++; }
+            else { makerETC++; }
+
+            // 2. 상태값별 분류 판정
+            if (p.status === "Storage") statusStorage++;
+            else if (p.status === "Using") statusUsing++;
+            else if (p.status === "Waiting") statusWaiting++;
+            else if (p.status === "Out_Polishing") statusPolishing++;
+        });
+
+        document.getElementById("stat-maker-hytc").innerText = makerHYTC + " EA";
+        document.getElementById("stat-maker-yj").innerText = makerYJ + " EA";
+        document.getElementById("stat-maker-etc").innerText = makerETC + " EA";
+        document.getElementById("stat-maker-total").innerText = globalData.length + " EA";
+
+        document.getElementById("stat-status-storage").innerText = statusStorage + " EA";
+        document.getElementById("stat-status-using").innerText = statusUsing + " EA";
+        document.getElementById("stat-status-waiting").innerText = statusWaiting + " EA";
+        document.getElementById("stat-status-polishing").innerText = statusPolishing + " EA";
+    }
+
+    // --- 🖥️ [6번 화면 신규 추가] 호기별 / 유닛별 장착 매핑 구조 빌더 함수 ---
+    function renderMatrixBoard() {
+        const matrixBody = document.getElementById("matrix-table-body");
+        if (!matrixBody) return;
+
+        // 현장 대상 전체 라인 목록 정의 (1-1 ~ 1-3, ... 6-1 ~ 6-4)
+        let totalLines = [];
+        for(let i=1; i<=5; i++) {
+            for(let j=1; j<=3; j++) { totalLines.push(`${i}-${j}`); }
+        }
+        for(let j=1; j<=4; j++) { totalLines.push(`6-${j}`); }
+
+        // 매핑 딕셔너리 초기화
+        let boardMapping = {};
+        totalLines.forEach(line => {
+            boardMapping[line] = { Upper: "<span class='empty-tool'>-</span>", Center: "<span class='empty-tool'>-</span>", Final: "<span class='empty-tool'>-</span>" };
+        });
+
+        // Using 상태 공구 전수 파싱 매핑
+        globalData.forEach(p => {
+            if (p.status === 'Using' && p.historyLog) {
+                for (let i = p.historyLog.length - 1; i >= 0; i--) {
+                    const logObj = p.historyLog[i];
+                    if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
+                        try {
+                            const linePart = logObj.log.split('라인:')[1].split('|')[0].trim();
+                            const unitPart = logObj.log.split('유닛:')[1].split('|')[0].trim();
+                            
+                            if (boardMapping[linePart] && boardMapping[linePart][unitPart] !== undefined) {
+                                boardMapping[linePart][unitPart] = `<span class="active-tool" title="${p.lastHistory}">${p.id}</span>`;
+                            }
+                            break;
+                        } catch(e) {}
+                    }
+                }
+            }
+        });
+
+        // HTML 문자열 렌더링
+        let htmlStr = "";
+        totalLines.forEach(line => {
+            htmlStr += `<tr>
+                <td><strong>${line} 호기</strong></td>
+                <td>${boardMapping[line].Upper}</td>
+                <td>${boardMapping[line].Center}</td>
+                <td>${boardMapping[line].Final}</td>
+            </tr>`;
+        });
+        matrixBody.innerHTML = htmlStr;
     }
 
     async function saveDatabase(newData) {
@@ -458,25 +546,19 @@
         
         const lockCheck = await fetch(lockUrl, { headers });
         if (lockCheck.status === 200) {
-            alert("🔒 다른 시스템 이용자가 원격 데이터를 변경 중입니다. 잠시 후 재수행하세요.");
+            alert("🔒 다른 작업자가 원격 데이터를 변경 중입니다.");
             showLoading(false); return false;
         }
-        const lockPayload = { message: "🔒 lock", content: btoa("locked") };
-        const createLock = await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify(lockPayload) });
+        const createLock = await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔒 lock", content: btoa("locked") }) });
         const lockData = await createLock.json();
         const lockSha = lockData.content.sha;
 
         try {
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
-            const dbPayload = {
-                message: "🔄 부품 상태 마스터 데이터 변동 사항 반영",
-                content: utf8_to_b64(JSON.stringify(newData, null, 2)),
-                sha: dbSha
-            };
-            const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify(dbPayload) });
+            const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) });
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
             if(saveRes.status === 200 || saveRes.status === 201) {
-                globalData = newData; renderUI(); showLoading(false); return true;
+                globalData = newData; calculateCalculations(); renderMatrixBoard(); showLoading(false); return true;
             }
         } catch (e) {
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
@@ -484,236 +566,112 @@
         showLoading(false); return false;
     }
 
-    function renderUI() {
-        let html = "";
-        let c18 = 0, c12 = 0, cLw = 0;
-
-        globalData.forEach(p => {
-            if (p.toolType === "1.8도 상도") c18++;
-            else if (p.toolType === "1.2도 상도") c12++;
-            else if (p.toolType === "LW (하도)") cLw++;
-
-            html += `<tr>
-                <td>${p.id}</td>
-                <td><b>${p.toolType || '-'}</b></td>
-                <td>${p.maker || '-'}</td>
-                <td><span style="padding:3px 6px; border-radius:4px; font-weight:bold; background:#eee;">${p.status}</span></td>
-                <td>${p.regridCount || 0}회</td>
-                <td>${p.lastHistory || '-'}</td>
-            </tr>`;
-        });
-
-        document.getElementById("count-18").innerText = c18 + " EA";
-        document.getElementById("count-12").innerText = c12 + " EA";
-        document.getElementById("count-lw").innerText = cLw + " EA";
-
-        document.getElementById("summary-table-body").innerHTML = html || `<tr><td colspan="6">조회된 마스터 데이터 부품이 존재하지 않습니다.</td></tr>`;
-    }
-
     async function submitBulkRegister() {
         const rows = document.querySelectorAll("#grid-register-body tr");
-        let tempArr = [...globalData];
-        let addedCount = 0;
-
+        let tempArr = [...globalData]; let addedCount = 0;
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
             const maker = row.querySelector('.maker-input').value.trim();
             if(!id) continue;
-
             const vRes = parseAndValidateToolId(id);
-            if(!vRes.valid) { alert(`[오류] ${id}는 지정된 ID 명명 인터락 규칙에 어긋납니다.`); return; }
-            if(tempArr.some(p => p.id === id)) { alert(`[중복 오류] ${id}는 이미 시스템에 등록되어 있는 부품 번호입니다.`); return; }
+            if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
 
-            const logMsg = "신규 생산 라인 등록 입고";
-            tempArr.push({
-                id: id,
-                toolType: vRes.type,
-                maker: maker,
-                status: "Storage",
-                regridCount: 0,
-                lastHistory: logMsg,
-                historyLog: [ { timestamp: new Date().toISOString(), status: "Storage", log: logMsg } ]
-            });
+            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", regridCount: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
-
-        if(addedCount === 0) return;
-        if(await saveDatabase(tempArr)) {
-            alert(`성공적으로 총 ${addedCount}건의 신규 공구가 마스터에 반영되었습니다.`);
-            switchMenu('home');
-        }
+        if(addedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${addedCount}건 등록 완료.`); switchMenu('home'); }
     }
 
-    // --- 2. 장비 장착 / 탈거 비즈니스 로직 (역추적 인터락 추가 패치) ---
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-equip-body tr");
-        let tempArr = [...globalData];
-        let updatedCount = 0;
-
+        let tempArr = [...globalData]; let updatedCount = 0;
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
             const dateVal = row.querySelector('.equip-date-input').value; 
             const timeVal = row.querySelector('.equip-time-input').value; 
+            if(!id || !dateVal || !timeVal) continue;
             
-            if(!id) continue;
-            if(!dateVal || !timeVal) { alert(`[입력 누락] ${id}의 장착/탈거 날짜와 시간을 지정해 주세요.`); return; }
-            
-            const hourVal = timeVal.split(':')[0]; 
-            const dt = `${dateVal} ${hourVal}`;
-
-            // disabled 상태인 select 태그의 value 도 안전하게 읽어옴
             const line = row.querySelector('.equip-line-select').value;
             const unit = row.querySelector('.equip-unit-select').value;
             const op = row.querySelector('.equip-op-input').value.trim();
             const comment = row.querySelector('.equip-comment-input').value.trim();
 
-            const vRes = parseAndValidateToolId(id);
-            if(!vRes.valid) { alert(`[오류] ${id}는 지정된 ID 명명 인터락 규칙에 어긋납니다.`); return; }
-
             const pIdx = tempArr.findIndex(p => p.id === id);
-            if(pIdx === -1) { alert(`[미등록 오류] 존재하지 않는 Tool ID(${id}) 입니다.`); return; }
-            
-            const currentPart = tempArr[pIdx];
-            if(targetStatus === 'Using' && currentPart.status !== 'Storage') { alert(`[장착 거부] ${id}는 현재 Storage 상태가 아닙니다. 장착이 불가합니다.`); return; }
-            if(targetStatus === 'Waiting' && currentPart.status !== 'Using') { alert(`[탈거 거부] ${id}는 현재 Using 상태가 아닙니다. 먼저 장착되어 있어야 탈거할 수 있습니다.`); return; }
+            if(pIdx === -1) continue;
 
             tempArr[pIdx].status = targetStatus;
-            if(!tempArr[pIdx].toolType) tempArr[pIdx].toolType = vRes.type;
-            
-            const logMsg = `[${targetStatus === 'Using'?'장착':'탈거'}] 일시:${dt} | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
+            const logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
-            
-            if(!tempArr[pIdx].historyLog) tempArr[pIdx].historyLog = [];
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
-            
             updatedCount++;
         }
-
-        if(updatedCount === 0) return;
-        if(await saveDatabase(tempArr)) {
-            alert(`총 ${updatedCount}건의 변경 사항이 처리 완료되었습니다.`);
-            switchMenu('home');
-        }
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 처리 완료.`); switchMenu('matrix'); }
     }
 
     async function submitBulkShipment(nextStatus) {
         const rows = document.querySelectorAll(`#grid-ship-out-body tr`);
-        let tempArr = [...globalData];
-        let processedCount = 0;
-
+        let tempArr = [...globalData]; let processedCount = 0;
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
-            const user = row.cells[1].querySelector('input').value.trim();
-            const note = row.cells[2].querySelector('input').value.trim();
             if(!id) continue;
-
             const pIdx = tempArr.findIndex(p => p.id === id);
-            if(pIdx === -1) { alert(`등록되지 않은 부품 ID: ${id}`); return; }
-            if(tempArr[pIdx].status !== 'Waiting') { alert(`[출하 불가] ${id}는 Waiting 상태여야 합니다.`); return; }
+            if(pIdx === -1 || tempArr[pIdx].status !== 'Waiting') { alert(`출하 불가 상태 ID 포함됨: ${id}`); return; }
 
             tempArr[pIdx].status = nextStatus;
-            const logMsg = `[연마 출하] 담당:${user} | 비고:${note}`;
-            tempArr[pIdx].lastHistory = logMsg;
-            
-            if(!tempArr[pIdx].historyLog) tempArr[pIdx].historyLog = [];
-            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
-            
+            tempArr[pIdx].lastHistory = `[연마 출하]`;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: `[연마 외주 출하]` });
             processedCount++;
         }
-
-        if(processedCount === 0) return;
-        if(await saveDatabase(tempArr)) {
-            alert(`총 ${processedCount}건의 출하 처리가 완료되었습니다.`);
-            switchMenu('home');
-        }
+        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`출하 완료.`); switchMenu('home'); }
     }
 
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll(`#grid-ship-in-body tr`);
-        let tempArr = [...globalData];
-        let processedCount = 0;
-
+        let tempArr = [...globalData]; let processedCount = 0;
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
             const regridCountVal = parseInt(row.querySelector('.regrid-count-input').value) || 0;
-            const user = row.cells[2].querySelector('input').value.trim();
-            const note = row.cells[3].querySelector('input').value.trim();
             if(!id) continue;
-
             const pIdx = tempArr.findIndex(p => p.id === id);
-            if(pIdx === -1) { alert(`등록되지 않은 부품 ID: ${id}`); return; }
-            if(tempArr[pIdx].status !== 'Out_Polishing') { alert(`[입고 불가] ${id}는 Out_Polishing 상태여야 합니다.`); return; }
+            if(pIdx === -1) continue;
 
             tempArr[pIdx].status = 'Storage';
             tempArr[pIdx].regridCount = regridCountVal; 
-            
-            const logMsg = `[연마 입고 완료] 입고등록 횟수: ${regridCountVal}회 | 담당:${user} | 비고:${note}`;
-            tempArr[pIdx].lastHistory = logMsg;
-            
-            if(!tempArr[pIdx].historyLog) tempArr[pIdx].historyLog = [];
-            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: 'Storage', log: logMsg });
-            
+            tempArr[pIdx].lastHistory = `[연마 입고 완료] ${regridCountVal}회`;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: 'Storage', log: `[연마 가공완료 입고]` });
             processedCount++;
         }
-
-        if(processedCount === 0) return;
-        if(await saveDatabase(tempArr)) {
-            alert(`총 ${processedCount}건의 입고 처리가 완료되었습니다.`);
-            switchMenu('home');
-        }
+        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`입고 완료.`); switchMenu('home'); }
     }
 
     function downloadExcel() {
-        if(globalData.length === 0) { alert("백업 데이터가 없습니다."); return; }
-        const excelRows = globalData.map(p => ({
-            "Tool ID": p.id,
-            "Tool Type": p.toolType,
-            "제작사": p.maker || "",
-            "현재 상태": p.status,
-            "누적 연마 횟수": p.regridCount,
-            "최근 변경 히스토리": p.lastHistory || ""
-        }));
+        const excelRows = globalData.map(p => ({ "Tool ID": p.id, "제작사": p.maker, "현재 상태": p.status, "누적 연마 횟수": p.regridCount, "최근 히스토리": p.lastHistory }));
         const worksheet = XLSX.utils.json_to_sheet(excelRows);
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "공구마스터DB");
-        XLSX.writeFile(workbook, `Tool_Master_Backup_${new Date().toISOString().slice(0,10)}.xlsx`);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "DB_Master");
+        XLSX.writeFile(workbook, `Tool_Master_${new Date().toISOString().slice(0,10)}.xlsx`);
     }
 
     function uploadExcel() {
         const fileInput = document.getElementById("excel-file-input");
-        if(!fileInput.files.length) { alert("파일을 업로드 하세요."); return; }
-        const file = fileInput.files[0];
+        if(!fileInput.files.length) return;
         const reader = new FileReader();
         reader.onload = async function(e) {
-            try {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: 'array' });
-                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                const excelRows = XLSX.utils.sheet_to_json(worksheet);
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const excelRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            const parsedNewData = excelRows.map(row => ({
+                id: String(row["Tool ID"]).trim(),
+                maker: String(row["제작사"] || ""),
+                status: String(row["현재 상태"] || "Storage"),
+                regridCount: parseInt(row["누적 연마 횟수"]) || 0,
+                lastHistory: String(row["최근 히스토리"] || ""),
+                historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "엑셀 복구 강제 주입" }]
+            })).filter(p => p.id !== "");
 
-                if(!confirm(`🚨 대량 복구를 실행하십니까? 기존 데이터가 덮어씌워집니다.`)) return;
-
-                const parsedNewData = excelRows.map(row => {
-                    const id = String(row["Tool ID"] || "").trim();
-                    const currentHistory = String(row["최근 변경 히스토리"] || "엑셀 복구 데이터");
-                    return {
-                        id: id,
-                        toolType: String(row["Tool Type"] || "").trim(),
-                        maker: String(row["제작사"] || "").trim(),
-                        status: String(row["현재 상태"] || "Storage").trim(),
-                        regridCount: parseInt(row["누적 연마 횟수"]) || 0,
-                        lastHistory: currentHistory,
-                        historyLog: [ { timestamp: new Date().toISOString(), status: String(row["현재 상태"] || "Storage").trim(), log: currentHistory } ]
-                    };
-                }).filter(p => p.id !== "");
-
-                if(await saveDatabase(parsedNewData)) {
-                    alert(`총 ${parsedNewData.length}건의 데이터 복구가 완료되었습니다.`);
-                    fileInput.value = ""; switchMenu('home');
-                }
-            } catch (err) { alert("엑셀 분석 오류: " + err); }
+            if(await saveDatabase(parsedNewData)) { alert("전체 원본 교체 성공"); switchMenu('home'); }
         };
-        reader.readAsArrayBuffer(file);
+        reader.readAsArrayBuffer(fileInput.files[0]);
     }
 </script>
 </body>
