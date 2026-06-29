@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "id": "LCAJHY1000CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1001CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1003CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1004CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY4000CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY4001CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY4003CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:09:08.640Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  }
+]
