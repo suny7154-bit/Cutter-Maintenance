@@ -4,20 +4,25 @@
     "status": "Waiting",
     "regridCount": 1,
     "activeSide": null,
-    "lastHistory": "[íê±°] ì¼ì:2026-06-09 14 | ë¼ì¸:5-1 | ì ë:Upper | ììì:JY | ë¹ê³ :"
+    "lastHistory": "[Ã­ÂÂÃªÂ±Â°] Ã¬ÂÂ¼Ã¬ÂÂ:2026-06-09 14 | Ã«ÂÂ¼Ã¬ÂÂ¸:5-1 | Ã¬ÂÂ Ã«ÂÂ:Upper | Ã¬ÂÂÃ¬ÂÂÃ¬ÂÂ:JY | Ã«Â¹ÂÃªÂ³Â :"
   },
   {
     "id": "LCAJHY1001CU656X1.8",
     "toolType": "",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "regridCount": 0,
-    "lastHistory": "신규 생산 라인 등록 입고",
+    "lastHistory": "[장착] 일시:2026-06-29 19 | 라인:5-2 | 유닛:Center | 작업자:JY | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-06-29T06:28:52.110Z",
         "status": "Storage",
-        "log": "신규 생산 라인 등록 입고"
+        "log": "ì ê· ìì° ë¼ì¸ ë±ë¡ ìê³ "
+      },
+      {
+        "timestamp": "2026-06-29T06:30:23.754Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 19 | 라인:5-2 | 유닛:Center | 작업자:JY | 비고:"
       }
     ]
   }
