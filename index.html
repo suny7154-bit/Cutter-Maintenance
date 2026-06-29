@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ 부품 생애주기 시스템 (GitHub DB)</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: #007bff;
+            --border-color: #dddddd;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 20px; }
+        .sidebar { width: 280px; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .main-content { flex: 1; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h1, h2, h3 { margin-top: 0; }
+        .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 15px; transition: all 0.2s; }
+        .menu-btn:hover, .menu-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; }
+        button.action-btn { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button.action-btn:hover { background: #218838; }
+        .type-badge { inline-size: max-content; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: bold; margin-top: 5px; display: none; }
+        .badge-18 { background: #e3f2fd; color: #0d47a1; display: inline-block; }
+        .badge-12 { background: #f3e5f5; color: #4a148c; display: inline-block; }
+        .badge-lw { background: #fff3e0; color: #e65100; display: inline-block; }
+        .status-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .status-table th, .status-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; }
+        .status-table th { background: #f8f9fa; }
+        .summary-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+        .summary-card { background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid var(--border-color); }
+        .summary-card h4 { margin: 0 0 5px 0; color: #666; }
+        .summary-card p { margin: 0; font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        .loading { display: none; color: #666; font-style: italic; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 사이드바 메뉴 -->
+    <div class="sidebar">
+        <h2>⚙️ 부품 생애주기</h2>
+        <button class="menu-btn active" onclick="switchMenu('home')">📊 0. Home (통계)</button>
+        <button class="menu-btn" onclick="switchMenu('register')">🆕 1. 신규 부품 등록</button>
+        <button class="menu-btn" onclick="switchMenu('equip')">🔧 2. 장비 장착/탈거</button>
+        <button class="menu-btn" onclick="switchMenu('history')">🔎 3. 이력 조회 현황</button>
+    </div>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <div class="main-content">
+        <div id="loading-indicator" class="loading">🔄 GitHub DB와 통신 중... 잠시만 기다려주세요.</div>
+        
+        <!-- 0. HOME 화면 -->
+        <div id="menu-home" class="menu-section">
+            <h2>📊 부품 재고 통계 Summary</h2>
+            <div class="summary-box">
+                <div class="summary-card"><h4>1.8도 상도</h4><p id="count-18">0 EA</p></div>
+                <div class="summary-card"><h4>1.2도 상도</h4><p id="count-12">0 EA</p></div>
+                <div class="summary-card"><h4>LW (하도)</h4><p id="count-lw">0 EA</p></div>
+            </div>
+            <h3>■ 전체 부품 현황 요약</h3>
+            <table class="status-table">
+                <thead>
+                    <tr>
+                        <th>부품 ID</th>
+                        <th>커터 타입</th>
+                        <th>현재 상태</th>
+                        <th>누적 연마 횟수</th>
+                        <th>하도 활성면</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-table-body">
+                    <tr><td colspan="5">데이터를 불러오는 중입니다...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 1. 신규 부품 등록 -->
+        <div id="menu-register" class="menu-section" style="display:none;">
+            <h2>🆕 1. 신규 부품 등록</h2>
+            <div class="form-group">
+                <label for="reg-id">부품 고유 일련번호(ID) 입력</label>
+                <input type="text" id="reg-id" placeholder="예: ABC-X1.8 또는 DEF-10.0" oninput="detectCutterType(this, 'reg-type-div')">
+                <div id="reg-type-div"></div>
+            </div>
+            <button class="action-btn" onclick="registerPart()">부품 등록하기</button>
+        </div>
+
+        <!-- 2. 장비 장착/탈거 -->
+        <div id="menu-equip" class="menu-section" style="display:none;">
+            <h2>🔧 2. 부품 장비 장착 / 탈거 및 하도 뒤집기</h2>
+            <div class="form-group">
+                <label for="eq-id">부품 ID 입력</label>
+                <input type="text" id="eq-id" placeholder="부품 ID를 입력하세요" oninput="checkCurrentStatus(this)">
+                <div id="eq-type-div"></div>
+            </div>
+            <div id="current-status-info" style="margin: 15px 0; font-weight: bold; color: #555;"></div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="action-btn" id="btn-mount" onclick="updateStatus('Using')" style="background:#007bff;">장비 장착</button>
+                <button class="action-btn" id="btn-unmount" onclick="updateStatus('Waiting')" style="background:#ffc107; color:#333;">장비 탈거 (연마대기)</button>
+                <button class="action-btn" id="btn-flip" onclick="flipLwSide()" style="background:#6c757d; display:none;">🔄 하도 면 뒤집기</button>
+            </div>
+        </div>
+
+        <!-- 3. 이력 조회 현황 -->
+        <div id="menu-history" class="menu-section" style="display:none;">
+            <h2>🔎 3. 이력 조회 및 커터 현황</h2>
+            <table class="status-table">
+                <thead>
+                    <tr>
+                        <th>부품 ID</th>
+                        <th>커터 타입 (1.8 / 1.2 / LW)</th>
+                        <th>현재 상태</th>
+                        <th>연마 횟수</th>
+                        <th>비고 (하도 사용면)</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table-body">
+                    <!-- 스크립트에서 동적 생성 -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // 🛠️ 1. GITHUB DB 설정 (여기를 내 정보로 채우기)
+    // ==========================================
+    const CONFIG = {
+        token: "여기_내_GITHUB_토큰_입력", 
+        owner: "내_GITHUB_유저명",
+        repo: "내_레포지토리_이름",
+        dbFile: "parts_db.json",
+        lockFile: "db.lock"
+    };
+
+    let globalData = [];
+    let dbSha = "";
+
+    // 부품 유형 자동 감지 엔진 (1.8, 1.2, LW 판별)
+    function getCutterType(id) {
+        if (!id) return null;
+        if (id.endsWith("X1.8")) return "1.8";
+        if (id.endsWith("X1.2")) return "1.2";
+        if (id.endsWith("10.0") || id.endsWith("20.0")) return "LW";
+        return "미분류";
+    }
+
+    function detectCutterType(inputEl, targetDivId) {
+        const id = inputEl.value.trim();
+        const type = getCutterType(id);
+        const targetDiv = document.getElementById(targetDivId);
+        
+        if(!type) { targetDiv.innerHTML = ""; return; }
+        
+        if (type === "1.8") targetDiv.innerHTML = `<span class="type-badge badge-18">확인된 타입: 1.8도 상도 커터</span>`;
+        else if (type === "1.2") targetDiv.innerHTML = `<span class="type-badge badge-12">확인된 타입: 1.2도 상도 커터</span>`;
+        else if (type === "LW") targetDiv.innerHTML = `<span class="type-badge badge-lw">확인된 타입: LW (하도 양면 커터)</span>`;
+        else targetDiv.innerHTML = `<span class="type-badge" style="background:#eee; color:#666; display:inline-block;">알 수 없는 ID 패턴</span>`;
+    }
+
+    // 메뉴 전환 함수
+    function switchMenu(menuId) {
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
+        
+        event.target.classList.add('active');
+        document.getElementById(`menu-${menuId}`).style.display = 'block';
+        
+        if(menuId === 'home' || menuId === 'history') { fetchDatabase(); }
+    }
+
+    // ==========================================
+    // 🚀 2. GITHUB API 핵심 연동 로직 (인터락 포함)
+    // ==========================================
+    
+    async function showLoading(show) {
+        document.getElementById('loading-indicator').style.display = show ? 'block' : 'none';
+    }
+
+    // 데이터 호출
+    async function fetchDatabase() {
+        showLoading(true);
+        try {
+            const url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.CONFIG.dbFile}`;
+            const res = await fetch(url, { headers: { "Authorization": `token ${CONFIG.token}` } });
+            if (res.status === 200) {
+                const json = await res.json();
+                dbSha = json.sha;
+                globalData = JSON.parse(atob(json.content));
+                renderUI();
+            } else if (res.status === 404) {
+                globalData = []; // 파일이 없으면 초기화 상태로 시작
+                renderUI();
+            }
+        } catch (e) {
+            alert("DB 로드 실패: GitHub 설정을 확인하세요.");
+        }
+        showLoading(false);
+    }
+
+    // 데이터 저장 (동시성 자물쇠 인터락 작동)
+    async function saveDatabase(newData) {
+        showLoading(true);
+        const headers = { "Authorization": `token ${CONFIG.token}`, "Content-Type": "application/json" };
+        const lockUrl = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.lockFile}`;
+        
+        // [인터락 STEP 1]: 먼저 lock 파일이 있나 확인
+        const lockCheck = await fetch(lockUrl, { headers });
+        if (lockCheck.status === 200) {
+            alert("🔒 [인터락 차단] 다른 팀원이 동시에 부품 정보를 수정하고 있습니다! 3초 후 다시 시도해 주세요.");
+            showLoading(false);
+            return false;
+        }
+
+        // [인터락 STEP 2]: 자물쇠 생성
+        const lockPayload = { message: "🔒 lock", content: btoa("locked") };
+        const createLock = await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify(lockPayload) });
+        const lockData = await createLock.json();
+        const lockSha = lockData.content.sha;
+
+        try {
+            // [인터락 STEP 3]: 데이터 업로드
+            const dbUrl = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dbFile}`;
+            const dbPayload = {
+                message: "🔄 부품 상태 데이터 업데이트",
+                content: btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2)))),
+                sha: dbSha
+            };
+            const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify(dbPayload) });
+            
+            if(saveRes.status === 200 || saveRes.status === 201) {
+                // 자물쇠 해제
+                await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
+                globalData = newData;
+                fetchDatabase(); // 최신화
+                showLoading(false);
+                return true;
+            }
+        } catch (e) {
+            // 에러 시 자물쇠 강제 해제
+            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
+        }
+        
+        showLoading(false);
+        return false;
+    }
+
+    // ==========================================
+    // 📊 3. 화면 렌더링 & 비즈니스 로직
+    // ==========================================
+    
+    function renderUI() {
+        let count18 = 0, count12 = 0, countLw = 0;
+        let summaryHtml = "";
+        let historyHtml = "";
+
+        globalData.forEach(p => {
+            const type = getCutterType(p.id);
+            if (type === "1.8") count18++;
+            if (type === "1.2") count12++;
+            if (type === "LW") countLw++;
+
+            const sideText = type === "LW" ? (p.activeSide || "A면") : "-";
+
+            summaryHtml += `<tr><td>${p.id}</td><td><b>${type}</b></td><td>${p.status}</td><td>${p.regridCount}회</td><td>${sideText}</td></tr>`;
+            historyHtml += `<tr><td>${p.id}</td><td><span class="type-badge badge-${type.toLowerCase()}">${type}</span></td><td>${p.status}</td><td>${p.regridCount}회</td><td>${type==='LW' ? '현재 사용면: '+sideText : '-'}</td></tr>`;
+        });
+
+        document.getElementById("count-18").innerText = count18 + " EA";
+        document.getElementById("count-12").innerText = count12 + " EA";
+        document.getElementById("count-lw").innerText = countLw + " EA";
+        
+        document.getElementById("summary-table-body").innerHTML = summaryHtml || `<tr><td colspan="5">등록된 부품이 없습니다.</td></tr>`;
+        document.getElementById("history-table-body").innerHTML = historyHtml || `<tr><td colspan="5">조회할 부품 데이터가 없습니다.</td></tr>`;
+    }
+
+    // 1번 메뉴: 신규 등록
+    async function registerPart() {
+        const id = document.getElementById("reg-id").value.trim();
+        const type = getCutterType(id);
+        
+        if(!id || type === "미분류") { alert("올바른 부품 ID 패턴을 입력해 주세요 (~X1.8, ~X1.2, ~10.0, ~20.0)"); return; }
+        if(globalData.some(p => p.id === id)) { alert("❌ 이미 등록된 부품 ID입니다."); return; }
+
+        const newPart = {
+            id: id,
+            status: "Storage",
+            regridCount: 0,
+            activeSide: type === "LW" ? "A면" : null
+        };
+
+        const updated = [...globalData, newPart];
+        if(await saveDatabase(updated)) {
+            alert(`종료 완료: [${id}] 부품이 Storage 상태로 등록되었습니다.`);
+            document.getElementById("reg-id").value = "";
+            document.getElementById("reg-type-div").innerHTML = "";
+        }
+    }
+
+    // 2번 메뉴: 실시간 상태 조회 인터락
+    function checkCurrentStatus(inputEl) {
+        const id = inputEl.value.trim();
+        detectCutterType(inputEl, 'eq-type-div');
+        
+        const part = globalData.find(p => p.id === id);
+        const infoDiv = document.getElementById("current-status-info");
+        const flipBtn = document.getElementById("btn-flip");
+
+        if(!part) {
+            infoDiv.innerText = "조회된 부품이 없습니다.";
+            flipBtn.style.display = "none";
+            return;
+        }
+
+        const type = getCutterType(id);
+        let statusText = `현재 부품 상태: [${part.status}] / 누적 연마: ${part.regridCount}회`;
+        if(type === "LW") {
+            statusText += ` / 활성화면: [${part.activeSide || 'A면'}]`;
+            flipBtn.style.display = "inline-block"; // 하도일 때만 뒤집기 버튼 노출
+        } else {
+            flipBtn.style.display = "none";
+        }
+        infoDiv.innerText = statusText;
+    }
+
+    // 2번 메뉴: 장착 및 탈거 처리
+    async function updateStatus(nextStatus) {
+        const id = document.getElementById("eq-id").value.trim();
+        const partIndex = globalData.findIndex(p => p.id === id);
+
+        if(partIndex === -1) { alert("부품 ID를 다시 확인해 주세요."); return; }
+        const part = globalData[partIndex];
+
+        if(nextStatus === 'Using' && part.status !== 'Storage') {
+            alert(`🚫 [인터락 차단] 해당 부품은 현재 [${part.status}] 상태입니다. 연마 완료 후 'Storage' 상태여야만 장장착이 가능합니다.`);
+            return;
+        }
+        if(nextStatus === 'Waiting' && part.status !== 'Using') {
+            alert(`🚫 현재 장비에 장착(Using) 상태인 부품이 아닙니다.`);
+            return;
+        }
+
+        const updated = [...globalData];
+        updated[partIndex].status = nextStatus;
+        
+        // 탈거되어 연마 대기로 갈 때 연마 횟수 카운트 1 증가시킴
+        if(nextStatus === 'Waiting') {
+            updated[partIndex].regridCount += 1;
+        }
+
+        if(await saveDatabase(updated)) {
+            alert(`부품 상태가 [${nextStatus}]로 변경되었습니다.`);
+            document.getElementById("eq-id").value = "";
+            document.getElementById("current-status-info").innerText = "";
+            document.getElementById("eq-type-div").innerHTML = "";
+        }
+    }
+
+    // 2번 메뉴: 하도 면 뒤집기(Flip) 특수 로직
+    async function flipLwSide() {
+        const id = document.getElementById("eq-id").value.trim();
+        const partIndex = globalData.findIndex(p => p.id === id);
+        
+        if(partIndex === -1) return;
+        const part = globalData[partIndex];
+        
+        if(getCutterType(id) !== "LW") { alert("하도(LW) 부품만 뒤집기가 가능합니다."); return; }
+        
+        const currentSide = part.activeSide || "A면";
+        const nextSide = currentSide === "A면" ? "B면" : "A면";
+        
+        if(!confirm(`현재 ${currentSide}을 사용 중입니다. ${nextSide}으로 뒤집어 장착하시겠습니까?`)) return;
+
+        const updated = [...globalData];
+        updated[partIndex].activeSide = nextSide;
+        updated[partIndex].status = "Storage"; // 뒤집으면 다시 쓸 수 있으므로 Storage로 초기화
+
+        if(await saveDatabase(updated)) {
+            alert(`🔄 면 뒤집기 완료: 현재 활성면이 [${nextSide}]으로 변경되었으며, 즉시 사용 가능한 Storage 상태로 전환되었습니다.`);
+            document.getElementById("eq-id").value = "";
+            document.getElementById("current-status-info").innerText = "";
+        }
+    }
+
+    // 첫 실행 시 데이터 호출
+    window.onload = fetchDatabase;
+</script>
+
+</body>
+</html>
