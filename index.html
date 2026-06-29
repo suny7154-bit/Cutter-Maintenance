@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (출하 화면 개선판)</title>
+    <title>⚙️ 부품 생애주기 관리 시스템 (요청 반영 개정판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -11,36 +11,45 @@
         .login-banner { background: #343a40; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; }
         .login-banner input { width: 180px; padding: 8px; border: none; border-radius: 4px; }
         .login-banner button { background: #17a2b8; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .container { max-width: 1500px; margin: 0 auto; display: flex; gap: 20px; }
+        .container { max-width: 1600px; margin: 0 auto; display: flex; gap: 20px; }
         .sidebar { width: 280px; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .main-content { flex: 1; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        h2, h3 { margin-top: 0; }
+        h2, h3, h4 { margin-top: 0; color: #212529; }
         .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s; font-weight: bold; }
         .menu-btn:hover, .menu-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
         
-        /* 테이블 그리드 스타일 */
-        .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-        .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
-        .grid-table th { background: #e9ecef; font-size: 14px; }
+        /* 테이블 공통 스타일 */
+        .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; font-size: 14px; }
+        .grid-table th { background: #e9ecef; color: #495057; font-weight: bold; }
         .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; }
-        .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
+        .grid-table input[readonly] { background-color: #f1f3f5; color: #495057; }
         
-        /* 대시보드 집계 판넬 */
-        .summary-dashboard { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
-        .summary-box-v2 { flex: 1; min-width: 300px; background: #fafafa; border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; }
-        .summary-box-v2 h4 { margin: 0 0 10px 0; padding-bottom: 5px; border-bottom: 2px solid #6c757d; font-size: 15px; }
-        .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .summary-item { background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 4px; text-align: center; }
-        .summary-item span { display: block; font-size: 12px; color: #666; font-weight: bold; }
-        .summary-item strong { font-size: 18px; color: #333; }
-        
-        /* 현황판 매트릭스 스타일 */
-        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; }
-        .matrix-table th { background: #495057; color: white; font-size: 14px; }
-        .matrix-table tr:nth-child(even) { background-color: #f8f9fa; }
-        .active-tool { background-color: #e3f2fd !important; font-weight: bold; color: #0d47a1; border: 2px solid #90caf9 !important; border-radius: 4px; padding: 4px; display: inline-block; word-break: break-all; }
-        .empty-tool { color: #adb5bd; font-style: italic; font-size: 13px; }
+        /* 집계용 Matrix 표 스타일 */
+        .matrix-summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
+        .matrix-summary-table th, .matrix-summary-table td { border: 1px solid #ced4da; padding: 12px; text-align: center; font-size: 14px; }
+        .matrix-summary-table th { background: #495057; color: white; }
+        .matrix-summary-table .sub-total { background: #f8f9fa; font-weight: bold; }
+        .matrix-summary-table .total-highlight { background: #e8f4fd; font-weight: bold; color: #0056b3; }
+
+        /* 현황판 스타일 */
+        .board-title { background: #6c757d; color: white; padding: 10px 15px; border-radius: 6px 6px 0 0; margin: 30px 0 0 0; font-size: 16px; font-weight: bold; }
+        .matrix-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; font-size: 13px; }
+        .matrix-table th { background: #eeeff1; color: #333; }
+        .matrix-table tr:nth-child(even) { background-color: #fafafa; }
+        .active-tool { background-color: #e3f2fd !important; font-weight: bold; color: #0d47a1; border: 1px solid #b3e5fc !important; padding: 4px 8px; border-radius: 4px; display: inline-block; word-break: break-all; }
+        .empty-tool { color: #adb5bd; font-style: italic; }
+
+        /* 로그 레이아웃 */
+        .log-split-container { display: flex; gap: 20px; height: 600px; }
+        .log-list-side { flex: 3; border: 1px solid #dee2e6; border-radius: 6px; overflow-y: auto; padding: 10px; }
+        .log-view-side { flex: 2; border: 1px solid #dee2e6; border-radius: 6px; background: #f8f9fa; padding: 15px; overflow-y: auto; }
+        .list-row { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; border-radius: 4px; transition: background 0.1s; }
+        .list-row:hover { background: #edf2f7; }
+        .list-row.selected { background: #d2e3fc; border-left: 4px solid #1a73e8; }
+        .log-item { background: white; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 13px; line-height: 1.4; }
+        .log-item small { color: #666; display: block; margin-bottom: 4px; }
 
         .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
         .datetime-container input { width: 48% !important; padding: 5px; }
@@ -71,35 +80,134 @@
         <button class="menu-btn" onclick="switchMenu('ship-out')">🚛 3. 연마 출하 관리</button>
         <button class="menu-btn" onclick="switchMenu('ship-in')">📥 4. 연마 입고 관리</button>
         <button class="menu-btn" onclick="switchMenu('excel-io')">💾 5. 마스터 엑셀 변환</button>
-        <button class="menu-btn" onclick="switchMenu('matrix')">🖥️ 6. 호기별 장착 현황판</button>
+        <button class="menu-btn" onclick="switchMenu('matrix')">🖥️ 6.전체 리스트 및 이력 조회</button>
     </div>
 
     <div class="main-content">
         <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 확인 중... 잠시만 기다려주세요.</div>
         
-        <!-- 0. HOME 수량 집계 화면 -->
+        <!-- 0. HOME 수량 집계 및 호기별 장착 현황 화면 -->
         <div id="menu-home" class="menu-section">
-            <h2>📊 마스터 데이터 실시간 수량 집계</h2>
-            <div class="summary-dashboard">
-                <div class="summary-box-v2">
-                    <h4>■ 제작사별 보유 수량</h4>
-                    <div class="summary-grid">
-                        <div class="summary-item"><span>HYTC</span><strong id="stat-maker-hytc">0 EA</strong></div>
-                        <div class="summary-item"><span>유진 (YJ)</span><strong id="stat-maker-yj">0 EA</strong></div>
-                        <div class="summary-item"><span>기타 / 미분류</span><strong id="stat-maker-etc">0 EA</strong></div>
-                        <div class="summary-item" style="background:#e9ecef;"><span>총 합계</span><strong id="stat-maker-total">0 EA</strong></div>
-                    </div>
-                </div>
-                <div class="summary-box-v2">
-                    <h4>■ Cutter 현재 상태별 수량</h4>
-                    <div class="summary-grid">
-                        <div class="summary-item"><span>보유고 재고 (Storage)</span><strong id="stat-status-storage">0 EA</strong></div>
-                        <div class="summary-item"><span>장비 장착 중 (Using)</span><strong id="stat-status-using">0 EA</strong></div>
-                        <div class="summary-item"><span>탈거 대기 (Waiting)</span><strong id="stat-status-waiting">0 EA</strong></div>
-                        <div class="summary-item"><span>외주 연마 중 (Out_Polishing)</span><strong id="stat-status-polishing">0 EA</strong></div>
-                    </div>
-                </div>
-            </div>
+            <h2>📊 커터 타입별 마스터 데이터 실시간 집계 현황</h2>
+            
+            <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량 표</h3>
+            <table class="matrix-summary-table">
+                <thead>
+                    <tr>
+                        <th>커터 타입 (구분)</th>
+                        <th>HYTC</th>
+                        <th>유진 (YJ)</th>
+                        <th>기타 / 미분류</th>
+                        <th class="sub-total">타입별 합계</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.8도 상도</strong></td>
+                        <td id="m1-18-hytc">0</td>
+                        <td id="m1-18-yj">0</td>
+                        <td id="m1-18-etc">0</td>
+                        <td class="sub-total" id="m1-18-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1.2도 상도</strong></td>
+                        <td id="m1-12-hytc">0</td>
+                        <td id="m1-12-yj">0</td>
+                        <td id="m1-12-etc">0</td>
+                        <td class="sub-total" id="m1-12-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LW (하도)</strong></td>
+                        <td id="m1-lw-hytc">0</td>
+                        <td id="m1-lw-yj">0</td>
+                        <td id="m1-lw-etc">0</td>
+                        <td class="sub-total" id="m1-lw-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>기타 / 분석불가</strong></td>
+                        <td id="m1-etc-hytc">0</td>
+                        <td id="m1-etc-yj">0</td>
+                        <td id="m1-etc-etc">0</td>
+                        <td class="sub-total" id="m1-etc-total">0</td>
+                    </tr>
+                    <tr class="total-highlight">
+                        <td>제작사별 총계</td>
+                        <td id="m1-tot-hytc">0</td>
+                        <td id="m1-tot-yj">0</td>
+                        <td id="m1-tot-etc">0</td>
+                        <td id="m1-grand-total">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>■ 2. 커터 타입별 ✕ 현재 상태별 수량 표</h3>
+            <table class="matrix-summary-table">
+                <thead>
+                    <tr>
+                        <th>커터 타입 (구분)</th>
+                        <th>보유고 재고 (Storage)</th>
+                        <th>장비 장착 중 (Using)</th>
+                        <th>탈거 대기 (Waiting)</th>
+                        <th>외주 연마 중 (Out_Polishing)</th>
+                        <th class="sub-total">타입별 합계</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.8도 상도</strong></td>
+                        <td id="m2-18-st">0</td>
+                        <td id="m2-18-us">0</td>
+                        <td id="m2-18-wt">0</td>
+                        <td id="m2-18-pl">0</td>
+                        <td class="sub-total" id="m2-18-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1.2도 상도</strong></td>
+                        <td id="m2-12-st">0</td>
+                        <td id="m2-12-us">0</td>
+                        <td id="m2-12-wt">0</td>
+                        <td id="m2-12-pl">0</td>
+                        <td class="sub-total" id="m2-12-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LW (하도)</strong></td>
+                        <td id="m2-lw-st">0</td>
+                        <td id="m2-lw-us">0</td>
+                        <td id="m2-lw-wt">0</td>
+                        <td id="m2-lw-pl">0</td>
+                        <td class="sub-total" id="m2-lw-total">0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>기타 / 분석불가</strong></td>
+                        <td id="m2-etc-st">0</td>
+                        <td id="m2-etc-us">0</td>
+                        <td id="m2-etc-wt">0</td>
+                        <td id="m2-etc-pl">0</td>
+                        <td class="sub-total" id="m2-etc-total">0</td>
+                    </tr>
+                    <tr class="total-highlight">
+                        <td>상태별 총계</td>
+                        <td id="m2-tot-st">0</td>
+                        <td id="m2-tot-us">0</td>
+                        <td id="m2-tot-wt">0</td>
+                        <td id="m2-tot-pl">0</td>
+                        <td id="m2-grand-total">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="board-title">🖥️ 설비 호기별 / Unit별 실시간 Cutter 장착 현황판 (0번 이동 완료)</div>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 16%;">설비 호기 (Line)</th>
+                        <th style="width: 28%;">Upper Unit</th>
+                        <th style="width: 28%;">Center Unit</th>
+                        <th style="width: 28%;">Final Unit</th>
+                    </tr>
+                </thead>
+                <tbody id="matrix-table-body"></tbody>
+            </table>
         </div>
 
         <!-- 1. 신규 부품 등록 -->
@@ -143,10 +251,10 @@
             <button class="action-btn" style="background:#ffc107; color:#333;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
 
-        <!-- 3. 연마 출하 (요청에 따른 개정) -->
+        <!-- 3. 연마 출하 -->
         <div id="menu-ship-out" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
-            <p style="font-size:13px; color:#666;">※ Tool ID를 입력하거나 붙여넣으면 제조사가 자동 매칭되어 표출됩니다.</p>
+            <p style="font-size:13px; color:#666;">※ Tool ID를 입력하면 제조사가 자동 매칭되며, 출하 일자를 기록할 수 있습니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('ship-out')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -194,20 +302,35 @@
             </div>
         </div>
 
-        <!-- 6. 호기별/Unit별 장착 현황판 -->
+        <!-- 6. 전체 커터 리스트 및 생애주기 DB 로그 (6번 분리 완료) -->
         <div id="menu-matrix" class="menu-section" style="display:none;">
-            <h2>🖥️ 6. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
-            <table class="matrix-table">
-                <thead>
-                    <tr>
-                        <th style="width: 16%;">설비 호기 (Line)</th>
-                        <th style="width: 28%;">Upper Unit</th>
-                        <th style="width: 28%;">Center Unit</th>
-                        <th style="width: 28%;">Final Unit</th>
-                    </tr>
-                </thead>
-                <tbody id="matrix-table-body"></tbody>
-            </table>
+            <h2>🖥️ 6. 전체 마스터 Cutter 리스트 및 생애주기 DB Log 조회</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">※ 왼쪽 리스트에서 Cutter 행을 클릭하면 오른쪽에 해당 공구의 전체 Life Cycle 변경 이력이 표출됩니다.</p>
+            
+            <div class="log-split-container">
+                <div class="log-list-side">
+                    <table style="width:100%; border-collapse:collapse; font-size:13px;" id="master-list-table">
+                        <thead>
+                            <tr style="background:#f1f3f5; position:sticky; top:0; z-index:10;">
+                                <th style="border:1px solid #ddd; padding:8px;">Tool ID</th>
+                                <th style="border:1px solid #ddd; padding:8px;">타입</th>
+                                <th style="border:1px solid #ddd; padding:8px;">제조사</th>
+                                <th style="border:1px solid #ddd; padding:8px;">현재 상태</th>
+                                <th style="border:1px solid #ddd; padding:8px;">연마횟수</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-list-tbody">
+                            <!-- 스크립트로 동적 로드 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="log-view-side">
+                    <h3 id="selected-tool-title" style="border-bottom:2px solid #007bff; padding-bottom:8px; font-size:16px;">🔍 공구를 선택해 주세요</h3>
+                    <div id="selected-tool-logs">
+                        <p style="color:#888; text-align:center; margin-top:50px;">선택된 이력이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -222,17 +345,16 @@
     function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
 
     function parseAndValidateToolId(id) {
-        if (!id) return { valid: false, type: "" };
-        let toolType = "";
+        if (!id) return { valid: false, type: "미분류" };
+        let toolType = "기타 / 분석불가";
         if (id.endsWith("X1.8")) toolType = "1.8도 상도";
         else if (id.endsWith("X1.2")) toolType = "1.2도 상도";
         else if (id.endsWith("01.0") || id.endsWith("02.0")) toolType = "LW (하도)";
         
         const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|01.0|02.0)$/;
-        return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "분석 중..." : "") };
+        return { valid: fullRegex.test(id), type: toolType };
     }
 
-    // 클립보드 다중 복사(Ctrl+V) 라우터 연동 모듈
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -286,7 +408,7 @@
 
             tr.innerHTML = `
                 <td>
-                    <input type="text" class="tool-id-input" placeholder="ID 입력 또는 Ctrl+V 다중 입력" onchange="handleEquipIdChange(this)">
+                    <input type="text" class="tool-id-input" placeholder="ID 입력 또는 Ctrl+V" onchange="handleEquipIdChange(this)">
                     <span class="info-text"></span>
                 </td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
@@ -310,7 +432,6 @@
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'equip');
         } else if (menu === 'ship-out') {
-            // [개정] 출하 담당자 제외 -> 제조사(자동) 및 출하 일자(기본값 금일) 셋업
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 또는 Ctrl+V" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="text" class="maker-input" readonly placeholder="자동 매칭"></td>
@@ -344,7 +465,7 @@
         if (makerInput) {
             if (id.includes("HY")) makerInput.value = "HYTC";
             else if (id.includes("YJ")) makerInput.value = "유진";
-            else makerInput.value = "";
+            else makerInput.value = "미분류";
         }
         
         if (id.length >= 21 && !res.valid) inputEl.classList.add('invalid-cell');
@@ -443,38 +564,94 @@
                 const json = await res.json();
                 dbSha = json.sha;
                 globalData = JSON.parse(b64_to_utf8(json.content));
-                calculateCalculations();
+                renderMatrixTables();
                 renderMatrixBoard();
+                renderMasterLogView();
             }
         } catch (e) { alert("DB 데이터 동기화 실패."); }
         showLoading(false);
     }
 
-    function calculateCalculations() {
-        let makerHYTC = 0, makerYJ = 0, makerETC = 0;
-        let statusStorage = 0, statusUsing = 0, statusWaiting = 0, statusPolishing = 0;
+    // --- 📊 [요청사항 반영] 표 형태의 다차원 집계 로직 ---
+    function renderMatrixTables() {
+        // 데이터 구조 초기화
+        let m1 = {
+            "1.8도 상도": { hytc: 0, yj: 0, etc: 0, total: 0 },
+            "1.2도 상도": { hytc: 0, yj: 0, etc: 0, total: 0 },
+            "LW (하도)": { hytc: 0, yj: 0, etc: 0, total: 0 },
+            "기타 / 분석불가": { hytc: 0, yj: 0, etc: 0, total: 0 }
+        };
+        let m2 = {
+            "1.8도 상도": { st: 0, us: 0, wt: 0, pl: 0, total: 0 },
+            "1.2도 상도": { st: 0, us: 0, wt: 0, pl: 0, total: 0 },
+            "LW (하도)": { st: 0, us: 0, wt: 0, pl: 0, total: 0 },
+            "기타 / 분석불가": { st: 0, us: 0, wt: 0, pl: 0, total: 0 }
+        };
+        
+        let m1Tot = { hytc:0, yj:0, etc:0, grand:0 };
+        let m2Tot = { st:0, us:0, wt:0, pl:0, grand:0 };
 
         globalData.forEach(p => {
-            const id = p.id.toUpperCase();
-            if (p.maker === "HYTC" || id.includes("HY")) { makerHYTC++; }
-            else if (p.maker === "유진" || id.includes("YJ")) { makerYJ++; }
-            else { makerETC++; }
+            const v = parseAndValidateToolId(p.id);
+            const type = v.type;
+            
+            // 제조사 파악
+            let makerKey = "etc";
+            if (p.maker === "HYTC" || p.id.includes("HY")) makerKey = "hytc";
+            else if (p.maker === "유진" || p.id.includes("YJ")) makerKey = "yj";
 
-            if (p.status === "Storage") statusStorage++;
-            else if (p.status === "Using") statusUsing++;
-            else if (p.status === "Waiting") statusWaiting++;
-            else if (p.status === "Out_Polishing") statusPolishing++;
+            // 상태 파악
+            let statusKey = "st";
+            if(p.status === "Using") statusKey = "us";
+            else if(p.status === "Waiting") statusKey = "wt";
+            else if(p.status === "Out_Polishing") statusKey = "pl";
+
+            // 표 1 맵핑
+            if(m1[type]) {
+                m1[type][makerKey]++;
+                m1[type].total++;
+                m1Tot[makerKey]++;
+                m1Tot.grand++;
+            }
+            
+            // 표 2 맵핑
+            if(m2[type]) {
+                m2[type][statusKey]++;
+                m2[type].total++;
+                m2Tot[statusKey]++;
+                m2Tot.grand++;
+            }
         });
 
-        document.getElementById("stat-maker-hytc").innerText = makerHYTC + " EA";
-        document.getElementById("stat-maker-yj").innerText = makerYJ + " EA";
-        document.getElementById("stat-maker-etc").innerText = makerETC + " EA";
-        document.getElementById("stat-maker-total").innerText = globalData.length + " EA";
+        // 표 1 DOM 반영
+        const types = ["1.8도 상도", "1.2도 상도", "LW (하도)", "기타 / 분석불가"];
+        const domIdsM1 = ["18", "12", "lw", "etc"];
+        types.forEach((t, idx) => {
+            const code = domIdsM1[idx];
+            document.getElementById(`m1-${code}-hytc`).innerText = m1[t].hytc + " EA";
+            document.getElementById(`m1-${code}-yj`).innerText = m1[t].yj + " EA";
+            document.getElementById(`m1-${code}-etc`).innerText = m1[t].etc + " EA";
+            document.getElementById(`m1-${code}-total`).innerText = m1[t].total + " EA";
+        });
+        document.getElementById("m1-tot-hytc").innerText = m1Tot.hytc + " EA";
+        document.getElementById("m1-tot-yj").innerText = m1Tot.yj + " EA";
+        document.getElementById("m1-tot-etc").innerText = m1Tot.etc + " EA";
+        document.getElementById("m1-grand-total").innerText = m1Tot.grand + " EA";
 
-        document.getElementById("stat-status-storage").innerText = statusStorage + " EA";
-        document.getElementById("stat-status-using").innerText = statusUsing + " EA";
-        document.getElementById("stat-status-waiting").innerText = statusWaiting + " EA";
-        document.getElementById("stat-status-polishing").innerText = statusPolishing + " EA";
+        // 표 2 DOM 반영
+        types.forEach((t, idx) => {
+            const code = domIdsM1[idx];
+            document.getElementById(`m2-${code}-st`).innerText = m2[t].st + " EA";
+            document.getElementById(`m2-${code}-us`).innerText = m2[t].us + " EA";
+            document.getElementById(`m2-${code}-wt`).innerText = m2[t].wt + " EA";
+            document.getElementById(`m2-${code}-pl`).innerText = m2[t].pl + " EA";
+            document.getElementById(`m2-${code}-total`).innerText = m2[t].total + " EA";
+        });
+        document.getElementById("m2-tot-st").innerText = m2Tot.st + " EA";
+        document.getElementById("m2-tot-us").innerText = m2Tot.us + " EA";
+        document.getElementById("m2-tot-wt").innerText = m2Tot.wt + " EA";
+        document.getElementById("m2-tot-pl").innerText = m2Tot.pl + " EA";
+        document.getElementById("m2-grand-total").innerText = m2Tot.grand + " EA";
     }
 
     function renderMatrixBoard() {
@@ -522,6 +699,61 @@
         matrixBody.innerHTML = htmlStr;
     }
 
+    // --- 🖥️ [요청사항 반영] 6번 전체 데이터 리스트 및 개별 로그 뷰어 로직 ---
+    function renderMasterLogView() {
+        const tbody = document.getElementById("master-list-tbody");
+        if(!tbody) return;
+        tbody.innerHTML = "";
+
+        globalData.forEach((p, index) => {
+            const v = parseAndValidateToolId(p.id);
+            const tr = document.createElement("tr");
+            tr.className = "list-row";
+            tr.setAttribute("data-id", p.id);
+            tr.onclick = () => showToolDetailLog(p.id, tr);
+            tr.innerHTML = `
+                <td style="border:1px solid #ddd; padding:8px; font-weight:bold; color:#0056b3;">${p.id}</td>
+                <td style="border:1px solid #ddd; padding:8px;">${v.type}</td>
+                <td style="border:1px solid #ddd; padding:8px;">${p.maker || '미분류'}</td>
+                <td style="border:1px solid #ddd; padding:8px;"><span class="active-tool" style="background:#e9ecef;color:#333;border:1px solid #ccc;">${p.status}</span></td>
+                <td style="border:1px solid #ddd; padding:8px; font-weight:bold;">${p.regridCount || 0}회</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function showToolDetailLog(toolId, rowEl) {
+        document.querySelectorAll("#master-list-tbody tr").forEach(r => r.classList.remove("selected"));
+        if(rowEl) rowEl.classList.add("selected");
+
+        const item = globalData.find(p => p.id === toolId);
+        const titleEl = document.getElementById("selected-tool-title");
+        const logContainer = document.getElementById("selected-tool-logs");
+        
+        if(!item) return;
+
+        titleEl.innerHTML = `🔍 [${item.status}] ${item.id} (${item.maker || '제조사 미분류'})`;
+        
+        if(!item.historyLog || item.historyLog.length === 0) {
+            logContainer.innerHTML = `<p style="color:#888; text-align:center; margin-top:50px;">기록된 생애주기 이력이 없습니다.</p>`;
+            return;
+        }
+
+        let html = "";
+        // 최신 로그가 맨 위로 오도록 역순 출력
+        for(let i = item.historyLog.length - 1; i >= 0; i--) {
+            const logObj = item.historyLog[i];
+            const dateStr = logObj.timestamp ? new Date(logObj.timestamp).toLocaleString() : '일시 미상';
+            html += `
+                <div class="log-item">
+                    <small>⏰ 변경 일시: ${dateStr} | <strong>상태: ${logObj.status}</strong></small>
+                    <div style="font-weight: 500; color:#2b2b2b;">${logObj.log}</div>
+                </div>
+            `;
+        }
+        logContainer.innerHTML = html;
+    }
+
     async function saveDatabase(newData) {
         const creds = getCredentials();
         if(!creds.token) { alert("토큰이 누락되었습니다."); return false; }
@@ -541,7 +773,7 @@
             const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) });
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
             if(saveRes.status === 200 || saveRes.status === 201) {
-                globalData = newData; calculateCalculations(); renderMatrixBoard(); showLoading(false); return true;
+                globalData = newData; renderMatrixTables(); renderMatrixBoard(); renderMasterLogView(); showLoading(false); return true;
             }
         } catch (e) {
             await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
@@ -588,10 +820,9 @@
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
             updatedCount++;
         }
-        if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 처리 완료.`); switchMenu('matrix'); }
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 처리 완료.`); switchMenu('home'); }
     }
 
-    // --- 🚛 [개정 반영] 3번 연마 외주 출하 처리 로직 ---
     async function submitBulkShipment(nextStatus) {
         const rows = document.querySelectorAll(`#grid-ship-out-body tr`);
         let tempArr = [...globalData]; let processedCount = 0;
@@ -608,14 +839,14 @@
             if(tempArr[pIdx].status !== 'Waiting') { alert(`[출하 불가] ${id}는 대기(Waiting) 상태여야 외주 연마 출하가 가능합니다.`); return; }
 
             tempArr[pIdx].status = nextStatus;
-            if(maker) tempArr[pIdx].maker = maker; // 자동 매칭된 제조사 업데이트 보장
+            if(maker) tempArr[pIdx].maker = maker;
             
             const logMsg = `[연마 출하] 일자: ${shipDate} | 제조사: ${maker || '미분류'} | 비고: ${note}`;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
             processedCount++;
         }
-        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${processedCount}건의 공구가 연마 공장으로 출하 처리되었습니다.`); switchMenu('home'); }
+        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${processedCount}건 외주 연마 출하 완료.`); switchMenu('home'); }
     }
 
     async function submitBulkShipIn() {
@@ -631,7 +862,7 @@
             tempArr[pIdx].status = 'Storage';
             tempArr[pIdx].regridCount = regridCountVal; 
             tempArr[pIdx].lastHistory = `[연마 입고 완료] ${regridCountVal}회`;
-            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: 'Storage', log: `[연마 가공완료 입고]` });
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: 'Storage', log: `[연마 가공완료 입고] 누적 연마 횟수 세팅: ${regridCountVal}회` });
             processedCount++;
         }
         if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`입고 완료.`); switchMenu('home'); }
