@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (UI 편의성 개선판)</title>
+    <title>⚙️ 부품 생애주기 시스템 (인터락 강화판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -23,7 +23,7 @@
         .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
         .grid-table th { background: #e9ecef; font-size: 14px; }
         .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; }
-        .grid-table input[readonly] { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; }
+        .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
         
         /* 날짜/시간 입력창 나란히 배치용 */
         .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
@@ -43,6 +43,9 @@
         .summary-card { background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid var(--border-color); }
         .summary-card h4 { margin: 0 0 5px 0; color: #666; font-size: 14px; }
         .summary-card p { margin: 0; font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        
+        /* 알림 텍스트 스타일 */
+        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -121,6 +124,7 @@
         <!-- 2. 장비 장착/탈거 -->
         <div id="menu-equip" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
+            <p style="font-size:13px; color:#666; margin-bottom: 15px;">※ <b>[탈거 승인]</b> 진행 시, Tool ID를 입력하면 직전 장착되었던 라인/유닛 정보가 <b>자동으로 역추적 바인딩</b>되어 오입력을 차단합니다.</p>
             <div>
                 <button class="btn-row-control" onclick="addGridRow('equip')">➕ 행 추가</button>
             </div>
@@ -241,12 +245,10 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
         } else if (menu === 'equip') {
-            // 오늘 날짜 및 현재 시간(시 단위) 기본값 계산
             const now = new Date();
             const localDate = now.toISOString().split('T')[0];
             const localHour = String(now.getHours()).padStart(2, '0') + ":00";
 
-            // 1-1부터 5-3, 그리고 6-1부터 6-4까지의 옵션 동적 생성
             let lineOptions = "";
             for(let i=1; i<=5; i++) {
                 for(let j=1; j<=3; j++) {
@@ -258,7 +260,10 @@
             }
 
             tr.innerHTML = `
-                <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this)"></td>
+                <td>
+                    <input type="text" class="tool-id-input" placeholder="ID 입력 후 엔터 또는 클릭 시 매핑" onchange="handleEquipIdChange(this)" onkeyup="if(event.keyCode===13) handleEquipIdChange(this)">
+                    <span class="info-text" class="msg-span"></span>
+                </td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
                 <td>
                     <div class="datetime-container">
@@ -309,25 +314,18 @@
         const typeInput = tr.querySelector('.tool-type-input');
         const makerInput = tr.querySelector('.maker-input');
         
-        if (typeInput) {
-            typeInput.value = res.type;
-        }
+        if (typeInput) typeInput.value = res.type;
 
         if (makerInput) {
-            if (id.includes("HY")) {
-                makerInput.value = "HYTC";
-            } else if (id.includes("YJ")) {
-                makerInput.value = "유진";
-            } else {
-                makerInput.value = "";
-            }
+            if (id.includes("HY")) makerInput.value = "HYTC";
+            else if (id.includes("YJ")) makerInput.value = "유진";
+            else makerInput.value = "";
         }
         
         if (id.length >= 21 && !res.valid) {
             inputEl.classList.add('invalid-cell');
         } else {
             inputEl.classList.remove('invalid-cell');
-            
             if (isShipIn && res.valid) {
                 const matched = globalData.find(p => p.id === id);
                 if (matched) {
@@ -335,6 +333,78 @@
                     if (regridInput) regridInput.value = matched.regridCount || 0;
                 }
             }
+        }
+    }
+
+    // --- 🔧 [신규 추가] 장착 및 탈거 전용 Tool ID 매핑 엔진 ---
+    function handleEquipIdChange(inputEl) {
+        const id = inputEl.value.trim().toUpperCase();
+        inputEl.value = id;
+        
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.querySelector('.tool-type-input');
+        const lineSelect = tr.querySelector('.equip-line-select');
+        const unitSelect = tr.querySelector('.equip-unit-select');
+        const msgSpan = tr.querySelector('.info-text');
+
+        // 기본 규격 검증
+        const res = parseAndValidateToolId(id);
+        if (typeInput) typeInput.value = res.type;
+
+        if (!res.valid) {
+            if(id.length >= 21) inputEl.classList.add('invalid-cell');
+            if(msgSpan) msgSpan.innerText = "";
+            return;
+        }
+        inputEl.classList.remove('invalid-cell');
+
+        // 마스터 데이터 매칭 검증 시작
+        const matchedPart = globalData.find(p => p.id === id);
+        if (!matchedPart) {
+            if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ 미등록 부품</span>";
+            return;
+        }
+
+        // 현재 상태가 설비 작동 중(Using) 상태라면 -> 히스토리에서 가장 최신 장착(Using) 정보 추적
+        if (matchedPart.status === 'Using') {
+            let foundLine = "";
+            let foundUnit = "";
+
+            if (matchedPart.historyLog && matchedPart.historyLog.length > 0) {
+                // historyLog를 최신순(역순)으로 탐색하여 장착 로그 파싱
+                for (let i = matchedPart.historyLog.length - 1; i >= 0; i--) {
+                    const logObj = matchedPart.historyLog[i];
+                    if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
+                        try {
+                            // 로그 문자열 예시: "[장착] 일시:2026-06-29 05 | 라인:4-3 | 유닛:Upper ..."
+                            const linePart = logObj.log.split('라인:')[1].split('|')[0].trim();
+                            const unitPart = logObj.log.split('유닛:')[1].split('|')[0].trim();
+                            foundLine = linePart;
+                            foundUnit = unitPart;
+                            break;
+                        } catch(e) { console.error("히스토리 파싱 실패", e); }
+                    }
+                }
+            }
+
+            // 역추적된 값이 세렉트 박스에 존재하면 자동 세팅 및 강제 고정(락)처리
+            if (foundLine && foundUnit) {
+                lineSelect.value = foundLine;
+                unitSelect.value = foundUnit;
+                lineSelect.disabled = true; // 유저 임의 변경 불가능하게 제어
+                unitSelect.disabled = true;
+                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 완료 (${foundLine} / ${foundUnit})`;
+            } else {
+                // 구조 문제 등으로 못 찾을 경우 활성화하여 수동 유도
+                lineSelect.disabled = false;
+                unitSelect.disabled = false;
+                if(msgSpan) msgSpan.innerHTML = "⚠️ 장착 로그를 찾지 못해 수동 선택 필요";
+            }
+        } else {
+            // Storage 상태이거나 기타인 경우 신규 장착이므로 잠금 해제 및 초기화
+            lineSelect.disabled = false;
+            unitSelect.disabled = false;
+            if(msgSpan) msgSpan.innerHTML = `📦 현재 창고 내 재고 상태 (신규 장착 가능)`;
         }
     }
 
@@ -474,7 +544,7 @@
         }
     }
 
-    // --- 2. 장비 장착 / 탈거 비즈니스 로직 (셀렉트 박스 및 달력 포맷 바인딩 패치) ---
+    // --- 2. 장비 장착 / 탈거 비즈니스 로직 (역추적 인터락 추가 패치) ---
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-equip-body tr");
         let tempArr = [...globalData];
@@ -482,18 +552,16 @@
 
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
-            
-            // 달력과 시간 피커에서 값을 긁어옴
-            const dateVal = row.querySelector('.equip-date-input').value; // YYYY-MM-DD
-            const timeVal = row.querySelector('.equip-time-input').value; // HH:MM
+            const dateVal = row.querySelector('.equip-date-input').value; 
+            const timeVal = row.querySelector('.equip-time-input').value; 
             
             if(!id) continue;
             if(!dateVal || !timeVal) { alert(`[입력 누락] ${id}의 장착/탈거 날짜와 시간을 지정해 주세요.`); return; }
             
-            // 시간 값에서 '시(Hour)' 정보만 추출 (예: "14:00" -> "14")
             const hourVal = timeVal.split(':')[0]; 
-            const dt = `${dateVal} ${hourVal}`; // "2026-06-29 14" 포맷 구축 완료
+            const dt = `${dateVal} ${hourVal}`;
 
+            // disabled 상태인 select 태그의 value 도 안전하게 읽어옴
             const line = row.querySelector('.equip-line-select').value;
             const unit = row.querySelector('.equip-unit-select').value;
             const op = row.querySelector('.equip-op-input').value.trim();
@@ -506,8 +574,8 @@
             if(pIdx === -1) { alert(`[미등록 오류] 존재하지 않는 Tool ID(${id}) 입니다.`); return; }
             
             const currentPart = tempArr[pIdx];
-            if(targetStatus === 'Using' && currentPart.status !== 'Storage') { alert(`[장착 거부] ${id}는 Storage 상태가 아닙니다.`); return; }
-            if(targetStatus === 'Waiting' && currentPart.status !== 'Using') { alert(`[탈거 거부] ${id}는 Using 상태가 아닙니다.`); return; }
+            if(targetStatus === 'Using' && currentPart.status !== 'Storage') { alert(`[장착 거부] ${id}는 현재 Storage 상태가 아닙니다. 장착이 불가합니다.`); return; }
+            if(targetStatus === 'Waiting' && currentPart.status !== 'Using') { alert(`[탈거 거부] ${id}는 현재 Using 상태가 아닙니다. 먼저 장착되어 있어야 탈거할 수 있습니다.`); return; }
 
             tempArr[pIdx].status = targetStatus;
             if(!tempArr[pIdx].toolType) tempArr[pIdx].toolType = vRes.type;
