@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (실시간 중복장착 인터락 & 자동로그인)</title>
+    <title>⚙️ 부품 생애주기 시스템 (상/하도 분리 및 유닛별 규격 인터락 적용)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -18,28 +18,24 @@
         .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s; font-weight: bold; }
         .menu-btn:hover, .menu-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
         
-        /* 공통 테이블 스타일 */
         .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
         .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
         .grid-table th { background: #e9ecef; font-size: 14px; color: #333; }
         .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
         .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
         
-        /* Home 집계 표 스타일 */
         .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
         .summary-table th, .summary-table td { border: 1px solid #ced4da; padding: 12px; text-align: center; font-size: 14px; }
         .summary-table th { background: #495057; color: white; }
         .summary-table .sub-total { background: #f8f9fa; font-weight: bold; color: #0056b3; }
         .summary-table .grand-total { background: #e2e3e5; font-weight: bold; color: #dc3545; }
 
-        /* 현황판 매트릭스 스타일 */
         .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; font-size: 13px; }
         .matrix-table th { background: #e9ecef; color: #333; font-weight: bold; }
         .matrix-table tr:nth-child(even) { background-color: #fafafa; }
         .empty-tool { color: #adb5bd; font-style: italic; }
 
-        /* 메뉴 6 전체 리스트 및 로그 뷰어 */
         .log-split-container { display: flex; gap: 20px; height: 600px; }
         .log-list-side { flex: 3; border: 1px solid #dee2e6; border-radius: 6px; overflow-y: auto; padding: 0; background: #fff; }
         .log-view-side { flex: 2; border: 1px solid #dee2e6; border-radius: 6px; background: #f8f9fa; padding: 15px; overflow-y: auto; }
@@ -48,7 +44,6 @@
         .list-row.selected { background: #d2e3fc; border-left: 4px solid #1a73e8; }
         .log-item { background: white; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 13px; line-height: 1.4; }
         
-        /* 상태별 지정 색상 뱃지 */
         .status-badge { font-weight: bold; padding: 5px 10px; border-radius: 4px; display: inline-block; word-break: break-all; font-size: 12px; text-shadow: 0px 0px 1px rgba(0,0,0,0.2); }
         .status-storage { background-color: #28a745; color: #ffffff; border: 1px solid #1e7e34; } 
         .status-using { background-color: #ffc107; color: #000000; border: 1px solid #d39e00; } 
@@ -62,7 +57,6 @@
         .btn-row-control:hover { background: #e2e6ea; }
         button.action-btn { color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-right: 10px; }
         
-        /* 에러 발생 시 빨간색 경고 셀 */
         .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
         .loading { display: none; color: #d9534f; font-weight: bold; margin-bottom: 15px; padding: 10px; background: #f2dede; border-radius: 4px; }
         .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; font-weight:bold; }
@@ -95,7 +89,6 @@
     <div class="main-content">
         <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 처리 중... 잠시만 기다려주세요.</div>
         
-        <!-- Home -->
         <div id="menu-home" class="menu-section">
             <h2>📊 마스터 데이터 실시간 표 집계 (Home)</h2>
             <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량</h3>
@@ -129,9 +122,9 @@
             </table>
         </div>
 
-        <!-- 0. 호기별 장착 ID -->
         <div id="menu-0" class="menu-section" style="display:none;">
             <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
+            <p style="font-size:13px; color:#666;">※ 각 유닛은 '상도 1개 + 하도 1개' 형태로 동시 장착 표출이 가능합니다.</p>
             <table class="matrix-table">
                 <thead>
                     <tr>
@@ -145,7 +138,6 @@
             </table>
         </div>
 
-        <!-- 1. 신규 부품 등록 -->
         <div id="menu-1" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('1')">➕ 행 추가</button></div>
@@ -163,10 +155,9 @@
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkRegister()">🚀 신규 부품 일괄 등록 실행</button>
         </div>
 
-        <!-- 2. 장비 장착/탈거 -->
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 동일 라인/유닛에 이미 장착(Using)된 부품이 있을 경우 중복 장착이 원천 차단됩니다.</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 상도는 상도끼리, 하도는 하도끼리 중복 장착 불가. (1.2상도=Final 전용 / 1.8상도=Upper,Center 전용)</p>
             <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -187,7 +178,6 @@
             <button class="action-btn" style="background:#fd7e14; color:#fff;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
 
-        <!-- 3. 연마 출하 -->
         <div id="menu-3" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('3')">➕ 행 추가</button></div>
@@ -206,7 +196,6 @@
             <button class="action-btn" style="background:#dc3545;" onclick="submitBulkShipment('Regrind')">🚛 외주 연마 일괄 출하 처리 (Regrind)</button>
         </div>
 
-        <!-- 4. 연마 입고 -->
         <div id="menu-4" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('4')">➕ 행 추가</button></div>
@@ -225,7 +214,6 @@
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkShipIn()">📥 검수 완료 및 가공 창고 입고</button>
         </div>
 
-        <!-- 5. 엑셀 백업 UI -->
         <div id="menu-5" class="menu-section" style="display:none;">
             <h2>💾 5. 데이터 백업 마스터 엑셀 다운로드 및 업로드</h2>
             <button class="action-btn" onclick="downloadExcel()" style="background:#495057;">📊 현시점 DB 마스터 엑셀 다운로드</button>
@@ -237,7 +225,6 @@
             </div>
         </div>
 
-        <!-- 6. 전체 커터 세부 리스트 (색상 적용) -->
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
             <div class="log-split-container">
@@ -264,7 +251,6 @@
             </div>
         </div>
 
-        <!-- 7. 폐기 등록 -->
         <div id="menu-7" class="menu-section" style="display:none;">
             <h2>🗑️ 7. 고품 폐기 일괄 등록 (상태 → Disposal)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('7')">➕ 행 추가</button></div>
@@ -287,13 +273,13 @@
 <script>
     let globalData = [];
     let dbSha = "";
-    let isSaving = false; // Lock 파일 대신 메모리 잠금 변수 사용
+    let isSaving = false;
     const DB_FILE = "parts_db.json";
 
     function utf8_to_b64(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
     function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
 
-    // --- 💡 [개선 사항 2] 브라우저 실행 시 기존 로그인 정보 자동 불러오기 (Local Storage 연동) ---
+    // 자동 로그인 (로컬 스토리지 연동)
     window.addEventListener('DOMContentLoaded', () => {
         const savedToken = localStorage.getItem('gh_token');
         const savedOwner = localStorage.getItem('gh_owner');
@@ -303,7 +289,6 @@
             document.getElementById("cfg-token").value = savedToken;
             document.getElementById("cfg-owner").value = savedOwner;
             document.getElementById("cfg-repo").value = savedRepo;
-            // 로컬 스토리지에 정보가 있으면 접속과 동시에 DB 동기화 실행
             fetchDatabase();
         }
     });
@@ -314,7 +299,6 @@
         const repo = document.getElementById("cfg-repo").value.trim();
         
         if(token && owner && repo) {
-            // 최초 로그인 시 로컬 스토리지에 정보를 캐싱
             localStorage.setItem('gh_token', token);
             localStorage.setItem('gh_owner', owner);
             localStorage.setItem('gh_repo', repo);
@@ -330,7 +314,6 @@
         };
     }
 
-    // 하도 규격 (10.0, 20.0) 
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
@@ -342,7 +325,13 @@
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
     }
 
-    // 공통: 특정 툴의 '현재 장착된 위치(라인/유닛)'를 정확하게 반환하는 함수
+    // 카테고리 판별 유틸: '상도'인지 '하도'인지 구분
+    function getToolCategory(type) {
+        if (type.includes("상도")) return "상도";
+        if (type.includes("하도")) return "하도";
+        return "기타";
+    }
+
     function getMountedLocation(part) {
         if (part.status !== 'Using') return null;
         let foundLine = "", foundUnit = "";
@@ -396,7 +385,6 @@
         });
     }
 
-    // --- 💡 [개선 사항 1] 메뉴 2 실시간 인터락 검증용 onchange 속성 추가 ---
     function addGridRow(menu) {
         const tbody = document.getElementById(`grid-${menu}-body`);
         if(!tbody) return;
@@ -433,7 +421,6 @@
                         <input type="time" class="equip-time-input" value="${localHour}">
                     </div>
                 </td>
-                <!-- 실시간 중복 체크를 위해 onchange 속성에 checkUnitAvailability() 추가 -->
                 <td><select class="equip-line-select" onchange="checkUnitAvailability(this)">${lineOptions}</select></td>
                 <td>
                     <select class="equip-unit-select" onchange="checkUnitAvailability(this)">
@@ -477,52 +464,71 @@
         tbody.appendChild(tr);
     }
 
-    // --- 💡 [개선 사항 1] 셀렉트박스 조작 시 실시간 인터락 (Real-time Validation) ---
+    // --- 💡 [강력한 실시간 인터락 함수: 상도/하도 유닛 제한 & 중복 체크] ---
     function checkUnitAvailability(el) {
         const tr = el.closest('tr');
         const idInput = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
+        const typeInput = tr.querySelector('.tool-type-input').value; 
         const lineEl = tr.querySelector('.equip-line-select');
         const unitEl = tr.querySelector('.equip-unit-select');
         const line = lineEl.value;
         const unit = unitEl.value;
         const msgSpan = tr.querySelector('.info-text');
         
-        // 현재 부품이 이미 'Using' 상태라면 (즉, 탈거를 위한 작업이라면) 중복 검사 대상에서 제외
+        if(!idInput || !typeInput) return; 
+
         const matchedPart = globalData.find(p => p.id === idInput);
         if (matchedPart && matchedPart.status === 'Using') return;
 
-        // 1) 서버(DB)에서 이미 같은 라인/유닛에 장착된 다른 부품이 있는지 검사
+        // 1. 규격별 유닛 제한 인터락 (1.2는 Final만, 1.8은 Upper/Center만)
+        if (typeInput === "1.2도 상도" && unit !== "Final") {
+            lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2도 상도는 Final 전용입니다.</span>`;
+            return;
+        }
+        if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) {
+            lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.8도 상도는 Upper/Center 전용입니다.</span>`;
+            return;
+        }
+
+        const currentCategory = getToolCategory(typeInput);
+
+        // 2. DB 기장착 중복 검사 (같은 카테고리 '상도' or '하도' 끼리만 충돌 인정)
         const dbConflict = globalData.find(p => {
             if (p.status !== 'Using' || p.id === idInput) return false;
             const loc = getMountedLocation(p);
-            return loc && loc.line === line && loc.unit === unit;
+            if (loc && loc.line === line && loc.unit === unit) {
+                return getToolCategory(p.toolType || "") === currentCategory;
+            }
+            return false;
         });
 
-        // 2) 현재 입력 중인 표 안에서 같은 라인/유닛을 선택한 다른 행이 있는지 검사
+        // 3. 화면 내 현재 작성중인 표 중복 검사
         let screenConflict = false;
         const rows = document.querySelectorAll("#grid-2-body tr");
         for(let r of rows) {
-            if (r === tr) continue; // 자기 자신 제외
+            if (r === tr) continue; 
+            const rId = r.querySelector('.tool-id-input').value.trim();
+            const rType = r.querySelector('.tool-type-input').value;
             const rLine = r.querySelector('.equip-line-select').value;
             const rUnit = r.querySelector('.equip-unit-select').value;
-            if (rLine === line && rUnit === unit) {
+            if (rId && rLine === line && rUnit === unit && getToolCategory(rType) === currentCategory) {
                 screenConflict = true;
                 break;
             }
         }
 
-        // 중복이 발견되면 셀을 즉시 빨간색으로 변경하고 에러 메시지 표출
+        // 중복이 발견되면 빨간색으로 변경
         if (dbConflict || screenConflict) {
             lineEl.classList.add('invalid-cell');
             unitEl.classList.add('invalid-cell');
-            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 사용중</span>`;
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 [${currentCategory}] 장착됨</span>`;
         } else {
-            // 정상일 경우 빨간 테두리 제거 및 원래 메시지 복구
             lineEl.classList.remove('invalid-cell');
             unitEl.classList.remove('invalid-cell');
-            if (matchedPart) {
-                msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
-            }
+            if (matchedPart) msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
+            else msgSpan.innerHTML = "";
         }
     }
 
@@ -586,18 +592,16 @@
             const loc = getMountedLocation(matchedPart);
             if (loc) {
                 lineSelect.value = loc.line; unitSelect.value = loc.unit;
-                // 이미 장착된 부품을 탈거하기 위한 것이므로 고정(disabled)시키고 빨간 테두리 클래스 제거
                 lineSelect.disabled = true; unitSelect.disabled = true;
                 lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
                 if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line} / ${loc.unit})`;
             }
         } else {
             lineSelect.disabled = false; unitSelect.disabled = false;
-            // ID가 입력되고 Storage 상태라면, 즉시 실시간 중복 체크 트리거 호출
-            checkUnitAvailability(lineSelect);
+            checkUnitAvailability(lineSelect); // ID가 바뀌면 실시간 인터락 즉시 재검증
         }
     }
-    
+
     function switchMenu(menuId) {
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
@@ -689,25 +693,30 @@
 
         let boardMapping = {};
         totalLines.forEach(line => {
-            boardMapping[line] = { Upper: "<span class='empty-tool'>-</span>", Center: "<span class='empty-tool'>-</span>", Final: "<span class='empty-tool'>-</span>" };
+            boardMapping[line] = { Upper: [], Center: [], Final: [] };
         });
 
         globalData.forEach(p => {
             if (p.status === 'Using') {
                 const loc = getMountedLocation(p);
                 if (loc && boardMapping[loc.line] && boardMapping[loc.line][loc.unit] !== undefined) {
-                    boardMapping[loc.line][loc.unit] = `<span class="status-badge status-using" title="${p.lastHistory}">${p.id}</span>`;
+                    // 동일 유닛에 상도/하도가 같이 있을 수 있으므로 배열 형태로 push
+                    boardMapping[loc.line][loc.unit].push(`<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${p.id}</span>`);
                 }
             }
         });
 
         let htmlStr = "";
         totalLines.forEach(line => {
+            const upStr = boardMapping[line].Upper.length > 0 ? boardMapping[line].Upper.join("") : "<span class='empty-tool'>-</span>";
+            const ctStr = boardMapping[line].Center.length > 0 ? boardMapping[line].Center.join("") : "<span class='empty-tool'>-</span>";
+            const fnStr = boardMapping[line].Final.length > 0 ? boardMapping[line].Final.join("") : "<span class='empty-tool'>-</span>";
+
             htmlStr += `<tr>
                 <td><strong>${line} 호기</strong></td>
-                <td>${boardMapping[line].Upper}</td>
-                <td>${boardMapping[line].Center}</td>
-                <td>${boardMapping[line].Final}</td>
+                <td>${upStr}</td>
+                <td>${ctStr}</td>
+                <td>${fnStr}</td>
             </tr>`;
         });
         matrixBody.innerHTML = htmlStr;
@@ -780,7 +789,6 @@
         logContainer.innerHTML = html;
     }
 
-    // --- 원격 자물쇠 로직을 완전히 제거하고 브라우저 내부 동시성 방지만 유지 ---
     async function saveDatabase(newData) {
         if (isSaving) {
             alert("⏳ 현재 데이터를 저장 중입니다. 여러 번 클릭하지 말아주세요.");
@@ -807,7 +815,6 @@
                 renderMatrixBoard(); 
                 renderMenu6List();
                 
-                // 저장 직후 최신 SHA 갱신
                 const newRes = await fetch(dbUrl, { headers: { "Authorization": `token ${creds.token}` } });
                 const newJson = await newRes.json();
                 dbSha = newJson.sha;
@@ -843,16 +850,16 @@
         if(addedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${addedCount}건 등록 완료.`); switchMenu('home'); }
     }
 
-    // --- 💡 [개선 사항 1] 제출(Submit) 시점의 철저한 중복 검사 (최종 안전망) ---
+    // --- 💡 [강화된 서브밋단 최종 검증(Submit Validation)] ---
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         
-        // 현재 표 안의 입력 데이터끼리 겹치는지 확인하는 Set
         const currentBatchSet = new Set();
 
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
+            const typeInput = row.querySelector('.tool-type-input').value; 
             const dateVal = row.querySelector('.equip-date-input').value; 
             const timeVal = row.querySelector('.equip-time-input').value; 
             if(!id || !dateVal || !timeVal) continue;
@@ -865,27 +872,32 @@
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) continue;
 
-            // 'Using(장착)' 액션일 때만 강력한 중복 인터락 발동
             if (targetStatus === 'Using') {
-                const locKey = `${line}|${unit}`;
+                if (typeInput === "1.2도 상도" && unit !== "Final") {
+                    alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${id} 확인 필요)`); return;
+                }
+                if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) {
+                    alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${id} 확인 필요)`); return;
+                }
+
+                const currentCategory = getToolCategory(typeInput);
+                const locKey = `${line}|${unit}|${currentCategory}`; // 상도/하도 별도 취급
                 
-                // 1) 표 내부 중복 입력 검사
                 if (currentBatchSet.has(locKey)) {
-                    alert(`🚨 [오류] 화면에 ${line} 호기 ${unit} 유닛에 장착하려는 부품이 두 개 이상 중복 작성되었습니다. 하나를 삭제 후 다시 진행하세요.`);
-                    return; // 처리 중단
+                    alert(`🚨 [오류] 화면 표 내부에 ${line} 호기 ${unit} 유닛에 장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`);
+                    return; 
                 }
                 currentBatchSet.add(locKey);
 
-                // 2) DB 내 기장착 여부 스캔
                 const conflictPart = tempArr.find(p => {
                     if (p.status !== 'Using' || p.id === id) return false;
                     const loc = getMountedLocation(p);
-                    return loc && loc.line === line && loc.unit === unit;
+                    return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
                 });
 
                 if (conflictPart) {
-                    alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 부품(${conflictPart.id})이 장착되어 있습니다.\n해당 부품을 먼저 [탈거] 승인한 후에 다시 시도해 주세요.`);
-                    return; // 처리 중단
+                    alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`);
+                    return; 
                 }
             }
 
@@ -898,7 +910,7 @@
         
         if(updatedCount > 0 && await saveDatabase(tempArr)) { 
             alert(`총 ${updatedCount}건 처리 완료.`); 
-            switchMenu('0'); // 처리가 완료되면 호기별 장착 ID 화면으로 즉시 이동하여 결과 확인
+            switchMenu('0'); 
         }
     }
 
