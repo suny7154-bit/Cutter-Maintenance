@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 관리 시스템 (요구사항 완벽 반영판)</title>
+    <title>⚙️ 부품 생애주기 관리 시스템 (Lock 로직 완전 제거판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -48,13 +48,13 @@
         .list-row.selected { background: #d2e3fc; border-left: 4px solid #1a73e8; }
         .log-item { background: white; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 13px; line-height: 1.4; }
         
-        /* 💡 지시하신 상태별 색상 적용 💡 */
+        /* 상태별 색상 적용 뱃지 */
         .status-badge { font-weight: bold; padding: 5px 10px; border-radius: 4px; display: inline-block; word-break: break-all; font-size: 12px; text-shadow: 0px 0px 1px rgba(0,0,0,0.2); }
-        .status-storage { background-color: #28a745; color: #ffffff; border: 1px solid #1e7e34; } /* Storage: 녹색 */
-        .status-using { background-color: #ffc107; color: #000000; border: 1px solid #d39e00; } /* Using: 노란색 */
-        .status-waiting { background-color: #fd7e14; color: #ffffff; border: 1px solid #e26b0a; } /* Waiting: 주황색 */
-        .status-regrind { background-color: #dc3545; color: #ffffff; border: 1px solid #bd2130; } /* Regrind / Out_Polishing: 빨간색 */
-        .status-disposal { background-color: #212529; color: #ffffff; border: 1px solid #000000; } /* Disposal: 검은색 */
+        .status-storage { background-color: #28a745; color: #ffffff; border: 1px solid #1e7e34; } 
+        .status-using { background-color: #ffc107; color: #000000; border: 1px solid #d39e00; } 
+        .status-waiting { background-color: #fd7e14; color: #ffffff; border: 1px solid #e26b0a; } 
+        .status-regrind { background-color: #dc3545; color: #ffffff; border: 1px solid #bd2130; } 
+        .status-disposal { background-color: #212529; color: #ffffff; border: 1px solid #000000; } 
 
         .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
         .datetime-container input { width: 48% !important; padding: 5px; }
@@ -91,7 +91,7 @@
     </div>
 
     <div class="main-content">
-        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 확인 중... 잠시만 기다려주세요.</div>
+        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 저장 처리 중... 잠시만 기다려주세요.</div>
         
         <!-- Home (표 형태 집계 화면) -->
         <div id="menu-home" class="menu-section">
@@ -189,6 +189,7 @@
         <!-- 3. 연마 출하 -->
         <div id="menu-3" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
+            <p style="font-size:13px; color:#666;">※ Tool ID를 입력하거나 붙여넣으면 제조사가 자동 매칭되어 표출됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('3')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -236,7 +237,7 @@
             </div>
         </div>
 
-        <!-- 6. 전체 커터 세부 리스트 (복구 및 색상 적용) -->
+        <!-- 6. 전체 커터 세부 리스트 (색상 적용) -->
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 15px;">※ 왼쪽 리스트에서 행을 클릭하면 오른쪽에 해당 공구의 DB Log가 표시됩니다.</p>
@@ -288,13 +289,13 @@
 <script>
     let globalData = [];
     let dbSha = "";
+    let isSaving = false; // 💡 GitHub Lock 파일 대신 브라우저 변수 잠금 사용
     const DB_FILE = "parts_db.json";
-    const LOCK_FILE = "db.lock";
 
     function utf8_to_b64(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
     function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
 
-    // [하도 규격 전역 수정 완료] 10.0 또는 20.0
+    // 하도 규격 (10.0, 20.0)
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
@@ -306,7 +307,6 @@
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
     }
 
-    // Ctrl+V 다중 붙여넣기 모듈
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -334,14 +334,13 @@
         });
     }
 
-    // 화면별 행 추가
     function addGridRow(menu) {
         const tbody = document.getElementById(`grid-${menu}-body`);
         if(!tbody) return;
         const tr = document.createElement('tr');
         const todayStr = new Date().toISOString().split('T')[0];
         
-        if (menu === '1') { // 등록
+        if (menu === '1') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="LCAJHY1000CU65610.0" oninput="handleIdInputLive(this)"></td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
@@ -349,7 +348,7 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '1');
-        } else if (menu === '2') { // 장착
+        } else if (menu === '2') { 
             const now = new Date();
             const localDate = now.toISOString().split('T')[0];
             const localHour = String(now.getHours()).padStart(2, '0') + ":00";
@@ -384,7 +383,7 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '2');
-        } else if (menu === '3') { // 출하
+        } else if (menu === '3') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="text" class="maker-input" readonly placeholder="자동 매칭"></td>
@@ -393,16 +392,16 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '3');
-        } else if (menu === '4') { // 입고
+        } else if (menu === '4') { 
             tr.innerHTML = `
-                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="number" class="regrid-count-input" value="0" min="0"></td>
                 <td><input type="text" class="ship-in-op" placeholder="검수자"></td>
                 <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '4');
-        } else if (menu === '7') { // 폐기
+        } else if (menu === '7') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="폐기 대상 ID (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="상태 자동 조회" style="font-weight:bold;"></td>
@@ -414,7 +413,6 @@
         tbody.appendChild(tr);
     }
 
-    // 라이브 입력 인터락
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         const id = inputEl.value.trim().toUpperCase();
         inputEl.value = id; 
@@ -446,7 +444,6 @@
         }
     }
 
-    // 장착화면 ID 역추적
     function handleEquipIdChange(inputEl) {
         const id = inputEl.value.trim().toUpperCase();
         inputEl.value = id;
@@ -512,7 +509,6 @@
         };
     }
     
-    // 메뉴 제어 라우터 (Home / 0 / 1~5 / 6 / 7)
     function switchMenu(menuId) {
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
@@ -527,7 +523,6 @@
 
     function showLoading(show) { document.getElementById('loading-indicator').style.display = show ? 'block' : 'none'; }
 
-    // 메인 DB Fetch 엔진
     async function fetchDatabase() {
         const creds = getCredentials();
         if(!creds.token || !creds.owner || !creds.repo) return;
@@ -540,7 +535,6 @@
                 dbSha = json.sha;
                 globalData = JSON.parse(b64_to_utf8(json.content));
                 
-                // 각 렌더링 함수 동시 호출
                 calculateHomeTables();
                 renderMatrixBoard();
                 renderMenu6List();
@@ -549,7 +543,6 @@
         showLoading(false);
     }
 
-    // 🏠 Home 화면 2개의 표 집계 로직
     function calculateHomeTables() {
         let t1 = { "1.8도 상도": { hytc:0, yj:0, etc:0, sum:0 }, "1.2도 상도": { hytc:0, yj:0, etc:0, sum:0 }, "LW (하도)": { hytc:0, yj:0, etc:0, sum:0 }, "기타": { hytc:0, yj:0, etc:0, sum:0 } };
         let t2 = { "1.8도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "1.2도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "LW (하도)": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "기타": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 } };
@@ -569,14 +562,13 @@
             else if(s==="Using") sKey = "us";
             else if(s==="Waiting") sKey = "wt";
             else if(s==="Disposal") sKey = "dp";
-            else if(s==="Regrind" || s==="Out_Polishing") sKey = "rg"; // 연마 출하는 Red 그룹 묶음
+            else if(s==="Regrind" || s==="Out_Polishing") sKey = "rg"; 
             
             t2[t][sKey]++; t2[t].sum++; t2Tot[sKey]++; t2Tot.grand++;
         });
 
         const types = ["1.8도 상도", "1.2도 상도", "LW (하도)", "기타"];
         
-        // 표 1 빌드
         let h1 = "";
         types.forEach(type => {
             h1 += `<tr>
@@ -586,7 +578,6 @@
         h1 += `<tr class="grand-total"><td>합계</td><td>${t1Tot.hytc}</td><td>${t1Tot.yj}</td><td>${t1Tot.etc}</td><td>${t1Tot.grand}</td></tr>`;
         document.getElementById("home-maker-tbody").innerHTML = h1;
 
-        // 표 2 빌드
         let h2 = "";
         types.forEach(type => {
             h2 += `<tr>
@@ -597,7 +588,6 @@
         document.getElementById("home-status-tbody").innerHTML = h2;
     }
 
-    // 🖥️ 0번 메뉴: 호기별 장착 ID 매트릭스 보완 적용 완료 (집계 고도화)
     function renderMatrixBoard() {
         const matrixBody = document.getElementById("matrix-table-body");
         if (!matrixBody) return;
@@ -653,7 +643,6 @@
         matrixBody.innerHTML = htmlStr;
     }
 
-    // 📜 6번 메뉴: 전체 리스트 및 상태별 색상 적용 (Storage=녹, Using=노란색, Waiting=주황, Regrind=빨, Disposal=검은색)
     function renderMenu6List() {
         const tbody = document.getElementById("master-list-tbody");
         if(!tbody) return;
@@ -665,8 +654,7 @@
             tr.className = "list-row";
             tr.onclick = () => showToolLog6(p.id, tr);
             
-            // 색상 클래스 적용
-            let sClass = "status-storage"; // default green
+            let sClass = "status-storage"; 
             let lowStat = p.status.toLowerCase();
             if(lowStat === 'using') sClass = 'status-using';
             else if(lowStat === 'waiting') sClass = 'status-waiting';
@@ -684,7 +672,6 @@
         });
     }
 
-    // 6번 메뉴: 오른쪽 로그 뷰어
     function showToolLog6(toolId, rowEl) {
         document.querySelectorAll("#master-list-tbody tr").forEach(r => r.classList.remove("selected"));
         if(rowEl) rowEl.classList.add("selected");
@@ -723,37 +710,49 @@
         logContainer.innerHTML = html;
     }
 
-    // DB 트랜잭션 함수
+    // 💡 Lock 파일 생성 로직 완전 삭제 및 변수 잠금 도입 💡
     async function saveDatabase(newData) {
+        if (isSaving) {
+            alert("⏳ 현재 데이터를 서버에 기록 중입니다. 잠시만 기다려주세요.");
+            return false;
+        }
+
         const creds = getCredentials();
         if(!creds.token) { alert("토큰이 누락되었습니다."); return false; }
-        showLoading(true);
-        const headers = { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" };
-        const lockUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${LOCK_FILE}`;
         
-        const lockCheck = await fetch(lockUrl, { headers });
-        if (lockCheck.status === 200) {
-            alert("🔒 다른 작업자가 원격 데이터를 변경 중입니다.");
-            showLoading(false); return false;
-        }
-        await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔒 lock", content: btoa("locked") }) });
+        isSaving = true;
+        showLoading(true);
 
         try {
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
-            const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) });
-            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
+            const saveRes = await fetch(dbUrl, { 
+                method: "PUT", 
+                headers: { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) 
+            });
+            
             if(saveRes.status === 200 || saveRes.status === 201) {
                 globalData = newData; 
-                calculateHomeTables(); renderMatrixBoard(); renderMenu6List();
-                dbSha = ""; await fetchDatabase(); showLoading(false); return true;
+                calculateHomeTables(); 
+                renderMatrixBoard(); 
+                renderMenu6List();
+                dbSha = ""; 
+                await fetchDatabase(); 
+                isSaving = false;
+                showLoading(false); 
+                return true;
+            } else {
+                alert("서버 저장 실패: 최신 데이터 갱신을 위해 새로고침 합니다.");
+                await fetchDatabase();
             }
         } catch (e) {
-            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
+            alert("통신 오류가 발생했습니다. 네트워크 상태를 확인하세요.");
         }
-        showLoading(false); return false;
+        isSaving = false;
+        showLoading(false); 
+        return false;
     }
 
-    // 1~4 및 7번(Disposal) 데이터 제출 기능들
     async function submitBulkRegister() {
         const rows = document.querySelectorAll("#grid-1-body tr");
         let tempArr = [...globalData]; let addedCount = 0;
@@ -840,7 +839,6 @@
         if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 입고 완료.`); switchMenu('home'); }
     }
 
-    // 🗑️ 7. 폐기 실행 로직
     async function submitBulkDisposal() {
         const rows = document.querySelectorAll("#grid-7-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -864,7 +862,6 @@
         }
     }
 
-    // 마스터 엑셀 백업
     function downloadExcel() {
         if(globalData.length === 0) return;
         let exportArr = globalData.map(p => ({
