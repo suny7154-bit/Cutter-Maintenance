@@ -103,5 +103,50 @@
         "log": "신규 생산 라인 등록 입고"
       }
     ]
+  },
+  {
+    "id": "LCAJHY3000FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:11:51.494Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY3001FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:11:51.494Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY3002FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "regridCount": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-06-29T08:11:51.494Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
