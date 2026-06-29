@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (집계 수정 및 호기별 현황판)</title>
+    <title>⚙️ 부품 생애주기 시스템 (출하 화면 개선판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -80,9 +80,7 @@
         <!-- 0. HOME 수량 집계 화면 -->
         <div id="menu-home" class="menu-section">
             <h2>📊 마스터 데이터 실시간 수량 집계</h2>
-            
             <div class="summary-dashboard">
-                <!-- 제작사별 집계 -->
                 <div class="summary-box-v2">
                     <h4>■ 제작사별 보유 수량</h4>
                     <div class="summary-grid">
@@ -92,8 +90,6 @@
                         <div class="summary-item" style="background:#e9ecef;"><span>총 합계</span><strong id="stat-maker-total">0 EA</strong></div>
                     </div>
                 </div>
-
-                <!-- 상태별 집계 -->
                 <div class="summary-box-v2">
                     <h4>■ Cutter 현재 상태별 수량</h4>
                     <div class="summary-grid">
@@ -104,13 +100,11 @@
                     </div>
                 </div>
             </div>
-            <p style="font-size:13px; color:#666;">※ 상단에 GitHub 정보를 입력한 후 [DB 연결]을 완료하면 원격 실시간 수치가 정밀 동기화됩니다.</p>
         </div>
 
         <!-- 1. 신규 부품 등록 -->
         <div id="menu-register" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
-            <p style="font-size:13px; color:#666;">※ Tool ID 열에 엑셀 데이터를 대량 복사(Ctrl+V)하여 붙여넣으면 행이 자동으로 확장됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('register')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -149,16 +143,18 @@
             <button class="action-btn" style="background:#ffc107; color:#333;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
 
-        <!-- 3. 연마 출하 -->
+        <!-- 3. 연마 출하 (요청에 따른 개정) -->
         <div id="menu-ship-out" class="menu-section" style="display:none;">
-            <h2>🚛 3. 연마 출하 관리 (대기 → 외주 연마 공장)</h2>
+            <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
+            <p style="font-size:13px; color:#666;">※ Tool ID를 입력하거나 붙여넣으면 제조사가 자동 매칭되어 표출됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('ship-out')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
-                        <th style="width: 40%;">Tool ID</th>
-                        <th style="width: 30%;">출하 담당자</th>
-                        <th style="width: 20%;">출하 비고</th>
+                        <th style="width: 35%;">Tool ID</th>
+                        <th style="width: 20%;">제조사 (자동)</th>
+                        <th style="width: 20%;">출하 일자</th>
+                        <th style="width: 15%;">출하 비고</th>
                         <th style="width: 10%;">삭제</th>
                     </tr>
                 </thead>
@@ -198,11 +194,9 @@
             </div>
         </div>
 
-        <!-- 6. 신규 분리된 호기별/Unit별 장착 현황판 화면 -->
+        <!-- 6. 호기별/Unit별 장착 현황판 -->
         <div id="menu-matrix" class="menu-section" style="display:none;">
             <h2>🖥️ 6. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
-            <p style="font-size:13px; color:#666;">※ 현재 설비 내부 라인에 장착되어 가동 중(Using)인 Tool ID가 실시간 매핑 표출됩니다.</p>
-            
             <table class="matrix-table">
                 <thead>
                     <tr>
@@ -212,9 +206,7 @@
                         <th style="width: 28%;">Final Unit</th>
                     </tr>
                 </thead>
-                <tbody id="matrix-table-body">
-                    <!-- JavaScript가 호기별 로우를 빌드합니다 -->
-                </tbody>
+                <tbody id="matrix-table-body"></tbody>
             </table>
         </div>
     </div>
@@ -240,7 +232,7 @@
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "분석 중..." : "") };
     }
 
-    // 클립보드 엔터 구분 대량 데이터 붙여넣기 모듈
+    // 클립보드 다중 복사(Ctrl+V) 라우터 연동 모듈
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -253,7 +245,7 @@
             
             inputEl.value = lines[0].toUpperCase();
             if (menuType === 'equip') handleEquipIdChange(inputEl);
-            else handleIdInputLive(inputEl, menuType === 'ship-in');
+            else handleIdInputLive(inputEl, menuType === 'ship-in' || menuType === 'ship-out');
 
             for (let i = 1; i < lines.length; i++) {
                 addGridRow(menuType);
@@ -262,7 +254,7 @@
                 if (nextInput) {
                     nextInput.value = lines[i].toUpperCase();
                     if (menuType === 'equip') handleEquipIdChange(nextInput);
-                    else handleIdInputLive(nextInput, menuType === 'ship-in');
+                    else handleIdInputLive(nextInput, menuType === 'ship-in' || menuType === 'ship-out');
                 }
             }
         });
@@ -272,6 +264,7 @@
         const tbody = document.getElementById(`grid-${menu}-body`);
         if(!tbody) return;
         const tr = document.createElement('tr');
+        const todayStr = new Date().toISOString().split('T')[0];
         
         if (menu === 'register') {
             tr.innerHTML = `
@@ -285,7 +278,6 @@
             const now = new Date();
             const localDate = now.toISOString().split('T')[0];
             const localHour = String(now.getHours()).padStart(2, '0') + ":00";
-
             let lineOptions = "";
             for(let i=1; i<=5; i++) {
                 for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
@@ -318,10 +310,12 @@
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'equip');
         } else if (menu === 'ship-out') {
+            // [개정] 출하 담당자 제외 -> 제조사(자동) 및 출하 일자(기본값 금일) 셋업
             tr.innerHTML = `
-                <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this, false)"></td>
-                <td><input type="text" placeholder="담당자"></td>
-                <td><input type="text" placeholder="비고"></td>
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 또는 Ctrl+V" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="maker-input" readonly placeholder="자동 매칭"></td>
+                <td><input type="date" class="ship-out-date" value="${todayStr}"></td>
+                <td><input type="text" placeholder="출하 비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), 'ship-out');
@@ -338,7 +332,7 @@
         tbody.appendChild(tr);
     }
 
-    function handleIdInputLive(inputEl, isShipIn = false) {
+    function handleIdInputLive(inputEl, isTriggerMatch = false) {
         const id = inputEl.value.trim().toUpperCase();
         inputEl.value = id; 
         const res = parseAndValidateToolId(id);
@@ -356,7 +350,7 @@
         if (id.length >= 21 && !res.valid) inputEl.classList.add('invalid-cell');
         else {
             inputEl.classList.remove('invalid-cell');
-            if (isShipIn && res.valid) {
+            if (isTriggerMatch && res.valid) {
                 const matched = globalData.find(p => p.id === id);
                 if (matched) {
                     const regridInput = tr.querySelector('.regrid-count-input');
@@ -456,19 +450,16 @@
         showLoading(false);
     }
 
-    // --- 📊 [수정 반영] 제작사별 및 상태별 카운트 정확한 연산 집계 로직 ---
     function calculateCalculations() {
         let makerHYTC = 0, makerYJ = 0, makerETC = 0;
         let statusStorage = 0, statusUsing = 0, statusWaiting = 0, statusPolishing = 0;
 
         globalData.forEach(p => {
-            // 1. 제작사별 분류 판정
             const id = p.id.toUpperCase();
             if (p.maker === "HYTC" || id.includes("HY")) { makerHYTC++; }
             else if (p.maker === "유진" || id.includes("YJ")) { makerYJ++; }
             else { makerETC++; }
 
-            // 2. 상태값별 분류 판정
             if (p.status === "Storage") statusStorage++;
             else if (p.status === "Using") statusUsing++;
             else if (p.status === "Waiting") statusWaiting++;
@@ -486,25 +477,21 @@
         document.getElementById("stat-status-polishing").innerText = statusPolishing + " EA";
     }
 
-    // --- 🖥️ [6번 화면 신규 추가] 호기별 / 유닛별 장착 매핑 구조 빌더 함수 ---
     function renderMatrixBoard() {
         const matrixBody = document.getElementById("matrix-table-body");
         if (!matrixBody) return;
 
-        // 현장 대상 전체 라인 목록 정의 (1-1 ~ 1-3, ... 6-1 ~ 6-4)
         let totalLines = [];
         for(let i=1; i<=5; i++) {
             for(let j=1; j<=3; j++) { totalLines.push(`${i}-${j}`); }
         }
         for(let j=1; j<=4; j++) { totalLines.push(`6-${j}`); }
 
-        // 매핑 딕셔너리 초기화
         let boardMapping = {};
         totalLines.forEach(line => {
             boardMapping[line] = { Upper: "<span class='empty-tool'>-</span>", Center: "<span class='empty-tool'>-</span>", Final: "<span class='empty-tool'>-</span>" };
         });
 
-        // Using 상태 공구 전수 파싱 매핑
         globalData.forEach(p => {
             if (p.status === 'Using' && p.historyLog) {
                 for (let i = p.historyLog.length - 1; i >= 0; i--) {
@@ -513,7 +500,6 @@
                         try {
                             const linePart = logObj.log.split('라인:')[1].split('|')[0].trim();
                             const unitPart = logObj.log.split('유닛:')[1].split('|')[0].trim();
-                            
                             if (boardMapping[linePart] && boardMapping[linePart][unitPart] !== undefined) {
                                 boardMapping[linePart][unitPart] = `<span class="active-tool" title="${p.lastHistory}">${p.id}</span>`;
                             }
@@ -524,7 +510,6 @@
             }
         });
 
-        // HTML 문자열 렌더링
         let htmlStr = "";
         totalLines.forEach(line => {
             htmlStr += `<tr>
@@ -549,19 +534,17 @@
             alert("🔒 다른 작업자가 원격 데이터를 변경 중입니다.");
             showLoading(false); return false;
         }
-        const createLock = await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔒 lock", content: btoa("locked") }) });
-        const lockData = await createLock.json();
-        const lockSha = lockData.content.sha;
+        await fetch(lockUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔒 lock", content: btoa("locked") }) });
 
         try {
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
             const saveRes = await fetch(dbUrl, { method: "PUT", headers, body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) });
-            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
+            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
             if(saveRes.status === 200 || saveRes.status === 201) {
                 globalData = newData; calculateCalculations(); renderMatrixBoard(); showLoading(false); return true;
             }
         } catch (e) {
-            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: lockSha }) });
+            await fetch(lockUrl, { method: "DELETE", headers, body: JSON.stringify({ message: "🔓 unlock", sha: dbSha }) });
         }
         showLoading(false); return false;
     }
@@ -608,21 +591,31 @@
         if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 처리 완료.`); switchMenu('matrix'); }
     }
 
+    // --- 🚛 [개정 반영] 3번 연마 외주 출하 처리 로직 ---
     async function submitBulkShipment(nextStatus) {
         const rows = document.querySelectorAll(`#grid-ship-out-body tr`);
         let tempArr = [...globalData]; let processedCount = 0;
+        
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
+            const maker = row.querySelector('.maker-input').value.trim();
+            const shipDate = row.querySelector('.ship-out-date').value;
+            const note = row.cells[3].querySelector('input').value.trim();
             if(!id) continue;
+            
             const pIdx = tempArr.findIndex(p => p.id === id);
-            if(pIdx === -1 || tempArr[pIdx].status !== 'Waiting') { alert(`출하 불가 상태 ID 포함됨: ${id}`); return; }
+            if(pIdx === -1) { alert(`등록되지 않은 부품 번호가 포함되어 있습니다: ${id}`); return; }
+            if(tempArr[pIdx].status !== 'Waiting') { alert(`[출하 불가] ${id}는 대기(Waiting) 상태여야 외주 연마 출하가 가능합니다.`); return; }
 
             tempArr[pIdx].status = nextStatus;
-            tempArr[pIdx].lastHistory = `[연마 출하]`;
-            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: `[연마 외주 출하]` });
+            if(maker) tempArr[pIdx].maker = maker; // 자동 매칭된 제조사 업데이트 보장
+            
+            const logMsg = `[연마 출하] 일자: ${shipDate} | 제조사: ${maker || '미분류'} | 비고: ${note}`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
             processedCount++;
         }
-        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`출하 완료.`); switchMenu('home'); }
+        if(processedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${processedCount}건의 공구가 연마 공장으로 출하 처리되었습니다.`); switchMenu('home'); }
     }
 
     async function submitBulkShipIn() {
