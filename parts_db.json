@@ -1,9 +1,9 @@
 [
   {
     "id": "LCAJHY1000CU656X1.8",
-    "status": "Using",
-    "regridCount": 0,
+    "status": "Waiting",
+    "regridCount": 1,
     "activeSide": null,
-    "lastHistory": "[장착] 일시:2026-06-06 14 | 라인:5-1 | 유닛:Upper | 작업자:JY | 비고:"
+    "lastHistory": "[탈거] 일시:2026-06-09 14 | 라인:5-1 | 유닛:Upper | 작업자:JY | 비고:"
   }
 ]
