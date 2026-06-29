@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 관리 시스템 (Lock 로직 완전 제거판)</title>
+    <title>⚙️ 부품 생애주기 시스템 (실시간 중복장착 인터락 & 자동로그인)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -22,7 +22,7 @@
         .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
         .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
         .grid-table th { background: #e9ecef; font-size: 14px; color: #333; }
-        .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; }
+        .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
         .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
         
         /* Home 집계 표 스타일 */
@@ -48,7 +48,7 @@
         .list-row.selected { background: #d2e3fc; border-left: 4px solid #1a73e8; }
         .log-item { background: white; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 13px; line-height: 1.4; }
         
-        /* 상태별 색상 적용 뱃지 */
+        /* 상태별 지정 색상 뱃지 */
         .status-badge { font-weight: bold; padding: 5px 10px; border-radius: 4px; display: inline-block; word-break: break-all; font-size: 12px; text-shadow: 0px 0px 1px rgba(0,0,0,0.2); }
         .status-storage { background-color: #28a745; color: #ffffff; border: 1px solid #1e7e34; } 
         .status-using { background-color: #ffc107; color: #000000; border: 1px solid #d39e00; } 
@@ -61,9 +61,11 @@
         .btn-row-control { padding: 4px 10px; font-size: 12px; cursor: pointer; margin-right: 5px; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
         .btn-row-control:hover { background: #e2e6ea; }
         button.action-btn { color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-right: 10px; }
-        .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; }
+        
+        /* 에러 발생 시 빨간색 경고 셀 */
+        .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
         .loading { display: none; color: #d9534f; font-weight: bold; margin-bottom: 15px; padding: 10px; background: #f2dede; border-radius: 4px; }
-        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; }
+        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; font-weight:bold; }
     </style>
 </head>
 <body>
@@ -73,7 +75,7 @@
     <input type="password" id="cfg-token" placeholder="GitHub 토큰">
     <input type="text" id="cfg-owner" placeholder="GitHub 유저명">
     <input type="text" id="cfg-repo" placeholder="레포지토리명">
-    <button onclick="connectDB()">DB 연결</button>
+    <button onclick="connectDB()" id="connect-btn">DB 연결 및 저장</button>
 </div>
 
 <div class="container">
@@ -91,12 +93,11 @@
     </div>
 
     <div class="main-content">
-        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 저장 처리 중... 잠시만 기다려주세요.</div>
+        <div id="loading-indicator" class="loading">⚠️ GitHub 데이터 동기화 및 처리 중... 잠시만 기다려주세요.</div>
         
-        <!-- Home (표 형태 집계 화면) -->
+        <!-- Home -->
         <div id="menu-home" class="menu-section">
             <h2>📊 마스터 데이터 실시간 표 집계 (Home)</h2>
-            
             <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량</h3>
             <table class="summary-table">
                 <thead>
@@ -128,10 +129,9 @@
             </table>
         </div>
 
-        <!-- 0. 호기별 장착 ID 매트릭스 -->
+        <!-- 0. 호기별 장착 ID -->
         <div id="menu-0" class="menu-section" style="display:none;">
             <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
-            <p style="font-size:13px; color:#666;">※ 현재 라인에 'Using' 상태로 장착된 Tool ID가 표출되며 집계가 실시간 연동됩니다.</p>
             <table class="matrix-table">
                 <thead>
                     <tr>
@@ -166,6 +166,7 @@
         <!-- 2. 장비 장착/탈거 -->
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 동일 라인/유닛에 이미 장착(Using)된 부품이 있을 경우 중복 장착이 원천 차단됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -189,7 +190,6 @@
         <!-- 3. 연마 출하 -->
         <div id="menu-3" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
-            <p style="font-size:13px; color:#666;">※ Tool ID를 입력하거나 붙여넣으면 제조사가 자동 매칭되어 표출됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('3')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -240,7 +240,6 @@
         <!-- 6. 전체 커터 세부 리스트 (색상 적용) -->
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
-            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">※ 왼쪽 리스트에서 행을 클릭하면 오른쪽에 해당 공구의 DB Log가 표시됩니다.</p>
             <div class="log-split-container">
                 <div class="log-list-side">
                     <table class="grid-table" style="margin-bottom:0; border:none;">
@@ -268,7 +267,6 @@
         <!-- 7. 폐기 등록 -->
         <div id="menu-7" class="menu-section" style="display:none;">
             <h2>🗑️ 7. 고품 폐기 일괄 등록 (상태 → Disposal)</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 처리된 Tool ID는 재생 불가한 폐기(Disposal) 상태로 일괄 변경됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('7')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -289,13 +287,50 @@
 <script>
     let globalData = [];
     let dbSha = "";
-    let isSaving = false; // 💡 GitHub Lock 파일 대신 브라우저 변수 잠금 사용
+    let isSaving = false; // Lock 파일 대신 메모리 잠금 변수 사용
     const DB_FILE = "parts_db.json";
 
     function utf8_to_b64(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
     function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
 
-    // 하도 규격 (10.0, 20.0)
+    // --- 💡 [개선 사항 2] 브라우저 실행 시 기존 로그인 정보 자동 불러오기 (Local Storage 연동) ---
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedToken = localStorage.getItem('gh_token');
+        const savedOwner = localStorage.getItem('gh_owner');
+        const savedRepo = localStorage.getItem('gh_repo');
+        
+        if (savedToken && savedOwner && savedRepo) {
+            document.getElementById("cfg-token").value = savedToken;
+            document.getElementById("cfg-owner").value = savedOwner;
+            document.getElementById("cfg-repo").value = savedRepo;
+            // 로컬 스토리지에 정보가 있으면 접속과 동시에 DB 동기화 실행
+            fetchDatabase();
+        }
+    });
+
+    function connectDB() {
+        const token = document.getElementById("cfg-token").value.trim();
+        const owner = document.getElementById("cfg-owner").value.trim();
+        const repo = document.getElementById("cfg-repo").value.trim();
+        
+        if(token && owner && repo) {
+            // 최초 로그인 시 로컬 스토리지에 정보를 캐싱
+            localStorage.setItem('gh_token', token);
+            localStorage.setItem('gh_owner', owner);
+            localStorage.setItem('gh_repo', repo);
+        }
+        fetchDatabase();
+    }
+
+    function getCredentials() {
+        return {
+            token: document.getElementById("cfg-token").value.trim(),
+            owner: document.getElementById("cfg-owner").value.trim(),
+            repo: document.getElementById("cfg-repo").value.trim()
+        };
+    }
+
+    // 하도 규격 (10.0, 20.0) 
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
@@ -305,6 +340,33 @@
         
         const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
+    }
+
+    // 공통: 특정 툴의 '현재 장착된 위치(라인/유닛)'를 정확하게 반환하는 함수
+    function getMountedLocation(part) {
+        if (part.status !== 'Using') return null;
+        let foundLine = "", foundUnit = "";
+        
+        if (part.historyLog && part.historyLog.length > 0) {
+            for (let i = part.historyLog.length - 1; i >= 0; i--) {
+                const logObj = part.historyLog[i];
+                if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
+                    try {
+                        foundLine = logObj.log.split('라인:')[1].split('|')[0].trim();
+                        foundUnit = logObj.log.split('유닛:')[1].split('|')[0].trim();
+                        return { line: foundLine, unit: foundUnit };
+                    } catch(e) {}
+                }
+            }
+        }
+        if (!foundLine && part.lastHistory && part.lastHistory.includes("라인:")) {
+            try {
+                foundLine = part.lastHistory.split('라인:')[1].split('|')[0].trim();
+                foundUnit = part.lastHistory.split('유닛:')[1].split('|')[0].trim();
+                return { line: foundLine, unit: foundUnit };
+            } catch(e) {}
+        }
+        return null;
     }
 
     function setupPasteInterceptor(inputEl, menuType) {
@@ -334,6 +396,7 @@
         });
     }
 
+    // --- 💡 [개선 사항 1] 메뉴 2 실시간 인터락 검증용 onchange 속성 추가 ---
     function addGridRow(menu) {
         const tbody = document.getElementById(`grid-${menu}-body`);
         if(!tbody) return;
@@ -370,9 +433,10 @@
                         <input type="time" class="equip-time-input" value="${localHour}">
                     </div>
                 </td>
-                <td><select class="equip-line-select">${lineOptions}</select></td>
+                <!-- 실시간 중복 체크를 위해 onchange 속성에 checkUnitAvailability() 추가 -->
+                <td><select class="equip-line-select" onchange="checkUnitAvailability(this)">${lineOptions}</select></td>
                 <td>
-                    <select class="equip-unit-select">
+                    <select class="equip-unit-select" onchange="checkUnitAvailability(this)">
                         <option value="Upper">Upper</option>
                         <option value="Center">Center</option>
                         <option value="Final">Final</option>
@@ -411,6 +475,55 @@
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '7');
         }
         tbody.appendChild(tr);
+    }
+
+    // --- 💡 [개선 사항 1] 셀렉트박스 조작 시 실시간 인터락 (Real-time Validation) ---
+    function checkUnitAvailability(el) {
+        const tr = el.closest('tr');
+        const idInput = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
+        const lineEl = tr.querySelector('.equip-line-select');
+        const unitEl = tr.querySelector('.equip-unit-select');
+        const line = lineEl.value;
+        const unit = unitEl.value;
+        const msgSpan = tr.querySelector('.info-text');
+        
+        // 현재 부품이 이미 'Using' 상태라면 (즉, 탈거를 위한 작업이라면) 중복 검사 대상에서 제외
+        const matchedPart = globalData.find(p => p.id === idInput);
+        if (matchedPart && matchedPart.status === 'Using') return;
+
+        // 1) 서버(DB)에서 이미 같은 라인/유닛에 장착된 다른 부품이 있는지 검사
+        const dbConflict = globalData.find(p => {
+            if (p.status !== 'Using' || p.id === idInput) return false;
+            const loc = getMountedLocation(p);
+            return loc && loc.line === line && loc.unit === unit;
+        });
+
+        // 2) 현재 입력 중인 표 안에서 같은 라인/유닛을 선택한 다른 행이 있는지 검사
+        let screenConflict = false;
+        const rows = document.querySelectorAll("#grid-2-body tr");
+        for(let r of rows) {
+            if (r === tr) continue; // 자기 자신 제외
+            const rLine = r.querySelector('.equip-line-select').value;
+            const rUnit = r.querySelector('.equip-unit-select').value;
+            if (rLine === line && rUnit === unit) {
+                screenConflict = true;
+                break;
+            }
+        }
+
+        // 중복이 발견되면 셀을 즉시 빨간색으로 변경하고 에러 메시지 표출
+        if (dbConflict || screenConflict) {
+            lineEl.classList.add('invalid-cell');
+            unitEl.classList.add('invalid-cell');
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 사용중</span>`;
+        } else {
+            // 정상일 경우 빨간 테두리 제거 및 원래 메시지 복구
+            lineEl.classList.remove('invalid-cell');
+            unitEl.classList.remove('invalid-cell');
+            if (matchedPart) {
+                msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
+            }
+        }
     }
 
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
@@ -470,43 +583,19 @@
         }
 
         if (matchedPart.status === 'Using') {
-            let foundLine = ""; let foundUnit = "";
-            if (matchedPart.historyLog && matchedPart.historyLog.length > 0) {
-                for (let i = matchedPart.historyLog.length - 1; i >= 0; i--) {
-                    const logObj = matchedPart.historyLog[i];
-                    if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
-                        try {
-                            foundLine = logObj.log.split('라인:')[1].split('|')[0].trim();
-                            foundUnit = logObj.log.split('유닛:')[1].split('|')[0].trim();
-                            break;
-                        } catch(e) {}
-                    }
-                }
-            }
-            if (!foundLine && matchedPart.lastHistory && matchedPart.lastHistory.includes("라인:")) {
-                try {
-                    foundLine = matchedPart.lastHistory.split('라인:')[1].split('|')[0].trim();
-                    foundUnit = matchedPart.lastHistory.split('유닛:')[1].split('|')[0].trim();
-                } catch(e) {}
-            }
-            
-            if (foundLine && foundUnit) {
-                lineSelect.value = foundLine; unitSelect.value = foundUnit;
+            const loc = getMountedLocation(matchedPart);
+            if (loc) {
+                lineSelect.value = loc.line; unitSelect.value = loc.unit;
+                // 이미 장착된 부품을 탈거하기 위한 것이므로 고정(disabled)시키고 빨간 테두리 클래스 제거
                 lineSelect.disabled = true; unitSelect.disabled = true;
-                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${foundLine} / ${foundUnit})`;
+                lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
+                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line} / ${loc.unit})`;
             }
         } else {
             lineSelect.disabled = false; unitSelect.disabled = false;
-            if(msgSpan) msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
+            // ID가 입력되고 Storage 상태라면, 즉시 실시간 중복 체크 트리거 호출
+            checkUnitAvailability(lineSelect);
         }
-    }
-
-    function getCredentials() {
-        return {
-            token: document.getElementById("cfg-token").value.trim(),
-            owner: document.getElementById("cfg-owner").value.trim(),
-            repo: document.getElementById("cfg-repo").value.trim()
-        };
     }
     
     function switchMenu(menuId) {
@@ -539,7 +628,7 @@
                 renderMatrixBoard();
                 renderMenu6List();
             }
-        } catch (e) { alert("DB 데이터 동기화 실패."); }
+        } catch (e) { console.error(e); alert("DB 데이터 동기화 실패."); }
         showLoading(false);
     }
 
@@ -605,28 +694,9 @@
 
         globalData.forEach(p => {
             if (p.status === 'Using') {
-                let foundLine = ""; let foundUnit = "";
-                if (p.historyLog && p.historyLog.length > 0) {
-                    for (let i = p.historyLog.length - 1; i >= 0; i--) {
-                        const logObj = p.historyLog[i];
-                        if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
-                            try {
-                                foundLine = logObj.log.split('라인:')[1].split('|')[0].trim();
-                                foundUnit = logObj.log.split('유닛:')[1].split('|')[0].trim();
-                                break;
-                            } catch(e) {}
-                        }
-                    }
-                }
-                if (!foundLine && p.lastHistory && p.lastHistory.includes("라인:")) {
-                    try {
-                        foundLine = p.lastHistory.split('라인:')[1].split('|')[0].trim();
-                        foundUnit = p.lastHistory.split('유닛:')[1].split('|')[0].trim();
-                    } catch(e) {}
-                }
-
-                if (foundLine && foundUnit && boardMapping[foundLine] && boardMapping[foundLine][foundUnit] !== undefined) {
-                    boardMapping[foundLine][foundUnit] = `<span class="status-badge status-using" title="${p.lastHistory}">${p.id}</span>`;
+                const loc = getMountedLocation(p);
+                if (loc && boardMapping[loc.line] && boardMapping[loc.line][loc.unit] !== undefined) {
+                    boardMapping[loc.line][loc.unit] = `<span class="status-badge status-using" title="${p.lastHistory}">${p.id}</span>`;
                 }
             }
         });
@@ -710,10 +780,10 @@
         logContainer.innerHTML = html;
     }
 
-    // 💡 Lock 파일 생성 로직 완전 삭제 및 변수 잠금 도입 💡
+    // --- 원격 자물쇠 로직을 완전히 제거하고 브라우저 내부 동시성 방지만 유지 ---
     async function saveDatabase(newData) {
         if (isSaving) {
-            alert("⏳ 현재 데이터를 서버에 기록 중입니다. 잠시만 기다려주세요.");
+            alert("⏳ 현재 데이터를 저장 중입니다. 여러 번 클릭하지 말아주세요.");
             return false;
         }
 
@@ -736,18 +806,22 @@
                 calculateHomeTables(); 
                 renderMatrixBoard(); 
                 renderMenu6List();
-                dbSha = ""; 
-                await fetchDatabase(); 
+                
+                // 저장 직후 최신 SHA 갱신
+                const newRes = await fetch(dbUrl, { headers: { "Authorization": `token ${creds.token}` } });
+                const newJson = await newRes.json();
+                dbSha = newJson.sha;
+
                 isSaving = false;
                 showLoading(false); 
                 return true;
             } else {
-                alert("서버 저장 실패: 최신 데이터 갱신을 위해 새로고침 합니다.");
-                await fetchDatabase();
+                alert("서버 저장에 실패했습니다.");
             }
         } catch (e) {
-            alert("통신 오류가 발생했습니다. 네트워크 상태를 확인하세요.");
+            alert("통신 오류가 발생했습니다.");
         }
+        
         isSaving = false;
         showLoading(false); 
         return false;
@@ -769,9 +843,14 @@
         if(addedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${addedCount}건 등록 완료.`); switchMenu('home'); }
     }
 
+    // --- 💡 [개선 사항 1] 제출(Submit) 시점의 철저한 중복 검사 (최종 안전망) ---
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
+        
+        // 현재 표 안의 입력 데이터끼리 겹치는지 확인하는 Set
+        const currentBatchSet = new Set();
+
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim();
             const dateVal = row.querySelector('.equip-date-input').value; 
@@ -786,13 +865,41 @@
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) continue;
 
+            // 'Using(장착)' 액션일 때만 강력한 중복 인터락 발동
+            if (targetStatus === 'Using') {
+                const locKey = `${line}|${unit}`;
+                
+                // 1) 표 내부 중복 입력 검사
+                if (currentBatchSet.has(locKey)) {
+                    alert(`🚨 [오류] 화면에 ${line} 호기 ${unit} 유닛에 장착하려는 부품이 두 개 이상 중복 작성되었습니다. 하나를 삭제 후 다시 진행하세요.`);
+                    return; // 처리 중단
+                }
+                currentBatchSet.add(locKey);
+
+                // 2) DB 내 기장착 여부 스캔
+                const conflictPart = tempArr.find(p => {
+                    if (p.status !== 'Using' || p.id === id) return false;
+                    const loc = getMountedLocation(p);
+                    return loc && loc.line === line && loc.unit === unit;
+                });
+
+                if (conflictPart) {
+                    alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 부품(${conflictPart.id})이 장착되어 있습니다.\n해당 부품을 먼저 [탈거] 승인한 후에 다시 시도해 주세요.`);
+                    return; // 처리 중단
+                }
+            }
+
             tempArr[pIdx].status = targetStatus;
             const logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
             updatedCount++;
         }
-        if(updatedCount > 0 && await saveDatabase(tempArr)) { alert(`총 ${updatedCount}건 처리 완료.`); switchMenu('0'); }
+        
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { 
+            alert(`총 ${updatedCount}건 처리 완료.`); 
+            switchMenu('0'); // 처리가 완료되면 호기별 장착 ID 화면으로 즉시 이동하여 결과 확인
+        }
     }
 
     async function submitBulkShipment(nextStatus) {
