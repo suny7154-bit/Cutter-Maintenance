@@ -143,9 +143,9 @@
     "id": "LCAJHY3000FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "regridCount": 0,
-    "lastHistory": "[장착] 일시:2026-06-29 04시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[관리자 강제 제어 오버라이드] 상태를 Waiting로 강제 변경함",
     "historyLog": [
       {
         "timestamp": "2026-06-29T08:11:51.494Z",
@@ -156,6 +156,11 @@
         "timestamp": "2026-06-29T08:23:57.748Z",
         "status": "Using",
         "log": "[장착] 일시:2026-06-29 04시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-02T15:43:21.503Z",
+        "status": "Waiting",
+        "log": "[관리자 강제 제어 오버라이드] 상태를 Waiting로 강제 변경함"
       }
     ]
   },
