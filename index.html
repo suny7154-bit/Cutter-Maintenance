@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (연마 가능 잔여 횟수 패러다임 전환)</title>
+    <title>⚙️ 부품 생애주기 시스템 (마스터 ID 통합 및 Flip 제어판)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -63,7 +63,6 @@
         .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
         .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 4px; font-weight:bold; }
 
-        /* 팝업/로딩 UX */
         #loading-indicator {
             display: none; position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.85); color: #fff; font-weight: bold; font-size: 16px;
@@ -79,7 +78,6 @@
         .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
         .toast.error { background-color: #dc3545; }
 
-        /* 관리자 화면 제어 커스텀 스타일 */
         .admin-lock-box { background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 6px; text-align: center; max-width: 400px; margin: 50px auto; }
         .admin-panel { background: #fff; padding: 5px; display: none; }
     </style>
@@ -147,7 +145,7 @@
 
         <div id="menu-0" class="menu-section" style="display:none;">
             <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
-            <p style="font-size:13px; color:#666;">※ 각 유닛은 '상도 1개 + 하도 1개' 형태로 동시 장착 표출이 가능합니다.</p>
+            <p style="font-size:13px; color:#666;">※ Flip으로 20.0면을 사용 중인 경우 마스터 ID 옆에 (20.0면)으로 통합 표시됩니다.</p>
             <table class="matrix-table">
                 <thead>
                     <tr>
@@ -163,6 +161,7 @@
 
         <div id="menu-1" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 등록 시 20.0을 스캔해도 자동으로 마스터 ID(10.0)로 통합 생성됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('1')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -180,7 +179,7 @@
 
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 상도는 상도끼리, 하도는 하도끼리 중복 장착 불가. (1.2상도=Final 전용 / 1.8상도=Upper,Center 전용)</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 20.0을 스캔하면 마스터 ID로 자동 변환되며 Flip 체크박스가 자동 선택됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -421,7 +420,6 @@
         return null;
     }
 
-    // 🔐 관리자 인증 
     function verifyAdminPassword() {
         const pass = document.getElementById("admin-password-input").value;
         if (pass === "Jooyupidiot") {
@@ -535,7 +533,6 @@
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '3');
         } else if (menu === '4') { 
-            // 💡 메뉴 4 (연마 입고): 잔여 연마 가능 횟수 입력으로 변경
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수"></td>
@@ -600,8 +597,11 @@
         
         if(!idInput || !typeInput) return; 
 
-        const matchedPart = globalData.find(p => p.id === idInput);
-        if (matchedPart && matchedPart.status === 'Using') return;
+        // 마스터 ID(10.0)로 매핑된 상태에서 조회
+        let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
+        const matchedPart = globalData.find(p => p.id === baseId);
+        
+        if (matchedPart && matchedPart.status === 'Using') return; // 탈거 작업 허용
 
         if (typeInput === "1.2도 상도" && unit !== "Final") {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
@@ -614,7 +614,7 @@
 
         const currentCategory = getToolCategory(typeInput);
         const dbConflict = globalData.find(p => {
-            if (p.status !== 'Using' || p.id === idInput) return false;
+            if (p.status !== 'Using' || p.id === baseId) return false;
             const loc = getMountedLocation(p);
             if (loc && loc.line === line && loc.unit === unit) {
                 return getToolCategory(p.toolType || "") === currentCategory;
@@ -626,7 +626,9 @@
         const rows = document.querySelectorAll("#grid-2-body tr");
         for(let r of rows) {
             if (r === tr) continue; 
-            const rId = r.querySelector('.tool-id-input').value.trim();
+            let rId = r.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (rId.endsWith("20.0")) rId = rId.replace("20.0", "10.0");
+            
             const rType = r.querySelector('.tool-type-input').value;
             const rLine = r.querySelector('.equip-line-select').value;
             const rUnit = r.querySelector('.equip-unit-select').value;
@@ -645,9 +647,20 @@
         }
     }
 
+    // 💡 마스터 ID(10.0) 통합 검색 및 스왑 로직
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
-        const id = inputEl.value.trim().toUpperCase();
-        inputEl.value = id; 
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        
+        // 하도 20.0 스캔 시 10.0 마스터 ID로 강제 변환
+        if (id.endsWith("20.0")) {
+            id = id.replace("20.0", "10.0");
+            inputEl.value = id;
+            showToast("💡 20.0 면이 입력되어 마스터 ID(10.0)로 자동 변환 조회됩니다.");
+        } else {
+            inputEl.value = id;
+        }
+        
         const res = parseAndValidateToolId(id);
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
@@ -666,14 +679,15 @@
             if (isTriggerMatch && res.valid) {
                 const matched = globalData.find(p => p.id === id);
                 if (matched) {
-                    // 💡 연마 가능 잔여 횟수 매핑 (기존 호환성 보장)
                     const regrindInput = tr.querySelector('.regrind-available-input');
                     if (regrindInput) {
                         regrindInput.value = matched.regrindAvailable !== undefined ? matched.regrindAvailable : (matched.regridCount || 0);
                     }
                     
                     if (typeInput && (inputEl.closest('tbody').id === 'grid-7-body' || inputEl.closest('tbody').id === 'grid-5-body')) {
-                        typeInput.value = `현재 상태: ${matched.status}`;
+                        let statusTxt = matched.status;
+                        if(matched.status === 'Using' && matched.currentSide === "20.0") statusTxt += " (20.0면)";
+                        typeInput.value = `현재 상태: ${statusTxt}`;
                     }
                 }
             }
@@ -681,8 +695,20 @@
     }
 
     function handleEquipIdChange(inputEl) {
-        const id = inputEl.value.trim().toUpperCase();
-        inputEl.value = id;
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        let is20 = false;
+
+        // 장착 시 20.0 스캔 시 10.0 변환 및 Flip 자동 체크
+        if (id.endsWith("20.0")) {
+            id = id.replace("20.0", "10.0");
+            inputEl.value = id;
+            is20 = true;
+            showToast("💡 20.0 면이 스캔되어 마스터 ID로 변환되며, Flip이 자동 체크됩니다.");
+        } else {
+            inputEl.value = id;
+        }
+
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
         const flipCb = tr.querySelector('.flip-checkbox');
@@ -693,9 +719,15 @@
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
 
+        // 하도 규격일 때만 Flip 활성화
         if (flipCb) {
-            if (res.type === "LW (하도)") flipCb.disabled = false;
-            else { flipCb.disabled = true; flipCb.checked = false; }
+            if (res.type === "LW (하도)") {
+                flipCb.disabled = false;
+                if (is20) flipCb.checked = true; // 20.0 스캔 시 자동 체크
+            } else {
+                flipCb.disabled = true; 
+                flipCb.checked = false; 
+            }
         }
 
         if (!res.valid) {
@@ -705,6 +737,7 @@
         }
         inputEl.classList.remove('invalid-cell');
 
+        // 변환된 마스터 ID(10.0)를 기준으로 DB 조회
         const matchedPart = globalData.find(p => p.id === id);
         if (!matchedPart) {
             if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ DB 미등록</span>";
@@ -717,7 +750,8 @@
                 lineSelect.value = loc.line; unitSelect.value = loc.unit;
                 lineSelect.disabled = true; unitSelect.disabled = true;
                 lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
-                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line} / ${loc.unit})`;
+                let faceInfo = matchedPart.currentSide === "20.0" ? "20.0면" : "10.0면";
+                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo})`;
             }
         } else {
             lineSelect.disabled = false; unitSelect.disabled = false;
@@ -826,7 +860,12 @@
             if (p.status === 'Using') {
                 const loc = getMountedLocation(p);
                 if (loc && boardMapping[loc.line] && boardMapping[loc.line][loc.unit] !== undefined) {
-                    boardMapping[loc.line][loc.unit].push(`<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${p.id}</span>`);
+                    // 💡 Flip 되어 20.0면 사용 중일 경우 마스터 ID 옆에 (20.0면) 명시
+                    let displayId = p.id;
+                    if (p.toolType === "LW (하도)" && p.currentSide === "20.0") {
+                        displayId = `${p.id} (20.0면)`;
+                    }
+                    boardMapping[loc.line][loc.unit].push(`<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${displayId}</span>`);
                 }
             }
         });
@@ -865,11 +904,16 @@
             else if(lowStat === 'disposal') sClass = 'status-disposal';
             else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
 
-            // 💡 메뉴 6 표출: 연마 가능 잔여 횟수 매핑
+            // 💡 리스트 뷰에서도 20.0면 장착 시 표시
+            let displayId = p.id;
+            if (p.status === 'Using' && p.toolType === "LW (하도)" && p.currentSide === "20.0") {
+                displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
+            }
+
             const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
 
             tr.innerHTML = `
-                <td style="font-weight:bold; color:#0056b3;">${p.id}</td>
+                <td style="font-weight:bold; color:#0056b3;">${displayId}</td>
                 <td>${v.type}</td>
                 <td>${p.maker || '미분류'}</td>
                 <td><span class="status-badge ${sClass}">${p.status}</span></td>
@@ -962,14 +1006,17 @@
         const rows = document.querySelectorAll("#grid-1-body tr");
         let tempArr = [...globalData]; let addedCount = 0;
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim();
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
             const maker = row.querySelector('.maker-input').value.trim();
             if(!id) continue;
+
+            // 신규 등록 시에도 무조건 10.0 베이스 아이디로 생성
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+
             const vRes = parseAndValidateToolId(id);
             if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
 
-            // 💡 신규 등록 시 연마 가능 잔여 횟수를 기본 0으로 세팅 (regrindAvailable)
-            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
+            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", currentSide: "10.0", regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { 
@@ -978,6 +1025,7 @@
         }
     }
 
+    // 💡 2번 메뉴: 장비 장착 시 마스터 ID 검색 및 Flip 속성(currentSide) 주입
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -985,14 +1033,18 @@
 
         for(let row of rows) {
             const idInputEl = row.querySelector('.tool-id-input');
-            let originalId = idInputEl.value.trim().toUpperCase();
+            let originalInput = idInputEl.value.trim().toUpperCase();
+            
+            // 처리 로직은 모두 마스터 ID 기준 (10.0)
+            let baseId = originalInput.endsWith("20.0") ? originalInput.replace("20.0", "10.0") : originalInput;
+            
             const typeInput = row.querySelector('.tool-type-input').value; 
             const dateVal = row.querySelector('.equip-date-input').value; 
             const timeVal = row.querySelector('.equip-time-input').value; 
             
-            if(!originalId || !dateVal || !timeVal) continue;
+            if(!baseId || !dateVal || !timeVal) continue;
 
-            const pIdx = tempArr.findIndex(p => p.id === originalId);
+            const pIdx = tempArr.findIndex(p => p.id === baseId);
             if(pIdx === -1) continue;
 
             const line = row.querySelector('.equip-line-select').value;
@@ -1000,21 +1052,18 @@
             const op = row.querySelector('.equip-op-input').value.trim();
             const comment = row.querySelector('.equip-comment-input').value.trim();
             
-            let newId = originalId;
-            let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
-
             const flipCb = row.querySelector('.flip-checkbox');
-            if (flipCb && flipCb.checked && targetStatus === 'Using') {
-                if (originalId.endsWith('10.0')) newId = originalId.replace('10.0', '20.0');
-                else if (originalId.endsWith('20.0')) newId = originalId.replace('20.0', '10.0');
-            }
+            const isFlipped = flipCb && flipCb.checked;
+            const targetSide = isFlipped ? "20.0" : "10.0";
+
+            let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
             if (targetStatus === 'Using') {
                 if (typeInput === "1.2도 상도" && unit !== "Final") {
-                    alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${originalId} 확인 필요)`); return;
+                    alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${baseId} 확인 필요)`); return;
                 }
                 if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) {
-                    alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${originalId} 확인 필요)`); return;
+                    alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${baseId} 확인 필요)`); return;
                 }
 
                 const currentCategory = getToolCategory(typeInput);
@@ -1026,7 +1075,7 @@
                 currentBatchSet.add(locKey);
 
                 const conflictPart = tempArr.find(p => {
-                    if (p.status !== 'Using' || p.id === originalId) return false;
+                    if (p.status !== 'Using' || p.id === baseId) return false;
                     const loc = getMountedLocation(p);
                     return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
                 });
@@ -1034,11 +1083,12 @@
                 if (conflictPart) {
                     alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`); return; 
                 }
-            }
 
-            if (newId !== originalId) {
-                tempArr[pIdx].id = newId;
-                logMsg = `[면 변경(Flip) 장착] 기존 ID:${originalId} -> ${newId} 변환됨 | ` + logMsg;
+                // 💡 Flip 장착 시 해당 객체의 currentSide 속성을 업데이트
+                if (typeInput === "LW (하도)") {
+                    tempArr[pIdx].currentSide = targetSide;
+                    if (isFlipped) logMsg = `[면 변경(Flip) 장착] 20.0면 사용 | ` + logMsg;
+                }
             }
 
             tempArr[pIdx].status = targetStatus;
@@ -1057,7 +1107,8 @@
         const rows = document.querySelectorAll("#grid-3-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0"); // 안전장치
             const shipDate = row.querySelector('.ship-out-date').value;
             const comment = row.querySelector('.ship-out-comment').value.trim();
             if(!id) continue;
@@ -1077,12 +1128,12 @@
         }
     }
 
-    // 💡 연마 입고 시 잔여 가능 횟수 매핑
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll("#grid-4-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
             const regrindAvailable = parseInt(row.querySelector('.regrind-available-input').value) || 0;
             const inspector = row.querySelector('.ship-in-op').value.trim();
             const comment = row.querySelector('.ship-in-comment').value.trim();
@@ -1093,8 +1144,8 @@
 
             tempArr[pIdx].status = "Storage";
             tempArr[pIdx].regrindAvailable = regrindAvailable;
+            // 입고 시 면(Side) 정보를 초기화 할 수 있으나, 보통 그대로 두거나 10.0으로 리셋함. 여기선 유지.
             
-            // 이력 텍스트 변경
             const logMsg = `[연마입고] 검수자:${inspector} | 연마가능잔여:${regrindAvailable}회 | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: "Storage", log: logMsg });
@@ -1111,7 +1162,8 @@
         let tempArr = [...globalData]; let updatedCount = 0;
 
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
             const nextStatus = row.querySelector('.admin-target-status').value;
             const line = row.querySelector('.admin-target-line').value;
             const unit = row.querySelector('.admin-target-unit').value;
@@ -1146,7 +1198,8 @@
         let tempArr = [...globalData]; let updatedCount = 0;
         
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
             const comment = row.querySelector('.disposal-comment').value.trim();
             if(!id) continue;
 
@@ -1170,7 +1223,8 @@
     function downloadExcel() {
         if(globalData.length === 0) return;
         let exportArr = globalData.map(p => ({
-            "Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
+            "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
+            "현재 사용 면": p.currentSide || "10.0",
             "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
             "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
         }));
@@ -1183,4 +1237,3 @@
 
 </body>
 </html>
-
