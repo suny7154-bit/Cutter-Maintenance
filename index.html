@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (UC1 자동분류 & Shortage 실시간 예측)</title>
+    <title>⚙️ Cutter 재고 관리 및 이력 확인</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -120,14 +120,14 @@
         <button class="menu-btn" onclick="switchMenu('2')">🔧 2. 장비 장착 / 탈거</button>
         <button class="menu-btn" onclick="switchMenu('3')">🚛 3. 연마 출하 관리</button>
         <button class="menu-btn" onclick="switchMenu('4')">📥 4. 연마 입고 관리</button>
-        <button class="menu-btn" onclick="switchMenu('5')" style="border-left: 4px solid #dc3545; font-weight: bold; color:#dc3545;">🔒 5. 관리자 제어 센터</button>
+        <button class="menu-btn" onclick="switchMenu('5')" style="border-left: 4px solid #dc3545; font-weight: bold; color:#dc3545;">🔒 5. 관리자 모드-강제 상태 변경</button>
         <button class="menu-btn" onclick="switchMenu('6')">📜 6. 전체 커터 세부 리스트</button>
         <button class="menu-btn" onclick="switchMenu('7')" style="border-left: 4px solid #212529;">🗑️ 7. 폐기 등록 (Disposal)</button>
     </div>
 
     <div class="main-content">
         <div id="menu-home" class="menu-section">
-            <h2>📊 마스터 데이터 실시간 표 집계 (Home)</h2>
+            <h2>📊 현재 재고 현황 (Home)</h2>
             <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량</h3>
             <table class="summary-table">
                 <thead>
@@ -161,7 +161,7 @@
 
             <hr style="margin: 40px 0; border: 1px solid #dee2e6;">
 
-            <h2>📈 커터 생애주기 및 Shortage 예측 시스템</h2>
+            <h2>📈 커터 재고 및 연마 잔존량 기반 Shortage 예측</h2>
             
             <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
                 🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span>개)
