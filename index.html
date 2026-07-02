@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (Flip 메모리 및 양면 사용 통제 인터락)</title>
+    <title>⚙️ 부품 생애주기 시스템 (UC1 제조사 자동분류 적용)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -93,7 +93,7 @@
 </div>
 
 <div id="toast-msg" class="toast"></div>
-<div id="loading-indicator">⏳ 데이터 불러오는 중...</div>
+<div id="loading-indicator">⏳ 데이터 처리 중...</div>
 
 <div class="container">
     <div class="sidebar">
@@ -119,6 +119,7 @@
                         <th style="background-color:#495057; color:white;">커터 타입 (구분)</th>
                         <th style="background-color:#495057; color:white;">HYTC</th>
                         <th style="background-color:#495057; color:white;">유진 (YJ)</th>
+                        <th style="background-color:#495057; color:white;">UC1</th>
                         <th style="background-color:#495057; color:white;">기타 / 미분류</th>
                         <th class="sub-total" style="background-color:#e9ecef; color:#0056b3;">타입별 합계</th>
                     </tr>
@@ -161,7 +162,7 @@
 
         <div id="menu-1" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 등록 시 20.0을 스캔해도 자동으로 마스터 ID(10.0)로 통합 생성됩니다.</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 20.0 스캔 시 10.0 통합 생성. 백의 자리가 9번대(X9XX)인 공구는 UC1으로 자동 분류됩니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('1')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -179,7 +180,7 @@
 
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 장착은 [Storage] 상태만, 탈거는 [Using] 상태만 가능합니다. Using 중인 하도 커터는 Flip하여 반대 면으로 재장착 가능합니다.</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. Using 중인 하도는 Flip하여 반대 면으로 재장착 가능합니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -395,6 +396,15 @@
         return "기타";
     }
 
+    // 💡 핵심: 마스터 ID 해석 시 7번째 인덱스(백의자리) '9' 감지 로직
+    function getResolvedMaker(id, defaultMaker) {
+        if (id && id.length >= 10 && id.charAt(7) === '9') return "UC1";
+        if (defaultMaker && defaultMaker !== "미분류" && defaultMaker !== "기타" && defaultMaker !== "") return defaultMaker;
+        if (id && id.includes("HY")) return "HYTC";
+        if (id && id.includes("YJ")) return "유진";
+        return "기타";
+    }
+
     function getMountedLocation(part) {
         if (part.status !== 'Using') return null;
         let foundLine = "", foundUnit = "";
@@ -600,6 +610,10 @@
         let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
         const matchedPart = globalData.find(p => p.id === baseId);
         
+        if (matchedPart && matchedPart.status !== 'Storage') {
+            return;
+        }
+
         if (typeInput === "1.2도 상도" && unit !== "Final") {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
             msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2상도는 Final 전용</span>`; return;
@@ -639,17 +653,12 @@
             msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 [${currentCategory}] 장착됨</span>`;
         } else {
             lineEl.classList.remove('invalid-cell'); unitEl.classList.remove('invalid-cell');
-            if (matchedPart) {
-                // Using 중인 하도 커터이면서 Flip을 위한 상황일 경우 안내 메시지 제공
-                if (matchedPart.status === 'Using' && matchedPart.toolType === "LW (하도)") {
-                    msgSpan.innerHTML = `🟢 장착 정보 연동 중 (면 변경 허용됨)`;
-                } else if (matchedPart.status === 'Storage') {
-                    msgSpan.innerHTML = `📦 Storage 상태 (장착 가능)`;
-                }
-            } else msgSpan.innerHTML = "";
+            if (matchedPart) msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
+            else msgSpan.innerHTML = "";
         }
     }
 
+    // 💡 1번 메뉴 및 조회용: 입력 시 제조사(UC1) 자동 판별
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -669,7 +678,9 @@
         
         if (typeInput && !isTriggerMatch) typeInput.value = res.type;
         if (makerInput) {
-            if (id.includes("HY")) makerInput.value = "HYTC";
+            // 💡 UC1 우선 자동 판별 (인덱스 7 = 일련번호 백의 자리)
+            if (id.length >= 10 && id.charAt(7) === '9') makerInput.value = "UC1";
+            else if (id.includes("HY")) makerInput.value = "HYTC";
             else if (id.includes("YJ")) makerInput.value = "유진";
             else makerInput.value = "";
         }
@@ -695,7 +706,6 @@
         }
     }
 
-    // 💡 2번 메뉴: ID 입력 시 상태 인터락(Storage/Using) 검증 로직
     function handleEquipIdChange(inputEl) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -743,7 +753,6 @@
             return;
         }
 
-        // 💡 1차 인터락: Storage와 Using 상태만 이 메뉴에서 조작 가능
         if (matchedPart.status === 'Storage') {
             lineSelect.disabled = false; unitSelect.disabled = false;
             checkUnitAvailability(lineSelect);
@@ -751,7 +760,6 @@
             const loc = getMountedLocation(matchedPart);
             if (loc) {
                 lineSelect.value = loc.line; unitSelect.value = loc.unit;
-                // Using 중인 부품은 위치를 바꿀 수 없으므로 셀렉터 잠금
                 lineSelect.disabled = true; unitSelect.disabled = true;
                 lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
                 
@@ -763,7 +771,6 @@
                 }
             }
         } else {
-            // Waiting, Regrind, Disposal 상태인 경우 에러 처리 및 입력 차단
             inputEl.classList.add('invalid-cell');
             lineSelect.disabled = true; unitSelect.disabled = true;
             if(msgSpan) msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착/탈거 불가! (현재 상태: ${matchedPart.status})</span>`;
@@ -808,17 +815,23 @@
         showLoading(false);
     }
 
+    // 💡 집계 로직: 1번 테이블에 UC1 객체 속성 추가 연산
     function calculateHomeTables() {
-        let t1 = { "1.8도 상도": { hytc:0, yj:0, etc:0, sum:0 }, "1.2도 상도": { hytc:0, yj:0, etc:0, sum:0 }, "LW (하도)": { hytc:0, yj:0, etc:0, sum:0 }, "기타": { hytc:0, yj:0, etc:0, sum:0 } };
+        let t1 = { "1.8도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "1.2도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "LW (하도)": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "기타": { hytc:0, yj:0, uc1:0, etc:0, sum:0 } };
         let t2 = { "1.8도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "1.2도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "LW (하도)": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "기타": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 } };
-        let t1Tot = { hytc:0, yj:0, etc:0, grand:0 };
+        let t1Tot = { hytc:0, yj:0, uc1:0, etc:0, grand:0 };
         let t2Tot = { st:0, us:0, wt:0, rg:0, dp:0, grand:0 };
 
         globalData.forEach(p => {
             let t = parseAndValidateToolId(p.id).type || "기타";
             if (!t1[t]) t = "기타";
 
-            let m = (p.maker === "HYTC" || p.id.includes("HY")) ? "hytc" : ((p.maker === "유진" || p.id.includes("YJ")) ? "yj" : "etc");
+            let makerName = getResolvedMaker(p.id, p.maker);
+            let m = "etc";
+            if (makerName === "UC1") m = "uc1";
+            else if (makerName === "HYTC") m = "hytc";
+            else if (makerName === "유진") m = "yj";
+
             t1[t][m]++; t1[t].sum++; t1Tot[m]++; t1Tot.grand++;
 
             let s = p.status;
@@ -836,10 +849,10 @@
         let h1 = "";
         types.forEach(type => {
             h1 += `<tr>
-                <td><strong>${type}</strong></td><td>${t1[type].hytc}</td><td>${t1[type].yj}</td><td>${t1[type].etc}</td><td class="sub-total">${t1[type].sum}</td>
+                <td><strong>${type}</strong></td><td>${t1[type].hytc}</td><td>${t1[type].yj}</td><td>${t1[type].uc1}</td><td>${t1[type].etc}</td><td class="sub-total">${t1[type].sum}</td>
             </tr>`;
         });
-        h1 += `<tr class="grand-total"><td>합계</td><td>${t1Tot.hytc}</td><td>${t1Tot.yj}</td><td>${t1Tot.etc}</td><td>${t1Tot.grand}</td></tr>`;
+        h1 += `<tr class="grand-total"><td>합계</td><td>${t1Tot.hytc}</td><td>${t1Tot.yj}</td><td>${t1Tot.uc1}</td><td>${t1Tot.etc}</td><td>${t1Tot.grand}</td></tr>`;
         document.getElementById("home-maker-tbody").innerHTML = h1;
 
         let h2 = "";
@@ -919,7 +932,6 @@
                 displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
             }
             
-            // 💡 메뉴 6 표출: 어떤 면을 이미 소모했는지 알려주는 기능 추가
             const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
             let usedInfo = "";
             if (p.toolType === "LW (하도)") {
@@ -927,10 +939,13 @@
                 if (used.length > 0) usedInfo = `<br><span style="color:#888; font-size:10px;">(사용된 면: ${used.join(", ")})</span>`;
             }
 
+            // 💡 메뉴 6 표출 시에도 getResolvedMaker로 UC1 표시 보장
+            let rMaker = getResolvedMaker(p.id, p.maker);
+
             tr.innerHTML = `
                 <td style="font-weight:bold; color:#0056b3;">${displayId} ${usedInfo}</td>
                 <td>${v.type}</td>
-                <td>${p.maker || '미분류'}</td>
+                <td>${rMaker}</td>
                 <td><span class="status-badge ${sClass}">${p.status}</span></td>
                 <td style="font-weight:bold;">${remainCount}회</td>
             `;
@@ -947,7 +962,9 @@
         const logContainer = document.getElementById("selected-tool-logs");
         if(!item) return;
 
-        titleEl.innerHTML = `🔍 [${item.status}] ${item.id} (${item.maker || '제조사 미분류'})`;
+        let rMaker = getResolvedMaker(item.id, item.maker);
+        titleEl.innerHTML = `🔍 [${item.status}] ${item.id} (${rMaker})`;
+        
         if(!item.historyLog || item.historyLog.length === 0) {
             logContainer.innerHTML = `<p style="color:#888; text-align:center; margin-top:50px;">생애주기 이력이 없습니다.</p>`;
             return;
@@ -1030,8 +1047,10 @@
             const vRes = parseAndValidateToolId(id);
             if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
 
-            // 신규 등록 시 usedSides 메모리를 빈 배열로 초기화 세팅
-            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", currentSide: "10.0", usedSides: [], regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
+            // 저장될 때 maker를 아예 UC1으로 확정지어 저장 (선택적)
+            const finalMaker = getResolvedMaker(id, maker);
+
+            tempArr.push({ id, toolType: vRes.type, maker: finalMaker, status: "Storage", currentSide: "10.0", usedSides: [], regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { 
@@ -1040,7 +1059,6 @@
         }
     }
 
-    // 💡 2번 메뉴 승인 
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1071,16 +1089,13 @@
 
             let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
-            // 💡 [장착 (Using) 액션 승인 시]
             if (targetStatus === 'Using') {
-                // 현재 Using 상태이면서, 하도 커터이고, 면을 바꾸는 다이렉트 Flip 작업인 경우 허용
                 const isDirectFlip = (tempArr[pIdx].status === 'Using' && typeInput === "LW (하도)" && tempArr[pIdx].currentSide !== targetSide);
 
                 if (tempArr[pIdx].status !== 'Storage' && !isDirectFlip) {
                     alert(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 Flip 스왑은 허용됩니다.)`); return;
                 }
 
-                // 🔥 신규 인터락: 타겟 면이 이미 이전에 사용된 적이 있는지 메모리(usedSides) 검사
                 if (typeInput === "LW (하도)") {
                     if (!tempArr[pIdx].usedSides) tempArr[pIdx].usedSides = [];
                     
@@ -1114,7 +1129,6 @@
                     alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`); return; 
                 }
 
-                // 하도 장착 메모리 업데이트
                 if (typeInput === "LW (하도)") {
                     tempArr[pIdx].usedSides.push(targetSide);
                     tempArr[pIdx].currentSide = targetSide;
@@ -1125,7 +1139,6 @@
                     }
                 }
             } 
-            // 💡 [탈거 (Waiting) 액션 승인 시]
             else if (targetStatus === 'Waiting') {
                 if (tempArr[pIdx].status !== 'Using') {
                     alert(`🚨 [오류] 탈거는 현재 'Using (사용중)' 상태인 커터만 가능합니다.\n(입력하신 ${originalInput}의 현재 상태: ${tempArr[pIdx].status})`); return;
@@ -1169,7 +1182,6 @@
         }
     }
 
-    // 💡 연마 입고 시 Used Sides 메모리 완벽 초기화
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll("#grid-4-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1186,8 +1198,6 @@
 
             tempArr[pIdx].status = "Storage";
             tempArr[pIdx].regrindAvailable = regrindAvailable;
-            
-            // 연마 후 새 커터처럼 양면을 다시 쓸 수 있도록 메모리 리셋
             tempArr[pIdx].usedSides = [];
             tempArr[pIdx].currentSide = "10.0";
             
@@ -1267,8 +1277,9 @@
 
     function downloadExcel() {
         if(globalData.length === 0) return;
+        // 💡 엑셀 백업 시에도 getResolvedMaker를 사용하여 UC1 반영
         let exportArr = globalData.map(p => ({
-            "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
+            "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": getResolvedMaker(p.id, p.maker), "현재 상태": p.status,
             "현재 장착 면": p.currentSide || "10.0",
             "사용 완료된 면": JSON.stringify(p.usedSides || []),
             "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
