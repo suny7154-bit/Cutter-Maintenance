@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (마스터 ID 통합 및 Flip 제어판)</title>
+    <title>⚙️ 부품 생애주기 시스템 (Flip 메모리 및 양면 사용 통제 인터락)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -179,7 +179,7 @@
 
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 20.0을 스캔하면 마스터 ID로 자동 변환되며 Flip 체크박스가 자동 선택됩니다.</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 장착은 [Storage] 상태만, 탈거는 [Using] 상태만 가능합니다. Using 중인 하도 커터는 Flip하여 반대 면으로 재장착 가능합니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -221,7 +221,7 @@
 
         <div id="menu-4" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
-            <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 [연마 가능 횟수 (잔여)]를 최신으로 갱신해 주십시오.</p>
+            <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 사용 이력 면(10.0/20.0)이 초기화되며 [연마 가능 횟수]를 갱신합니다.</p>
             <div><button class="btn-row-control" onclick="addGridRow('4')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
@@ -597,12 +597,9 @@
         
         if(!idInput || !typeInput) return; 
 
-        // 마스터 ID(10.0)로 매핑된 상태에서 조회
         let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
         const matchedPart = globalData.find(p => p.id === baseId);
         
-        if (matchedPart && matchedPart.status === 'Using') return; // 탈거 작업 허용
-
         if (typeInput === "1.2도 상도" && unit !== "Final") {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
             msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2상도는 Final 전용</span>`; return;
@@ -642,17 +639,21 @@
             msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 [${currentCategory}] 장착됨</span>`;
         } else {
             lineEl.classList.remove('invalid-cell'); unitEl.classList.remove('invalid-cell');
-            if (matchedPart) msgSpan.innerHTML = `📦 ${matchedPart.status} 상태 (장착 가능)`;
-            else msgSpan.innerHTML = "";
+            if (matchedPart) {
+                // Using 중인 하도 커터이면서 Flip을 위한 상황일 경우 안내 메시지 제공
+                if (matchedPart.status === 'Using' && matchedPart.toolType === "LW (하도)") {
+                    msgSpan.innerHTML = `🟢 장착 정보 연동 중 (면 변경 허용됨)`;
+                } else if (matchedPart.status === 'Storage') {
+                    msgSpan.innerHTML = `📦 Storage 상태 (장착 가능)`;
+                }
+            } else msgSpan.innerHTML = "";
         }
     }
 
-    // 💡 마스터 ID(10.0) 통합 검색 및 스왑 로직
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
         
-        // 하도 20.0 스캔 시 10.0 마스터 ID로 강제 변환
         if (id.endsWith("20.0")) {
             id = id.replace("20.0", "10.0");
             inputEl.value = id;
@@ -694,12 +695,12 @@
         }
     }
 
+    // 💡 2번 메뉴: ID 입력 시 상태 인터락(Storage/Using) 검증 로직
     function handleEquipIdChange(inputEl) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
         let is20 = false;
 
-        // 장착 시 20.0 스캔 시 10.0 변환 및 Flip 자동 체크
         if (id.endsWith("20.0")) {
             id = id.replace("20.0", "10.0");
             inputEl.value = id;
@@ -719,11 +720,10 @@
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
 
-        // 하도 규격일 때만 Flip 활성화
         if (flipCb) {
             if (res.type === "LW (하도)") {
                 flipCb.disabled = false;
-                if (is20) flipCb.checked = true; // 20.0 스캔 시 자동 체크
+                if (is20) flipCb.checked = true;
             } else {
                 flipCb.disabled = true; 
                 flipCb.checked = false; 
@@ -737,25 +737,36 @@
         }
         inputEl.classList.remove('invalid-cell');
 
-        // 변환된 마스터 ID(10.0)를 기준으로 DB 조회
         const matchedPart = globalData.find(p => p.id === id);
         if (!matchedPart) {
             if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ DB 미등록</span>";
             return;
         }
 
-        if (matchedPart.status === 'Using') {
+        // 💡 1차 인터락: Storage와 Using 상태만 이 메뉴에서 조작 가능
+        if (matchedPart.status === 'Storage') {
+            lineSelect.disabled = false; unitSelect.disabled = false;
+            checkUnitAvailability(lineSelect);
+        } else if (matchedPart.status === 'Using') {
             const loc = getMountedLocation(matchedPart);
             if (loc) {
                 lineSelect.value = loc.line; unitSelect.value = loc.unit;
+                // Using 중인 부품은 위치를 바꿀 수 없으므로 셀렉터 잠금
                 lineSelect.disabled = true; unitSelect.disabled = true;
                 lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
+                
                 let faceInfo = matchedPart.currentSide === "20.0" ? "20.0면" : "10.0면";
-                if(msgSpan) msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo})`;
+                if (matchedPart.toolType === "LW (하도)") {
+                    msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo} 사용중) - Flip 후 재장착 혹은 탈거 가능`;
+                } else {
+                    msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit}) - 탈거 가능`;
+                }
             }
         } else {
-            lineSelect.disabled = false; unitSelect.disabled = false;
-            checkUnitAvailability(lineSelect);
+            // Waiting, Regrind, Disposal 상태인 경우 에러 처리 및 입력 차단
+            inputEl.classList.add('invalid-cell');
+            lineSelect.disabled = true; unitSelect.disabled = true;
+            if(msgSpan) msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착/탈거 불가! (현재 상태: ${matchedPart.status})</span>`;
         }
     }
 
@@ -860,7 +871,6 @@
             if (p.status === 'Using') {
                 const loc = getMountedLocation(p);
                 if (loc && boardMapping[loc.line] && boardMapping[loc.line][loc.unit] !== undefined) {
-                    // 💡 Flip 되어 20.0면 사용 중일 경우 마스터 ID 옆에 (20.0면) 명시
                     let displayId = p.id;
                     if (p.toolType === "LW (하도)" && p.currentSide === "20.0") {
                         displayId = `${p.id} (20.0면)`;
@@ -904,16 +914,21 @@
             else if(lowStat === 'disposal') sClass = 'status-disposal';
             else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
 
-            // 💡 리스트 뷰에서도 20.0면 장착 시 표시
             let displayId = p.id;
             if (p.status === 'Using' && p.toolType === "LW (하도)" && p.currentSide === "20.0") {
                 displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
             }
-
+            
+            // 💡 메뉴 6 표출: 어떤 면을 이미 소모했는지 알려주는 기능 추가
             const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            let usedInfo = "";
+            if (p.toolType === "LW (하도)") {
+                const used = p.usedSides || [];
+                if (used.length > 0) usedInfo = `<br><span style="color:#888; font-size:10px;">(사용된 면: ${used.join(", ")})</span>`;
+            }
 
             tr.innerHTML = `
-                <td style="font-weight:bold; color:#0056b3;">${displayId}</td>
+                <td style="font-weight:bold; color:#0056b3;">${displayId} ${usedInfo}</td>
                 <td>${v.type}</td>
                 <td>${p.maker || '미분류'}</td>
                 <td><span class="status-badge ${sClass}">${p.status}</span></td>
@@ -1010,13 +1025,13 @@
             const maker = row.querySelector('.maker-input').value.trim();
             if(!id) continue;
 
-            // 신규 등록 시에도 무조건 10.0 베이스 아이디로 생성
             if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
 
             const vRes = parseAndValidateToolId(id);
             if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
 
-            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", currentSide: "10.0", regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
+            // 신규 등록 시 usedSides 메모리를 빈 배열로 초기화 세팅
+            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", currentSide: "10.0", usedSides: [], regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { 
@@ -1025,7 +1040,7 @@
         }
     }
 
-    // 💡 2번 메뉴: 장비 장착 시 마스터 ID 검색 및 Flip 속성(currentSide) 주입
+    // 💡 2번 메뉴 승인 
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1034,8 +1049,6 @@
         for(let row of rows) {
             const idInputEl = row.querySelector('.tool-id-input');
             let originalInput = idInputEl.value.trim().toUpperCase();
-            
-            // 처리 로직은 모두 마스터 ID 기준 (10.0)
             let baseId = originalInput.endsWith("20.0") ? originalInput.replace("20.0", "10.0") : originalInput;
             
             const typeInput = row.querySelector('.tool-type-input').value; 
@@ -1058,7 +1071,24 @@
 
             let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
+            // 💡 [장착 (Using) 액션 승인 시]
             if (targetStatus === 'Using') {
+                // 현재 Using 상태이면서, 하도 커터이고, 면을 바꾸는 다이렉트 Flip 작업인 경우 허용
+                const isDirectFlip = (tempArr[pIdx].status === 'Using' && typeInput === "LW (하도)" && tempArr[pIdx].currentSide !== targetSide);
+
+                if (tempArr[pIdx].status !== 'Storage' && !isDirectFlip) {
+                    alert(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 Flip 스왑은 허용됩니다.)`); return;
+                }
+
+                // 🔥 신규 인터락: 타겟 면이 이미 이전에 사용된 적이 있는지 메모리(usedSides) 검사
+                if (typeInput === "LW (하도)") {
+                    if (!tempArr[pIdx].usedSides) tempArr[pIdx].usedSides = [];
+                    
+                    if (tempArr[pIdx].usedSides.includes(targetSide)) {
+                        alert(`🚨 [오류] ${baseId} 커터의 [${targetSide}면]은 이미 이번 주기에 사용한 이력이 있어 재장착/Flip이 불가능합니다.\n(양면을 모두 썼다면 탈거 후 연마 출하하세요.)`); return;
+                    }
+                }
+
                 if (typeInput === "1.2도 상도" && unit !== "Final") {
                     alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${baseId} 확인 필요)`); return;
                 }
@@ -1084,10 +1114,21 @@
                     alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`); return; 
                 }
 
-                // 💡 Flip 장착 시 해당 객체의 currentSide 속성을 업데이트
+                // 하도 장착 메모리 업데이트
                 if (typeInput === "LW (하도)") {
+                    tempArr[pIdx].usedSides.push(targetSide);
                     tempArr[pIdx].currentSide = targetSide;
-                    if (isFlipped) logMsg = `[면 변경(Flip) 장착] 20.0면 사용 | ` + logMsg;
+                    if (isDirectFlip) {
+                        logMsg = `[면 변경(Flip) 장착] ${tempArr[pIdx].currentSide === '20.0' ? '10.0' : '20.0'}면 -> ${targetSide}면으로 스왑됨 | ` + logMsg;
+                    } else if (isFlipped) {
+                        logMsg = `[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | ` + logMsg;
+                    }
+                }
+            } 
+            // 💡 [탈거 (Waiting) 액션 승인 시]
+            else if (targetStatus === 'Waiting') {
+                if (tempArr[pIdx].status !== 'Using') {
+                    alert(`🚨 [오류] 탈거는 현재 'Using (사용중)' 상태인 커터만 가능합니다.\n(입력하신 ${originalInput}의 현재 상태: ${tempArr[pIdx].status})`); return;
                 }
             }
 
@@ -1108,7 +1149,7 @@
         let tempArr = [...globalData]; let updatedCount = 0;
         for(let row of rows) {
             let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
-            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0"); // 안전장치
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0"); 
             const shipDate = row.querySelector('.ship-out-date').value;
             const comment = row.querySelector('.ship-out-comment').value.trim();
             if(!id) continue;
@@ -1128,6 +1169,7 @@
         }
     }
 
+    // 💡 연마 입고 시 Used Sides 메모리 완벽 초기화
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll("#grid-4-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1144,7 +1186,10 @@
 
             tempArr[pIdx].status = "Storage";
             tempArr[pIdx].regrindAvailable = regrindAvailable;
-            // 입고 시 면(Side) 정보를 초기화 할 수 있으나, 보통 그대로 두거나 10.0으로 리셋함. 여기선 유지.
+            
+            // 연마 후 새 커터처럼 양면을 다시 쓸 수 있도록 메모리 리셋
+            tempArr[pIdx].usedSides = [];
+            tempArr[pIdx].currentSide = "10.0";
             
             const logMsg = `[연마입고] 검수자:${inspector} | 연마가능잔여:${regrindAvailable}회 | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
@@ -1224,7 +1269,8 @@
         if(globalData.length === 0) return;
         let exportArr = globalData.map(p => ({
             "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
-            "현재 사용 면": p.currentSide || "10.0",
+            "현재 장착 면": p.currentSide || "10.0",
+            "사용 완료된 면": JSON.stringify(p.usedSides || []),
             "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
             "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
         }));
