@@ -73,9 +73,9 @@
     "id": "LCAJHY4000CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "regridCount": 0,
-    "lastHistory": "[연마입고] 검수자: | 연마가능잔여:9회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-07-02 14시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-06-29T08:09:08.640Z",
@@ -101,6 +101,11 @@
         "timestamp": "2026-07-02T18:29:33.417Z",
         "status": "Storage",
         "log": "[연마입고] 검수자: | 연마가능잔여:9회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-02T18:29:59.957Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-02 14시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
       }
     ],
     "regrindAvailable": 9
