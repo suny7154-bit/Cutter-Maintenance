@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (관리자 강제 제어 모드 탑재)</title>
+    <title>⚙️ 부품 생애주기 시스템 (관리자 다중 제어 & Flip 기능 적용)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -22,8 +22,9 @@
         .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
         .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
         .grid-table th { background: #e9ecef; font-size: 14px; color: #333; }
-        .grid-table input, .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
+        .grid-table input[type="text"], .grid-table input[type="number"], .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
         .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
+        .grid-table input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
         
         .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
         .summary-table th, .summary-table td { border: 1px solid #ced4da; padding: 12px; text-align: center; font-size: 14px; }
@@ -60,7 +61,7 @@
         button.action-btn:hover { opacity: 0.85; transform: translateY(-1px); }
         
         .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
-        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 2px; font-weight:bold; }
+        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 4px; font-weight:bold; }
 
         /* 팝업/로딩 UX */
         #loading-indicator {
@@ -78,12 +79,9 @@
         .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
         .toast.error { background-color: #dc3545; }
 
-        /* 🔐 관리자 화면 제어 커스텀 스타일 */
+        /* 관리자 화면 제어 커스텀 스타일 */
         .admin-lock-box { background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 6px; text-align: center; max-width: 400px; margin: 50px auto; }
-        .admin-panel { background: #fff; border: 1px solid #ced4da; padding: 25px; border-radius: 8px; display: none; }
-        .admin-field-group { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; }
-        .admin-field-group label { width: 140px; font-weight: bold; color: #495057; }
-        .admin-field-group input, .admin-field-group select { flex: 1; padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px; }
+        .admin-panel { background: #fff; padding: 5px; display: none; }
     </style>
 </head>
 <body>
@@ -187,12 +185,13 @@
             <table class="grid-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Tool ID</th>
-                        <th style="width: 15%;">Tool Type (자동)</th>
-                        <th style="width: 22%;">장착/탈거 일시</th>
-                        <th style="width: 13%;">라인 선택</th>
+                        <th style="width: 18%;">Tool ID</th>
+                        <th style="width: 12%;">Tool Type</th>
+                        <th style="width: 6%;">Flip<br><small>(하도)</small></th>
+                        <th style="width: 18%;">장착/탈거 일시</th>
+                        <th style="width: 12%;">라인 선택</th>
                         <th style="width: 10%;">Unit</th>
-                        <th style="width: 10%;">작업자</th>
+                        <th style="width: 9%;">작업자</th>
                         <th style="width: 10%;">Comment</th>
                         <th style="width: 5%;">삭제</th>
                     </tr>
@@ -241,7 +240,6 @@
 
         <div id="menu-5" class="menu-section" style="display:none;">
             <h2>🔒 5. 최고 관리자 전용 데이터 상태 제어 센터</h2>
-            <p style="font-size:13px; color:#666; margin-bottom:20px;">※ 마스터 엑셀 복구 로직을 폐쇄하고 관리자 권한 강제 주입 로직으로 개편되었습니다.</p>
             
             <div id="admin-auth-zone" class="admin-lock-box">
                 <label style="display:block; margin-bottom:10px; font-weight:bold; color:#721c24;">⚠️ 최고 관리자 비밀번호 인증 필요</label>
@@ -250,46 +248,23 @@
             </div>
 
             <div id="admin-panel-zone" class="admin-panel">
-                <h3 style="color:#dc3545; border-bottom:1px dashed #dc3545; padding-bottom:8px; margin-bottom:20px;">⚡ 마스터 부품 상태 강제 오버라이드</h3>
-                
-                <div class="admin-field-group">
-                    <label>대상 Cutter ID:</label>
-                    <input type="text" id="admin-target-id" placeholder="LCAJHY... 포맷 정확히 입력" oninput="trackAdminTargetId(this)">
-                </div>
-                
-                <div class="admin-field-group">
-                    <label>조회된 현재 상태:</label>
-                    <input type="text" id="admin-current-status-view" readonly placeholder="ID 입력 시 자동 감지" style="background:#e9ecef; font-weight:bold;">
-                </div>
-
-                <div class="admin-field-group">
-                    <label>변경할 목표 상태:</label>
-                    <select id="admin-target-status" onchange="toggleAdminUsingFields(this.value)">
-                        <option value="Storage">Storage (사용대기)</option>
-                        <option value="Using">Using (사용중)</option>
-                        <option value="Waiting">Waiting (연마대기)</option>
-                        <option value="Regrind">Regrind (연마중-출하)</option>
-                        <option value="Disposal">Disposal (폐기)</option>
-                    </select>
-                </div>
-
-                <div id="admin-using-subfields" style="display:none; background:#f8f9fa; border:1px solid #e9ecef; padding:15px; border-radius:4px; margin-bottom:15px;">
-                    <p style="margin:0 0 10px 0; font-size:12px; color:#0056b3; font-weight:bold;">💡 Using 상태 변경 시 장착 위치 입력 필수</p>
-                    <div class="admin-field-group">
-                        <label>장착 호기 선택:</label>
-                        <select id="admin-target-line"></select>
-                    </div>
-                    <div class="admin-field-group">
-                        <label>장착 Unit 선택:</label>
-                        <select id="admin-target-unit">
-                            <option value="Upper">Upper</option>
-                            <option value="Center">Center</option>
-                            <option value="Final">Final</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button class="action-btn" style="background:#212529; width:100%; margin-top:10px;" onclick="executeAdminOverride()">⚡ 마스터 데이터 강제 변경 승인</button>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 신규 ID 생성은 불가하며, 상태를 Using으로 변경 시 장착 호기와 Unit을 필수로 선택해야 합니다.</p>
+                <div><button class="btn-row-control" onclick="addGridRow('5')">➕ 행 추가</button></div>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Tool ID (Ctrl+V)</th>
+                            <th style="width: 15%;">조회된 현재 상태</th>
+                            <th style="width: 15%;">변경 상태 (목표)</th>
+                            <th style="width: 15%;">장착 호기</th>
+                            <th style="width: 15%;">장착 Unit</th>
+                            <th style="width: 15%;">비고 / 사유</th>
+                            <th style="width: 5%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#212529; width:100%; margin-top:10px;" onclick="submitAdminOverride()">⚡ 마스터 데이터 일괄 강제 변경 승인</button>
                 
                 <br><br><br>
                 <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 백업 출력</h3>
@@ -370,22 +345,11 @@
         }
     }
 
-    // 자동 로그인 및 라인 옵션 동적 빌드
     window.addEventListener('DOMContentLoaded', () => {
-        // 호기 옵션 주입 빌더
-        const lineSelect = document.getElementById("admin-target-line");
-        if(lineSelect) {
-            let options = "";
-            for(let i=1; i<=5; i++) {
-                for(let j=1; j<=3; j++) { options += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
-            }
-            for(let j=1; j<=4; j++) { options += `<option value="6-${j}">6-${j} 라인</option>`; }
-            lineSelect.innerHTML = options;
-        }
-
         const savedToken = localStorage.getItem('gh_token');
         const savedOwner = localStorage.getItem('gh_owner');
         const savedRepo = localStorage.getItem('gh_repo');
+        
         if (savedToken && savedOwner && savedRepo) {
             document.getElementById("cfg-token").value = savedToken;
             document.getElementById("cfg-owner").value = savedOwner;
@@ -456,7 +420,7 @@
         return null;
     }
 
-    // 🔐 [관리자 모드 전용 핵심 스크립트 엔진] 🔐
+    // 🔐 관리자 인증 
     function verifyAdminPassword() {
         const pass = document.getElementById("admin-password-input").value;
         if (pass === "Jooyupidiot") {
@@ -468,51 +432,19 @@
         }
     }
 
-    function trackAdminTargetId(inputEl) {
-        const id = inputEl.value.trim().toUpperCase();
-        inputEl.value = id;
-        const viewEl = document.getElementById("admin-current-status-view");
-        const matched = globalData.find(p => p.id === id);
-        if(matched) {
-            viewEl.value = `${matched.status} (${matched.toolType || '규격미상'})`;
+    // 💡 5번 메뉴 상태 변경 시 라인/유닛 활성화 토글 로직
+    function toggleAdminLineUnit(selectEl) {
+        const tr = selectEl.closest('tr');
+        const line = tr.querySelector('.admin-target-line');
+        const unit = tr.querySelector('.admin-target-unit');
+        if (selectEl.value === 'Using') {
+            line.disabled = false;
+            unit.disabled = false;
         } else {
-            viewEl.value = id.length > 5 ? "등록되지 않은 ID 포맷" : "입력 대기 중...";
-        }
-    }
-
-    function toggleAdminUsingFields(status) {
-        const subfields = document.getElementById("admin-using-subfields");
-        subfields.style.display = (status === "Using") ? "block" : "none";
-    }
-
-    async function executeAdminOverride() {
-        const id = document.getElementById("admin-target-id").value.trim().toUpperCase();
-        const nextStatus = document.getElementById("admin-target-status").value;
-        
-        if(!id) { return showToast("대상 Cutter ID를 정확히 입력하세요.", true); }
-        
-        let tempArr = [...globalData];
-        const pIdx = tempArr.findIndex(p => p.id === id);
-        if(pIdx === -1) { return showToast("DB 목록에 없는 공구 ID입니다. 신규 등록은 1번 메뉴를 이용하세요.", true); }
-
-        let logMsg = `[관리자 강제 제어 오버라이드] 상태를 ${nextStatus}로 강제 변경함`;
-        
-        if(nextStatus === "Using") {
-            const line = document.getElementById("admin-target-line").value;
-            const unit = document.getElementById("admin-target-unit").value;
-            logMsg += ` | 라인:${line} | 유닛:${unit} | 강제 데이터 주입 연동`;
-        }
-
-        tempArr[pIdx].status = nextStatus;
-        tempArr[pIdx].lastHistory = logMsg;
-        if(!tempArr[pIdx].historyLog) tempArr[pIdx].historyLog = [];
-        tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
-
-        if(await saveDatabase(tempArr)) {
-            showToast(`⚡ ${id}의 상태가 ${nextStatus}로 강제 오버라이드 완료되었습니다.`);
-            // 입력창 리셋
-            document.getElementById("admin-target-id").value = "";
-            document.getElementById("admin-current-status-view").value = "";
+            line.disabled = true;
+            unit.disabled = true;
+            line.value = '';
+            unit.value = '';
         }
     }
 
@@ -528,7 +460,7 @@
             
             inputEl.value = lines[0].toUpperCase();
             if (menuType === '2') handleEquipIdChange(inputEl);
-            else handleIdInputLive(inputEl, ['3', '4', '7'].includes(menuType));
+            else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
 
             for (let i = 1; i < lines.length; i++) {
                 addGridRow(menuType);
@@ -537,7 +469,7 @@
                 if (nextInput) {
                     nextInput.value = lines[i].toUpperCase();
                     if (menuType === '2') handleEquipIdChange(nextInput);
-                    else handleIdInputLive(nextInput, ['3', '4', '7'].includes(menuType));
+                    else handleIdInputLive(nextInput, ['3', '4', '5', '7'].includes(menuType));
                 }
             }
         });
@@ -573,6 +505,7 @@
                     <span class="info-text"></span>
                 </td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
+                <td><input type="checkbox" class="flip-checkbox" disabled title="하도 전용 면 변경"></td>
                 <td>
                     <div class="datetime-container">
                         <input type="date" class="equip-date-input" value="${localDate}">
@@ -610,6 +543,38 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '4');
+        } else if (menu === '5') { 
+            let lineOptions = "<option value=''>선택 안함</option>";
+            for(let i=1; i<=5; i++) {
+                for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
+            }
+            for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
+
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="상태 자동 조회" style="font-weight:bold;"></td>
+                <td>
+                    <select class="admin-target-status" onchange="toggleAdminLineUnit(this)">
+                        <option value="Storage">Storage (사용대기)</option>
+                        <option value="Using">Using (사용중)</option>
+                        <option value="Waiting">Waiting (연마대기)</option>
+                        <option value="Regrind">Regrind (연마중-출하)</option>
+                        <option value="Disposal">Disposal (폐기)</option>
+                    </select>
+                </td>
+                <td><select class="admin-target-line" disabled>${lineOptions}</select></td>
+                <td>
+                    <select class="admin-target-unit" disabled>
+                        <option value="">선택 안함</option>
+                        <option value="Upper">Upper</option>
+                        <option value="Center">Center</option>
+                        <option value="Final">Final</option>
+                    </select>
+                </td>
+                <td><input type="text" class="admin-comment" placeholder="변경 사유"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5');
         } else if (menu === '7') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="폐기 대상 ID (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
@@ -638,18 +603,21 @@
 
         if (typeInput === "1.2도 상도" && unit !== "Final") {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
-            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2도 상도는 Final 전용입니다.</span>`; return;
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2상도는 Final 전용</span>`; return;
         }
         if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
-            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.8도 상도는 Upper/Center 전용입니다.</span>`; return;
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.8상도는 Upper/Center 전용</span>`; return;
         }
 
         const currentCategory = getToolCategory(typeInput);
         const dbConflict = globalData.find(p => {
             if (p.status !== 'Using' || p.id === idInput) return false;
             const loc = getMountedLocation(p);
-            return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
+            if (loc && loc.line === line && loc.unit === unit) {
+                return getToolCategory(p.toolType || "") === currentCategory;
+            }
+            return false;
         });
 
         let screenConflict = false;
@@ -698,7 +666,8 @@
                 if (matched) {
                     const regridInput = tr.querySelector('.regrid-count-input');
                     if (regridInput) regridInput.value = matched.regridCount || 0;
-                    if (typeInput && inputEl.closest('tbody').id === 'grid-7-body') {
+                    
+                    if (typeInput && (inputEl.closest('tbody').id === 'grid-7-body' || inputEl.closest('tbody').id === 'grid-5-body')) {
                         typeInput.value = `현재 상태: ${matched.status}`;
                     }
                 }
@@ -711,12 +680,19 @@
         inputEl.value = id;
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
+        const flipCb = tr.querySelector('.flip-checkbox');
         const lineSelect = tr.querySelector('.equip-line-select');
         const unitSelect = tr.querySelector('.equip-unit-select');
         const msgSpan = tr.querySelector('.info-text');
 
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
+
+        // 💡 하도(LW)인 경우 Flip 체크박스 활성화
+        if (flipCb) {
+            if (res.type === "LW (하도)") flipCb.disabled = false;
+            else { flipCb.disabled = true; flipCb.checked = false; }
+        }
 
         if (!res.valid) {
             if(id.length >= 21) inputEl.classList.add('invalid-cell');
@@ -754,7 +730,6 @@
         const tbody = document.getElementById(`grid-${menuId}-body`);
         if(tbody) { tbody.innerHTML = ""; addGridRow(menuId); }
         
-        // 5번 메뉴는 보안 구역이므로 폼 입력 초기화 유도
         if(menuId === '5') {
             document.getElementById("admin-password-input").value = "";
             document.getElementById("admin-auth-zone").style.display = "block";
@@ -995,32 +970,45 @@
         }
     }
 
+    // 💡 2번 메뉴: 장착 시 하도 Flip 스왑 처리 및 인터락 로직
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         const currentBatchSet = new Set();
 
         for(let row of rows) {
-            const id = row.querySelector('.tool-id-input').value.trim();
+            const idInputEl = row.querySelector('.tool-id-input');
+            let originalId = idInputEl.value.trim().toUpperCase();
             const typeInput = row.querySelector('.tool-type-input').value; 
             const dateVal = row.querySelector('.equip-date-input').value; 
             const timeVal = row.querySelector('.equip-time-input').value; 
-            if(!id || !dateVal || !timeVal) continue;
             
+            if(!originalId || !dateVal || !timeVal) continue;
+
+            const pIdx = tempArr.findIndex(p => p.id === originalId);
+            if(pIdx === -1) continue;
+
             const line = row.querySelector('.equip-line-select').value;
             const unit = row.querySelector('.equip-unit-select').value;
             const op = row.querySelector('.equip-op-input').value.trim();
             const comment = row.querySelector('.equip-comment-input').value.trim();
+            
+            let newId = originalId;
+            let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
-            const pIdx = tempArr.findIndex(p => p.id === id);
-            if(pIdx === -1) continue;
+            // 💡 Flip 활성화 상태 시 ID 스왑 로직 적용 (Using 액션에 한함)
+            const flipCb = row.querySelector('.flip-checkbox');
+            if (flipCb && flipCb.checked && targetStatus === 'Using') {
+                if (originalId.endsWith('10.0')) newId = originalId.replace('10.0', '20.0');
+                else if (originalId.endsWith('20.0')) newId = originalId.replace('20.0', '10.0');
+            }
 
             if (targetStatus === 'Using') {
                 if (typeInput === "1.2도 상도" && unit !== "Final") {
-                    alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${id} 확인 필요)`); return;
+                    alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${originalId} 확인 필요)`); return;
                 }
                 if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) {
-                    alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${id} 확인 필요)`); return;
+                    alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${originalId} 확인 필요)`); return;
                 }
 
                 const currentCategory = getToolCategory(typeInput);
@@ -1031,8 +1019,10 @@
                 }
                 currentBatchSet.add(locKey);
 
+                // Flip된 ID를 기준으로 중복 검색하면 안 되고, 위치 기준으로 검증
                 const conflictPart = tempArr.find(p => {
-                    if (p.status !== 'Using' || p.id === id) return false;
+                    // 자기 자신이 Flip되어 ID가 변경되는 경우 충돌로 잡히지 않도록 주의 (originalId와 비교)
+                    if (p.status !== 'Using' || p.id === originalId) return false;
                     const loc = getMountedLocation(p);
                     return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
                 });
@@ -1042,15 +1032,20 @@
                 }
             }
 
+            // Flip으로 인해 ID가 변경되었다면 해당 객체의 id 자체를 업데이트
+            if (newId !== originalId) {
+                tempArr[pIdx].id = newId;
+                logMsg = `[면 변경(Flip) 장착] 기존 ID:${originalId} -> ${newId} 변환됨 | ` + logMsg;
+            }
+
             tempArr[pIdx].status = targetStatus;
-            const logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
             updatedCount++;
         }
         
         if(updatedCount > 0 && await saveDatabase(tempArr)) { 
-            showToast(`✅ 총 ${updatedCount}건의 장착/탈거가 처리되었습니다.`); 
+            showToast(`✅ 총 ${updatedCount}건의 장착/탈거 처리가 완료되었습니다.`); 
             switchMenu('0'); 
         }
     }
@@ -1105,9 +1100,47 @@
         }
     }
 
+    // 💡 5번 관리자 전용 일괄 상태 강제 변경 로직 💡
+    async function submitAdminOverride() {
+        const rows = document.querySelectorAll("#grid-5-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+
+        for(let row of rows) {
+            const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            const nextStatus = row.querySelector('.admin-target-status').value;
+            const line = row.querySelector('.admin-target-line').value;
+            const unit = row.querySelector('.admin-target-unit').value;
+            const comment = row.querySelector('.admin-comment').value.trim();
+            
+            if(!id) continue;
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`🚨 DB에 등록되지 않은 ID가 포함되어 있습니다: ${id}`); return; }
+
+            // Using으로 상태 강제 변경 시 장착 위치 필수 검증 인터락
+            if (nextStatus === 'Using' && (!line || !unit)) {
+                alert(`🚨 [오류] ${id}의 상태를 'Using'으로 변경하려면 장착 호기와 Unit을 반드시 선택해야 합니다.`); return;
+            }
+
+            tempArr[pIdx].status = nextStatus;
+            let logMsg = `[최고관리자 강제 오버라이드] 상태를 ${nextStatus}로 변경`;
+            if(nextStatus === 'Using') logMsg += ` | 강제연동 라인:${line} | 유닛:${unit}`;
+            if(comment) logMsg += ` | 변경사유:${comment}`;
+
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
+            updatedCount++;
+        }
+
+        if(updatedCount > 0 && await saveDatabase(tempArr)) {
+            showToast(`✅ 총 ${updatedCount}건의 데이터 상태 강제 변경이 성공적으로 승인되었습니다.`);
+            switchMenu('home');
+        }
+    }
+
     async function submitBulkDisposal() {
         const rows = document.querySelectorAll("#grid-7-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
+        
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
             const comment = row.querySelector('.disposal-comment').value.trim();
@@ -1128,18 +1161,6 @@
                 switchMenu('6'); 
             }
         }
-    }
-
-    function downloadExcel() {
-        if(globalData.length === 0) return;
-        let exportArr = globalData.map(p => ({
-            "Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
-            "누적 연마 횟수": p.regridCount || 0, "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
-        }));
-        const ws = XLSX.utils.json_to_sheet(exportArr);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "MasterDB");
-        XLSX.writeFile(wb, `Cutter_DB_${new Date().toISOString().split('T')[0]}.xlsx`);
     }
 </script>
 
