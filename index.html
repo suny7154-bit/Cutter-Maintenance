@@ -286,7 +286,7 @@
         </div>
 
         <div id="menu-5" class="menu-section" style="display:none;">
-            <h2>🔒 5. 최고 관리자 전용 데이터 상태 제어 센터</h2>
+            <h2>🔒 5. 관리자 모드-강제 상태 변경</h2>
             
             <div id="admin-auth-zone" class="admin-lock-box">
                 <label style="display:block; margin-bottom:10px; font-weight:bold; color:#721c24;">⚠️ 최고 관리자 비밀번호 인증 필요</label>
@@ -295,8 +295,24 @@
             </div>
 
             <div id="admin-panel-zone" class="admin-panel">
+                <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-1. 상태 및 장착 위치 강제 제어</h3>
+                
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                    <div><button class="btn-row-control" onclick="addGridRow('5')">➕ 행 추가</button></div>
+                    <div style="background:#f1f3f5; padding:5px 10px; border-radius:4px; border:1px solid #ced4da; font-size:13px;">
+                        <strong>🛠️ 표 전체 일괄 상태 변경:</strong>
+                        <select id="bulk-admin-status" style="padding:4px; margin:0 5px; border-radius:4px; border:1px solid #ccc; font-size:13px;">
+                            <option value="Storage">Storage (사용대기)</option>
+                            <option value="Using">Using (사용중)</option>
+                            <option value="Waiting">Waiting (연마대기)</option>
+                            <option value="Regrind">Regrind (연마중-출하)</option>
+                            <option value="Disposal">Disposal (폐기)</option>
+                        </select>
+                        <button class="btn-row-control" style="background:#007bff; color:white; border:none; padding:5px 12px; font-weight:bold;" onclick="applyBulkAdminStatus()">한번에 적용</button>
+                    </div>
+                </div>
+
                 <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 상태를 Using으로 변경 시 장착 호기와 Unit을 필수로 선택해야 합니다.</p>
-                <div><button class="btn-row-control" onclick="addGridRow('5')">➕ 행 추가</button></div>
                 <table class="grid-table">
                     <thead>
                         <tr>
@@ -312,6 +328,24 @@
                     <tbody id="grid-5-body"></tbody>
                 </table>
                 <button class="action-btn" style="background:#212529; width:100%; margin-top:10px;" onclick="submitAdminOverride()">⚡ 마스터 데이터 일괄 강제 변경 승인</button>
+                
+                <h3 style="margin-top:40px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-2. 커터 ID 일괄 변경 (Rename)</h3>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 오기입된 커터 ID를 새로운 ID로 덮어씌웁니다. 기존 이력과 수명 정보는 모두 안전하게 승계됩니다.</p>
+                <div><button class="btn-row-control" onclick="addGridRow('5_rename')">➕ 행 추가</button></div>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">기존 Tool ID (Ctrl+V)</th>
+                            <th style="width: 20%;">현재 상태 조회</th>
+                            <th style="width: 15%;">장착 호기</th>
+                            <th style="width: 15%;">장착 Unit</th>
+                            <th style="width: 20%;">신규 Tool ID 입력</th>
+                            <th style="width: 5%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-rename-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#28a745; width:100%; margin-top:10px;" onclick="submitAdminRename()">⚡ 마스터 ID 일괄 변경 승인</button>
                 
                 <br><br><br>
                 <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 백업 출력</h3>
@@ -501,6 +535,23 @@
         }
     }
 
+    function applyBulkAdminStatus() {
+        const targetStatus = document.getElementById("bulk-admin-status").value;
+        const rows = document.querySelectorAll("#grid-5-body tr");
+        if(rows.length === 0) {
+            showToast("변경할 행이 없습니다.", true);
+            return;
+        }
+        rows.forEach(row => {
+            const selectEl = row.querySelector('.admin-target-status');
+            if(selectEl) {
+                selectEl.value = targetStatus;
+                toggleAdminLineUnit(selectEl);
+            }
+        });
+        showToast(`표 전체 행의 목표 상태가 [${targetStatus}]로 일괄 변경되었습니다.`);
+    }
+
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -512,7 +563,9 @@
             const tbody = tr.parentNode;
             
             inputEl.value = lines[0].toUpperCase();
+            
             if (menuType === '2') handleEquipIdChange(inputEl);
+            else if (menuType === '5_rename') handleIdRenameLive(inputEl);
             else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
 
             for (let i = 1; i < lines.length; i++) {
@@ -522,6 +575,7 @@
                 if (nextInput) {
                     nextInput.value = lines[i].toUpperCase();
                     if (menuType === '2') handleEquipIdChange(nextInput);
+                    else if (menuType === '5_rename') handleIdRenameLive(nextInput);
                     else handleIdInputLive(nextInput, ['3', '4', '5', '7'].includes(menuType));
                 }
             }
@@ -628,6 +682,16 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5');
+        } else if (menu === '5_rename') { 
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="기존 ID 입력 (Ctrl+V)" oninput="handleIdRenameLive(this)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="상태 조회" style="font-weight:bold;"></td>
+                <td><input type="text" class="equip-line-view" readonly placeholder="-"></td>
+                <td><input type="text" class="equip-unit-view" readonly placeholder="-"></td>
+                <td><input type="text" class="new-tool-id-input" placeholder="신규 ID 입력"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_rename');
         } else if (menu === '7') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="폐기 대상 ID (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
@@ -752,6 +816,60 @@
         }
     }
 
+    function handleIdRenameLive(inputEl) {
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        
+        if (id.endsWith("20.0")) {
+            id = id.replace("20.0", "10.0");
+            inputEl.value = id;
+        } else {
+            inputEl.value = id;
+        }
+
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.querySelector('.tool-type-input');
+        const lineView = tr.querySelector('.equip-line-view');
+        const unitView = tr.querySelector('.equip-unit-view');
+
+        if (id.length === 0) {
+            inputEl.classList.remove('invalid-cell');
+            if (typeInput) typeInput.value = "";
+            if (lineView) lineView.value = "";
+            if (unitView) unitView.value = "";
+            return;
+        }
+
+        const matched = globalData.find(p => p.id === id);
+        
+        if (matched) {
+            inputEl.classList.remove('invalid-cell');
+            if (typeInput) {
+                let statusTxt = matched.status;
+                if(matched.status === 'Using' && matched.currentSide === "20.0") statusTxt += " (20.0면)";
+                typeInput.value = statusTxt;
+            }
+
+            if (matched.status === 'Using') {
+                const loc = getMountedLocation(matched);
+                if (loc) {
+                    if(lineView) lineView.value = loc.line;
+                    if(unitView) unitView.value = loc.unit;
+                }
+            } else {
+                if(lineView) lineView.value = "-";
+                if(unitView) unitView.value = "-";
+            }
+        } else {
+            if (id.length >= 21) inputEl.classList.add('invalid-cell');
+            else inputEl.classList.remove('invalid-cell');
+            
+            if (typeInput) typeInput.value = "미등록 ID";
+            if (lineView) lineView.value = "-";
+            if (unitView) unitView.value = "-";
+        }
+    }
+
     function handleEquipIdChange(inputEl) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -833,6 +951,9 @@
         if(tbody) { tbody.innerHTML = ""; addGridRow(menuId); }
         
         if(menuId === '5') {
+            const tbodyRename = document.getElementById(`grid-5-rename-body`);
+            if(tbodyRename) { tbodyRename.innerHTML = ""; addGridRow('5_rename'); }
+
             document.getElementById("admin-password-input").value = "";
             document.getElementById("admin-auth-zone").style.display = "block";
             document.getElementById("admin-panel-zone").style.display = "none";
@@ -909,7 +1030,6 @@
         h2 += `<tr class="grand-total"><td>합계</td><td>${t2Tot.st}</td><td>${t2Tot.us}</td><td>${t2Tot.wt}</td><td>${t2Tot.rg}</td><td>${t2Tot.dp}</td><td>${t2Tot.grand}</td></tr>`;
         document.getElementById("home-status-tbody").innerHTML = h2;
 
-        // 💡 집계 후 예측 시스템 연산 트리거
         runPrediction();
     }
 
@@ -1279,7 +1399,7 @@
             }
 
             tempArr[pIdx].status = nextStatus;
-            let logMsg = `[최고관리자 강제 오버라이드] 상태를 ${nextStatus}로 변경`;
+            let logMsg = `[최고관리자 강제 제어] 상태를 ${nextStatus}로 변경`;
             if(nextStatus === 'Using') logMsg += ` | 강제연동 라인:${line} | 유닛:${unit}`;
             if(comment) logMsg += ` | 변경사유:${comment}`;
 
@@ -1290,6 +1410,47 @@
 
         if(updatedCount > 0 && await saveDatabase(tempArr)) {
             showToast(`✅ 총 ${updatedCount}건의 데이터 상태 강제 변경이 성공적으로 승인되었습니다.`);
+            switchMenu('home');
+        }
+    }
+
+    async function submitAdminRename() {
+        const rows = document.querySelectorAll("#grid-5-rename-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+
+        for(let row of rows) {
+            let oldId = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let newId = row.querySelector('.new-tool-id-input').value.trim().toUpperCase();
+            
+            if(!oldId || !newId) continue;
+            
+            if (oldId.endsWith("20.0")) oldId = oldId.replace("20.0", "10.0");
+            if (newId.endsWith("20.0")) newId = newId.replace("20.0", "10.0");
+
+            const pIdx = tempArr.findIndex(p => p.id === oldId);
+            if(pIdx === -1) { alert(`🚨 DB에 등록되지 않은 기존 ID입니다: ${oldId}`); return; }
+
+            if(oldId === newId) continue;
+
+            const vRes = parseAndValidateToolId(newId);
+            if(!vRes.valid) { alert(`🚨 신규 ID 형식이 올바르지 않습니다: ${newId}`); return; }
+
+            const duplicate = tempArr.find(p => p.id === newId);
+            if(duplicate) { alert(`🚨 신규 ID가 이미 DB에 존재합니다: ${newId}`); return; }
+
+            tempArr[pIdx].id = newId;
+            tempArr[pIdx].toolType = vRes.type;
+            tempArr[pIdx].maker = getResolvedMaker(newId, tempArr[pIdx].maker);
+            
+            const logMsg = `[최고관리자 강제 제어] 커터 ID 일괄 변경 (기존: ${oldId} -> 신규: ${newId})`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: tempArr[pIdx].status, log: logMsg });
+            
+            updatedCount++;
+        }
+
+        if(updatedCount > 0 && await saveDatabase(tempArr)) {
+            showToast(`✅ 총 ${updatedCount}건의 커터 ID가 성공적으로 변경(Rename)되었습니다.`);
             switchMenu('home');
         }
     }
@@ -1336,17 +1497,14 @@
         XLSX.writeFile(wb, `Cutter_DB_${new Date().toISOString().split('T')[0]}.xlsx`);
     }
 
-    // 💡 Shortage 예측 시스템 함수
     function runPrediction() {
         if (globalData.length === 0) return;
 
-        // Disposal 상태를 제외한 유효 커터 필터링
         const activeCutters = globalData.filter(p => p.status !== 'Disposal');
         const totalCount = activeCutters.length;
         
         document.getElementById('sim-current-total').innerText = totalCount;
 
-        // 30개 미만일 시 인터락 (비활성화)
         if (totalCount < 30) {
             document.getElementById('sim-panel-content').style.display = 'none';
             document.getElementById('sim-panel-warning').style.display = 'block';
@@ -1359,7 +1517,7 @@
         const machines = parseFloat(document.getElementById("sim-machines").value) || 3;
         const regrindCycle = parseFloat(document.getElementById("sim-regrind-cycle").value) || 1;
         const leadTime = parseFloat(document.getElementById("sim-lead-time").value) || 1;
-        const replaceRate = 1; // 1주 1회 교체 가정
+        const replaceRate = 1;
 
         const weeklyConsumption = {
             "1.8도 상도": (2 * replaceRate) * machines,
