@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚙️ 부품 생애주기 시스템 (관리자 다중 제어 & Flip 기능 적용)</title>
+    <title>⚙️ 부품 생애주기 시스템 (연마 가능 잔여 횟수 패러다임 전환)</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
@@ -222,12 +222,13 @@
 
         <div id="menu-4" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
+            <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 [연마 가능 횟수 (잔여)]를 최신으로 갱신해 주십시오.</p>
             <div><button class="btn-row-control" onclick="addGridRow('4')">➕ 행 추가</button></div>
             <table class="grid-table">
                 <thead>
                     <tr>
                         <th style="width: 35%;">Tool ID</th>
-                        <th style="width: 20%;">누적 연마 횟수 입력</th>
+                        <th style="width: 20%;">연마 가능 횟수 (잔여)</th>
                         <th style="width: 20%;">검수자</th>
                         <th style="width: 15%;">입고 상태 비고</th>
                         <th style="width: 10%;">삭제</th>
@@ -248,7 +249,7 @@
             </div>
 
             <div id="admin-panel-zone" class="admin-panel">
-                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 신규 ID 생성은 불가하며, 상태를 Using으로 변경 시 장착 호기와 Unit을 필수로 선택해야 합니다.</p>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 상태를 Using으로 변경 시 장착 호기와 Unit을 필수로 선택해야 합니다.</p>
                 <div><button class="btn-row-control" onclick="addGridRow('5')">➕ 행 추가</button></div>
                 <table class="grid-table">
                     <thead>
@@ -283,7 +284,7 @@
                                 <th style="width:20%;">타입</th>
                                 <th style="width:15%;">제작사</th>
                                 <th style="width:25%;">상태 (Color)</th>
-                                <th style="width:15%;">연마수</th>
+                                <th style="width:15%;">연마 가능 (잔여)</th>
                             </tr>
                         </thead>
                         <tbody id="master-list-tbody"></tbody>
@@ -432,7 +433,6 @@
         }
     }
 
-    // 💡 5번 메뉴 상태 변경 시 라인/유닛 활성화 토글 로직
     function toggleAdminLineUnit(selectEl) {
         const tr = selectEl.closest('tr');
         const line = tr.querySelector('.admin-target-line');
@@ -535,9 +535,10 @@
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '3');
         } else if (menu === '4') { 
+            // 💡 메뉴 4 (연마 입고): 잔여 연마 가능 횟수 입력으로 변경
             tr.innerHTML = `
-                <td><input type="text" class="tool-id-input" placeholder="ID 입력" oninput="handleIdInputLive(this, true)"></td>
-                <td><input type="number" class="regrid-count-input" value="0" min="0"></td>
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수"></td>
                 <td><input type="text" class="ship-in-op" placeholder="검수자"></td>
                 <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
@@ -598,6 +599,7 @@
         const msgSpan = tr.querySelector('.info-text');
         
         if(!idInput || !typeInput) return; 
+
         const matchedPart = globalData.find(p => p.id === idInput);
         if (matchedPart && matchedPart.status === 'Using') return;
 
@@ -664,8 +666,11 @@
             if (isTriggerMatch && res.valid) {
                 const matched = globalData.find(p => p.id === id);
                 if (matched) {
-                    const regridInput = tr.querySelector('.regrid-count-input');
-                    if (regridInput) regridInput.value = matched.regridCount || 0;
+                    // 💡 연마 가능 잔여 횟수 매핑 (기존 호환성 보장)
+                    const regrindInput = tr.querySelector('.regrind-available-input');
+                    if (regrindInput) {
+                        regrindInput.value = matched.regrindAvailable !== undefined ? matched.regrindAvailable : (matched.regridCount || 0);
+                    }
                     
                     if (typeInput && (inputEl.closest('tbody').id === 'grid-7-body' || inputEl.closest('tbody').id === 'grid-5-body')) {
                         typeInput.value = `현재 상태: ${matched.status}`;
@@ -688,7 +693,6 @@
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
 
-        // 💡 하도(LW)인 경우 Flip 체크박스 활성화
         if (flipCb) {
             if (res.type === "LW (하도)") flipCb.disabled = false;
             else { flipCb.disabled = true; flipCb.checked = false; }
@@ -861,12 +865,15 @@
             else if(lowStat === 'disposal') sClass = 'status-disposal';
             else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
 
+            // 💡 메뉴 6 표출: 연마 가능 잔여 횟수 매핑
+            const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+
             tr.innerHTML = `
                 <td style="font-weight:bold; color:#0056b3;">${p.id}</td>
                 <td>${v.type}</td>
                 <td>${p.maker || '미분류'}</td>
                 <td><span class="status-badge ${sClass}">${p.status}</span></td>
-                <td style="font-weight:bold;">${p.regridCount || 0}회</td>
+                <td style="font-weight:bold;">${remainCount}회</td>
             `;
             tbody.appendChild(tr);
         });
@@ -961,7 +968,8 @@
             const vRes = parseAndValidateToolId(id);
             if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
 
-            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", regridCount: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
+            // 💡 신규 등록 시 연마 가능 잔여 횟수를 기본 0으로 세팅 (regrindAvailable)
+            tempArr.push({ id, toolType: vRes.type, maker, status: "Storage", regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { 
@@ -970,7 +978,6 @@
         }
     }
 
-    // 💡 2번 메뉴: 장착 시 하도 Flip 스왑 처리 및 인터락 로직
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -996,7 +1003,6 @@
             let newId = originalId;
             let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
-            // 💡 Flip 활성화 상태 시 ID 스왑 로직 적용 (Using 액션에 한함)
             const flipCb = row.querySelector('.flip-checkbox');
             if (flipCb && flipCb.checked && targetStatus === 'Using') {
                 if (originalId.endsWith('10.0')) newId = originalId.replace('10.0', '20.0');
@@ -1019,9 +1025,7 @@
                 }
                 currentBatchSet.add(locKey);
 
-                // Flip된 ID를 기준으로 중복 검색하면 안 되고, 위치 기준으로 검증
                 const conflictPart = tempArr.find(p => {
-                    // 자기 자신이 Flip되어 ID가 변경되는 경우 충돌로 잡히지 않도록 주의 (originalId와 비교)
                     if (p.status !== 'Using' || p.id === originalId) return false;
                     const loc = getMountedLocation(p);
                     return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
@@ -1032,7 +1036,6 @@
                 }
             }
 
-            // Flip으로 인해 ID가 변경되었다면 해당 객체의 id 자체를 업데이트
             if (newId !== originalId) {
                 tempArr[pIdx].id = newId;
                 logMsg = `[면 변경(Flip) 장착] 기존 ID:${originalId} -> ${newId} 변환됨 | ` + logMsg;
@@ -1074,12 +1077,13 @@
         }
     }
 
+    // 💡 연마 입고 시 잔여 가능 횟수 매핑
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll("#grid-4-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         for(let row of rows) {
             const id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
-            const regridCount = parseInt(row.querySelector('.regrid-count-input').value) || 0;
+            const regrindAvailable = parseInt(row.querySelector('.regrind-available-input').value) || 0;
             const inspector = row.querySelector('.ship-in-op').value.trim();
             const comment = row.querySelector('.ship-in-comment').value.trim();
             if(!id) continue;
@@ -1088,8 +1092,10 @@
             if(pIdx === -1) { alert(`미등록 부품: ${id}`); return; }
 
             tempArr[pIdx].status = "Storage";
-            tempArr[pIdx].regridCount = regridCount;
-            const logMsg = `[연마입고] 검수자:${inspector} | 연마수:${regridCount}회 | 비고:${comment}`;
+            tempArr[pIdx].regrindAvailable = regrindAvailable;
+            
+            // 이력 텍스트 변경
+            const logMsg = `[연마입고] 검수자:${inspector} | 연마가능잔여:${regrindAvailable}회 | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: "Storage", log: logMsg });
             updatedCount++;
@@ -1100,7 +1106,6 @@
         }
     }
 
-    // 💡 5번 관리자 전용 일괄 상태 강제 변경 로직 💡
     async function submitAdminOverride() {
         const rows = document.querySelectorAll("#grid-5-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1116,7 +1121,6 @@
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) { alert(`🚨 DB에 등록되지 않은 ID가 포함되어 있습니다: ${id}`); return; }
 
-            // Using으로 상태 강제 변경 시 장착 위치 필수 검증 인터락
             if (nextStatus === 'Using' && (!line || !unit)) {
                 alert(`🚨 [오류] ${id}의 상태를 'Using'으로 변경하려면 장착 호기와 Unit을 반드시 선택해야 합니다.`); return;
             }
@@ -1161,6 +1165,19 @@
                 switchMenu('6'); 
             }
         }
+    }
+
+    function downloadExcel() {
+        if(globalData.length === 0) return;
+        let exportArr = globalData.map(p => ({
+            "Tool ID": p.id, "Tool Type": p.toolType, "제작사": p.maker, "현재 상태": p.status,
+            "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
+            "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
+        }));
+        const ws = XLSX.utils.json_to_sheet(exportArr);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "MasterDB");
+        XLSX.writeFile(wb, `Cutter_DB_${new Date().toISOString().split('T')[0]}.xlsx`);
     }
 </script>
 
