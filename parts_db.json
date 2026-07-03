@@ -6037,5 +6037,175 @@
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
       }
     ]
+  },
+  {
+    "id": "WCAJHY0040FL717X000",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0040FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0005FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0049FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0058FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0067FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0013FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0022FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY0032FL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
+  },
+  {
+    "id": "WCAJHY0006CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": null,
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "관리자 강제 예외 등록",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-03T23:49:34.978Z",
+        "status": "Storage",
+        "log": "관리자 예외 승인 등록"
+      }
+    ]
   }
 ]
