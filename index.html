@@ -355,6 +355,13 @@
 
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
+            
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6;">
+                <span style="font-size: 16px;">🔍 검색:</span>
+                <input type="text" id="search-input-6" placeholder="Tool ID, 타입, 상태, 제조사 검색..." style="width: 300px; padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;" oninput="renderMenu6List(this.value)">
+                <span style="font-size: 12px; color: #6c757d;">※ 입력 시 목록이 즉시 필터링됩니다.</span>
+            </div>
+
             <div class="log-split-container">
                 <div class="log-list-side">
                     <table class="grid-table" style="margin-bottom:0; border:none;">
@@ -404,8 +411,21 @@
     let isSaving = false;
     const DB_FILE = "parts_db.json";
 
-    function utf8_to_b64(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
-    function b64_to_utf8(str) { return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0))); }
+    // 💡 메모리 과부하 방지용 네이티브 Base64 인코딩 (비동기)
+    function utf8_to_b64(str) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(new Blob([str], { type: "application/json" }));
+        });
+    }
+
+    // 💡 네이티브 Base64 디코딩 (비동기)
+    async function b64_to_utf8(b64) {
+        const res = await fetch(`data:application/json;base64,${b64.replace(/\s/g, '')}`);
+        return await res.text();
+    }
 
     function showToast(message, isError = false) {
         const toast = document.getElementById("toast-msg");
@@ -959,7 +979,13 @@
             document.getElementById("admin-panel-zone").style.display = "none";
         }
         
-        if(['home', '0', '6'].includes(menuId)) fetchDatabase();
+        if(['home', '0', '6'].includes(menuId)) {
+            if(menuId === '6') {
+                const searchInput = document.getElementById("search-input-6");
+                if (searchInput) searchInput.value = "";
+            }
+            fetchDatabase();
+        }
     }
 
     async function fetchDatabase() {
@@ -972,7 +998,14 @@
             if (res.status === 200) {
                 const json = await res.json();
                 dbSha = json.sha;
-                globalData = JSON.parse(b64_to_utf8(json.content));
+                
+                try {
+                    const content = await b64_to_utf8(json.content);
+                    globalData = JSON.parse(content);
+                } catch(err) {
+                    showToast("❌ 데이터 디코딩 중 오류가 발생했습니다.", true);
+                    return;
+                }
                 
                 calculateHomeTables();
                 renderMatrixBoard();
@@ -1077,13 +1110,22 @@
         matrixBody.innerHTML = htmlStr;
     }
 
-    function renderMenu6List() {
+    function renderMenu6List(searchTerm = "") {
         const tbody = document.getElementById("master-list-tbody");
         if(!tbody) return;
         tbody.innerHTML = "";
 
+        const term = searchTerm.trim().toLowerCase();
+
         globalData.forEach(p => {
             const v = parseAndValidateToolId(p.id);
+            const rMaker = getResolvedMaker(p.id, p.maker);
+            
+            if (term) {
+                const searchableText = `${p.id} ${v.type} ${rMaker} ${p.status}`.toLowerCase();
+                if (!searchableText.includes(term)) return; 
+            }
+
             const tr = document.createElement("tr");
             tr.className = "list-row";
             tr.onclick = () => showToolLog6(p.id, tr);
@@ -1106,8 +1148,6 @@
                 const used = p.usedSides || [];
                 if (used.length > 0) usedInfo = `<br><span style="color:#888; font-size:10px;">(사용된 면: ${used.join(", ")})</span>`;
             }
-
-            let rMaker = getResolvedMaker(p.id, p.maker);
 
             tr.innerHTML = `
                 <td style="font-weight:bold; color:#0056b3;">${displayId} ${usedInfo}</td>
@@ -1172,11 +1212,14 @@
         showLoading(true, "⏳ GitHub에 데이터 저장 중...");
 
         try {
+            const jsonString = JSON.stringify(newData, null, 2);
+            const base64Content = await utf8_to_b64(jsonString);
+
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
             const saveRes = await fetch(dbUrl, { 
                 method: "PUT", 
                 headers: { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" },
-                body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: utf8_to_b64(JSON.stringify(newData, null, 2)), sha: dbSha }) 
+                body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: base64Content, sha: dbSha }) 
             });
             
             if(saveRes.status === 200 || saveRes.status === 201) {
@@ -1195,7 +1238,10 @@
             } else {
                 showToast("❌ 서버 저장에 실패했습니다.", true);
             }
-        } catch (e) { showToast("❌ 통신 오류가 발생했습니다.", true); }
+        } catch (e) { 
+            console.error(e);
+            showToast(`❌ 오류: ${e.message || "통신 오류가 발생했습니다."}`, true); 
+        }
         isSaving = false;
         showLoading(false); 
         return false;
@@ -1588,7 +1634,7 @@
                     <div class="stat-row"><span>파이프라인 필수 보유량</span><strong>${requiredPhysicalStock} 개 (최소)</strong></div>
                     <div class="stat-row"><span>전체 잔여 사용 한도</span><strong>${st.totalUses} 회(면)</strong></div>
                     <div class="stat-row"><span>주당 예상 소모량</span><strong>${consumption.toFixed(1)} 회(면) / 주</strong></div>
-                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">예상 완전 폐기 시점 (Absolute Shortage)</div>
+                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">예상 shortage 시점 (Estimated Shortage)</div>
                     <div class="life-expectancy">${totalWeeksLeft} 주 <span style="font-size:16px;">(약 ${yearsLeft}년)</span></div>
                     <div style="margin-top:10px; background:#f8f9fa; padding:10px; border-radius:4px; font-size:13px;">${statusMessage}</div>
                 </div>
