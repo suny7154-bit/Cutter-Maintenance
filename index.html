@@ -123,7 +123,7 @@
         <button class="menu-btn" onclick="switchMenu('5')" style="border-left: 4px solid #dc3545; font-weight: bold; color:#dc3545;">🔒 5. 관리자 모드-강제 상태 변경</button>
         <button class="menu-btn" onclick="switchMenu('6')">📜 6. 전체 커터 세부 리스트</button>
         <button class="menu-btn" onclick="switchMenu('7')" style="border-left: 4px solid #212529;">🗑️ 7. 폐기 등록 (Disposal)</button>
-        <button class="menu-btn" onclick="switchMenu('8')" style="border-left: 4px solid #28a745; margin-top:15px;">📅 8. 기간별 장착/탈거 보고서</button>
+        <button class="menu-btn" onclick="switchMenu('8')" style="border-left: 4px solid #28a745; margin-top:15px;">📅 8. 전체 장착/탈거 이력 보고서</button>
     </div>
 
     <div class="main-content">
@@ -227,8 +227,11 @@
 
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. 🔍이력 버튼을 누르면 해당 커터의 기록을 바로 확인합니다.</p>
-            <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
+                <button class="action-btn" style="background:#28a745; padding:6px 12px; font-size:13px; margin:0;" onclick="switchMenu('8')">📅 공장 전체 장착/탈거 이력 조회</button>
+            </div>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold; margin-top:5px;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. Using 중인 하도는 Flip하여 반대 면으로 재장착 가능합니다.</p>
             <table class="grid-table">
                 <thead>
                     <tr>
@@ -288,9 +291,9 @@
             <table class="grid-table">
                 <thead>
                     <tr>
-                        <th style="width: 35%;">Tool ID</th>
+                        <th style="width: 40%;">Tool ID (Ctrl+V)</th>
                         <th style="width: 20%;">입고 일자</th>
-                        <th style="width: 20%;">연마 가능 횟수 (잔여)</th>
+                        <th style="width: 15%;">연마 가능 횟수 (잔여)</th>
                         <th style="width: 15%;">입고 상태 비고</th>
                         <th style="width: 10%;">삭제</th>
                     </tr>
@@ -431,7 +434,7 @@
         </div>
 
         <div id="menu-8" class="menu-section" style="display:none;">
-            <h2>📅 8. 기간별 장착/탈거 이력 보고서</h2>
+            <h2>📅 8. 전체 장착/탈거 이력 보고서</h2>
             <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
                 <strong>조회 기간:</strong>
                 <input type="date" id="report-start-date" style="padding:6px; border-radius:4px; border:1px solid #ccc;">
@@ -508,7 +511,6 @@
         if(d3) d3.value = todayStr;
         if(d4) d4.value = todayStr;
 
-        // 8번 메뉴 보고서 날짜 기본값 세팅 (최근 1주일)
         const reportStart = document.getElementById("report-start-date");
         const reportEnd = document.getElementById("report-end-date");
         if (reportStart && reportEnd) {
@@ -657,6 +659,32 @@
         showToast(`표 전체 행의 입고 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
     }
 
+    // 💡 숫자형(연마 가능 횟수) 전용 다중 붙여넣기 로직
+    function setupNumberPasteInterceptor(inputEl) {
+        inputEl.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+            const lines = clipboardData.split(/\r?\n/).map(line => line.trim()).filter(line => line !== '');
+            if (lines.length === 0) return;
+
+            let currentRow = inputEl.closest('tr');
+            let tbody = currentRow.parentNode;
+
+            inputEl.value = lines[0];
+
+            for (let i = 1; i < lines.length; i++) {
+                let nextRow = currentRow.nextElementSibling;
+                if (!nextRow) {
+                    addGridRow('4');
+                    nextRow = tbody.lastChild;
+                }
+                const nextInput = nextRow.querySelector('.regrind-available-input');
+                if (nextInput) nextInput.value = lines[i];
+                currentRow = nextRow;
+            }
+        });
+    }
+
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -707,11 +735,14 @@
             const now = new Date();
             const localDate = now.toISOString().split('T')[0];
             const localHour = String(now.getHours()).padStart(2, '0') + ":00";
+            
             let lineOptions = "";
             for(let i=1; i<=5; i++) {
                 for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
             }
             for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
+            lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
+            lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
 
             tr.innerHTML = `
                 <td>
@@ -757,17 +788,21 @@
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="date" class="ship-in-date" value="${bulkDate4 || todayStr}"></td>
-                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수"></td>
+                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V)"></td>
                 <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '4');
+            // 💡 숫자 복사 붙여넣기 이벤트 바인딩
+            setupNumberPasteInterceptor(tr.querySelector('.regrind-available-input'));
         } else if (menu === '5') { 
             let lineOptions = "<option value=''>선택 안함</option>";
             for(let i=1; i<=5; i++) {
                 for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; }
             }
             for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
+            lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
+            lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
@@ -805,7 +840,6 @@
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_rename');
         } else if (menu === '5_forcereg') { 
-            // 💡 5-3번 메뉴: 강제 예외 등록
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="예외 ID 입력 (Ctrl+V)" oninput="this.value=this.value.trim().toUpperCase()"></td>
                 <td>
@@ -832,7 +866,6 @@
         tbody.appendChild(tr);
     }
 
-    // 💡 2번 메뉴 내 🔍 이력 버튼 기능 (6번 메뉴로 자동 점프 및 검색)
     function goToHistory(btn) {
         const tr = btn.closest('tr');
         let id = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
@@ -858,9 +891,27 @@
         const lineEl = tr.querySelector('.equip-line-select');
         const unitEl = tr.querySelector('.equip-unit-select');
         const line = lineEl.value;
-        const unit = unitEl.value;
         const msgSpan = tr.querySelector('.info-text');
-        
+
+        if (line.startsWith("H/C")) {
+            let hasUpper = false;
+            for(let opt of unitEl.options) { if(opt.value === 'Upper') hasUpper = true; }
+            if(hasUpper) {
+                const currentVal = unitEl.value;
+                unitEl.innerHTML = `<option value="Center">Center</option><option value="Final">Final</option>`;
+                if (currentVal !== 'Upper') unitEl.value = currentVal;
+            }
+        } else {
+            let hasUpper = false;
+            for(let opt of unitEl.options) { if(opt.value === 'Upper') hasUpper = true; }
+            if(!hasUpper) {
+                const currentVal = unitEl.value;
+                unitEl.innerHTML = `<option value="Upper">Upper</option><option value="Center">Center</option><option value="Final">Final</option>`;
+                unitEl.value = currentVal;
+            }
+        }
+
+        const unit = unitEl.value;
         if(!idInput || !typeInput) return; 
 
         let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
@@ -1204,6 +1255,8 @@
             for(let j=1; j<=3; j++) { totalLines.push(`${i}-${j}`); }
         }
         for(let j=1; j<=4; j++) { totalLines.push(`6-${j}`); }
+        totalLines.push("H/C 1");
+        totalLines.push("H/C 2");
 
         let boardMapping = {};
         totalLines.forEach(line => {
@@ -1225,7 +1278,7 @@
 
         let htmlStr = "";
         totalLines.forEach(line => {
-            const upStr = boardMapping[line].Upper.length > 0 ? boardMapping[line].Upper.join("") : "<span class='empty-tool'>-</span>";
+            const upStr = boardMapping[line].Upper.length > 0 ? boardMapping[line].Upper.join("") : (line.startsWith("H/C") ? "<span class='empty-tool' style='color:#ccc;'>N/A</span>" : "<span class='empty-tool'>-</span>");
             const ctStr = boardMapping[line].Center.length > 0 ? boardMapping[line].Center.join("") : "<span class='empty-tool'>-</span>";
             const fnStr = boardMapping[line].Final.length > 0 ? boardMapping[line].Final.join("") : "<span class='empty-tool'>-</span>";
 
@@ -1329,7 +1382,6 @@
         logContainer.innerHTML = html;
     }
 
-    // 💡 8번 메뉴 보고서 생성 로직
     function generateEquipReport() {
         const startStr = document.getElementById("report-start-date").value;
         const endStr = document.getElementById("report-end-date").value;
@@ -1350,7 +1402,6 @@
                 p.historyLog.forEach(logObj => {
                     const logTime = new Date(logObj.timestamp);
                     if (logTime >= startDate && logTime <= endDate) {
-                        // 장착 또는 탈거 이력만 추출
                         if (logObj.log.includes("[장착]") || logObj.log.includes("[탈거]")) {
                             
                             let actionType = logObj.log.includes("[탈거]") ? "탈거" : "장착";
@@ -1538,7 +1589,7 @@
                 const locKey = `${line}|${unit}|${currentCategory}`; 
                 
                 if (currentBatchSet.has(locKey)) {
-                    alert(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에 장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`); return; 
+                    alert(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`); return; 
                 }
                 currentBatchSet.add(locKey);
 
@@ -1713,7 +1764,6 @@
         }
     }
 
-    // 💡 5-3 메뉴 예외 등록 로직
     async function submitAdminForceReg() {
         const rows = document.querySelectorAll("#grid-5-forcereg-body tr");
         let tempArr = [...globalData]; let addedCount = 0;
