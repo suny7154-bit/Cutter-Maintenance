@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -128,6 +127,7 @@
     </div>
 
     <div class="main-content">
+        <!-- Home -->
         <div id="menu-home" class="menu-section">
             <h2>📊 현재 재고 현황 (Home)</h2>
             <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량</h3>
@@ -163,6 +163,7 @@
 
             <hr style="margin: 40px 0; border: 1px solid #dee2e6;">
 
+            <!-- Shortage 예측 시스템 섹션 -->
             <h2>📈 커터 재고 및 연마 잔존량 기반 Shortage 예측</h2>
             
             <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
@@ -188,10 +189,12 @@
                 
                 <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">📊 타입별 Shortage 분석 결과</h3>
                 <div class="result-grid" id="prediction-cards">
-                    </div>
+                    <!-- 예측 카드가 동적으로 렌더링 됩니다 -->
+                </div>
             </div>
         </div>
 
+        <!-- 0. 호기별 장착 ID -->
         <div id="menu-0" class="menu-section" style="display:none;">
             <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
             <p style="font-size:13px; color:#666;">※ Flip으로 20.0면을 사용 중인 경우 마스터 ID 옆에 (20.0면)으로 통합 표시됩니다.</p>
@@ -208,6 +211,7 @@
             </table>
         </div>
 
+        <!-- 1. 신규 부품 등록 -->
         <div id="menu-1" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
             <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 20.0 스캔 시 10.0 통합 생성. 백의 자리가 9번대(X9XX)인 공구는 UC1으로 자동 분류됩니다.</p>
@@ -226,6 +230,7 @@
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkRegister()">🚀 신규 부품 일괄 등록 실행</button>
         </div>
 
+        <!-- 2. 장비 장착/탈거 -->
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
@@ -253,6 +258,7 @@
             <button class="action-btn" style="background:#fd7e14; color:#fff;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
 
+        <!-- 3. 연마 출하 관리 -->
         <div id="menu-3" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
@@ -278,6 +284,7 @@
             <button class="action-btn" style="background:#dc3545;" onclick="submitBulkShipment('Regrind')">🚛 외주 연마 일괄 출하 처리 (Regrind)</button>
         </div>
 
+        <!-- 4. 연마 입고 관리 -->
         <div id="menu-4" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
             <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 사용 이력 면(10.0/20.0)이 초기화되며 [연마 가능 횟수]를 갱신합니다.</p>
@@ -304,6 +311,7 @@
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkShipIn()">📥 가공 창고 입고 승인</button>
         </div>
 
+        <!-- 5. 관리자 제어 센터 -->
         <div id="menu-5" class="menu-section" style="display:none;">
             <h2>🔒 5. 관리자 모드-강제 상태 변경 및 예외 등록</h2>
             
@@ -386,6 +394,7 @@
             </div>
         </div>
 
+        <!-- 6. 전체 커터 세부 리스트 (검색 탑재) -->
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
             <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6;">
@@ -417,6 +426,7 @@
             </div>
         </div>
 
+        <!-- 7. 폐기 등록 -->
         <div id="menu-7" class="menu-section" style="display:none;">
             <h2>🗑️ 7. 고품 폐기 일괄 등록 (상태 → Disposal)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('7')">➕ 행 추가</button></div>
@@ -434,6 +444,7 @@
             <button class="action-btn" style="background:#212529; border: 1px solid #000;" onclick="submitBulkDisposal()">🗑️ 선택 부품 폐기(Disposal) 처리</button>
         </div>
 
+        <!-- 💡 8. 기간별 장착/탈거 이력 보고서 메뉴 -->
         <div id="menu-8" class="menu-section" style="display:none;">
             <h2>📅 8. 전체 장착/탈거 이력 보고서</h2>
             <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
@@ -469,17 +480,23 @@
     const DB_FILE = "parts_db.json";
 
     function utf8_to_b64(str) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-            reader.readAsDataURL(new Blob([str], { type: "application/json" }));
-        });
+        const bytes = new TextEncoder().encode(str);
+        let binString = '';
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binString += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binString);
     }
 
-    async function b64_to_utf8(b64) {
-        const res = await fetch(`data:application/json;base64,${b64.replace(/\s/g, '')}`);
-        return await res.text();
+    function b64_to_utf8(str) {
+        const binString = window.atob(str);
+        const len = binString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binString.charCodeAt(i);
+        }
+        return new TextDecoder().decode(bytes);
     }
 
     function showToast(message, isError = false) {
@@ -660,7 +677,6 @@
         showToast(`표 전체 행의 입고 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
     }
 
-    // 💡 숫자형(연마 가능 횟수) 전용 다중 붙여넣기 로직
     function setupNumberPasteInterceptor(inputEl) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -789,12 +805,11 @@
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="date" class="ship-in-date" value="${bulkDate4 || todayStr}"></td>
-                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V)"></td>
+                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V 복사가능)"></td>
                 <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '4');
-            // 💡 숫자 복사 붙여넣기 이벤트 바인딩
             setupNumberPasteInterceptor(tr.querySelector('.regrind-available-input'));
         } else if (menu === '5') { 
             let lineOptions = "<option value=''>선택 안함</option>";
@@ -1247,6 +1262,7 @@
         runPrediction();
     }
 
+    // 💡 현황판 하도 하단 고정 정렬 로직 적용
     function renderMatrixBoard() {
         const matrixBody = document.getElementById("matrix-table-body");
         if (!matrixBody) return;
@@ -1272,16 +1288,31 @@
                     if (p.toolType === "LW (하도)" && p.currentSide === "20.0") {
                         displayId = `${p.id} (20.0면)`;
                     }
-                    boardMapping[loc.line][loc.unit].push(`<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${displayId}</span>`);
+                    boardMapping[loc.line][loc.unit].push({
+                        type: p.toolType,
+                        html: `<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${displayId}</span>`
+                    });
                 }
             }
         });
 
         let htmlStr = "";
         totalLines.forEach(line => {
-            const upStr = boardMapping[line].Upper.length > 0 ? boardMapping[line].Upper.join("") : (line.startsWith("H/C") ? "<span class='empty-tool' style='color:#ccc;'>N/A</span>" : "<span class='empty-tool'>-</span>");
-            const ctStr = boardMapping[line].Center.length > 0 ? boardMapping[line].Center.join("") : "<span class='empty-tool'>-</span>";
-            const fnStr = boardMapping[line].Final.length > 0 ? boardMapping[line].Final.join("") : "<span class='empty-tool'>-</span>";
+            const sortFn = (a, b) => {
+                const isALW = a.type === "LW (하도)";
+                const isBLW = b.type === "LW (하도)";
+                if (isALW && !isBLW) return 1;
+                if (!isALW && isBLW) return -1;
+                return 0;
+            };
+
+            const upperArr = boardMapping[line].Upper.sort(sortFn).map(i => i.html);
+            const centerArr = boardMapping[line].Center.sort(sortFn).map(i => i.html);
+            const finalArr = boardMapping[line].Final.sort(sortFn).map(i => i.html);
+
+            const upStr = upperArr.length > 0 ? upperArr.join("") : (line.startsWith("H/C") ? "<span class='empty-tool' style='color:#ccc;'>N/A</span>" : "<span class='empty-tool'>-</span>");
+            const ctStr = centerArr.length > 0 ? centerArr.join("") : "<span class='empty-tool'>-</span>";
+            const fnStr = finalArr.length > 0 ? finalArr.join("") : "<span class='empty-tool'>-</span>";
 
             htmlStr += `<tr>
                 <td><strong>${line} 호기</strong></td>
@@ -1898,16 +1929,21 @@
         for (let type of ["1.8도 상도", "1.2도 상도", "LW (하도)"]) {
             const st = stats[type];
             const consumption = weeklyConsumption[type];
-            
-            const totalWeeksLeft = consumption > 0 ? Math.floor(st.totalUses / consumption) : 0;
-            const yearsLeft = (totalWeeksLeft / 52).toFixed(1);
 
             let requiredPhysicalStock = 0;
+            let requiredUses = 0; 
+
             if (type === "LW (하도)") {
                 requiredPhysicalStock = Math.ceil((consumption / 2) * totalPipelineWeeks);
+                requiredUses = requiredPhysicalStock * 2; 
             } else {
                 requiredPhysicalStock = Math.ceil(consumption * totalPipelineWeeks);
+                requiredUses = requiredPhysicalStock; 
             }
+
+            const usableUses = st.totalUses - requiredUses;
+            const totalWeeksLeft = (usableUses > 0 && consumption > 0) ? Math.floor(usableUses / consumption) : 0;
+            const yearsLeft = (totalWeeksLeft / 52).toFixed(1);
 
             const isPipelineDanger = st.physCount < requiredPhysicalStock;
 
@@ -1929,7 +1965,7 @@
                     <div class="stat-row"><span>파이프라인 필수 보유량</span><strong>${requiredPhysicalStock} 개 (최소)</strong></div>
                     <div class="stat-row"><span>전체 잔여 사용 한도</span><strong>${st.totalUses} 회(면)</strong></div>
                     <div class="stat-row"><span>주당 예상 소모량</span><strong>${consumption.toFixed(1)} 회(면) / 주</strong></div>
-                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">예상 완전 폐기 시점 (Absolute Shortage)</div>
+                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">최초 Shortage (라인 중단) 시점</div>
                     <div class="life-expectancy">${totalWeeksLeft} 주 <span style="font-size:16px;">(약 ${yearsLeft}년)</span></div>
                     <div style="margin-top:10px; background:#f8f9fa; padding:10px; border-radius:4px; font-size:13px;">${statusMessage}</div>
                 </div>
