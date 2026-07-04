@@ -636,11 +636,8 @@
     "toolType": "LW (하도)",
     "maker": "HYTC",
     "status": "Storage",
-    "currentSide": "20.0",
-    "usedSides": [
-      "10.0",
-      "20.0"
-    ],
+    "currentSide": "10.0",
+    "usedSides": [],
     "regrindAvailable": 9,
     "lastHistory": "[최고관리자 강제 제어] 상태를 Storage로 변경",
     "historyLog": [
@@ -666,6 +663,11 @@
       },
       {
         "timestamp": "2026-07-04T19:26:22.085Z",
+        "status": "Storage",
+        "log": "[최고관리자 강제 제어] 상태를 Storage로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T19:45:11.148Z",
         "status": "Storage",
         "log": "[최고관리자 강제 제어] 상태를 Storage로 변경"
       }
