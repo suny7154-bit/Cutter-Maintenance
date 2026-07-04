@@ -635,14 +635,14 @@
     "id": "LCAJHY4007CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Storage",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-04 14시 | 라인:1-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Storage로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -663,6 +663,11 @@
         "timestamp": "2026-07-04T18:54:41.757Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-04 14시 | 라인:1-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-04T19:26:22.085Z",
+        "status": "Storage",
+        "log": "[최고관리자 강제 제어] 상태를 Storage로 변경"
       }
     ]
   },
