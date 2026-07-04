@@ -67,11 +67,11 @@
     "id": "LCAJHY4022CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 10,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:5-1 | 유닛:Center",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -102,6 +102,11 @@
         "timestamp": "2026-07-04T00:46:36.665Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T02:45:51.070Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:5-1 | 유닛:Center"
       }
     ]
   },
