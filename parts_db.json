@@ -574,11 +574,11 @@
     "id": "LCAJHY3002FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[연마입고] 일자:2026-05-08 | 연마가능잔여:9회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -589,6 +589,11 @@
         "timestamp": "2026-07-04T00:40:29.534Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-05-08 | 연마가능잔여:9회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-04T02:43:57.531Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -691,11 +696,13 @@
     "id": "LCAJHY4050CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
-    "currentSide": "10.0",
-    "usedSides": [],
+    "status": "Using",
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
     "regrindAvailable": 8,
-    "lastHistory": "[연마입고] 일자:2026-06-10 | 연마가능잔여:8회 | 비고:",
+    "lastHistory": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -721,6 +728,11 @@
         "timestamp": "2026-07-04T00:43:06.507Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-06-10 | 연마가능잔여:8회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-04T02:43:57.531Z",
+        "status": "Using",
+        "log": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -816,11 +828,13 @@
     "id": "LCAJHY4003CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 9,
-    "lastHistory": "[연마입고] 일자:2026-05-08 | 연마가능잔여:9회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -831,6 +845,11 @@
         "timestamp": "2026-07-04T00:40:29.534Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-05-08 | 연마가능잔여:9회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-04T02:43:57.531Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -2282,11 +2301,11 @@
     "id": "LCAJHY1037CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[연마입고] 일자:2026-06-10 | 연마가능잔여:14회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -2312,6 +2331,11 @@
         "timestamp": "2026-07-04T00:43:06.506Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-06-10 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-04T02:43:57.531Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -5180,16 +5204,21 @@
     "id": "LCAJHY1034CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:43:57.531Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
