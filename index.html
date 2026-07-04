@@ -24,7 +24,6 @@
         .grid-table th { background: #e9ecef; font-size: 14px; color: #333; }
         .grid-table input[type="text"], .grid-table input[type="number"], .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
         .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
-        .grid-table input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
         
         .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
         .summary-table th, .summary-table td { border: 1px solid #ced4da; padding: 12px; text-align: center; font-size: 14px; }
@@ -237,18 +236,18 @@
                 <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
                 <button class="action-btn" style="background:#28a745; padding:6px 12px; font-size:13px; margin:0;" onclick="switchMenu('8')">📅 공장 전체 장착/탈거 이력 조회</button>
             </div>
-            <p style="font-size:13px; color:#ef4444; font-weight:bold; margin-top:5px;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. Using 중인 하도는 Flip하여 반대 면으로 재장착 가능합니다.</p>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold; margin-top:5px;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. Using 중인 하도는 반대 면으로 재장착(스왑) 가능합니다.</p>
             <table class="grid-table">
                 <thead>
                     <tr>
                         <th style="width: 18%;">Tool ID</th>
                         <th style="width: 11%;">Tool Type</th>
-                        <th style="width: 5%;">Flip<br><small>(하도)</small></th>
+                        <th style="width: 8%;">장착 면<br><small>(하도)</small></th>
                         <th style="width: 18%;">장착/탈거 일시</th>
-                        <th style="width: 10%;">라인 선택</th>
-                        <th style="width: 10%;">Unit</th>
+                        <th style="width: 9%;">라인 선택</th>
+                        <th style="width: 9%;">Unit</th>
                         <th style="width: 8%;">작업자</th>
-                        <th style="width: 10%;">Comment</th>
+                        <th style="width: 9%;">Comment</th>
                         <th style="width: 10%;">액션</th>
                     </tr>
                 </thead>
@@ -372,6 +371,7 @@
                 </table>
                 <button class="action-btn" style="background:#28a745; width:100%; margin-top:10px;" onclick="submitAdminRename()">⚡ 마스터 ID 일괄 변경 승인</button>
                 
+                <!-- 💡 5-3. 신규 커터 ID 강제 등록 -->
                 <h3 style="margin-top:40px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-3. 신규 커터 ID 강제 등록 (발번 규칙 예외)</h3>
                 <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 발번 규칙에 맞지 않는 예외 ID를 강제로 등록합니다. 타입과 제작사를 수동으로 지정하세요.</p>
                 <div><button class="btn-row-control" onclick="addGridRow('5_forcereg')">➕ 행 추가</button></div>
@@ -716,7 +716,7 @@
             
             if (menuType === '2') handleEquipIdChange(inputEl);
             else if (menuType === '5_rename') handleIdRenameLive(inputEl);
-            else if (menuType === '5_forcereg') { /* do nothing for validation */ }
+            else if (menuType === '5_forcereg') { /* do nothing */ }
             else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
 
             for (let i = 1; i < lines.length; i++) {
@@ -767,7 +767,12 @@
                     <span class="info-text"></span>
                 </td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
-                <td><input type="checkbox" class="flip-checkbox" disabled title="하도 전용 면 변경"></td>
+                <td>
+                    <select class="face-select" disabled style="width:95%; font-size:12px; padding:4px;">
+                        <option value="10.0">10.0면</option>
+                        <option value="20.0">20.0면</option>
+                    </select>
+                </td>
                 <td>
                     <div class="datetime-container">
                         <input type="date" class="equip-date-input" value="${localDate}">
@@ -805,7 +810,7 @@
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="date" class="ship-in-date" value="${bulkDate4 || todayStr}"></td>
-                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V 복사가능)"></td>
+                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V)"></td>
                 <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
@@ -1093,14 +1098,14 @@
             id = id.replace("20.0", "10.0");
             inputEl.value = id;
             is20 = true;
-            showToast("💡 20.0 면이 스캔되어 마스터 ID로 변환되며, Flip이 자동 체크됩니다.");
+            showToast("💡 20.0 면이 스캔되어 마스터 ID로 변환되며, 장착 면이 20.0면으로 자동 선택됩니다.");
         } else {
             inputEl.value = id;
         }
 
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
-        const flipCb = tr.querySelector('.flip-checkbox');
+        const faceSelect = tr.querySelector('.face-select');
         const lineSelect = tr.querySelector('.equip-line-select');
         const unitSelect = tr.querySelector('.equip-unit-select');
         const msgSpan = tr.querySelector('.info-text');
@@ -1108,13 +1113,13 @@
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
 
-        if (flipCb) {
+        if (faceSelect) {
             if (res.type === "LW (하도)") {
-                flipCb.disabled = false;
-                if (is20) flipCb.checked = true;
+                faceSelect.disabled = false;
+                faceSelect.value = is20 ? "20.0" : "10.0";
             } else {
-                flipCb.disabled = true; 
-                flipCb.checked = false; 
+                faceSelect.disabled = true;
+                faceSelect.value = "10.0";
             }
         }
 
@@ -1143,7 +1148,7 @@
                 
                 let faceInfo = matchedPart.currentSide === "20.0" ? "20.0면" : "10.0면";
                 if (matchedPart.toolType === "LW (하도)") {
-                    msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo} 사용중) - Flip 후 재장착 혹은 탈거 가능`;
+                    msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo} 사용중) - 장착 면 변경 후 재장착(스왑) 혹은 탈거 가능`;
                 } else {
                     msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit}) - 탈거 가능`;
                 }
@@ -1262,7 +1267,6 @@
         runPrediction();
     }
 
-    // 💡 현황판 하도 하단 고정 정렬 로직 적용
     function renderMatrixBoard() {
         const matrixBody = document.getElementById("matrix-table-body");
         if (!matrixBody) return;
@@ -1437,7 +1441,7 @@
                         if (logObj.log.includes("[장착]") || logObj.log.includes("[탈거]")) {
                             
                             let actionType = logObj.log.includes("[탈거]") ? "탈거" : "장착";
-                            if (logObj.log.includes("면 변경")) actionType = "면 스왑(장착)";
+                            if (logObj.log.includes("면 스왑")) actionType = "면 스왑(장착)";
                             
                             let lineUnit = "-";
                             let op = "-";
@@ -1589,9 +1593,8 @@
             const op = row.querySelector('.equip-op-input').value.trim();
             const comment = row.querySelector('.equip-comment-input').value.trim();
             
-            const flipCb = row.querySelector('.flip-checkbox');
-            const isFlipped = flipCb && flipCb.checked;
-            const targetSide = isFlipped ? "20.0" : "10.0";
+            const faceSelect = row.querySelector('.face-select');
+            const targetSide = (faceSelect && !faceSelect.disabled) ? faceSelect.value : "10.0";
 
             let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
 
@@ -1599,14 +1602,14 @@
                 const isDirectFlip = (tempArr[pIdx].status === 'Using' && typeInput === "LW (하도)" && tempArr[pIdx].currentSide !== targetSide);
 
                 if (tempArr[pIdx].status !== 'Storage' && !isDirectFlip) {
-                    alert(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 Flip 스왑은 허용됩니다.)`); return;
+                    alert(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 면 스왑은 허용됩니다.)`); return;
                 }
 
                 if (typeInput === "LW (하도)") {
                     if (!tempArr[pIdx].usedSides) tempArr[pIdx].usedSides = [];
                     
                     if (tempArr[pIdx].usedSides.includes(targetSide)) {
-                        alert(`🚨 [오류] ${baseId} 커터의 [${targetSide}면]은 이미 이번 주기에 사용한 이력이 있어 재장착/Flip이 불가능합니다.\n(양면을 모두 썼다면 탈거 후 연마 출하하세요.)`); return;
+                        alert(`🚨 [오류] ${baseId} 커터의 [${targetSide}면]은 이미 이번 주기에 사용한 이력이 있어 재장착/스왑이 불가능합니다.\n(양면을 모두 썼다면 탈거 후 연마 출하하세요.)`); return;
                     }
                 }
 
@@ -1621,7 +1624,7 @@
                 const locKey = `${line}|${unit}|${currentCategory}`; 
                 
                 if (currentBatchSet.has(locKey)) {
-                    alert(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`); return; 
+                    alert(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에 장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`); return; 
                 }
                 currentBatchSet.add(locKey);
 
@@ -1636,12 +1639,13 @@
                 }
 
                 if (typeInput === "LW (하도)") {
+                    let previousSide = tempArr[pIdx].currentSide || "10.0";
                     tempArr[pIdx].usedSides.push(targetSide);
                     tempArr[pIdx].currentSide = targetSide;
                     if (isDirectFlip) {
-                        logMsg = `[면 변경(Flip) 장착] ${tempArr[pIdx].currentSide === '20.0' ? '10.0' : '20.0'}면 -> ${targetSide}면으로 스왑됨 | ` + logMsg;
-                    } else if (isFlipped) {
-                        logMsg = `[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | ` + logMsg;
+                        logMsg = `[면 스왑 장착] ${previousSide}면 -> ${targetSide}면으로 변경 | 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
+                    } else if (targetSide === "20.0") {
+                        logMsg = `[장착 (20.0면 우선)] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
                     }
                 }
             } 
