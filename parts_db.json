@@ -7903,16 +7903,23 @@
     "id": "LCAJHY0047CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
-    "currentSide": "10.0",
-    "usedSides": [],
+    "status": "Using",
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-07-01 22시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-04T02:49:40.076Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:52:07.628Z",
+        "status": "Using",
+        "log": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-07-01 22시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   }
