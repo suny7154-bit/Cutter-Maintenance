@@ -551,6 +551,7 @@
     let isSaving = false;
     let simChartInstance = null;
     
+    // 전역 변수 설정
     let machineSchedules = [];
     const DB_FILE = "parts_db.json";
 
@@ -596,6 +597,7 @@
         if(d3) d3.value = todayStr;
         if(d4) d4.value = todayStr;
 
+        // 리포트 기본 날짜 세팅 (8번, 10번 메뉴)
         const d = new Date();
         const endStr = d.toISOString().split('T')[0];
         d.setDate(d.getDate() - 7);
@@ -619,19 +621,20 @@
         }
     });
 
+    // 💡 3번 메뉴 Waiting 커터 자동 호출 함수
     function loadWaitingCutters() {
         const waitingCutters = globalData.filter(p => p.status === 'Waiting');
         if(waitingCutters.length === 0) { showToast("대기(Waiting) 중인 커터가 없습니다.", true); return; }
         
         const tbody = document.getElementById('grid-3-body');
-        tbody.innerHTML = ''; 
+        tbody.innerHTML = ''; // 기존 입력 내용 초기화
         
         waitingCutters.forEach(p => {
             addGridRow('3');
             const lastRow = tbody.lastElementChild;
             const idInput = lastRow.querySelector('.tool-id-input');
             idInput.value = p.id;
-            handleIdInputLive(idInput, true); 
+            handleIdInputLive(idInput, true); // 자동 조회 트리거
         });
         showToast(`✅ ${waitingCutters.length}개의 Waiting 커터를 모두 불러왔습니다.`);
     }
@@ -1261,24 +1264,36 @@
 
     async function fetchDatabase() {
         const creds = getCredentials();
-        if(!creds.token || !creds.owner || !creds.repo) return;
+        if(!creds.token || !creds.owner || !creds.repo) {
+            showToast("⚠️ GitHub 연동 정보를 모두 입력해주세요.", true);
+            return;
+        }
         showLoading(true, "⏳ GitHub 데이터 로드 중...");
         try {
             const url = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
             const res = await fetch(url, { headers: { "Authorization": `token ${creds.token}` } });
+            
             if (res.status === 200) {
                 const json = await res.json();
                 dbSha = json.sha;
                 try {
                     const content = await b64_to_utf8(json.content);
                     globalData = JSON.parse(content);
-                } catch(err) { showToast("❌ 데이터 디코딩 중 오류가 발생했습니다.", true); return; }
+                } catch(err) { 
+                    showToast("❌ 데이터 디코딩 오류. JSON 파일 형식이 깨졌습니다.", true); 
+                    showLoading(false);
+                    return; 
+                }
                 
-                calculateHomeTables();
-                renderMatrixBoard();
+                calculateHomeTables(); 
+                renderMatrixBoard(); 
                 renderMenu6List();
+            } else {
+                showToast(`❌ DB 연결 실패! (상태 코드: ${res.status})`, true);
             }
-        } catch (e) { showToast("DB 연결에 실패했습니다.", true); }
+        } catch (e) { 
+            showToast(`❌ 통신 오류: ${e.message}`, true); 
+        }
         showLoading(false);
     }
 
@@ -1887,7 +1902,8 @@
         }
         return disposedCount;
     }
-function runPrediction() {
+
+    function runPrediction() {
         if (globalData.length === 0) return;
 
         const activeCutters = globalData.filter(p => p.status !== 'Disposal');
@@ -1906,14 +1922,13 @@ function runPrediction() {
         const regrindCycle = parseFloat(document.getElementById("sim-regrind-cycle").value) || 1;
         const leadTime = parseFloat(document.getElementById("sim-lead-time").value) || 1;
         const newCutterLT = parseFloat(document.getElementById("sim-new-lt").value) || 15;
-        const totalPipelineWeeks = Math.ceil(regrindCycle + leadTime); // 연마장 체류 시간 (주)
+        const totalPipelineWeeks = Math.ceil(regrindCycle + leadTime);
 
         const uc1DateStr = document.getElementById("sim-uc1-date").value;
         const uc1Date = uc1DateStr ? new Date(uc1DateStr + "T00:00:00") : new Date("2099-12-31T00:00:00");
 
         let newCuttersData = getNewCutterSchedules();
 
-        // 💡 1. 톱니바퀴 궤적을 위해 창고(가용 풀)와 파이프라인(외주 연마장) 분리
         let availPools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
         let pipeline = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
 
@@ -1921,7 +1936,6 @@ function runPrediction() {
             let type = parseAndValidateToolId(p.id).type || "기타";
             if (!availPools[type]) return;
             
-            // 💡 [핵심] 잔여 횟수 0(신규) 처리 및 숫자 변환 완벽 대응
             let rawRegrindVal = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
             let rawRegrind = parseInt(rawRegrindVal, 10);
             if (isNaN(rawRegrind)) rawRegrind = 0;
@@ -1941,7 +1955,6 @@ function runPrediction() {
 
             if(currentLife > 0) {
                 let cutter = { id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife };
-                // 현재 연마/대기 중인 건 파이프라인으로 뺌 (그래프 가용 재고에서 일단 제외)
                 if (p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') {
                     pipeline[type].push({ cutter: cutter, returnWeek: 1 }); 
                 } else {
@@ -1969,24 +1982,20 @@ function runPrediction() {
         
         let shortageWeeks = { "1.8도 상도": -1, "1.2도 상도": -1, "LW (하도)": -1 };
         
-        // 무조건 현재 시점(오늘)을 1주 차로 잡고 1년치 시뮬레이션
         let simDate = new Date();
         let uc1Dropped = false;
 
-        // 💡 2. 주차별 이산 흐름 시뮬레이션 (공장 출납을 리얼하게 구현)
         for (let w = 0; w < 52; w++) {
             let currentMach = getMachinesForDate(simDate);
             let newArr18 = false, newArr12 = false, newArrLW = false;
             let disp18 = 0, disp12 = 0, dispLW = 0;
 
-            // [A] 파이프라인(외주 연마장) 복귀 처리 -> 그래프 삐죽하게 솟아오름!
             ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
                 let returning = pipeline[type].filter(p => p.returnWeek <= w);
                 pipeline[type] = pipeline[type].filter(p => p.returnWeek > w);
                 returning.forEach(r => availPools[type].push(r.cutter));
             });
 
-            // [B] 신규 제작 커터 입고 처리 -> 그래프 수직 상승!
             newCuttersData.forEach(nc => {
                 if(isSameWeek(nc.date, simDate)) {
                     let maxLife = nc.type === "LW (하도)" ? 22 : 17; 
@@ -1997,7 +2006,6 @@ function runPrediction() {
                 }
             });
 
-            // [C] UC1 커터 전량 폐기 이벤트
             if (!uc1Dropped && simDate >= uc1Date) {
                 ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
                     availPools[type] = availPools[type].filter(p => p.maker !== 'UC1');
@@ -2006,25 +2014,23 @@ function runPrediction() {
                 uc1Dropped = true;
             }
 
-            // [D] 공장 내 장착 소모 (연마장으로 보냄) -> 그래프 뚝 떨어짐!
             let cons18 = currentMach * 2;
             let cons12 = currentMach * 1;
             let consLW = Math.ceil(currentMach * 1.5); 
 
             const processConsumption = (type, amount) => {
                 let disposedCount = 0;
-                // 수명이 가장 적은(오래된) 커터부터 먼저 꺼내서 씀
                 availPools[type].sort((a, b) => a.life - b.life);
                 for (let i = 0; i < amount; i++) {
                     if (availPools[type].length === 0) {
                         if (shortageWeeks[type] === -1) shortageWeeks[type] = w;
                         break;
                     }
-                    let usedItem = availPools[type].shift(); // 가용 재고에서 빠짐
+                    let usedItem = availPools[type].shift(); 
                     usedItem.life--;
                     
-                    if (usedItem.life <= 0) disposedCount++; // 수명 끝 = 영구 폐기
-                    else pipeline[type].push({ cutter: usedItem, returnWeek: w + totalPipelineWeeks }); // 연마장 진입
+                    if (usedItem.life <= 0) disposedCount++; 
+                    else pipeline[type].push({ cutter: usedItem, returnWeek: w + totalPipelineWeeks }); 
                 }
                 return disposedCount;
             };
@@ -2033,10 +2039,8 @@ function runPrediction() {
             disp12 = processConsumption("1.2도 상도", cons12);
             dispLW = processConsumption("LW (하도)", consLW);
 
-            // 차트 X축 라벨 (7월 ~)
             chartLabels.push(getWeekLabel(new Date(simDate)));
             
-            // 💡 삐죽삐죽한 형태를 위해 "현재 가용 수량"만 그래프 Y축에 찍음
             let y18 = availPools["1.8도 상도"].length;
             let y12 = availPools["1.2도 상도"].length;
             let yLW = availPools["LW (하도)"].length;
@@ -2045,7 +2049,6 @@ function runPrediction() {
             data12.push(y12);
             dataLW.push(yLW);
             
-            // 일직선 점선 마지노선 (이번 주 장착에 필요한 최소 소모 수량)
             req18Data.push(cons18);
             req12Data.push(cons12);
             reqLWData.push(consLW);
@@ -2061,7 +2064,6 @@ function runPrediction() {
             simDate.setDate(simDate.getDate() + 7);
         }
 
-        // 💡 3. 하단 분석 결과 카드 렌더링
         const container = document.getElementById("prediction-cards");
         container.innerHTML = "";
         
@@ -2124,7 +2126,6 @@ function runPrediction() {
             `;
         }
 
-        // 💡 4. Chart.js 렌더링 (범례 텍스트 직관적으로 수정)
         const ctx = document.getElementById('shortageChart').getContext('2d');
         if (simChartInstance) { simChartInstance.destroy(); }
 
@@ -2162,3 +2163,7 @@ function runPrediction() {
             }
         });
     }
+</script>
+
+</body>
+</html>
