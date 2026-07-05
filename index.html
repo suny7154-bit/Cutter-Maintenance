@@ -1889,7 +1889,7 @@
         return disposedCount;
     }
 
-    function runPrediction() {
+   function runPrediction() {
         if (globalData.length === 0) return;
 
         const activeCutters = globalData.filter(p => p.status !== 'Disposal');
@@ -1908,20 +1908,26 @@
         const regrindCycle = parseFloat(document.getElementById("sim-regrind-cycle").value) || 1;
         const leadTime = parseFloat(document.getElementById("sim-lead-time").value) || 1;
         const newCutterLT = parseFloat(document.getElementById("sim-new-lt").value) || 15;
-        const totalPipelineWeeks = regrindCycle + leadTime;
+        const totalPipelineWeeks = Math.ceil(regrindCycle + leadTime); // 연마장 체류 시간 (주)
 
         const uc1DateStr = document.getElementById("sim-uc1-date").value;
         const uc1Date = uc1DateStr ? new Date(uc1DateStr + "T00:00:00") : new Date("2099-12-31T00:00:00");
 
-        let newCuttersData = getNewCutterSchedules(); 
+        let newCuttersData = getNewCutterSchedules();
 
-        let pools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
+        // 💡 1. 톱니바퀴 궤적을 위해 창고(가용 풀)와 파이프라인(외주 연마장) 분리
+        let availPools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
+        let pipeline = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
 
         activeCutters.forEach(p => {
             let type = parseAndValidateToolId(p.id).type || "기타";
-            if (!pools[type]) return;
+            if (!availPools[type]) return;
             
-            let rawRegrind = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            // 💡 [핵심] 잔여 횟수 0(신규) 처리 및 숫자 변환 완벽 대응
+            let rawRegrindVal = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            let rawRegrind = parseInt(rawRegrindVal, 10);
+            if (isNaN(rawRegrind)) rawRegrind = 0;
+
             let remainRegrinds = rawRegrind;
             if (rawRegrind === 0) {
                 remainRegrinds = (type === "LW (하도)") ? 10 : 16;
@@ -1932,17 +1938,28 @@
                 const usedSidesCount = p.usedSides ? p.usedSides.length : 0;
                 currentLife = (remainRegrinds * 2) + Math.max(0, 2 - usedSidesCount);
             } else {
-                currentLife = remainRegrinds + ((p.status === 'Waiting' || p.status === 'Regrind') ? 0 : 1);
+                currentLife = remainRegrinds + ((p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') ? 0 : 1);
             }
-            if(currentLife > 0) pools[type].push({ id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife });
+
+            if(currentLife > 0) {
+                let cutter = { id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife };
+                // 현재 연마/대기 중인 건 파이프라인으로 뺌 (그래프 가용 재고에서 일단 제외)
+                if (p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') {
+                    pipeline[type].push({ cutter: cutter, returnWeek: 1 }); 
+                } else {
+                    availPools[type].push(cutter);
+                }
+            }
         });
 
-        const initialPhys18 = pools["1.8도 상도"].length;
-        const initialPhys12 = pools["1.2도 상도"].length;
-        const initialPhysLW = pools["LW (하도)"].length;
-        const initialUses18 = pools["1.8도 상도"].reduce((sum, c) => sum + c.life, 0);
-        const initialUses12 = pools["1.2도 상도"].reduce((sum, c) => sum + c.life, 0);
-        const initialUsesLW = pools["LW (하도)"].reduce((sum, c) => sum + c.life, 0);
+        const initialPhys18 = availPools["1.8도 상도"].length + pipeline["1.8도 상도"].length;
+        const initialPhys12 = availPools["1.2도 상도"].length + pipeline["1.2도 상도"].length;
+        const initialPhysLW = availPools["LW (하도)"].length + pipeline["LW (하도)"].length;
+        
+        let initialUses18 = 0, initialUses12 = 0, initialUsesLW = 0;
+        availPools["1.8도 상도"].concat(pipeline["1.8도 상도"].map(x=>x.cutter)).forEach(c => initialUses18 += c.life);
+        availPools["1.2도 상도"].concat(pipeline["1.2도 상도"].map(x=>x.cutter)).forEach(c => initialUses12 += c.life);
+        availPools["LW (하도)"].concat(pipeline["LW (하도)"].map(x=>x.cutter)).forEach(c => initialUsesLW += c.life);
 
         let chartLabels = [];
         let data18 = [], req18Data = [];
@@ -1953,66 +1970,91 @@
         let disposalPointsLW = [], arrivalPointsLW = [];
         
         let shortageWeeks = { "1.8도 상도": -1, "1.2도 상도": -1, "LW (하도)": -1 };
+        
+        // 무조건 현재 시점(오늘)을 1주 차로 잡고 1년치 시뮬레이션
         let simDate = new Date();
         let uc1Dropped = false;
 
+        // 💡 2. 주차별 이산 흐름 시뮬레이션 (공장 출납을 리얼하게 구현)
         for (let w = 0; w < 52; w++) {
             let currentMach = getMachinesForDate(simDate);
-            
             let newArr18 = false, newArr12 = false, newArrLW = false;
+            let disp18 = 0, disp12 = 0, dispLW = 0;
+
+            // [A] 파이프라인(외주 연마장) 복귀 처리 -> 그래프 삐죽하게 솟아오름!
+            ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
+                let returning = pipeline[type].filter(p => p.returnWeek <= w);
+                pipeline[type] = pipeline[type].filter(p => p.returnWeek > w);
+                returning.forEach(r => availPools[type].push(r.cutter));
+            });
+
+            // [B] 신규 제작 커터 입고 처리 -> 그래프 수직 상승!
             newCuttersData.forEach(nc => {
                 if(isSameWeek(nc.date, simDate)) {
                     let maxLife = nc.type === "LW (하도)" ? 22 : 17; 
-                    for(let i=0; i<nc.qty; i++) pools[nc.type].push({id:'NEW', maker:'New', life: maxLife});
+                    for(let i=0; i<nc.qty; i++) availPools[nc.type].push({id:'NEW', maker:'New', life: maxLife});
                     if(nc.type === "1.8도 상도") newArr18 = true;
                     if(nc.type === "1.2도 상도") newArr12 = true;
                     if(nc.type === "LW (하도)") newArrLW = true;
                 }
             });
 
+            // [C] UC1 커터 전량 폐기 이벤트
             if (!uc1Dropped && simDate >= uc1Date) {
-                pools["1.8도 상도"] = pools["1.8도 상도"].filter(p => p.maker !== 'UC1');
-                pools["1.2도 상도"] = pools["1.2도 상도"].filter(p => p.maker !== 'UC1');
-                pools["LW (하도)"] = pools["LW (하도)"].filter(p => p.maker !== 'UC1');
+                ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
+                    availPools[type] = availPools[type].filter(p => p.maker !== 'UC1');
+                    pipeline[type] = pipeline[type].filter(p => p.cutter.maker !== 'UC1');
+                });
                 uc1Dropped = true;
             }
 
+            // [D] 공장 내 장착 소모 (연마장으로 보냄) -> 그래프 뚝 떨어짐!
             let cons18 = currentMach * 2;
             let cons12 = currentMach * 1;
             let consLW = Math.ceil(currentMach * 1.5); 
 
-            let reqPipe18 = Math.ceil(cons18 * totalPipelineWeeks);
-            let reqPipe12 = Math.ceil(cons12 * totalPipelineWeeks);
-            let reqPipeLW = Math.ceil(consLW * totalPipelineWeeks);
+            const processConsumption = (type, amount) => {
+                let disposedCount = 0;
+                // 수명이 가장 적은(오래된) 커터부터 먼저 꺼내서 씀
+                availPools[type].sort((a, b) => a.life - b.life);
+                for (let i = 0; i < amount; i++) {
+                    if (availPools[type].length === 0) {
+                        if (shortageWeeks[type] === -1) shortageWeeks[type] = w;
+                        break;
+                    }
+                    let usedItem = availPools[type].shift(); // 가용 재고에서 빠짐
+                    usedItem.life--;
+                    
+                    if (usedItem.life <= 0) disposedCount++; // 수명 끝 = 영구 폐기
+                    else pipeline[type].push({ cutter: usedItem, returnWeek: w + totalPipelineWeeks }); // 연마장 진입
+                }
+                return disposedCount;
+            };
 
-            let reqTotal18 = cons18 + reqPipe18;
-            let reqTotal12 = cons12 + reqPipe12;
-            let reqTotalLW = consLW + reqPipeLW;
+            disp18 = processConsumption("1.8도 상도", cons18);
+            disp12 = processConsumption("1.2도 상도", cons12);
+            dispLW = processConsumption("LW (하도)", consLW);
 
-            if (shortageWeeks["1.8도 상도"] === -1 && pools["1.8도 상도"].length < reqTotal18) shortageWeeks["1.8도 상도"] = w;
-            if (shortageWeeks["1.2도 상도"] === -1 && pools["1.2도 상도"].length < reqTotal12) shortageWeeks["1.2도 상도"] = w;
-            if (shortageWeeks["LW (하도)"] === -1 && pools["LW (하도)"].length < reqTotalLW) shortageWeeks["LW (하도)"] = w;
-
+            // 차트 X축 라벨 (7월 ~)
             chartLabels.push(getWeekLabel(new Date(simDate)));
             
-            let y18 = pools["1.8도 상도"].length;
-            let y12 = pools["1.2도 상도"].length;
-            let yLW = pools["LW (하도)"].length;
+            // 💡 삐죽삐죽한 형태를 위해 "현재 가용 수량"만 그래프 Y축에 찍음
+            let y18 = availPools["1.8도 상도"].length;
+            let y12 = availPools["1.2도 상도"].length;
+            let yLW = availPools["LW (하도)"].length;
             
             data18.push(y18);
             data12.push(y12);
             dataLW.push(yLW);
-            req18Data.push(reqTotal18);
-            req12Data.push(reqTotal12);
-            reqLWData.push(reqTotalLW);
+            
+            // 일직선 점선 마지노선 (이번 주 장착에 필요한 최소 소모 수량)
+            req18Data.push(cons18);
+            req12Data.push(cons12);
+            reqLWData.push(consLW);
 
             if(newArr18) arrivalPoints18.push({x: w, y: y18});
             if(newArr12) arrivalPoints12.push({x: w, y: y12});
             if(newArrLW) arrivalPointsLW.push({x: w, y: yLW});
-
-            let disp18 = consumePool(pools["1.8도 상도"], cons18);
-            let disp12 = consumePool(pools["1.2도 상도"], cons12);
-            let dispLW = consumePool(pools["LW (하도)"], consLW); 
 
             if(disp18 > 0) disposalPoints18.push({x: w, y: y18}); 
             if(disp12 > 0) disposalPoints12.push({x: w, y: y12});
@@ -2021,6 +2063,7 @@
             simDate.setDate(simDate.getDate() + 7);
         }
 
+        // 💡 3. 하단 분석 결과 카드 렌더링
         const container = document.getElementById("prediction-cards");
         container.innerHTML = "";
         
@@ -2058,7 +2101,7 @@
             if (isPipelineDanger) {
                 cardClass += " danger";
                 alertHtml = `<div class="alert-badge">단기 재고 부족 경고</div>`;
-                statusMessage = `<span style="color:#dc3545; font-weight:bold;">🚨 순환 마지노선 붕괴 (라인 중단)</span>`;
+                statusMessage = `<span style="color:#dc3545; font-weight:bold;">🚨 순환 마지노선 붕괴 (총량 부족)</span>`;
             }
 
             let displayShortage = sw === -1 ? "> 52" : sw;
@@ -2068,11 +2111,11 @@
                 <div class="${cardClass}">
                     ${alertHtml}
                     <div class="card-header">${td.type}</div>
-                    <div class="stat-row"><span>현재 전체 물리 보유량</span><strong>${td.phys} 개</strong></div>
-                    <div class="stat-row"><span>마지노선 (장착+파이프라인)</span><strong>${reqPhysicalStock} 개 (최소)</strong></div>
+                    <div class="stat-row"><span>현재 전체 물리 보유량 (연마장 포함)</span><strong>${td.phys} 개</strong></div>
+                    <div class="stat-row"><span>안전 마지노선 총량 (장착+연마대기)</span><strong>${reqPhysicalStock} 개 (최소)</strong></div>
                     <div class="stat-row"><span>전체 잔여 사용 한도</span><strong>${td.uses} 회(면)</strong></div>
                     <div class="stat-row"><span>주당 예상 소모량</span><strong>${td.cons.toFixed(1)} 회(면) / 주</strong></div>
-                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">최초 Shortage (라인 중단) 예상 시점</div>
+                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">최초 공장 내 가용 재고 고갈(Shortage) 시점</div>
                     <div class="life-expectancy">${displayShortage} 주 <span style="font-size:16px;">(약 ${displayYears}년)</span></div>
                     <div class="stat-row" style="background:#fff3cd; border:1px solid #ffeeba; padding:5px 10px; border-radius:4px; margin-bottom:10px;">
                         <span>신품 발주 데드라인 (L/T ${newCutterLT}주 반영)</span>
@@ -2083,6 +2126,7 @@
             `;
         }
 
+        // 💡 4. Chart.js 렌더링 (범례 텍스트 직관적으로 수정)
         const ctx = document.getElementById('shortageChart').getContext('2d');
         if (simChartInstance) { simChartInstance.destroy(); }
 
@@ -2091,16 +2135,16 @@
             data: {
                 labels: chartLabels,
                 datasets: [
-                    { label: '1.8도 상도 전체 재고량', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
-                    { label: '1.8도 마지노선', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.8도 공장 가용재고', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
+                    { label: '1.8도 필요수량', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
                     { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#007bff', pointRadius: 8 },
-                    { label: '1.2도 상도 전체 재고량', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
-                    { label: '1.2도 마지노선', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.2도 공장 가용재고', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
+                    { label: '1.2도 필요수량', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
                     { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#28a745', pointRadius: 8 },
-                    { label: 'LW 하도 전체 재고량', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
-                    { label: 'LW 마지노선', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: 'LW 공장 가용재고', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
+                    { label: 'LW 필요수량', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
                     { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#fd7e14', pointRadius: 8 }
                 ]
@@ -2109,18 +2153,14 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    title: { display: true, text: '향후 1년 간의 이산(Discrete) 물류 궤적 시뮬레이션', font: {size:16}, padding: {top:10, bottom:20} },
+                    title: { display: true, text: '향후 1년 간의 실시간 공장 내 가용 재고 시뮬레이션 (톱니바퀴 궤적)', font: {size:16}, padding: {top:10, bottom:20} },
                     tooltip: { mode: 'index', intersect: false },
                     legend: { labels: { filter: function(item) { return !item.text.includes('폐기') && !item.text.includes('신규'); } } }
                 },
                 scales: {
-                    y: { beginAtZero: true, title: { display: true, text: '전체 물리 보유 수량 (개)' } },
+                    y: { beginAtZero: true, title: { display: true, text: '공장 내 즉시 가용 수량 (개)' } },
                     x: { title: { display: true, text: '시뮬레이션 경과 기간 (월/주차)' } }
                 }
             }
         });
     }
-</script>
-
-</body>
-</html>
