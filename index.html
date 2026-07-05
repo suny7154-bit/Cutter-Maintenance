@@ -551,7 +551,6 @@
     let isSaving = false;
     let simChartInstance = null;
     
-    // 전역 변수 설정
     let machineSchedules = [];
     const DB_FILE = "parts_db.json";
 
@@ -597,7 +596,6 @@
         if(d3) d3.value = todayStr;
         if(d4) d4.value = todayStr;
 
-        // 리포트 기본 날짜 세팅 (8번, 10번 메뉴)
         const d = new Date();
         const endStr = d.toISOString().split('T')[0];
         d.setDate(d.getDate() - 7);
@@ -621,20 +619,19 @@
         }
     });
 
-    // 💡 3번 메뉴 Waiting 커터 자동 호출 함수 (기능 추가 1)
     function loadWaitingCutters() {
         const waitingCutters = globalData.filter(p => p.status === 'Waiting');
         if(waitingCutters.length === 0) { showToast("대기(Waiting) 중인 커터가 없습니다.", true); return; }
         
         const tbody = document.getElementById('grid-3-body');
-        tbody.innerHTML = ''; // 기존 입력 내용 초기화
+        tbody.innerHTML = ''; 
         
         waitingCutters.forEach(p => {
             addGridRow('3');
             const lastRow = tbody.lastElementChild;
             const idInput = lastRow.querySelector('.tool-id-input');
             idInput.value = p.id;
-            handleIdInputLive(idInput, true); // 자동 조회 트리거
+            handleIdInputLive(idInput, true); 
         });
         showToast(`✅ ${waitingCutters.length}개의 Waiting 커터를 모두 불러왔습니다.`);
     }
@@ -1243,7 +1240,7 @@
         document.getElementById(`menu-${menuId}`).style.display = 'block';
         
         const tbody = document.getElementById(`grid-${menuId}-body`) || document.getElementById(`grid-${menuId.replace('_', '-')}-body`);
-        if(tbody && menuId !== '9' && menuId !== '8' && menuId !== '10') { tbody.innerHTML = ""; addGridRow(menuId); } // 제외 처리
+        if(tbody && menuId !== '9' && menuId !== '8' && menuId !== '10') { tbody.innerHTML = ""; addGridRow(menuId); }
         
         if(menuId === '5') {
             const tbodyRename = document.getElementById(`grid-5-rename-body`);
@@ -1496,7 +1493,6 @@
         showToast(`총 ${reportData.length}건의 이력이 조회되었습니다.`);
     }
 
-    // 💡 10번 메뉴: 연마 출하 / 입고 보고서 생성 함수 (기능 추가 2)
     function generateGrindingReport() {
         const startStr = document.getElementById("grinding-start-date").value;
         const endStr = document.getElementById("grinding-end-date").value;
@@ -1746,7 +1742,6 @@
 
             tempArr[pIdx].status = nextStatus;
             
-            // Storage 강제 변경 시 사용 이력(메모리) 초기화
             if (nextStatus === 'Storage') {
                 tempArr[pIdx].usedSides = [];
                 if (tempArr[pIdx].toolType === "LW (하도)") tempArr[pIdx].currentSide = "10.0";
@@ -1877,17 +1872,15 @@
     function consumePool(pool, amount) {
         if (pool.length === 0) return 0;
         let disposedCount = 0;
-        // 가장 오래된(잔여 수명이 적은) 커터부터 차감하여 현실성 극대화
         pool.sort((a, b) => a.life - b.life); 
         
         for (let i = 0; i < amount; i++) {
             if (pool.length === 0) break;
             pool[0].life--;
             if (pool[0].life <= 0) {
-                pool.shift(); // 0이 되면 풀에서 폐기 (배열에서 제거)
+                pool.shift();
                 disposedCount++;
             } else {
-                // 사용 후 풀의 맨 뒤로 이동 (순환)
                 const usedItem = pool.shift();
                 pool.push(usedItem);
             }
@@ -1919,16 +1912,14 @@
         const uc1DateStr = document.getElementById("sim-uc1-date").value;
         const uc1Date = uc1DateStr ? new Date(uc1DateStr + "T00:00:00") : new Date("2099-12-31T00:00:00");
 
-        let newCuttersData = getNewCutterSchedules(); // 신규 입고 예정
+        let newCuttersData = getNewCutterSchedules(); 
 
-        // 💡 1. 궤적 추적을 위한 가상 Pool(창고) 생성
         let pools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
 
         activeCutters.forEach(p => {
             let type = parseAndValidateToolId(p.id).type || "기타";
             if (!pools[type]) return;
             
-            // 💡 [핵심 버그 수정] 잔여 연마 횟수가 0인 경우 = 신규 커터
             let rawRegrind = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
             let remainRegrinds = rawRegrind;
             if (rawRegrind === 0) {
@@ -1938,10 +1929,8 @@
             let currentLife = 0;
             if (type === "LW (하도)") {
                 const usedSidesCount = p.usedSides ? p.usedSides.length : 0;
-                // 하도 수명: 연마 횟수 * 2 + (신규 2면 중 남은 면)
                 currentLife = (remainRegrinds * 2) + Math.max(0, 2 - usedSidesCount);
             } else {
-                // 상도 수명: 연마 횟수 + (현재 장착 전이면 1 추가)
                 currentLife = remainRegrinds + ((p.status === 'Waiting' || p.status === 'Regrind') ? 0 : 1);
             }
             if(currentLife > 0) pools[type].push({ id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife });
@@ -1966,15 +1955,12 @@
         let simDate = new Date();
         let uc1Dropped = false;
 
-        // 💡 2. 52주 이산(Discrete) 루프 시뮬레이션
         for (let w = 0; w < 52; w++) {
             let currentMach = getMachinesForDate(simDate);
             
-            // [이벤트] 신규 커터 입고
             let newArr18 = false, newArr12 = false, newArrLW = false;
             newCuttersData.forEach(nc => {
                 if(isSameWeek(nc.date, simDate)) {
-                    // 신작 최대 수명 반영
                     let maxLife = nc.type === "LW (하도)" ? 22 : 17; 
                     for(let i=0; i<nc.qty; i++) pools[nc.type].push({id:'NEW', maker:'New', life: maxLife});
                     if(nc.type === "1.8도 상도") newArr18 = true;
@@ -1983,7 +1969,6 @@
                 }
             });
 
-            // [이벤트] UC1 전량 폐기
             if (!uc1Dropped && simDate >= uc1Date) {
                 pools["1.8도 상도"] = pools["1.8도 상도"].filter(p => p.maker !== 'UC1');
                 pools["1.2도 상도"] = pools["1.2도 상도"].filter(p => p.maker !== 'UC1');
@@ -1993,7 +1978,7 @@
 
             let cons18 = currentMach * 2;
             let cons12 = currentMach * 1;
-            let consLW = Math.ceil(currentMach * 1.5); // LW는 1개당 2면이므로 필요 실물개수 절반
+            let consLW = Math.ceil(currentMach * 1.5); 
 
             let reqPipe18 = Math.ceil(cons18 * totalPipelineWeeks);
             let reqPipe12 = Math.ceil(cons12 * totalPipelineWeeks);
@@ -2003,12 +1988,10 @@
             let reqTotal12 = cons12 + reqPipe12;
             let reqTotalLW = consLW + reqPipeLW;
 
-            // Shortage 감지
             if (shortageWeeks["1.8도 상도"] === -1 && pools["1.8도 상도"].length < reqTotal18) shortageWeeks["1.8도 상도"] = w;
             if (shortageWeeks["1.2도 상도"] === -1 && pools["1.2도 상도"].length < reqTotal12) shortageWeeks["1.2도 상도"] = w;
             if (shortageWeeks["LW (하도)"] === -1 && pools["LW (하도)"].length < reqTotalLW) shortageWeeks["LW (하도)"] = w;
 
-            // 차트 X축
             chartLabels.push(getWeekLabel(new Date(simDate)));
             
             let y18 = pools["1.8도 상도"].length;
@@ -2022,17 +2005,14 @@
             req12Data.push(reqTotal12);
             reqLWData.push(reqTotalLW);
 
-            // [마커] 신규 입고점 기록 (🔺)
             if(newArr18) arrivalPoints18.push({x: w, y: y18});
             if(newArr12) arrivalPoints12.push({x: w, y: y12});
             if(newArrLW) arrivalPointsLW.push({x: w, y: yLW});
 
-            // [이벤트] 공장 사용으로 인한 수명 차감 및 폐기 발생
             let disp18 = consumePool(pools["1.8도 상도"], cons18);
             let disp12 = consumePool(pools["1.2도 상도"], cons12);
             let dispLW = consumePool(pools["LW (하도)"], consLW); 
 
-            // [마커] 폐기 발생점 기록 (🔻)
             if(disp18 > 0) disposalPoints18.push({x: w, y: y18}); 
             if(disp12 > 0) disposalPoints12.push({x: w, y: y12});
             if(dispLW > 0) disposalPointsLW.push({x: w, y: yLW});
@@ -2040,7 +2020,6 @@
             simDate.setDate(simDate.getDate() + 7);
         }
 
-        // 💡 3. 결과 카드 렌더링
         const container = document.getElementById("prediction-cards");
         container.innerHTML = "";
         
@@ -2103,7 +2082,6 @@
             `;
         }
 
-        // 💡 4. Chart.js 렌더링
         const ctx = document.getElementById('shortageChart').getContext('2d');
         if (simChartInstance) { simChartInstance.destroy(); }
 
