@@ -1888,8 +1888,7 @@
         }
         return disposedCount;
     }
-
-   function runPrediction() {
+function runPrediction() {
         if (globalData.length === 0) return;
 
         const activeCutters = globalData.filter(p => p.status !== 'Disposal');
