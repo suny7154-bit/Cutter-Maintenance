@@ -4476,10 +4476,12 @@
     "toolType": "LW (하도)",
     "maker": "UC1",
     "status": "Using",
-    "currentSide": "10.0",
-    "usedSides": [],
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-2 | 유닛:Final",
+    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-07 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4505,6 +4507,11 @@
         "timestamp": "2026-07-04T02:39:08.967Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-2 | 유닛:Final"
+      },
+      {
+        "timestamp": "2026-07-09T18:28:16.531Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-07 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
