@@ -783,13 +783,13 @@
     "id": "LCAJHY4050CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "20.0"
     ],
     "regrindAvailable": 8,
-    "lastHistory": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -820,6 +820,11 @@
         "timestamp": "2026-07-04T02:43:57.531Z",
         "status": "Using",
         "log": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-10T13:46:54.369Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
