@@ -173,11 +173,11 @@
     "id": "LCAJHY3007FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 16,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -208,6 +208,26 @@
         "timestamp": "2026-07-04T00:46:36.665Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.122Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -715,16 +735,21 @@
     "id": "LCAJHY1905CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -3192,16 +3217,36 @@
     "id": "LCAJHY1918CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.122Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -3312,16 +3357,36 @@
     "id": "LCAJHY1911CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.122Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -3329,16 +3394,36 @@
     "id": "LCAJHY3905FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.121Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -4127,16 +4212,36 @@
     "id": "LCAJHY1914CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.121Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
