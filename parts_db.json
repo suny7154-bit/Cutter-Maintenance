@@ -925,13 +925,13 @@
     "id": "LCAJHY4003CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -947,6 +947,11 @@
         "timestamp": "2026-07-04T02:43:57.531Z",
         "status": "Using",
         "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-10T13:52:44.280Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
