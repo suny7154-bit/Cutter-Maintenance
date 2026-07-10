@@ -3076,16 +3076,21 @@
     "id": "LCAJHY4909CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -3534,11 +3539,11 @@
     "id": "LCAJHY4048CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[연마입고] 일자:2026-06-10 | 연마가능잔여:9회 | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -3559,6 +3564,11 @@
         "timestamp": "2026-07-04T00:43:06.507Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-06-10 | 연마가능잔여:9회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -3566,11 +3576,11 @@
     "id": "LCAJHY4006CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -3596,6 +3606,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -4555,16 +4570,21 @@
     "id": "LCAJHY4920CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -4572,16 +4592,21 @@
     "id": "LCAJHY4918CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -4670,16 +4695,21 @@
     "id": "LCAJHY4916CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -4734,11 +4764,11 @@
     "id": "LCAJHY4914CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Regrind",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4759,6 +4789,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
@@ -5960,16 +5995,21 @@
     "id": "LCAJHY4915CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Waiting로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
       }
     ]
   },
