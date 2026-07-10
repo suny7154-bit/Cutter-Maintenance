@@ -5597,11 +5597,11 @@
     "id": "LCAJHY1034CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -5612,6 +5612,11 @@
         "timestamp": "2026-07-04T02:43:57.531Z",
         "status": "Using",
         "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-10T13:45:33.475Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
