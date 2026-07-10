@@ -612,11 +612,11 @@
     "id": "LCAJHY3002FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -632,6 +632,11 @@
         "timestamp": "2026-07-04T02:43:57.531Z",
         "status": "Using",
         "log": "[장착] 일시:2026-06-29 22시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-10T13:50:49.403Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-10 09시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
