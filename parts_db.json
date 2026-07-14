@@ -10617,5 +10617,413 @@
         "log": "신규 생산 라인 등록 입고"
       }
     ]
+  },
+  {
+    "id": "LCAJHY1122CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1123CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1124CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1125CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1126CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1127CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1128CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1129CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1130CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1131CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1132CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1133CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1134CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1135CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1136CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1137CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1138CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1139CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1140CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1141CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1142CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1143CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1144CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
+  },
+  {
+    "id": "LCAJHY1145CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-14T18:26:59.292Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
