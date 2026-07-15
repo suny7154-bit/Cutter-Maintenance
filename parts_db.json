@@ -134,11 +134,11 @@
     "id": "LCAJHY4023CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-1 | 유닛:Upper",
+    "lastHistory": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:Harley, Austin",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -154,6 +154,11 @@
         "timestamp": "2026-07-09T19:33:19.461Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-1 | 유닛:Upper"
+      },
+      {
+        "timestamp": "2026-07-15T13:21:54.594Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:Harley, Austin"
       }
     ]
   },
@@ -7218,11 +7223,11 @@
     "id": "LCAJHY1025CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:Dan, Tonya",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7233,6 +7238,11 @@
         "timestamp": "2026-07-09T19:37:42.594Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-15T13:21:54.594Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:Dan, Tonya"
       }
     ]
   },
@@ -7399,11 +7409,11 @@
     "id": "LCAJHY1033CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:Harley, Austin",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -7414,6 +7424,11 @@
         "timestamp": "2026-07-09T19:36:26.128Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-15T13:21:54.594Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:Harley, Austin"
       }
     ]
   },
@@ -8131,11 +8146,11 @@
     "id": "LCAJHY3105FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:Sean",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -8146,6 +8161,11 @@
         "timestamp": "2026-07-09T19:39:15.611Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-15T13:21:54.594Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-15 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:Sean"
       }
     ]
   },
