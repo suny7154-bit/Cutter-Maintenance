@@ -6964,16 +6964,23 @@
     "id": "LCAJHY4046CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-15T14:38:54.677Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:"
       }
     ]
   },
@@ -7765,16 +7772,21 @@
     "id": "LCAJHY1104CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-15T14:38:54.677Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:"
       }
     ]
   },
@@ -8030,16 +8042,21 @@
     "id": "LCAJHY1119CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Center | 작업자:Gage, Nate | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-15T14:38:54.677Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Center | 작업자:Gage, Nate | 비고:"
       }
     ]
   },
@@ -8069,16 +8086,21 @@
     "id": "LCAJHY3101FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Final | 작업자:Sean | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-15T14:38:54.677Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Final | 작업자:Sean | 비고:"
       }
     ]
   },
