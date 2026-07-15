@@ -12426,5 +12426,22 @@
         "log": "신규 생산 라인 등록 입고"
       }
     ]
+  },
+  {
+    "id": "LCAJHY0030CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-15T13:52:15.401Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
