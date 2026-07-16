@@ -5393,11 +5393,11 @@
     "id": "LCAJHY3903FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-09 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5408,6 +5408,11 @@
         "timestamp": "2026-07-09T19:50:22.728Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-09 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate"
       }
     ]
   },
@@ -6186,14 +6191,14 @@
     "id": "LCAJHY4922CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:Harley",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6209,6 +6214,11 @@
         "timestamp": "2026-07-09T18:32:37.368Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:Harley"
       }
     ]
   },
@@ -6356,14 +6366,14 @@
     "id": "LCAJHY4913CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6379,6 +6389,11 @@
         "timestamp": "2026-07-09T18:32:37.368Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate"
       }
     ]
   },
@@ -7291,11 +7306,11 @@
     "id": "LCAJHY1027CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-09 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:Harley",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7306,6 +7321,11 @@
         "timestamp": "2026-07-09T19:50:22.727Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-09 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:Harley"
       }
     ]
   },
@@ -7352,11 +7372,11 @@
     "id": "LCAJHY1030CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Center",
+    "lastHistory": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:Tonya",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7367,6 +7387,11 @@
         "timestamp": "2026-07-09T19:51:30.063Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Center"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:Tonya"
       }
     ]
   },
