@@ -2751,11 +2751,11 @@
     "id": "LCAJHY4005CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Final",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -2781,6 +2781,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-17T13:27:35.868Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Final"
       }
     ]
   },
@@ -2844,11 +2849,11 @@
     "id": "LCAJHY1003CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 16,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Center",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -2874,6 +2879,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-17T13:27:35.868Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Center"
       }
     ]
   },
@@ -2881,11 +2891,11 @@
     "id": "LCAJHY3005FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 16,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Final",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -2911,6 +2921,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-17T13:27:35.868Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Final"
       }
     ]
   },
@@ -2918,11 +2933,11 @@
     "id": "LCAJHY4015CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Upper",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -2948,6 +2963,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-17T13:27:35.868Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:6-2 | 유닛:Upper"
       }
     ]
   },
