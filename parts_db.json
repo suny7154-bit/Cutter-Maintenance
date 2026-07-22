@@ -11144,16 +11144,21 @@
     "id": "LCAJHY1124CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-21 13시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-22T17:37:53.212Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-21 13시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
