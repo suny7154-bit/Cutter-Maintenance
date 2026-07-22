@@ -7882,11 +7882,11 @@
     "id": "LCAJHY1024CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:2-3 | 유닛:Center",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7907,6 +7907,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:29:39.333Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:2-3 | 유닛:Center"
       }
     ]
   },
