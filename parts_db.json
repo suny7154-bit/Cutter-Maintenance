@@ -3497,11 +3497,13 @@
     "id": "LCAJHY4901CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -3527,6 +3529,11 @@
         "timestamp": "2026-07-13T17:42:02.154Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:"
       }
     ]
   },
@@ -3636,11 +3643,13 @@
     "id": "LCAJHY4018CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 8,
-    "lastHistory": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Center | 작업자:OEM | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -3671,6 +3680,11 @@
         "timestamp": "2026-07-13T17:42:02.154Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Center | 작업자:OEM | 비고:"
       }
     ]
   },
@@ -5701,11 +5715,11 @@
     "id": "LCAJHY1903CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 8,
-    "lastHistory": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5716,6 +5730,11 @@
         "timestamp": "2026-07-13T15:51:20.221Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:"
       }
     ]
   },
@@ -6686,16 +6705,23 @@
     "id": "LCAJHY4921CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Final | 작업자:OEM | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Final | 작업자:OEM | 비고:"
       }
     ]
   },
