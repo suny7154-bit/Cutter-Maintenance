@@ -7252,12 +7252,13 @@
     "toolType": "LW (하도)",
     "maker": "HYTC",
     "status": "Using",
-    "currentSide": "10.0",
+    "currentSide": "20.0",
     "usedSides": [
-      "10.0"
+      "10.0",
+      "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:",
+    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-21 13시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7268,6 +7269,11 @@
         "timestamp": "2026-07-15T14:38:54.677Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-15 10시 | 라인:4-1 | 유닛:Upper | 작업자:Harley, Austin | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T17:35:23.477Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-21 13시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
