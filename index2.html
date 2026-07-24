@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ Cutter 재고 관리 및 이력 확인</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+        :root { --bg-color: #f4f6f9; --card-color: #ffffff; --text-color: #333333; --primary-color: #007bff; --border-color: #dddddd; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; }
+        .login-banner { background: #343a40; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; }
+        .login-banner input { width: 180px; padding: 8px; border: none; border-radius: 4px; }
+        .login-banner button { background: #17a2b8; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .login-banner button:hover { opacity: 0.9; }
+        .container { max-width: 1650px; margin: 0 auto; display: flex; gap: 20px; }
+        .sidebar { width: 280px; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
+        .main-content { flex: 1; background: var(--card-color); padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; min-width: 0; }
+        h2, h3 { margin-top: 0; color: #212529; }
+        .menu-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; background: none; border: 1px solid var(--border-color); text-align: left; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s; font-weight: bold; }
+        .menu-btn:hover, .menu-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        
+        .grid-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .grid-table th, .grid-table td { border: 1px solid var(--border-color); padding: 8px; text-align: center; }
+        .grid-table th { background: #e9ecef; font-size: 14px; color: #333; }
+        .grid-table input[type="text"], .grid-table input[type="number"], .grid-table select { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; text-align: center; transition: all 0.2s; }
+        .grid-table input[type="date"] { padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        .grid-table input[readonly], .grid-table select:disabled { background-color: #f1f3f5; color: #495057; border: 1px solid #dee2e6; opacity: 0.8; }
+        .grid-table input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
+        
+        .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: #fff; }
+        .summary-table th, .summary-table td { border: 1px solid #ced4da; padding: 12px; text-align: center; font-size: 14px; }
+        .summary-table th { background: #495057; color: white; }
+        .summary-table .sub-total { background: #f8f9fa; font-weight: bold; color: #0056b3; }
+        .summary-table .grand-total { background: #e2e3e5; font-weight: bold; color: #dc3545; }
+
+        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; font-size: 13px; }
+        .matrix-table th { background: #e9ecef; color: #333; font-weight: bold; }
+        .matrix-table tr:nth-child(even) { background-color: #fafafa; }
+        .empty-tool { color: #adb5bd; font-style: italic; }
+
+        .log-split-container { display: flex; gap: 20px; height: 600px; }
+        .log-list-side { flex: 3; border: 1px solid #dee2e6; border-radius: 6px; overflow-y: auto; padding: 0; background: #fff; }
+        .log-view-side { flex: 2; border: 1px solid #dee2e6; border-radius: 6px; background: #f8f9fa; padding: 15px; overflow-y: auto; }
+        .list-row { cursor: pointer; transition: background 0.1s; }
+        .list-row:hover { background: #edf2f7; }
+        .list-row.selected { background: #d2e3fc; border-left: 4px solid #1a73e8; }
+        .log-item { background: white; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 13px; line-height: 1.4; }
+        
+        .status-badge { font-weight: bold; padding: 5px 10px; border-radius: 4px; display: inline-block; word-break: break-all; font-size: 12px; text-shadow: 0px 0px 1px rgba(0,0,0,0.2); }
+        .status-storage { background-color: #28a745; color: #ffffff; border: 1px solid #1e7e34; } 
+        .status-using { background-color: #ffc107; color: #000000; border: 1px solid #d39e00; } 
+        .status-waiting { background-color: #fd7e14; color: #ffffff; border: 1px solid #e26b0a; } 
+        .status-regrind { background-color: #dc3545; color: #ffffff; border: 1px solid #bd2130; } 
+        .status-disposal { background-color: #212529; color: #ffffff; border: 1px solid #000000; } 
+
+        .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
+        .datetime-container input { width: 48% !important; padding: 5px; }
+        .btn-row-control { padding: 4px 10px; font-size: 12px; cursor: pointer; margin-right: 5px; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
+        .btn-row-control:hover { background: #e2e6ea; }
+        button.action-btn { color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-right: 10px; transition: 0.2s; }
+        button.action-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+        
+        .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
+        .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 4px; font-weight:bold; }
+
+        #loading-indicator {
+            display: none; position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85); color: #fff; font-weight: bold; font-size: 16px;
+            padding: 15px 30px; border-radius: 30px; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+        .toast {
+            visibility: hidden; min-width: 250px; background-color: #28a745; color: #fff;
+            text-align: center; border-radius: 30px; padding: 16px 20px; position: fixed; font-weight:bold;
+            z-index: 10000; left: 50%; bottom: 20px; font-size: 15px; transform: translateX(-50%);
+            box-shadow: 0px 6px 10px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.4s, bottom 0.4s;
+        }
+        .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+        .toast.error { background-color: #dc3545; }
+
+        .admin-lock-box { background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 6px; text-align: center; max-width: 400px; margin: 50px auto; }
+        .admin-panel { background: #fff; padding: 5px; display: none; }
+
+        .sim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; background:#fff; padding:15px; border-radius:6px; border:1px solid #dee2e6;}
+        .sim-item { display: flex; flex-direction: column; gap: 5px; }
+        .sim-item label { font-size: 13px; font-weight: bold; color: #495057; }
+        .sim-item input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; text-align: right; }
+        .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 15px; margin-bottom:20px; }
+        .result-card { background: #fff; border: 1px solid #ced4da; border-radius: 8px; padding: 20px; text-align: center; position: relative; overflow: hidden; }
+        .result-card.danger { border: 2px solid #dc3545; background: #fff5f5; }
+        .card-header { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #0056b3; }
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 14px; }
+        .stat-row strong { color: #212529; }
+        .life-expectancy { font-size: 32px; font-weight: bold; color: #28a745; margin: 15px 0; }
+        .danger .life-expectancy { color: #dc3545; }
+        .alert-badge { background: #dc3545; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; position: absolute; top: 10px; right: 10px; animation: blink 1s infinite alternate; }
+        @keyframes blink { from { opacity: 1; } to { opacity: 0.5; } }
+        .chart-container { background: #fff; border: 1px solid #ced4da; border-radius: 8px; padding: 20px; margin-top: 20px; width: 100%; height: 500px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="login-banner">
+    🔑 <strong>GitHub DB 연동:</strong>
+    <input type="password" id="cfg-token" placeholder="GitHub 토큰">
+    <input type="text" id="cfg-owner" placeholder="GitHub 유저명">
+    <input type="text" id="cfg-repo" placeholder="레포지토리명">
+    <button onclick="connectDB()" id="connect-btn">DB 연결 및 동기화</button>
+</div>
+
+<div id="toast-msg" class="toast"></div>
+<div id="loading-indicator">⏳ 데이터 처리 중...</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h2 style="margin-bottom: 20px; font-size: 24px;">Menu</h2>
+        <button class="menu-btn active" onclick="switchMenu('home')">🏠 Home (수량 집계)</button>
+        <button class="menu-btn" onclick="switchMenu('0')">🖥️ 0. 호기별 장착 ID</button>
+        <button class="menu-btn" onclick="switchMenu('1')">🆕 1. 신규 부품 등록</button>
+        <button class="menu-btn" onclick="switchMenu('2')">🔧 2. 장비 장착 / 탈거</button>
+        <button class="menu-btn" onclick="switchMenu('3')">🚛 3. 연마 출하 관리</button>
+        <button class="menu-btn" onclick="switchMenu('4')">📥 4. 연마 입고 관리</button>
+        <button class="menu-btn" onclick="switchMenu('5')" style="border-left: 4px solid #dc3545; font-weight: bold; color:#dc3545;">🔒 5. 관리자 모드-강제 제어</button>
+        <button class="menu-btn" onclick="switchMenu('6')">📜 6. 전체 커터 세부 리스트</button>
+        <button class="menu-btn" onclick="switchMenu('7')" style="border-left: 4px solid #212529;">🗑️ 7. 폐기 등록 (Disposal)</button>
+        <button class="menu-btn" onclick="switchMenu('8')" style="border-left: 4px solid #28a745; margin-top:15px;">📅 8. 장착/탈거 이력 보고서</button>
+        <button class="menu-btn" onclick="switchMenu('10')" style="border-left: 4px solid #17a2b8;">📅 10. 연마 출하/입고 이력 보고서</button>
+        <button class="menu-btn" onclick="switchMenu('9')" style="border-left: 4px solid #6f42c1; margin-top:10px;">📈 9. Shortage 예측 시뮬레이션</button>
+    </div>
+
+    <div class="main-content">
+        <div id="menu-home" class="menu-section">
+            <h2>📊 현재 재고 현황 (Home)</h2>
+            <p style="color:#666; font-size:14px;">※ Shortage 예측 및 톱니바퀴 시뮬레이션은 <b>좌측 [9번 메뉴]</b>로 이동되었습니다.</p>
+            <h3>■ 1. 커터 타입별 ✕ 제작사별 보유 수량</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th style="background-color:#495057; color:white;">커터 타입 (구분)</th>
+                        <th style="background-color:#495057; color:white;">HYTC</th>
+                        <th style="background-color:#495057; color:white;">유진 (YJ)</th>
+                        <th style="background-color:#495057; color:white;">UC1</th>
+                        <th style="background-color:#495057; color:white;">기타 / 미분류</th>
+                        <th class="sub-total" style="background-color:#e9ecef; color:#0056b3;">타입별 합계</th>
+                    </tr>
+                </thead>
+                <tbody id="home-maker-tbody"></tbody>
+            </table>
+
+            <h3>■ 2. 커터 타입별 ✕ 현재 상태별 수량</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th style="background-color:#495057; color:white;">커터 타입 (구분)</th>
+                        <th style="background-color:#28a745; color:white; border-color:#1e7e34;">Storage (사용대기)</th>
+                        <th style="background-color:#ffc107; color:black; border-color:#d39e00;">Using (사용중)</th>
+                        <th style="background-color:#fd7e14; color:white; border-color:#e26b0a;">Waiting (연마대기)</th>
+                        <th style="background-color:#dc3545; color:white; border-color:#bd2130;">Regrind (연마중-출하)</th>
+                        <th style="background-color:#212529; color:white; border-color:#000000;">Disposal (폐기)</th>
+                        <th class="sub-total" style="background-color:#e9ecef; color:#0056b3;">타입별 합계</th>
+                    </tr>
+                </thead>
+                <tbody id="home-status-tbody"></tbody>
+            </table>
+        </div>
+
+        <div id="menu-0" class="menu-section" style="display:none;">
+            <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
+            <p style="font-size:13px; color:#666;">※ Flip으로 20.0면을 사용 중인 경우 마스터 ID 옆에 (20.0면)으로 통합 표시되며, 하도는 표 하단에 정렬됩니다.</p>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 16%;">설비 호기 (Line)</th>
+                        <th style="width: 28%;">Upper Unit</th>
+                        <th style="width: 28%;">Center Unit</th>
+                        <th style="width: 28%;">Final Unit</th>
+                    </tr>
+                </thead>
+                <tbody id="matrix-table-body"></tbody>
+            </table>
+        </div>
+
+        <div id="menu-1" class="menu-section" style="display:none;">
+            <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 20.0 스캔 시 10.0 통합 생성. 백의 자리가 9번대(X9XX)인 공구는 UC1으로 자동 분류됩니다.</p>
+            <div><button class="btn-row-control" onclick="addGridRow('1')">➕ 행 추가</button></div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Tool ID</th>
+                        <th style="width: 25%;">Tool Type (자동)</th>
+                        <th style="width: 25%;">제작사 (자동)</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-1-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#28a745;" onclick="submitBulkRegister()">🚀 신규 부품 일괄 등록 실행</button>
+        </div>
+
+        <div id="menu-2" class="menu-section" style="display:none;">
+            <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                <div><button class="btn-row-control" onclick="addGridRow('2')">➕ 행 추가</button></div>
+                <button class="action-btn" style="background:#28a745; padding:6px 12px; font-size:13px; margin:0;" onclick="switchMenu('8')">📅 공장 전체 장착/탈거 이력 조회</button>
+            </div>
+            <p style="font-size:13px; color:#ef4444; font-weight:bold; margin-top:5px;">※ 장착은 [Storage], 탈거는 [Using]만 가능합니다. Using 중인 하도는 반대 면으로 재장착(스왑) 가능합니다.</p>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 18%;">Tool ID</th>
+                        <th style="width: 11%;">Tool Type</th>
+                        <th style="width: 8%;">장착 면<br><small>(하도)</small></th>
+                        <th style="width: 18%;">장착/탈거 일시</th>
+                        <th style="width: 9%;">라인 선택</th>
+                        <th style="width: 9%;">Unit</th>
+                        <th style="width: 8%;">작업자</th>
+                        <th style="width: 9%;">Comment</th>
+                        <th style="width: 10%;">액션</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-2-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#007bff;" onclick="submitBulkEquip('Using')">🛠️ 일괄 장비 장착 승인</button>
+            <button class="action-btn" style="background:#fd7e14; color:#fff;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
+        </div>
+
+        <div id="menu-3" class="menu-section" style="display:none;">
+            <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                <div>
+                    <button class="btn-row-control" onclick="addGridRow('3')">➕ 행 추가</button>
+                    <button class="btn-row-control" style="background:#ffc107; color:#000; border:none; font-weight:bold; padding:5px 12px;" onclick="loadWaitingCutters()">📥 Waiting 커터 자동 불러오기</button>
+                </div>
+                <div style="background:#f1f3f5; padding:5px 10px; border-radius:4px; border:1px solid #ced4da; font-size:13px;">
+                    <strong>📅 출하 일자 일괄 변경:</strong>
+                    <input type="date" id="bulk-ship3-date" style="padding:4px; margin:0 5px; border-radius:4px; border:1px solid #ccc; font-size:13px; width:auto;">
+                    <button class="btn-row-control" style="background:#007bff; color:white; border:none; padding:5px 12px; font-weight:bold;" onclick="applyBulkShip3Date()">한번에 적용</button>
+                </div>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">Tool ID</th>
+                        <th style="width: 20%;">제조사 (자동)</th>
+                        <th style="width: 20%;">출하 일자</th>
+                        <th style="width: 15%;">출하 비고</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-3-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#dc3545;" onclick="submitBulkShipment('Regrind')">🚛 외주 연마 일괄 출하 처리 (Regrind)</button>
+        </div>
+
+        <div id="menu-4" class="menu-section" style="display:none;">
+            <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
+            <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 사용 이력 면(10.0/20.0)이 초기화되며 [연마 가능 횟수]를 갱신합니다.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                <div><button class="btn-row-control" onclick="addGridRow('4')">➕ 행 추가</button></div>
+                <div style="background:#f1f3f5; padding:5px 10px; border-radius:4px; border:1px solid #ced4da; font-size:13px;">
+                    <strong>📅 입고 일자 일괄 변경:</strong>
+                    <input type="date" id="bulk-ship4-date" style="padding:4px; margin:0 5px; border-radius:4px; border:1px solid #ccc; font-size:13px; width:auto;">
+                    <button class="btn-row-control" style="background:#007bff; color:white; border:none; padding:5px 12px; font-weight:bold;" onclick="applyBulkShip4Date()">한번에 적용</button>
+                </div>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Tool ID (Ctrl+V)</th>
+                        <th style="width: 20%;">입고 일자</th>
+                        <th style="width: 15%;">연마 가능 횟수 (잔여)</th>
+                        <th style="width: 15%;">입고 상태 비고</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-4-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#28a745;" onclick="submitBulkShipIn()">📥 가공 창고 입고 승인</button>
+        </div>
+
+        <div id="menu-5" class="menu-section" style="display:none;">
+            <h2>🔒 5. 관리자 모드-강제 상태 변경 및 예외 등록</h2>
+            
+            <div id="admin-auth-zone" class="admin-lock-box">
+                <label style="display:block; margin-bottom:10px; font-weight:bold; color:#721c24;">⚠️ 최고 관리자 비밀번호 인증 필요</label>
+                <input type="password" id="admin-password-input" placeholder="비밀번호 입력" style="padding:8px; width:80%; text-align:center; border:1px solid #f5c6cb; border-radius:4px; margin-bottom:10px;"><br>
+                <button class="action-btn" style="background:#dc3545; padding:6px 15px; font-size:13px;" onclick="verifyAdminPassword()">🔐 인증 실행</button>
+            </div>
+
+            <div id="admin-panel-zone" class="admin-panel">
+                <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-1. 상태 및 장착 위치 강제 제어</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                    <div><button class="btn-row-control" onclick="addGridRow('5')">➕ 행 추가</button></div>
+                    <div style="background:#f1f3f5; padding:5px 10px; border-radius:4px; border:1px solid #ced4da; font-size:13px;">
+                        <strong>🛠️ 표 전체 일괄 상태 변경:</strong>
+                        <select id="bulk-admin-status" style="padding:4px; margin:0 5px; border-radius:4px; border:1px solid #ccc; font-size:13px;">
+                            <option value="Storage">Storage (사용대기)</option>
+                            <option value="Using">Using (사용중)</option>
+                            <option value="Waiting">Waiting (연마대기)</option>
+                            <option value="Regrind">Regrind (연마중-출하)</option>
+                            <option value="Disposal">Disposal (폐기)</option>
+                        </select>
+                        <button class="btn-row-control" style="background:#007bff; color:white; border:none; padding:5px 12px; font-weight:bold;" onclick="applyBulkAdminStatus()">한번에 적용</button>
+                    </div>
+                </div>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 상태를 Using으로 변경 시 장착 호기와 Unit을 필수로 선택해야 합니다.</p>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Tool ID (Ctrl+V)</th>
+                            <th style="width: 15%;">조회된 현재 상태</th>
+                            <th style="width: 15%;">변경 상태 (목표)</th>
+                            <th style="width: 15%;">장착 호기</th>
+                            <th style="width: 15%;">장착 Unit</th>
+                            <th style="width: 15%;">비고 / 사유</th>
+                            <th style="width: 5%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#212529; width:100%; margin-top:10px;" onclick="submitAdminOverride()">⚡ 마스터 데이터 일괄 강제 변경 승인</button>
+                
+                <h3 style="margin-top:40px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-2. 커터 ID 일괄 변경 (Rename)</h3>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 오기입된 커터 ID를 새로운 ID로 덮어씌웁니다. 기존 이력과 수명 정보는 모두 안전하게 승계됩니다.</p>
+                <div><button class="btn-row-control" onclick="addGridRow('5_rename')">➕ 행 추가</button></div>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">기존 Tool ID (Ctrl+V)</th>
+                            <th style="width: 20%;">현재 상태 조회</th>
+                            <th style="width: 15%;">장착 호기</th>
+                            <th style="width: 15%;">장착 Unit</th>
+                            <th style="width: 20%;">신규 Tool ID 입력</th>
+                            <th style="width: 5%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-rename-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#28a745; width:100%; margin-top:10px;" onclick="submitAdminRename()">⚡ 마스터 ID 일괄 변경 승인</button>
+                
+                <h3 style="margin-top:40px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-3. 신규 커터 ID 강제 등록 (발번 규칙 예외)</h3>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 발번 규칙에 맞지 않는 예외 ID를 강제로 등록합니다. 타입과 제작사를 수동으로 지정하세요.</p>
+                <div><button class="btn-row-control" onclick="addGridRow('5_forcereg')">➕ 행 추가</button></div>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">예외 Tool ID (Ctrl+V)</th>
+                            <th style="width: 25%;">커터 타입 직접 지정</th>
+                            <th style="width: 25%;">제작사 직접 입력</th>
+                            <th style="width: 15%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-forcereg-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#dc3545; width:100%; margin-top:10px;" onclick="submitAdminForceReg()">⚡ 예외 커터 강제 등록 승인</button>
+
+                <br><br><br>
+                <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 백업 출력</h3>
+                <button class="action-btn" onclick="downloadExcel()" style="background:#495057; font-size:13px; padding:8px 15px;">📊 현시점 DB 마스터 엑셀 백업 다운로드</button>
+            </div>
+        </div>
+
+        <div id="menu-6" class="menu-section" style="display:none;">
+            <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6;">
+                <span style="font-size: 16px;">🔍 검색:</span>
+                <input type="text" id="search-input-6" placeholder="Tool ID, 타입, 상태, 제조사 검색..." style="width: 300px; padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;" oninput="renderMenu6List(this.value)">
+                <span style="font-size: 12px; color: #6c757d;">※ 입력 시 목록이 즉시 필터링됩니다.</span>
+            </div>
+            <div class="log-split-container">
+                <div class="log-list-side">
+                    <table class="grid-table" style="margin-bottom:0; border:none;">
+                        <thead style="position: sticky; top: 0; z-index: 10;">
+                            <tr>
+                                <th style="width:25%;">Tool ID</th>
+                                <th style="width:20%;">타입</th>
+                                <th style="width:15%;">제작사</th>
+                                <th style="width:25%;">상태 (Color)</th>
+                                <th style="width:15%;">연마 가능 (잔여)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-list-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="log-view-side">
+                    <h3 id="selected-tool-title" style="border-bottom:2px solid #007bff; padding-bottom:8px; font-size:16px;">🔍 공구를 선택해 주세요</h3>
+                    <div id="selected-tool-logs">
+                        <p style="color:#888; text-align:center; margin-top:50px;">선택된 이력이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="menu-7" class="menu-section" style="display:none;">
+            <h2>🗑️ 7. 고품 폐기 일괄 등록 (상태 → Disposal)</h2>
+            <div><button class="btn-row-control" onclick="addGridRow('7')">➕ 행 추가</button></div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 45%;">Tool ID (입력 또는 Ctrl+V)</th>
+                        <th style="width: 25%;">현재 상태 조회</th>
+                        <th style="width: 20%;">폐기 사유 기입</th>
+                        <th style="width: 10%;">삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-7-body"></tbody>
+            </table>
+            <button class="action-btn" style="background:#212529; border: 1px solid #000;" onclick="submitBulkDisposal()">🗑️ 선택 부품 폐기(Disposal) 처리</button>
+        </div>
+
+        <div id="menu-8" class="menu-section" style="display:none;">
+            <h2>📅 8. 전체 장착/탈거 이력 보고서</h2>
+            <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
+                <strong>조회 기간:</strong>
+                <input type="date" id="report-start-date" style="padding:6px; border-radius:4px; border:1px solid #ccc;">
+                ~
+                <input type="date" id="report-end-date" style="padding:6px; border-radius:4px; border:1px solid #ccc;">
+                <button class="action-btn" style="background:#007bff; padding:8px 15px; margin:0;" onclick="generateEquipReport()">📊 보고서 생성</button>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">일시</th>
+                        <th style="width: 20%;">Tool ID</th>
+                        <th style="width: 10%;">구분 (Action)</th>
+                        <th style="width: 15%;">라인 / 유닛</th>
+                        <th style="width: 10%;">작업자</th>
+                        <th style="width: 30%;">전체 원본 로그</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-8-body">
+                    <tr><td colspan="6" style="color:#888; padding:30px;">조회 기간을 설정하고 보고서 생성 버튼을 눌러주세요.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="menu-10" class="menu-section" style="display:none;">
+            <h2>📅 10. 연마 출하 / 입고 이력 보고서</h2>
+            <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
+                <strong>조회 기간:</strong>
+                <input type="date" id="grinding-start-date" style="padding:6px; border-radius:4px; border:1px solid #ccc;">
+                ~
+                <input type="date" id="grinding-end-date" style="padding:6px; border-radius:4px; border:1px solid #ccc;">
+                <button class="action-btn" style="background:#17a2b8; padding:8px 15px; margin:0;" onclick="generateGrindingReport()">📊 연마 이력 생성</button>
+            </div>
+            <table class="grid-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">일시</th>
+                        <th style="width: 25%;">Tool ID</th>
+                        <th style="width: 15%;">구분 (Action)</th>
+                        <th style="width: 45%;">전체 원본 로그 (비고 등)</th>
+                    </tr>
+                </thead>
+                <tbody id="grid-10-body">
+                    <tr><td colspan="4" style="color:#888; padding:30px;">조회 기간을 설정하고 보고서 생성 버튼을 눌러주세요.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="menu-9" class="menu-section" style="display:none;">
+            <h2>📈 9. 커터 파이프라인 Shortage 이산(Discrete) 궤적 시뮬레이터</h2>
+            <p style="font-size:13px; color:#666;">※ 실제 공장 물류 흐름(입고 시 증가, 장착 시 하락)을 개별 커터 수명 단위로 추적하는 리얼타임 알고리즘이 적용되었습니다.</p>
+            
+            <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
+                🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span>개)
+            </div>
+
+            <div id="sim-panel-content">
+                <div class="sim-grid">
+                    <div class="sim-item">
+                        <label>연마 반출 주기 (주)</label>
+                        <input type="number" id="sim-regrind-cycle" value="1" min="1" step="0.5" oninput="runPrediction()">
+                    </div>
+                    <div class="sim-item">
+                        <label>반출 이후 입고 L/T (주)</label>
+                        <input type="number" id="sim-lead-time" value="1" min="0" step="0.5" oninput="runPrediction()">
+                    </div>
+                    <div class="sim-item">
+                        <label>신규 제작 발주 L/T (주)</label>
+                        <input type="number" id="sim-new-lt" value="15" min="0" step="1" oninput="runPrediction()">
+                    </div>
+                    <div class="sim-item">
+                        <label>UC1 커터 전량 반출 (폐기) 일자</label>
+                        <input type="date" id="sim-uc1-date" value="2026-08-31" onchange="runPrediction()">
+                    </div>
+                </div>
+                
+                <div style="display:flex; gap:20px; margin-bottom:20px;">
+                    <div style="flex:1; background:#fff; border:1px solid #ced4da; padding:15px; border-radius:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <label style="font-size: 14px; font-weight: bold; color: #495057;">🗓️ 1. 기간별 양산 장비 대수 (Capa) 일정</label>
+                            <button class="btn-row-control" style="background:#28a745; color:white; border:none;" onclick="addScheduleRow()">➕ 기간 추가</button>
+                        </div>
+                        <table class="grid-table" style="margin-bottom:0;">
+                            <thead>
+                                <tr>
+                                    <th style="width:25%;">시작 일자</th>
+                                    <th style="width:30%;">종료 일자 (빈칸=계속)</th>
+                                    <th style="width:25%;">양산 장비 (대)</th>
+                                    <th style="width:20%;">액션</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div style="flex:1; background:#fff; border:1px solid #ced4da; padding:15px; border-radius:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <label style="font-size: 14px; font-weight: bold; color: #495057;">🛒 2. 신규 제작 커터 입고 예정 일정</label>
+                            <button class="btn-row-control" style="background:#007bff; color:white; border:none;" onclick="addNewCutterRow()">➕ 입고 추가</button>
+                        </div>
+                        <table class="grid-table" style="margin-bottom:0;">
+                            <thead>
+                                <tr>
+                                    <th style="width:30%;">입고 예정 주간</th>
+                                    <th style="width:35%;">커터 타입</th>
+                                    <th style="width:20%;">수량 (개)</th>
+                                    <th style="width:15%;">삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody id="new-cutter-tbody">
+                                <tr id="new-cutter-empty-msg"><td colspan="4" style="color:#adb5bd; font-size:12px;">등록된 신규 입고 일정이 없습니다.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="text-align:right; margin-bottom:15px;">
+                    <button class="action-btn" style="background:#6f42c1; padding:10px 30px; font-size:16px;" onclick="runPrediction()">🚀 리얼타임 이산 궤적 시뮬레이션 가동</button>
+                </div>
+
+                <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">📊 타입별 Shortage 분석 결과</h3>
+                <div class="result-grid" id="prediction-cards"></div>
+
+                <div class="chart-container">
+                    <canvas id="shortageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let globalData = [];
+    let dbSha = "";
+    let isSaving = false;
+    let simChartInstance = null;
+    
+    // 전역 변수 설정
+    let machineSchedules = [];
+    const DB_FILE = "parts_db.json";
+
+    function utf8_to_b64(str) {
+        const bytes = new TextEncoder().encode(str);
+        let binString = '';
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) { binString += String.fromCharCode(bytes[i]); }
+        return window.btoa(binString);
+    }
+
+    function b64_to_utf8(str) {
+        const binString = window.atob(str);
+        const len = binString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) { bytes[i] = binString.charCodeAt(i); }
+        return new TextDecoder().decode(bytes);
+    }
+
+    function showToast(message, isError = false) {
+        const toast = document.getElementById("toast-msg");
+        toast.innerText = message;
+        if(isError) toast.classList.add("error");
+        else toast.classList.remove("error");
+        toast.classList.add("show");
+        setTimeout(() => { toast.classList.remove("show"); }, 3000);
+    }
+
+    function showLoading(show, message = "⏳ 데이터 처리 중...") {
+        const loader = document.getElementById('loading-indicator');
+        if (show) { loader.innerText = message; loader.style.display = 'block'; } 
+        else { loader.style.display = 'none'; }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedToken = localStorage.getItem('gh_token');
+        const savedOwner = localStorage.getItem('gh_owner');
+        const savedRepo = localStorage.getItem('gh_repo');
+        
+        const todayStr = new Date().toISOString().split('T')[0];
+        const d3 = document.getElementById("bulk-ship3-date");
+        const d4 = document.getElementById("bulk-ship4-date");
+        if(d3) d3.value = todayStr;
+        if(d4) d4.value = todayStr;
+
+        // 리포트 기본 날짜 세팅 (8번, 10번 메뉴)
+        const d = new Date();
+        const endStr = d.toISOString().split('T')[0];
+        d.setDate(d.getDate() - 7);
+        const startStr = d.toISOString().split('T')[0];
+
+        const reportStart = document.getElementById("report-start-date");
+        const reportEnd = document.getElementById("report-end-date");
+        if (reportStart && reportEnd) { reportStart.value = startStr; reportEnd.value = endStr; }
+
+        const grindStart = document.getElementById("grinding-start-date");
+        const grindEnd = document.getElementById("grinding-end-date");
+        if (grindStart && grindEnd) { grindStart.value = startStr; grindEnd.value = endStr; }
+        
+        renderScheduleTable();
+
+        if (savedToken && savedOwner && savedRepo) {
+            document.getElementById("cfg-token").value = savedToken;
+            document.getElementById("cfg-owner").value = savedOwner;
+            document.getElementById("cfg-repo").value = savedRepo;
+            fetchDatabase();
+        }
+    });
+
+    // 💡 3번 메뉴 Waiting 커터 자동 호출 함수
+    function loadWaitingCutters() {
+        const waitingCutters = globalData.filter(p => p.status === 'Waiting');
+        if(waitingCutters.length === 0) { showToast("대기(Waiting) 중인 커터가 없습니다.", true); return; }
+        
+        const tbody = document.getElementById('grid-3-body');
+        tbody.innerHTML = ''; // 기존 입력 내용 초기화
+        
+        waitingCutters.forEach(p => {
+            addGridRow('3');
+            const lastRow = tbody.lastElementChild;
+            const idInput = lastRow.querySelector('.tool-id-input');
+            idInput.value = p.id;
+            handleIdInputLive(idInput, true); // 자동 조회 트리거
+        });
+        showToast(`✅ ${waitingCutters.length}개의 Waiting 커터를 모두 불러왔습니다.`);
+    }
+
+    function renderScheduleTable() {
+        const tbody = document.getElementById('schedule-tbody');
+        if(!tbody) return;
+        tbody.innerHTML = '';
+        if (machineSchedules.length === 0) {
+            const today = new Date().toISOString().split('T')[0];
+            machineSchedules.push({ start: today, end: '', machines: 14 });
+        }
+
+        machineSchedules.forEach((sch, index) => {
+            const tr = document.createElement('tr');
+            const isFirst = index === 0;
+            const isLast = index === machineSchedules.length - 1;
+
+            const startStr = isFirst ? 'Today' : sch.start;
+            const startTd = document.createElement('td');
+            startTd.innerHTML = `<input type="text" value="${startStr}" readonly style="background:#e9ecef; font-weight:bold; color:#495057;">`;
+            tr.appendChild(startTd);
+
+            const endTd = document.createElement('td');
+            if (isLast) {
+                const endInput = document.createElement('input');
+                endInput.type = 'date';
+                endInput.value = sch.end;
+                endInput.onchange = (e) => { machineSchedules[index].end = e.target.value; };
+                endTd.appendChild(endInput);
+            } else {
+                endTd.innerHTML = `<input type="date" value="${sch.end}" readonly style="background:#f1f3f5; color:#6c757d;">`;
+            }
+            tr.appendChild(endTd);
+
+            const machTd = document.createElement('td');
+            const machInput = document.createElement('input');
+            machInput.type = 'number';
+            machInput.value = sch.machines;
+            machInput.min = 0;
+            machInput.onchange = (e) => { machineSchedules[index].machines = parseInt(e.target.value) || 0; };
+            machTd.appendChild(machInput);
+            tr.appendChild(machTd);
+
+            const actTd = document.createElement('td');
+            if (isLast && index > 0) {
+                const delBtn = document.createElement('button');
+                delBtn.className = 'btn-row-control';
+                delBtn.style.color = '#dc3545';
+                delBtn.innerText = '❌ 삭제';
+                delBtn.onclick = () => { machineSchedules.pop(); machineSchedules[machineSchedules.length-1].end = ''; renderScheduleTable(); };
+                actTd.appendChild(delBtn);
+            } else {
+                actTd.innerHTML = `<span style="color:#adb5bd;">-</span>`;
+            }
+            tr.appendChild(actTd);
+            tbody.appendChild(tr);
+        });
+    }
+
+    function addScheduleRow() {
+        const lastSch = machineSchedules[machineSchedules.length - 1];
+        if (!lastSch.end) { showToast("⚠️ 이전 기간의 '종료 일자'를 설정해야 다음 기간을 추가할 수 있습니다.", true); return; }
+        const nextStart = new Date(lastSch.end);
+        nextStart.setDate(nextStart.getDate() + 1);
+        machineSchedules.push({ start: nextStart.toISOString().split('T')[0], end: '', machines: lastSch.machines });
+        renderScheduleTable();
+    }
+
+    function getMachinesForDate(targetDate) {
+        for (let i = 0; i < machineSchedules.length; i++) {
+            const sch = machineSchedules[i];
+            let startD = new Date(sch.start + "T00:00:00");
+            if (i === 0) startD = new Date(new Date().toISOString().split('T')[0] + "T00:00:00"); 
+            const endD = sch.end ? new Date(sch.end + "T23:59:59") : new Date("2099-12-31T23:59:59");
+            if (targetDate >= startD && targetDate <= endD) return sch.machines;
+        }
+        return machineSchedules[0].machines; 
+    }
+
+    function addNewCutterRow() {
+        const tbody = document.getElementById('new-cutter-tbody');
+        const emptyMsg = document.getElementById('new-cutter-empty-msg');
+        if (emptyMsg) emptyMsg.remove();
+
+        const tr = document.createElement('tr');
+        tr.className = 'new-cutter-row';
+        tr.innerHTML = `
+            <td><input type="date" class="nc-date"></td>
+            <td>
+                <select class="nc-type">
+                    <option value="1.8도 상도">1.8도 상도</option>
+                    <option value="1.2도 상도">1.2도 상도</option>
+                    <option value="LW (하도)">LW (하도)</option>
+                </select>
+            </td>
+            <td><input type="number" class="nc-qty" value="10" min="1"></td>
+            <td><button class="btn-row-control" style="color:#dc3545;" onclick="this.closest('tr').remove(); checkEmptyNewCutter();">❌ 삭제</button></td>
+        `;
+        tbody.appendChild(tr);
+    }
+    
+    function checkEmptyNewCutter() {
+        const tbody = document.getElementById('new-cutter-tbody');
+        if (tbody.children.length === 0) {
+            tbody.innerHTML = `<tr id="new-cutter-empty-msg"><td colspan="4" style="color:#adb5bd; font-size:12px;">등록된 신규 입고 일정이 없습니다.</td></tr>`;
+        }
+    }
+
+    function getNewCutterSchedules() {
+        let schedules = [];
+        const rows = document.querySelectorAll('.new-cutter-row');
+        rows.forEach(row => {
+            const dateVal = row.querySelector('.nc-date').value;
+            const typeVal = row.querySelector('.nc-type').value;
+            const qtyVal = parseInt(row.querySelector('.nc-qty').value) || 0;
+            if (dateVal && qtyVal > 0) {
+                schedules.push({ date: dateVal, type: typeVal, qty: qtyVal });
+            }
+        });
+        return schedules;
+    }
+
+    function connectDB() {
+        const token = document.getElementById("cfg-token").value.trim();
+        const owner = document.getElementById("cfg-owner").value.trim();
+        const repo = document.getElementById("cfg-repo").value.trim();
+        if(token && owner && repo) {
+            localStorage.setItem('gh_token', token);
+            localStorage.setItem('gh_owner', owner);
+            localStorage.setItem('gh_repo', repo);
+        }
+        fetchDatabase();
+    }
+
+    function getCredentials() {
+        return { token: document.getElementById("cfg-token").value.trim(), owner: document.getElementById("cfg-owner").value.trim(), repo: document.getElementById("cfg-repo").value.trim() };
+    }
+
+    function parseAndValidateToolId(id) {
+        if (!id) return { valid: false, type: "" };
+        let toolType = "";
+        if (id.endsWith("X1.8")) toolType = "1.8도 상도";
+        else if (id.endsWith("X1.2")) toolType = "1.2도 상도";
+        else if (id.endsWith("10.0") || id.endsWith("20.0")) toolType = "LW (하도)";
+        const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
+        return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
+    }
+
+    function getToolCategory(type) {
+        if (type.includes("상도")) return "상도";
+        if (type.includes("하도")) return "하도";
+        return "기타";
+    }
+
+    function getResolvedMaker(id, defaultMaker) {
+        if (id && id.length >= 10 && id.charAt(7) === '9') return "UC1";
+        if (defaultMaker && defaultMaker !== "미분류" && defaultMaker !== "기타" && defaultMaker !== "") return defaultMaker;
+        if (id && id.includes("HY")) return "HYTC";
+        if (id && id.includes("YJ")) return "유진";
+        return "기타";
+    }
+
+    function getMountedLocation(part) {
+        if (part.status !== 'Using') return null;
+        let foundLine = "", foundUnit = "";
+        if (part.historyLog && part.historyLog.length > 0) {
+            for (let i = part.historyLog.length - 1; i >= 0; i--) {
+                const logObj = part.historyLog[i];
+                if (logObj.status === 'Using' && logObj.log.includes("라인:")) {
+                    try { foundLine = logObj.log.split('라인:')[1].split('|')[0].trim(); foundUnit = logObj.log.split('유닛:')[1].split('|')[0].trim(); return { line: foundLine, unit: foundUnit }; } catch(e) {}
+                }
+            }
+        }
+        return null;
+    }
+
+    function verifyAdminPassword() {
+        const pass = document.getElementById("admin-password-input").value;
+        if (pass === "Jooyupidiot") {
+            document.getElementById("admin-auth-zone").style.display = "none";
+            document.getElementById("admin-panel-zone").style.display = "block";
+            showToast("🔒 최고 관리자 권한 승인 완료.");
+        } else {
+            showToast("❌ 비밀번호가 올바르지 않습니다.", true);
+        }
+    }
+
+    function toggleAdminLineUnit(selectEl) {
+        const tr = selectEl.closest('tr');
+        const line = tr.querySelector('.admin-target-line');
+        const unit = tr.querySelector('.admin-target-unit');
+        if (selectEl.value === 'Using') { line.disabled = false; unit.disabled = false; } 
+        else { line.disabled = true; unit.disabled = true; line.value = ''; unit.value = ''; }
+    }
+
+    function applyBulkAdminStatus() {
+        const targetStatus = document.getElementById("bulk-admin-status").value;
+        const rows = document.querySelectorAll("#grid-5-body tr");
+        if(rows.length === 0) { showToast("변경할 행이 없습니다.", true); return; }
+        rows.forEach(row => {
+            const selectEl = row.querySelector('.admin-target-status');
+            if(selectEl) { selectEl.value = targetStatus; toggleAdminLineUnit(selectEl); }
+        });
+        showToast(`표 전체 행의 목표 상태가 [${targetStatus}]로 일괄 변경되었습니다.`);
+    }
+
+    function applyBulkShip3Date() {
+        const targetDate = document.getElementById("bulk-ship3-date").value;
+        if(!targetDate) { showToast("변경할 출하 날짜를 선택하세요.", true); return; }
+        const rows = document.querySelectorAll("#grid-3-body tr");
+        if(rows.length === 0) { showToast("변경할 행이 없습니다.", true); return; }
+        rows.forEach(row => {
+            const dateInput = row.querySelector('.ship-out-date');
+            if(dateInput) dateInput.value = targetDate;
+        });
+        showToast(`표 전체 행의 출하 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
+    }
+
+    function applyBulkShip4Date() {
+        const targetDate = document.getElementById("bulk-ship4-date").value;
+        if(!targetDate) { showToast("변경할 입고 날짜를 선택하세요.", true); return; }
+        const rows = document.querySelectorAll("#grid-4-body tr");
+        if(rows.length === 0) { showToast("변경할 행이 없습니다.", true); return; }
+        rows.forEach(row => {
+            const dateInput = row.querySelector('.ship-in-date');
+            if(dateInput) dateInput.value = targetDate;
+        });
+        showToast(`표 전체 행의 입고 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
+    }
+
+    function setupNumberPasteInterceptor(inputEl) {
+        inputEl.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+            const lines = clipboardData.split(/\r?\n/).map(line => line.trim()).filter(line => line !== '');
+            if (lines.length === 0) return;
+            let currentRow = inputEl.closest('tr');
+            let tbody = currentRow.parentNode;
+            inputEl.value = lines[0];
+            for (let i = 1; i < lines.length; i++) {
+                let nextRow = currentRow.nextElementSibling;
+                if (!nextRow) { addGridRow('4'); nextRow = tbody.lastChild; }
+                const nextInput = nextRow.querySelector('.regrind-available-input');
+                if (nextInput) nextInput.value = lines[i];
+                currentRow = nextRow;
+            }
+        });
+    }
+
+    function setupPasteInterceptor(inputEl, menuType) {
+        inputEl.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+            const lines = clipboardData.split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0);
+            if (lines.length === 0) return;
+            const tr = inputEl.closest('tr');
+            const tbody = tr.parentNode;
+            
+            inputEl.value = lines[0].toUpperCase();
+            if (menuType === '2') handleEquipIdChange(inputEl);
+            else if (menuType === '5_rename') handleIdRenameLive(inputEl);
+            else if (menuType === '5_forcereg') { }
+            else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
+
+            for (let i = 1; i < lines.length; i++) {
+                addGridRow(menuType);
+                const nextTr = tbody.lastChild;
+                const nextInput = nextTr.querySelector('.tool-id-input');
+                if (nextInput) {
+                    nextInput.value = lines[i].toUpperCase();
+                    if (menuType === '2') handleEquipIdChange(nextInput);
+                    else if (menuType === '5_rename') handleIdRenameLive(nextInput);
+                    else if (menuType === '5_forcereg') { }
+                    else handleIdInputLive(nextInput, ['3', '4', '5', '7'].includes(menuType));
+                }
+            }
+        });
+    }
+
+    function addGridRow(menu) {
+        const tbody = document.getElementById(`grid-${menu}-body`) || document.getElementById(`grid-${menu.replace('_', '-')}-body`);
+        if(!tbody) return;
+        const tr = document.createElement('tr');
+        const todayStr = new Date().toISOString().split('T')[0];
+        
+        if (menu === '1') { 
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="LCAJHY1000CU65610.0" oninput="handleIdInputLive(this)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
+                <td><input type="text" class="maker-input" placeholder="자동 완성"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '1');
+        } else if (menu === '2') { 
+            const now = new Date();
+            const localDate = now.toISOString().split('T')[0];
+            const localHour = String(now.getHours()).padStart(2, '0') + ":00";
+            
+            let lineOptions = "";
+            for(let i=1; i<=5; i++) { for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; } }
+            for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
+            lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
+            lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
+
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" onchange="handleEquipIdChange(this)"><span class="info-text"></span></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
+                <td><select class="face-select" disabled style="width:95%; font-size:12px; padding:4px;"><option value="10.0">10.0면</option><option value="20.0">20.0면</option></select></td>
+                <td><div class="datetime-container"><input type="date" class="equip-date-input" value="${localDate}"><input type="time" class="equip-time-input" value="${localHour}"></div></td>
+                <td><select class="equip-line-select" onchange="checkUnitAvailability(this)">${lineOptions}</select></td>
+                <td><select class="equip-unit-select" onchange="checkUnitAvailability(this)"><option value="Upper">Upper</option><option value="Center">Center</option><option value="Final">Final</option></select></td>
+                <td><input type="text" class="equip-op-input" placeholder="작업자"></td>
+                <td><input type="text" class="equip-comment-input" placeholder="비고"></td>
+                <td><button type="button" class="btn-row-control" style="background:#17a2b8; color:white; border:none; margin-bottom:4px;" onclick="goToHistory(this)">🔍 이력</button><button class="btn-row-control" onclick="this.closest('tr').remove()">❌ 삭제</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '2');
+        } else if (menu === '3') { 
+            const bulkDate3 = document.getElementById("bulk-ship3-date") ? document.getElementById("bulk-ship3-date").value : todayStr;
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="maker-input" readonly placeholder="자동 매칭"></td>
+                <td><input type="date" class="ship-out-date" value="${bulkDate3 || todayStr}"></td>
+                <td><input type="text" class="ship-out-comment" placeholder="출하 비고"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '3');
+        } else if (menu === '4') { 
+            const bulkDate4 = document.getElementById("bulk-ship4-date") ? document.getElementById("bulk-ship4-date").value : todayStr;
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="date" class="ship-in-date" value="${bulkDate4 || todayStr}"></td>
+                <td><input type="number" class="regrind-available-input" value="0" min="0" placeholder="잔여 횟수 (Ctrl+V)"></td>
+                <td><input type="text" class="ship-in-comment" placeholder="비고"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '4');
+            setupNumberPasteInterceptor(tr.querySelector('.regrind-available-input'));
+        } else if (menu === '5') { 
+            let lineOptions = "<option value=''>선택 안함</option>";
+            for(let i=1; i<=5; i++) { for(let j=1; j<=3; j++) { lineOptions += `<option value="${i}-${j}">${i}-${j} 라인</option>`; } }
+            for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
+            lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
+            lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
+
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="상태 자동 조회" style="font-weight:bold;"></td>
+                <td><select class="admin-target-status" onchange="toggleAdminLineUnit(this)"><option value="Storage">Storage (사용대기)</option><option value="Using">Using (사용중)</option><option value="Waiting">Waiting (연마대기)</option><option value="Regrind">Regrind (연마중-출하)</option><option value="Disposal">Disposal (폐기)</option></select></td>
+                <td><select class="admin-target-line" disabled>${lineOptions}</select></td>
+                <td><select class="admin-target-unit" disabled><option value="">선택 안함</option><option value="Upper">Upper</option><option value="Center">Center</option><option value="Final">Final</option></select></td>
+                <td><input type="text" class="admin-comment" placeholder="변경 사유"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5');
+        } else if (menu === '5_rename') { 
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="기존 ID 입력 (Ctrl+V)" oninput="handleIdRenameLive(this)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="상태 조회" style="font-weight:bold;"></td>
+                <td><input type="text" class="equip-line-view" readonly placeholder="-"></td>
+                <td><input type="text" class="equip-unit-view" readonly placeholder="-"></td>
+                <td><input type="text" class="new-tool-id-input" placeholder="신규 ID 입력"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_rename');
+        } else if (menu === '5_forcereg') { 
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="예외 ID 입력 (Ctrl+V)" oninput="this.value=this.value.trim().toUpperCase()"></td>
+                <td><select class="force-type-select"><option value="1.8도 상도">1.8도 상도</option><option value="1.2도 상도">1.2도 상도</option><option value="LW (하도)">LW (하도)</option><option value="기타">기타</option></select></td>
+                <td><input type="text" class="maker-input" placeholder="수동 입력 (예: HYTC)"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_forcereg');
+        } else if (menu === '7') { 
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="폐기 대상 ID (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
+                <td><input type="text" class="tool-type-input" readonly placeholder="상태 자동 조회" style="font-weight:bold;"></td>
+                <td><input type="text" class="disposal-comment" placeholder="폐기 사유"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '7');
+        }
+        tbody.appendChild(tr);
+    }
+
+    function goToHistory(btn) {
+        const tr = btn.closest('tr');
+        let id = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
+        if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+        if (!id) { showToast("ID를 먼저 입력하세요.", true); return; }
+        
+        switchMenu('6');
+        const searchInput = document.getElementById("search-input-6");
+        if(searchInput) {
+            searchInput.value = id;
+            renderMenu6List(id);
+            setTimeout(() => { const firstRow = document.querySelector("#master-list-tbody tr.list-row"); if(firstRow) firstRow.click(); }, 100);
+        }
+    }
+
+    function checkUnitAvailability(el) {
+        const tr = el.closest('tr');
+        const idInput = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
+        const typeInput = tr.querySelector('.tool-type-input').value; 
+        const lineEl = tr.querySelector('.equip-line-select');
+        const unitEl = tr.querySelector('.equip-unit-select');
+        const line = lineEl.value;
+        const msgSpan = tr.querySelector('.info-text');
+
+        if (line.startsWith("H/C")) {
+            let hasUpper = false;
+            for(let opt of unitEl.options) { if(opt.value === 'Upper') hasUpper = true; }
+            if(hasUpper) {
+                const currentVal = unitEl.value;
+                unitEl.innerHTML = `<option value="Center">Center</option><option value="Final">Final</option>`;
+                if (currentVal !== 'Upper') unitEl.value = currentVal;
+            }
+        } else {
+            let hasUpper = false;
+            for(let opt of unitEl.options) { if(opt.value === 'Upper') hasUpper = true; }
+            if(!hasUpper) {
+                const currentVal = unitEl.value;
+                unitEl.innerHTML = `<option value="Upper">Upper</option><option value="Center">Center</option><option value="Final">Final</option>`;
+                unitEl.value = currentVal;
+            }
+        }
+
+        const unit = unitEl.value;
+        if(!idInput || !typeInput) return; 
+
+        let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
+        const matchedPart = globalData.find(p => p.id === baseId);
+        if (matchedPart && matchedPart.status !== 'Storage') return;
+
+        if (typeInput === "1.2도 상도" && unit !== "Final") { lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell'); msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2상도는 Final 전용</span>`; return; }
+        if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) { lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell'); msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.8상도는 Upper/Center 전용</span>`; return; }
+
+        const currentCategory = getToolCategory(typeInput);
+        const dbConflict = globalData.find(p => {
+            if (p.status !== 'Using' || p.id === baseId) return false;
+            const loc = getMountedLocation(p);
+            return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
+        });
+
+        let screenConflict = false;
+        const rows = document.querySelectorAll("#grid-2-body tr");
+        for(let r of rows) {
+            if (r === tr) continue; 
+            let rId = r.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (rId.endsWith("20.0")) rId = rId.replace("20.0", "10.0");
+            const rType = r.querySelector('.tool-type-input').value;
+            const rLine = r.querySelector('.equip-line-select').value;
+            const rUnit = r.querySelector('.equip-unit-select').value;
+            if (rId && rLine === line && rUnit === unit && getToolCategory(rType) === currentCategory) { screenConflict = true; break; }
+        }
+
+        if (dbConflict || screenConflict) {
+            lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
+            msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 [${currentCategory}] 장착됨</span>`;
+        } else {
+            lineEl.classList.remove('invalid-cell'); unitEl.classList.remove('invalid-cell');
+            if (matchedPart) {
+                if (matchedPart.status === 'Using' && matchedPart.toolType === "LW (하도)") { msgSpan.innerHTML = `🟢 장착 정보 연동 중 (면 변경 허용됨)`; } 
+                else if (matchedPart.status === 'Storage') { msgSpan.innerHTML = `📦 Storage 상태 (장착 가능)`; }
+            } else msgSpan.innerHTML = "";
+        }
+    }
+
+    function handleIdInputLive(inputEl, isTriggerMatch = false) {
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        if (id.endsWith("20.0")) { id = id.replace("20.0", "10.0"); inputEl.value = id; showToast("💡 20.0 면이 입력되어 마스터 ID(10.0)로 자동 변환 조회됩니다."); } 
+        else { inputEl.value = id; }
+        
+        const res = parseAndValidateToolId(id);
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.querySelector('.tool-type-input');
+        const makerInput = tr.querySelector('.maker-input');
+        
+        if (typeInput && !isTriggerMatch) typeInput.value = res.type;
+        if (makerInput) {
+            if (id.length >= 10 && id.charAt(7) === '9') makerInput.value = "UC1";
+            else if (id.includes("HY")) makerInput.value = "HYTC";
+            else if (id.includes("YJ")) makerInput.value = "유진";
+            else makerInput.value = "";
+        }
+        
+        if (id.length >= 21 && !res.valid) inputEl.classList.add('invalid-cell');
+        else {
+            inputEl.classList.remove('invalid-cell');
+            if (isTriggerMatch && res.valid) {
+                const matched = globalData.find(p => p.id === id);
+                if (matched) {
+                    const regrindInput = tr.querySelector('.regrind-available-input');
+                    if (regrindInput) { regrindInput.value = matched.regrindAvailable !== undefined ? matched.regrindAvailable : (matched.regridCount || 0); }
+                    if (typeInput && (inputEl.closest('tbody').id === 'grid-7-body' || inputEl.closest('tbody').id === 'grid-5-body')) {
+                        let statusTxt = matched.status;
+                        if(matched.status === 'Using' && matched.currentSide === "20.0") statusTxt += " (20.0면)";
+                        typeInput.value = `현재 상태: ${statusTxt}`;
+                    }
+                }
+            }
+        }
+    }
+
+    function handleIdRenameLive(inputEl) {
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        if (id.endsWith("20.0")) { id = id.replace("20.0", "10.0"); inputEl.value = id; } 
+        else { inputEl.value = id; }
+
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.querySelector('.tool-type-input');
+        const lineView = tr.querySelector('.equip-line-view');
+        const unitView = tr.querySelector('.equip-unit-view');
+
+        if (id.length === 0) {
+            inputEl.classList.remove('invalid-cell');
+            if (typeInput) typeInput.value = "";
+            if (lineView) lineView.value = "";
+            if (unitView) unitView.value = "";
+            return;
+        }
+
+        const matched = globalData.find(p => p.id === id);
+        if (matched) {
+            inputEl.classList.remove('invalid-cell');
+            if (typeInput) {
+                let statusTxt = matched.status;
+                if(matched.status === 'Using' && matched.currentSide === "20.0") statusTxt += " (20.0면)";
+                typeInput.value = statusTxt;
+            }
+            if (matched.status === 'Using') {
+                const loc = getMountedLocation(matched);
+                if (loc) { if(lineView) lineView.value = loc.line; if(unitView) unitView.value = loc.unit; }
+            } else {
+                if(lineView) lineView.value = "-"; if(unitView) unitView.value = "-";
+            }
+        } else {
+            if (id.length >= 21) inputEl.classList.add('invalid-cell'); else inputEl.classList.remove('invalid-cell');
+            if (typeInput) typeInput.value = "미등록 ID";
+            if (lineView) lineView.value = "-"; if (unitView) unitView.value = "-";
+        }
+    }
+
+    function handleEquipIdChange(inputEl) {
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        let is20 = false;
+
+        if (id.endsWith("20.0")) {
+            id = id.replace("20.0", "10.0");
+            inputEl.value = id;
+            is20 = true;
+            showToast("💡 20.0 면이 스캔되어 마스터 ID로 변환되며, 장착 면이 20.0면으로 자동 선택됩니다.");
+        } else { inputEl.value = id; }
+
+        const tr = inputEl.closest('tr');
+        const typeInput = tr.querySelector('.tool-type-input');
+        const faceSelect = tr.querySelector('.face-select');
+        const lineSelect = tr.querySelector('.equip-line-select');
+        const unitSelect = tr.querySelector('.equip-unit-select');
+        const msgSpan = tr.querySelector('.info-text');
+
+        const res = parseAndValidateToolId(id);
+        if (typeInput) typeInput.value = res.type;
+
+        if (faceSelect) {
+            if (res.type === "LW (하도)") { faceSelect.disabled = false; faceSelect.value = is20 ? "20.0" : "10.0"; } 
+            else { faceSelect.disabled = true; faceSelect.value = "10.0"; }
+        }
+
+        if (!res.valid) {
+            if(id.length >= 21) inputEl.classList.add('invalid-cell');
+            if(msgSpan) msgSpan.innerText = "";
+            return;
+        }
+        inputEl.classList.remove('invalid-cell');
+
+        const matchedPart = globalData.find(p => p.id === id);
+        if (!matchedPart) { if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ DB 미등록</span>"; return; }
+
+        if (matchedPart.status === 'Storage') {
+            lineSelect.disabled = false; unitSelect.disabled = false;
+            checkUnitAvailability(lineSelect);
+        } else if (matchedPart.status === 'Using') {
+            const loc = getMountedLocation(matchedPart);
+            if (loc) {
+                lineSelect.value = loc.line; unitSelect.value = loc.unit;
+                lineSelect.disabled = true; unitSelect.disabled = true;
+                lineSelect.classList.remove('invalid-cell'); unitSelect.classList.remove('invalid-cell');
+                let faceInfo = matchedPart.currentSide === "20.0" ? "20.0면" : "10.0면";
+                if (matchedPart.toolType === "LW (하도)") { msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit} | ${faceInfo} 사용중) - 장착 면 변경 후 재장착(스왑) 혹은 탈거 가능`; } 
+                else { msgSpan.innerHTML = `🟢 장착 정보 연동 (${loc.line}/${loc.unit}) - 탈거 가능`; }
+            }
+        } else {
+            inputEl.classList.add('invalid-cell'); lineSelect.disabled = true; unitSelect.disabled = true;
+            if(msgSpan) msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착/탈거 불가! (현재 상태: ${matchedPart.status})</span>`;
+        }
+    }
+
+    function switchMenu(menuId) {
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
+        if(window.event && window.event.target.classList.contains('menu-btn')) window.event.target.classList.add('active');
+        document.getElementById(`menu-${menuId}`).style.display = 'block';
+        
+        const tbody = document.getElementById(`grid-${menuId}-body`) || document.getElementById(`grid-${menuId.replace('_', '-')}-body`);
+        if(tbody && menuId !== '9' && menuId !== '8' && menuId !== '10') { tbody.innerHTML = ""; addGridRow(menuId); }
+        
+        if(menuId === '5') {
+            const tbodyRename = document.getElementById(`grid-5-rename-body`);
+            if(tbodyRename) { tbodyRename.innerHTML = ""; addGridRow('5_rename'); }
+            const tbodyForce = document.getElementById(`grid-5-forcereg-body`);
+            if(tbodyForce) { tbodyForce.innerHTML = ""; addGridRow('5_forcereg'); }
+
+            document.getElementById("admin-password-input").value = "";
+            document.getElementById("admin-auth-zone").style.display = "block";
+            document.getElementById("admin-panel-zone").style.display = "none";
+        }
+        
+        if(['home', '0', '6'].includes(menuId)) {
+            if(menuId === '6') { const searchInput = document.getElementById("search-input-6"); if (searchInput) searchInput.value = ""; }
+            fetchDatabase();
+        }
+    }
+
+    async function fetchDatabase() {
+        const creds = getCredentials();
+        if(!creds.token || !creds.owner || !creds.repo) {
+            showToast("⚠️ GitHub 연동 정보를 모두 입력해주세요.", true);
+            return;
+        }
+        showLoading(true, "⏳ GitHub 데이터 로드 중...");
+        try {
+            const url = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
+            const res = await fetch(url, { headers: { "Authorization": `token ${creds.token}` } });
+            
+            if (res.status === 200) {
+                const json = await res.json();
+                dbSha = json.sha;
+                try {
+                    const content = await b64_to_utf8(json.content);
+                    globalData = JSON.parse(content);
+                } catch(err) { 
+                    showToast("❌ 데이터 디코딩 오류. JSON 파일 형식이 깨졌습니다.", true); 
+                    showLoading(false);
+                    return; 
+                }
+                
+                calculateHomeTables(); 
+                renderMatrixBoard(); 
+                renderMenu6List();
+            } else {
+                showToast(`❌ DB 연결 실패! (상태 코드: ${res.status})`, true);
+            }
+        } catch (e) { 
+            showToast(`❌ 통신 오류: ${e.message}`, true); 
+        }
+        showLoading(false);
+    }
+
+    function calculateHomeTables() {
+        let t1 = { "1.8도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "1.2도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "LW (하도)": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "기타": { hytc:0, yj:0, uc1:0, etc:0, sum:0 } };
+        let t2 = { "1.8도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "1.2도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "LW (하도)": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "기타": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 } };
+        let t1Tot = { hytc:0, yj:0, uc1:0, etc:0, grand:0 };
+        let t2Tot = { st:0, us:0, wt:0, rg:0, dp:0, grand:0 };
+
+        globalData.forEach(p => {
+            let t = parseAndValidateToolId(p.id).type || "기타";
+            if (!t1[t]) t = "기타";
+
+            let makerName = getResolvedMaker(p.id, p.maker);
+            let m = "etc";
+            if (makerName === "UC1") m = "uc1";
+            else if (makerName === "HYTC") m = "hytc";
+            else if (makerName === "유진") m = "yj";
+
+            t1[t][m]++; t1[t].sum++; t1Tot[m]++; t1Tot.grand++;
+
+            let s = p.status;
+            let sKey = "st";
+            if(s==="Storage") sKey = "st";
+            else if(s==="Using") sKey = "us";
+            else if(s==="Waiting") sKey = "wt";
+            else if(s==="Disposal") sKey = "dp";
+            else if(s==="Regrind" || s==="Out_Polishing") sKey = "rg"; 
+            
+            t2[t][sKey]++; t2[t].sum++; t2Tot[sKey]++; t2Tot.grand++;
+        });
+
+        const types = ["1.8도 상도", "1.2도 상도", "LW (하도)", "기타"];
+        let h1 = "";
+        types.forEach(type => {
+            h1 += `<tr><td><strong>${type}</strong></td><td>${t1[type].hytc}</td><td>${t1[type].yj}</td><td>${t1[type].uc1}</td><td>${t1[type].etc}</td><td class="sub-total">${t1[type].sum}</td></tr>`;
+        });
+        h1 += `<tr class="grand-total"><td>합계</td><td>${t1Tot.hytc}</td><td>${t1Tot.yj}</td><td>${t1Tot.uc1}</td><td>${t1Tot.etc}</td><td>${t1Tot.grand}</td></tr>`;
+        document.getElementById("home-maker-tbody").innerHTML = h1;
+
+        let h2 = "";
+        types.forEach(type => {
+            h2 += `<tr><td><strong>${type}</strong></td><td>${t2[type].st}</td><td>${t2[type].us}</td><td>${t2[type].wt}</td><td>${t2[type].rg}</td><td>${t2[type].dp}</td><td class="sub-total">${t2[type].sum}</td></tr>`;
+        });
+        h2 += `<tr class="grand-total"><td>합계</td><td>${t2Tot.st}</td><td>${t2Tot.us}</td><td>${t2Tot.wt}</td><td>${t2Tot.rg}</td><td>${t2Tot.dp}</td><td>${t2Tot.grand}</td></tr>`;
+        document.getElementById("home-status-tbody").innerHTML = h2;
+    }
+
+    function renderMatrixBoard() {
+        const matrixBody = document.getElementById("matrix-table-body");
+        if (!matrixBody) return;
+
+        let totalLines = [];
+        for(let i=1; i<=5; i++) { for(let j=1; j<=3; j++) { totalLines.push(`${i}-${j}`); } }
+        for(let j=1; j<=4; j++) { totalLines.push(`6-${j}`); }
+        totalLines.push("H/C 1"); totalLines.push("H/C 2");
+
+        let boardMapping = {};
+        totalLines.forEach(line => { boardMapping[line] = { Upper: [], Center: [], Final: [] }; });
+
+        globalData.forEach(p => {
+            if (p.status === 'Using') {
+                const loc = getMountedLocation(p);
+                if (loc && boardMapping[loc.line] && boardMapping[loc.line][loc.unit] !== undefined) {
+                    let displayId = p.id;
+                    if (p.toolType === "LW (하도)" && p.currentSide === "20.0") displayId = `${p.id} (20.0면)`;
+                    boardMapping[loc.line][loc.unit].push({
+                        type: p.toolType,
+                        html: `<span class="status-badge status-using" title="${p.lastHistory}" style="margin-bottom:3px; display:block;">${displayId}</span>`
+                    });
+                }
+            }
+        });
+
+        let htmlStr = "";
+        totalLines.forEach(line => {
+            const sortFn = (a, b) => {
+                const isALW = a.type === "LW (하도)"; const isBLW = b.type === "LW (하도)";
+                if (isALW && !isBLW) return 1; if (!isALW && isBLW) return -1; return 0;
+            };
+
+            const upperArr = boardMapping[line].Upper.sort(sortFn).map(i => i.html);
+            const centerArr = boardMapping[line].Center.sort(sortFn).map(i => i.html);
+            const finalArr = boardMapping[line].Final.sort(sortFn).map(i => i.html);
+
+            const upStr = upperArr.length > 0 ? upperArr.join("") : (line.startsWith("H/C") ? "<span class='empty-tool' style='color:#ccc;'>N/A</span>" : "<span class='empty-tool'>-</span>");
+            const ctStr = centerArr.length > 0 ? centerArr.join("") : "<span class='empty-tool'>-</span>";
+            const fnStr = finalArr.length > 0 ? finalArr.join("") : "<span class='empty-tool'>-</span>";
+
+            htmlStr += `<tr><td><strong>${line} 호기</strong></td><td>${upStr}</td><td>${ctStr}</td><td>${fnStr}</td></tr>`;
+        });
+        matrixBody.innerHTML = htmlStr;
+    }
+
+    function renderMenu6List(searchTerm = "") {
+        const tbody = document.getElementById("master-list-tbody");
+        if(!tbody) return;
+        tbody.innerHTML = "";
+
+        const term = searchTerm.trim().toLowerCase();
+
+        globalData.forEach(p => {
+            const v = parseAndValidateToolId(p.id);
+            const rMaker = getResolvedMaker(p.id, p.maker);
+            
+            if (term) {
+                const searchableText = `${p.id} ${v.type} ${rMaker} ${p.status}`.toLowerCase();
+                if (!searchableText.includes(term)) return; 
+            }
+
+            const tr = document.createElement("tr");
+            tr.className = "list-row";
+            tr.onclick = () => showToolLog6(p.id, tr);
+            
+            let sClass = "status-storage"; 
+            let lowStat = p.status.toLowerCase();
+            if(lowStat === 'using') sClass = 'status-using';
+            else if(lowStat === 'waiting') sClass = 'status-waiting';
+            else if(lowStat === 'disposal') sClass = 'status-disposal';
+            else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
+
+            let displayId = p.id;
+            if (p.status === 'Using' && p.toolType === "LW (하도)" && p.currentSide === "20.0") displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
+            
+            const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            let usedInfo = "";
+            if (p.toolType === "LW (하도)") {
+                const used = p.usedSides || [];
+                if (used.length > 0) usedInfo = `<br><span style="color:#888; font-size:10px;">(사용된 면: ${used.join(", ")})</span>`;
+            }
+
+            tr.innerHTML = `<td style="font-weight:bold; color:#0056b3;">${displayId} ${usedInfo}</td><td>${v.type}</td><td>${rMaker}</td><td><span class="status-badge ${sClass}">${p.status}</span></td><td style="font-weight:bold;">${remainCount}회</td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function showToolLog6(toolId, rowEl) {
+        document.querySelectorAll("#master-list-tbody tr").forEach(r => r.classList.remove("selected"));
+        if(rowEl) rowEl.classList.add("selected");
+
+        const item = globalData.find(p => p.id === toolId);
+        const titleEl = document.getElementById("selected-tool-title");
+        const logContainer = document.getElementById("selected-tool-logs");
+        if(!item) return;
+
+        let rMaker = getResolvedMaker(item.id, item.maker);
+        titleEl.innerHTML = `🔍 [${item.status}] ${item.id} (${rMaker})`;
+        
+        if(!item.historyLog || item.historyLog.length === 0) { logContainer.innerHTML = `<p style="color:#888; text-align:center; margin-top:50px;">생애주기 이력이 없습니다.</p>`; return; }
+
+        let html = "";
+        for(let i = item.historyLog.length - 1; i >= 0; i--) {
+            const logObj = item.historyLog[i];
+            const dateStr = logObj.timestamp ? new Date(logObj.timestamp).toLocaleString() : '일시 미상';
+            
+            let sClass = "status-storage";
+            let lowStat = logObj.status.toLowerCase();
+            if(lowStat === 'using') sClass = 'status-using';
+            else if(lowStat === 'waiting') sClass = 'status-waiting';
+            else if(lowStat === 'disposal') sClass = 'status-disposal';
+            else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
+
+            html += `<div class="log-item"><small>⏰ ${dateStr}</small><div style="font-weight:bold; margin-bottom:5px;"><span class="status-badge ${sClass}" style="padding:2px 6px; font-size:11px;">${logObj.status}</span></div><div style="color:#2b2b2b;">${logObj.log}</div></div>`;
+        }
+        logContainer.innerHTML = html;
+    }
+
+    function generateEquipReport() {
+        const startStr = document.getElementById("report-start-date").value;
+        const endStr = document.getElementById("report-end-date").value;
+        const tbody = document.getElementById("grid-8-body");
+        
+        if (!startStr || !endStr) { showToast("시작일과 종료일을 모두 선택해주세요.", true); return; }
+
+        const startDate = new Date(startStr + "T00:00:00");
+        const endDate = new Date(endStr + "T23:59:59");
+        let reportData = [];
+
+        globalData.forEach(p => {
+            if (p.historyLog && p.historyLog.length > 0) {
+                p.historyLog.forEach(logObj => {
+                    const logTime = new Date(logObj.timestamp);
+                    if (logTime >= startDate && logTime <= endDate) {
+                        if (logObj.log.includes("[장착]") || logObj.log.includes("[탈거]")) {
+                            let actionType = logObj.log.includes("[탈거]") ? "탈거" : "장착";
+                            if (logObj.log.includes("면 스왑")) actionType = "면 스왑(장착)";
+                            let lineUnit = "-", op = "-";
+                            try {
+                                if(logObj.log.includes("라인:")) { lineUnit = `${logObj.log.split("라인:")[1].split("|")[0].trim()} / ${logObj.log.split("유닛:")[1].split("|")[0].trim()}`; }
+                                if(logObj.log.includes("작업자:")) { op = logObj.log.split("작업자:")[1].split("|")[0].trim(); }
+                            } catch(e) {}
+                            reportData.push({ time: logTime, timeStr: logTime.toLocaleString(), id: p.id, action: actionType, loc: lineUnit, operator: op, fullLog: logObj.log });
+                        }
+                    }
+                });
+            }
+        });
+
+        reportData.sort((a, b) => b.time - a.time);
+
+        if (reportData.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="color:#888; padding:30px;">해당 기간에 장착/탈거 이력이 없습니다.</td></tr>`;
+            showToast("조건에 맞는 이력이 없습니다.", true); return;
+        }
+
+        let html = "";
+        reportData.forEach(item => {
+            let actionColor = item.action.includes("장착") ? "#0056b3" : "#fd7e14";
+            html += `<tr><td>${item.timeStr}</td><td style="font-weight:bold; color:#333;">${item.id}</td><td style="color:${actionColor}; font-weight:bold;">${item.action}</td><td>${item.loc}</td><td>${item.operator}</td><td style="text-align:left; font-size:12px; color:#555;">${item.fullLog}</td></tr>`;
+        });
+        tbody.innerHTML = html;
+        showToast(`총 ${reportData.length}건의 이력이 조회되었습니다.`);
+    }
+
+    function generateGrindingReport() {
+        const startStr = document.getElementById("grinding-start-date").value;
+        const endStr = document.getElementById("grinding-end-date").value;
+        const tbody = document.getElementById("grid-10-body");
+        
+        if (!startStr || !endStr) { showToast("시작일과 종료일을 모두 선택해주세요.", true); return; }
+
+        const startDate = new Date(startStr + "T00:00:00");
+        const endDate = new Date(endStr + "T23:59:59");
+        let reportData = [];
+
+        globalData.forEach(p => {
+            if (p.historyLog && p.historyLog.length > 0) {
+                p.historyLog.forEach(logObj => {
+                    const logTime = new Date(logObj.timestamp);
+                    if (logTime >= startDate && logTime <= endDate) {
+                        if (logObj.log.includes("[외주연마출하]") || logObj.log.includes("[연마입고]")) {
+                            let actionType = logObj.log.includes("[외주연마출하]") ? "출하 (외주 연마장)" : "입고 (Storage)";
+                            reportData.push({ time: logTime, timeStr: logTime.toLocaleString(), id: p.id, action: actionType, fullLog: logObj.log });
+                        }
+                    }
+                });
+            }
+        });
+
+        reportData.sort((a, b) => b.time - a.time);
+
+        if (reportData.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="color:#888; padding:30px;">해당 기간에 연마 출하/입고 이력이 없습니다.</td></tr>`;
+            showToast("조건에 맞는 이력이 없습니다.", true); return;
+        }
+
+        let html = "";
+        reportData.forEach(item => {
+            let actionColor = item.action.includes("출하") ? "#dc3545" : "#28a745";
+            html += `<tr>
+                <td>${item.timeStr}</td>
+                <td style="font-weight:bold; color:#333;">${item.id}</td>
+                <td style="color:${actionColor}; font-weight:bold;">${item.action}</td>
+                <td style="text-align:left; font-size:12px; color:#555;">${item.fullLog}</td>
+            </tr>`;
+        });
+        tbody.innerHTML = html;
+        showToast(`총 ${reportData.length}건의 연마 이력이 조회되었습니다.`);
+    }
+
+    async function saveDatabase(newData) {
+        if (isSaving) { showToast("⏳ 이전 데이터를 저장 중입니다. 잠시만 기다려주세요.", true); return false; }
+        const creds = getCredentials();
+        if(!creds.token) { showToast("GitHub 토큰이 누락되었습니다.", true); return false; }
+        isSaving = true;
+        showLoading(true, "⏳ GitHub에 데이터 저장 중...");
+
+        try {
+            const jsonString = JSON.stringify(newData, null, 2);
+            const base64Content = await utf8_to_b64(jsonString);
+
+            const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
+            const saveRes = await fetch(dbUrl, { 
+                method: "PUT", 
+                headers: { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ message: "🔄 데이터 변동 반영", content: base64Content, sha: dbSha }) 
+            });
+            
+            if(saveRes.status === 200 || saveRes.status === 201) {
+                globalData = newData; 
+                calculateHomeTables(); 
+                renderMatrixBoard(); 
+                renderMenu6List();
+                
+                const newRes = await fetch(dbUrl, { headers: { "Authorization": `token ${creds.token}` } });
+                const newJson = await newRes.json();
+                dbSha = newJson.sha;
+
+                isSaving = false;
+                showLoading(false); 
+                return true;
+            } else {
+                showToast("❌ 서버 저장에 실패했습니다.", true);
+            }
+        } catch (e) { 
+            console.error(e);
+            showToast(`❌ 오류: ${e.message || "통신 오류가 발생했습니다."}`, true); 
+        }
+        isSaving = false;
+        showLoading(false); 
+        return false;
+    }
+
+    async function submitBulkRegister() {
+        const rows = document.querySelectorAll("#grid-1-body tr");
+        let tempArr = [...globalData]; let addedCount = 0;
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            const maker = row.querySelector('.maker-input').value.trim();
+            if(!id) continue;
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            const vRes = parseAndValidateToolId(id);
+            if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
+            const finalMaker = getResolvedMaker(id, maker);
+
+            tempArr.push({ id, toolType: vRes.type, maker: finalMaker, status: "Storage", currentSide: "10.0", usedSides: [], regrindAvailable: 0, lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
+            addedCount++;
+        }
+        if(addedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${addedCount}건 등록이 완료되었습니다.`); switchMenu('home'); }
+    }
+
+    async function submitBulkEquip(targetStatus) {
+        const rows = document.querySelectorAll("#grid-2-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+        const currentBatchSet = new Set();
+
+        for(let row of rows) {
+            const idInputEl = row.querySelector('.tool-id-input');
+            let originalInput = idInputEl.value.trim().toUpperCase();
+            let baseId = originalInput.endsWith("20.0") ? originalInput.replace("20.0", "10.0") : originalInput;
+            
+            const typeInput = row.querySelector('.tool-type-input').value; 
+            const dateVal = row.querySelector('.equip-date-input').value; 
+            const timeVal = row.querySelector('.equip-time-input').value; 
+            
+            if(!baseId || !dateVal || !timeVal) continue;
+
+            const pIdx = tempArr.findIndex(p => p.id === baseId);
+            if(pIdx === -1) continue;
+
+            const line = row.querySelector('.equip-line-select').value;
+            const unit = row.querySelector('.equip-unit-select').value;
+            const op = row.querySelector('.equip-op-input').value.trim();
+            const comment = row.querySelector('.equip-comment-input').value.trim();
+            
+            const faceSelect = row.querySelector('.face-select');
+            const targetSide = (faceSelect && !faceSelect.disabled) ? faceSelect.value : "10.0";
+
+            let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
+
+            if (targetStatus === 'Using') {
+                const isDirectFlip = (tempArr[pIdx].status === 'Using' && typeInput === "LW (하도)" && tempArr[pIdx].currentSide !== targetSide);
+                if (tempArr[pIdx].status !== 'Storage' && !isDirectFlip) { alert(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 면 스왑은 허용됩니다.)`); return; }
+
+                if (typeInput === "LW (하도)") {
+                    if (!tempArr[pIdx].usedSides) tempArr[pIdx].usedSides = [];
+                    if (tempArr[pIdx].usedSides.includes(targetSide)) { alert(`🚨 [오류] ${baseId} 커터의 [${targetSide}면]은 이미 이번 주기에 사용한 이력이 있어 재장착/스왑이 불가능합니다.\n(양면을 모두 썼다면 탈거 후 연마 출하하세요.)`); return; }
+                }
+
+                if (typeInput === "1.2도 상도" && unit !== "Final") { alert(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${baseId} 확인 필요)`); return; }
+                if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) { alert(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${baseId} 확인 필요)`); return; }
+
+                const currentCategory = getToolCategory(typeInput);
+                const locKey = `${line}|${unit}|${currentCategory}`; 
+                if (currentBatchSet.has(locKey)) { alert(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에 장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`); return; }
+                currentBatchSet.add(locKey);
+
+                const conflictPart = tempArr.find(p => {
+                    if (p.status !== 'Using' || p.id === baseId) return false;
+                    const loc = getMountedLocation(p);
+                    return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
+                });
+                if (conflictPart) { alert(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`); return; }
+
+                if (typeInput === "LW (하도)") {
+                    let previousSide = tempArr[pIdx].currentSide || "10.0";
+                    tempArr[pIdx].usedSides.push(targetSide);
+                    tempArr[pIdx].currentSide = targetSide;
+                    if (isDirectFlip) { logMsg = `[면 스왑 장착] ${previousSide}면 -> ${targetSide}면으로 변경 | 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`; } 
+                    else if (targetSide === "20.0") { logMsg = `[장착 (20.0면 우선)] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`; }
+                }
+            } else if (targetStatus === 'Waiting') {
+                if (tempArr[pIdx].status !== 'Using') { alert(`🚨 [오류] 탈거는 현재 'Using (사용중)' 상태인 커터만 가능합니다.\n(입력하신 ${originalInput}의 현재 상태: ${tempArr[pIdx].status})`); return; }
+            }
+
+            tempArr[pIdx].status = targetStatus;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
+            updatedCount++;
+        }
+        
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 장착/탈거 처리가 완료되었습니다.`); switchMenu('0'); }
+    }
+
+    async function submitBulkShipment(nextStatus) {
+        const rows = document.querySelectorAll("#grid-3-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0"); 
+            const shipDate = row.querySelector('.ship-out-date').value;
+            const comment = row.querySelector('.ship-out-comment').value.trim();
+            if(!id) continue;
+
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`미등록 부품: ${id}`); return; }
+
+            tempArr[pIdx].status = nextStatus; 
+            const logMsg = `[외주연마출하] 일자:${shipDate} | 비고:${comment}`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
+            updatedCount++;
+        }
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 외주 출하가 완료되었습니다.`); switchMenu('home'); }
+    }
+
+    async function submitBulkShipIn() {
+        const rows = document.querySelectorAll("#grid-4-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            const shipInDate = row.querySelector('.ship-in-date').value;
+            const regrindAvailable = parseInt(row.querySelector('.regrind-available-input').value) || 0;
+            const comment = row.querySelector('.ship-in-comment').value.trim();
+            if(!id) continue;
+
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`미등록 부품: ${id}`); return; }
+
+            tempArr[pIdx].status = "Storage";
+            tempArr[pIdx].regrindAvailable = regrindAvailable;
+            tempArr[pIdx].usedSides = [];
+            tempArr[pIdx].currentSide = "10.0";
+            
+            const logMsg = `[연마입고] 일자:${shipInDate} | 연마가능잔여:${regrindAvailable}회 | 비고:${comment}`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: "Storage", log: logMsg });
+            updatedCount++;
+        }
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 연마 입고 완료.`); switchMenu('home'); }
+    }
+
+    async function submitAdminOverride() {
+        const rows = document.querySelectorAll("#grid-5-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            const nextStatus = row.querySelector('.admin-target-status').value;
+            const line = row.querySelector('.admin-target-line').value;
+            const unit = row.querySelector('.admin-target-unit').value;
+            const comment = row.querySelector('.admin-comment').value.trim();
+            
+            if(!id) continue;
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`🚨 DB에 등록되지 않은 ID가 포함되어 있습니다: ${id}`); return; }
+
+            if (nextStatus === 'Using' && (!line || !unit)) { alert(`🚨 [오류] ${id}의 상태를 'Using'으로 변경하려면 장착 호기와 Unit을 반드시 선택해야 합니다.`); return; }
+
+            tempArr[pIdx].status = nextStatus;
+            
+            if (nextStatus === 'Storage') {
+                tempArr[pIdx].usedSides = [];
+                if (tempArr[pIdx].toolType === "LW (하도)") tempArr[pIdx].currentSide = "10.0";
+            }
+
+            let logMsg = `[최고관리자 강제 제어] 상태를 ${nextStatus}로 변경`;
+            if(nextStatus === 'Using') logMsg += ` | 강제연동 라인:${line} | 유닛:${unit}`;
+            if(comment) logMsg += ` | 변경사유:${comment}`;
+
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
+            updatedCount++;
+        }
+
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 데이터 상태 강제 변경이 성공적으로 승인되었습니다.`); switchMenu('home'); }
+    }
+
+    async function submitAdminRename() {
+        const rows = document.querySelectorAll("#grid-5-rename-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+
+        for(let row of rows) {
+            let oldId = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            let newId = row.querySelector('.new-tool-id-input').value.trim().toUpperCase();
+            
+            if(!oldId || !newId) continue;
+            if (oldId.endsWith("20.0")) oldId = oldId.replace("20.0", "10.0");
+            if (newId.endsWith("20.0")) newId = newId.replace("20.0", "10.0");
+
+            const pIdx = tempArr.findIndex(p => p.id === oldId);
+            if(pIdx === -1) { alert(`🚨 DB에 등록되지 않은 기존 ID입니다: ${oldId}`); return; }
+            if(oldId === newId) continue;
+
+            const vRes = parseAndValidateToolId(newId);
+            if(!vRes.valid) { alert(`🚨 신규 ID 형식이 올바르지 않습니다: ${newId}`); return; }
+
+            const duplicate = tempArr.find(p => p.id === newId);
+            if(duplicate) { alert(`🚨 신규 ID가 이미 DB에 존재합니다: ${newId}`); return; }
+
+            tempArr[pIdx].id = newId;
+            tempArr[pIdx].toolType = vRes.type;
+            tempArr[pIdx].maker = getResolvedMaker(newId, tempArr[pIdx].maker);
+            
+            const logMsg = `[최고관리자 강제 제어] 커터 ID 일괄 변경 (기존: ${oldId} -> 신규: ${newId})`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: tempArr[pIdx].status, log: logMsg });
+            updatedCount++;
+        }
+
+        if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 커터 ID가 성공적으로 변경(Rename)되었습니다.`); switchMenu('home'); }
+    }
+
+    async function submitAdminForceReg() {
+        const rows = document.querySelectorAll("#grid-5-forcereg-body tr");
+        let tempArr = [...globalData]; let addedCount = 0;
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            const type = row.querySelector('.force-type-select').value;
+            const maker = row.querySelector('.maker-input').value.trim() || '미분류';
+            if(!id) continue;
+
+            if(tempArr.some(p => p.id === id)) { alert(`🚨 이미 존재하는 ID입니다: ${id}`); return; }
+
+            tempArr.push({ 
+                id, toolType: type, maker: maker, status: "Storage", currentSide: (type === "LW (하도)") ? "10.0" : null, 
+                usedSides: [], regrindAvailable: 0, lastHistory: "관리자 강제 예외 등록", 
+                historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "관리자 예외 승인 등록" }] 
+            });
+            addedCount++;
+        }
+        if(addedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${addedCount}건 예외 등록 완료.`); switchMenu('home'); }
+    }
+
+    async function submitBulkDisposal() {
+        const rows = document.querySelectorAll("#grid-7-body tr");
+        let tempArr = [...globalData]; let updatedCount = 0;
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            const comment = row.querySelector('.disposal-comment').value.trim();
+            if(!id) continue;
+
+            const pIdx = tempArr.findIndex(p => p.id === id);
+            if(pIdx === -1) { alert(`존재하지 않는 ID: ${id}`); return; }
+
+            tempArr[pIdx].status = "Disposal"; 
+            const logMsg = `[영구폐기] 사유:${comment || '사유 미기입'}`;
+            tempArr[pIdx].lastHistory = logMsg;
+            tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: "Disposal", log: logMsg });
+            updatedCount++;
+        }
+        if(updatedCount > 0 && confirm(`⚠️ ${updatedCount}건을 영구 폐기 처리합니다.`)) {
+            if(await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 영구 폐기 완료.`); switchMenu('6'); }
+        }
+    }
+
+    function downloadExcel() {
+        if(globalData.length === 0) return;
+        let exportArr = globalData.map(p => ({
+            "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": getResolvedMaker(p.id, p.maker), "현재 상태": p.status,
+            "현재 장착 면": p.currentSide || "10.0",
+            "사용 완료된 면": JSON.stringify(p.usedSides || []),
+            "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
+            "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
+        }));
+        const ws = XLSX.utils.json_to_sheet(exportArr);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "MasterDB");
+        XLSX.writeFile(wb, `Cutter_DB_${new Date().toISOString().split('T')[0]}.xlsx`);
+    }
+
+    function getWeekLabel(date) {
+        const fullMonthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const m = fullMonthNames[date.getMonth()];
+        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        const pastDaysOfMonth = date.getDate() - 1;
+        const weekOfMonth = Math.floor((pastDaysOfMonth + firstDay.getDay()) / 7) + 1;
+        return `${m} ${weekOfMonth}W`;
+    }
+
+    function isSameWeek(dateStr1, dateObj2) {
+        if(!dateStr1) return false;
+        const d1 = new Date(dateStr1 + "T00:00:00");
+        return getWeekLabel(d1) === getWeekLabel(dateObj2) && d1.getFullYear() === dateObj2.getFullYear();
+    }
+
+    function consumePool(pool, amount) {
+        if (pool.length === 0) return 0;
+        let disposedCount = 0;
+        pool.sort((a, b) => a.life - b.life); 
+        
+        for (let i = 0; i < amount; i++) {
+            if (pool.length === 0) break;
+            pool[0].life--;
+            if (pool[0].life <= 0) {
+                pool.shift();
+                disposedCount++;
+            } else {
+                const usedItem = pool.shift();
+                pool.push(usedItem);
+            }
+        }
+        return disposedCount;
+    }
+
+    function runPrediction() {
+        if (globalData.length === 0) return;
+
+        const activeCutters = globalData.filter(p => p.status !== 'Disposal');
+        const totalCount = activeCutters.length;
+        
+        const warningEl = document.getElementById('sim-panel-warning');
+        const contentEl = document.getElementById('sim-panel-content');
+        if(document.getElementById('sim-current-total')) document.getElementById('sim-current-total').innerText = totalCount;
+
+        if (totalCount < 30 && warningEl) {
+            contentEl.style.display = 'none'; warningEl.style.display = 'block'; return;
+        }
+        if(contentEl) contentEl.style.display = 'block';
+        if(warningEl) warningEl.style.display = 'none';
+
+        const regrindCycle = parseFloat(document.getElementById("sim-regrind-cycle").value) || 1;
+        const leadTime = parseFloat(document.getElementById("sim-lead-time").value) || 1;
+        const newCutterLT = parseFloat(document.getElementById("sim-new-lt").value) || 15;
+        const totalPipelineWeeks = Math.ceil(regrindCycle + leadTime);
+
+        const uc1DateStr = document.getElementById("sim-uc1-date").value;
+        const uc1Date = uc1DateStr ? new Date(uc1DateStr + "T00:00:00") : new Date("2099-12-31T00:00:00");
+
+        let newCuttersData = getNewCutterSchedules();
+
+        let availPools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
+        let pipeline = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
+
+        activeCutters.forEach(p => {
+            let type = parseAndValidateToolId(p.id).type || "기타";
+            if (!availPools[type]) return;
+            
+            let rawRegrindVal = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            let rawRegrind = parseInt(rawRegrindVal, 10);
+            if (isNaN(rawRegrind)) rawRegrind = 0;
+
+            let remainRegrinds = rawRegrind;
+            if (rawRegrind === 0) {
+                remainRegrinds = (type === "LW (하도)") ? 10 : 16;
+            }
+
+            let currentLife = 0;
+            if (type === "LW (하도)") {
+                const usedSidesCount = p.usedSides ? p.usedSides.length : 0;
+                currentLife = (remainRegrinds * 2) + Math.max(0, 2 - usedSidesCount);
+            } else {
+                currentLife = remainRegrinds + ((p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') ? 0 : 1);
+            }
+
+            if(currentLife > 0) {
+                let cutter = { id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife };
+                if (p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') {
+                    pipeline[type].push({ cutter: cutter, returnWeek: 1 }); 
+                } else {
+                    availPools[type].push(cutter);
+                }
+            }
+        });
+
+        const initialPhys18 = availPools["1.8도 상도"].length + pipeline["1.8도 상도"].length;
+        const initialPhys12 = availPools["1.2도 상도"].length + pipeline["1.2도 상도"].length;
+        const initialPhysLW = availPools["LW (하도)"].length + pipeline["LW (하도)"].length;
+        
+        let initialUses18 = 0, initialUses12 = 0, initialUsesLW = 0;
+        availPools["1.8도 상도"].concat(pipeline["1.8도 상도"].map(x=>x.cutter)).forEach(c => initialUses18 += c.life);
+        availPools["1.2도 상도"].concat(pipeline["1.2도 상도"].map(x=>x.cutter)).forEach(c => initialUses12 += c.life);
+        availPools["LW (하도)"].concat(pipeline["LW (하도)"].map(x=>x.cutter)).forEach(c => initialUsesLW += c.life);
+
+        let chartLabels = [];
+        let data18 = [], req18Data = [];
+        let data12 = [], req12Data = [];
+        let dataLW = [], reqLWData = [];
+        let disposalPoints18 = [], arrivalPoints18 = [];
+        let disposalPoints12 = [], arrivalPoints12 = [];
+        let disposalPointsLW = [], arrivalPointsLW = [];
+        
+        let shortageWeeks = { "1.8도 상도": -1, "1.2도 상도": -1, "LW (하도)": -1 };
+        
+        let simDate = new Date();
+        let uc1Dropped = false;
+
+        for (let w = 0; w < 52; w++) {
+            let currentMach = getMachinesForDate(simDate);
+            let newArr18 = false, newArr12 = false, newArrLW = false;
+            let disp18 = 0, disp12 = 0, dispLW = 0;
+
+            ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
+                let returning = pipeline[type].filter(p => p.returnWeek <= w);
+                pipeline[type] = pipeline[type].filter(p => p.returnWeek > w);
+                returning.forEach(r => availPools[type].push(r.cutter));
+            });
+
+            newCuttersData.forEach(nc => {
+                if(isSameWeek(nc.date, simDate)) {
+                    let maxLife = nc.type === "LW (하도)" ? 22 : 17; 
+                    for(let i=0; i<nc.qty; i++) availPools[nc.type].push({id:'NEW', maker:'New', life: maxLife});
+                    if(nc.type === "1.8도 상도") newArr18 = true;
+                    if(nc.type === "1.2도 상도") newArr12 = true;
+                    if(nc.type === "LW (하도)") newArrLW = true;
+                }
+            });
+
+            if (!uc1Dropped && simDate >= uc1Date) {
+                ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
+                    availPools[type] = availPools[type].filter(p => p.maker !== 'UC1');
+                    pipeline[type] = pipeline[type].filter(p => p.cutter.maker !== 'UC1');
+                });
+                uc1Dropped = true;
+            }
+
+            let cons18 = currentMach * 2;
+            let cons12 = currentMach * 1;
+            let consLW = Math.ceil(currentMach * 1.5); 
+
+            const processConsumption = (type, amount) => {
+                let disposedCount = 0;
+                availPools[type].sort((a, b) => a.life - b.life);
+                for (let i = 0; i < amount; i++) {
+                    if (availPools[type].length === 0) {
+                        if (shortageWeeks[type] === -1) shortageWeeks[type] = w;
+                        break;
+                    }
+                    let usedItem = availPools[type].shift(); 
+                    usedItem.life--;
+                    
+                    if (usedItem.life <= 0) disposedCount++; 
+                    else pipeline[type].push({ cutter: usedItem, returnWeek: w + totalPipelineWeeks }); 
+                }
+                return disposedCount;
+            };
+
+            disp18 = processConsumption("1.8도 상도", cons18);
+            disp12 = processConsumption("1.2도 상도", cons12);
+            dispLW = processConsumption("LW (하도)", consLW);
+
+            chartLabels.push(getWeekLabel(new Date(simDate)));
+            
+            let y18 = availPools["1.8도 상도"].length;
+            let y12 = availPools["1.2도 상도"].length;
+            let yLW = availPools["LW (하도)"].length;
+            
+            data18.push(y18);
+            data12.push(y12);
+            dataLW.push(yLW);
+            
+            req18Data.push(cons18);
+            req12Data.push(cons12);
+            reqLWData.push(consLW);
+
+            if(newArr18) arrivalPoints18.push({x: w, y: y18});
+            if(newArr12) arrivalPoints12.push({x: w, y: y12});
+            if(newArrLW) arrivalPointsLW.push({x: w, y: yLW});
+
+            if(disp18 > 0) disposalPoints18.push({x: w, y: y18}); 
+            if(disp12 > 0) disposalPoints12.push({x: w, y: y12});
+            if(dispLW > 0) disposalPointsLW.push({x: w, y: yLW});
+
+            simDate.setDate(simDate.getDate() + 7);
+        }
+
+        const container = document.getElementById("prediction-cards");
+        container.innerHTML = "";
+        
+        let startMach = getMachinesForDate(new Date());
+        const typeData = [
+            { type: "1.8도 상도", phys: initialPhys18, uses: initialUses18, cons: startMach * 2 },
+            { type: "1.2도 상도", phys: initialPhys12, uses: initialUses12, cons: startMach * 1 },
+            { type: "LW (하도)", phys: initialPhysLW, uses: initialUsesLW, cons: startMach * 3 }
+        ];
+
+        for (let td of typeData) {
+            let reqPhysicalStock = 0;
+            if (td.type === "LW (하도)") {
+                reqPhysicalStock = Math.ceil(startMach * 1.5) + Math.ceil(Math.ceil(startMach * 1.5) * totalPipelineWeeks);
+            } else {
+                reqPhysicalStock = td.cons + Math.ceil(td.cons * totalPipelineWeeks);
+            }
+
+            const sw = shortageWeeks[td.type];
+            let isPipelineDanger = (td.phys < reqPhysicalStock);
+            
+            let orderPointMsg = "";
+            if (sw !== -1) {
+                const orderPoint = sw - newCutterLT;
+                if (orderPoint <= 0) orderPointMsg = `<span style="color:#dc3545; font-weight:bold;">🚨 즉시 발주 필요 (L/T 미달)</span>`;
+                else orderPointMsg = `<span style="color:#28a745; font-weight:bold;">${orderPoint}주 후 발주 요망</span>`;
+            } else {
+                orderPointMsg = `<span style="color:#888;">발주 불필요 (안정)</span>`;
+            }
+
+            let cardClass = "result-card";
+            let alertHtml = "";
+            let statusMessage = `<span style="color:#28a745;">✅ 안정적인 순환 가능</span>`;
+
+            if (isPipelineDanger) {
+                cardClass += " danger";
+                alertHtml = `<div class="alert-badge">단기 재고 부족 경고</div>`;
+                statusMessage = `<span style="color:#dc3545; font-weight:bold;">🚨 순환 마지노선 붕괴 (총량 부족)</span>`;
+            }
+
+            let displayShortage = sw === -1 ? "> 52" : sw;
+            let displayYears = sw === -1 ? "> 1.0" : (sw / 52).toFixed(1);
+
+            container.innerHTML += `
+                <div class="${cardClass}">
+                    ${alertHtml}
+                    <div class="card-header">${td.type}</div>
+                    <div class="stat-row"><span>현재 전체 물리 보유량 (연마장 포함)</span><strong>${td.phys} 개</strong></div>
+                    <div class="stat-row"><span>안전 마지노선 총량 (장착+연마대기)</span><strong>${reqPhysicalStock} 개 (최소)</strong></div>
+                    <div class="stat-row"><span>전체 잔여 사용 한도</span><strong>${td.uses} 회(면)</strong></div>
+                    <div class="stat-row"><span>주당 예상 소모량</span><strong>${td.cons.toFixed(1)} 회(면) / 주</strong></div>
+                    <div style="margin-top:20px; font-size:12px; color:#6c757d;">최초 공장 내 가용 재고 고갈(Shortage) 시점</div>
+                    <div class="life-expectancy">${displayShortage} 주 <span style="font-size:16px;">(약 ${displayYears}년)</span></div>
+                    <div class="stat-row" style="background:#fff3cd; border:1px solid #ffeeba; padding:5px 10px; border-radius:4px; margin-bottom:10px;">
+                        <span>신품 발주 데드라인 (L/T ${newCutterLT}주 반영)</span>
+                        <strong>${orderPointMsg}</strong>
+                    </div>
+                    <div style="background:#f8f9fa; padding:10px; border-radius:4px; font-size:13px;">${statusMessage}</div>
+                </div>
+            `;
+        }
+
+        const ctx = document.getElementById('shortageChart').getContext('2d');
+        if (simChartInstance) { simChartInstance.destroy(); }
+
+        simChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    { label: '1.8도 공장 가용재고', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
+                    { label: '1.8도 필요수량', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#007bff', pointRadius: 8 },
+                    { label: '1.2도 공장 가용재고', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
+                    { label: '1.2도 필요수량', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#28a745', pointRadius: 8 },
+                    { label: 'LW 공장 가용재고', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
+                    { label: 'LW 필요수량', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#fd7e14', pointRadius: 8 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: '향후 1년 간의 실시간 공장 내 가용 재고 시뮬레이션 (톱니바퀴 궤적)', font: {size:16}, padding: {top:10, bottom:20} },
+                    tooltip: { mode: 'index', intersect: false },
+                    legend: { labels: { filter: function(item) { return !item.text.includes('폐기') && !item.text.includes('신규'); } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: '공장 내 즉시 가용 수량 (개)' } },
+                    x: { title: { display: true, text: '시뮬레이션 경과 기간 (월/주차)' } }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
