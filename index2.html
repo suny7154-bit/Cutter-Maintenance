@@ -1128,7 +1128,7 @@
                 const matched = globalData.find(p => p.id === id);
                 if (matched) {
                     const regrindInput = tr.querySelector('.regrind-available-input');
-                    if (regrindInput) { regrindInput.value = matched.regrindAvailable !== undefined ? matched.regrindAvailable : (matched.regridCount || 0); }
+                    if (regrindInput) { regrindInput.value = getEffectiveRegrindCount(matched, res.type); }
                     if (typeInput && (inputEl.closest('tbody').id === 'grid-7-body' || inputEl.closest('tbody').id === 'grid-5-body')) {
                         let statusTxt = matched.status;
                         if(matched.status === 'Using' && matched.currentSide === "20.0") statusTxt += " (20.0면)";
@@ -1424,7 +1424,7 @@
             let displayId = p.id;
             if (p.status === 'Using' && p.toolType === "LW (하도)" && p.currentSide === "20.0") displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
             
-            const remainCount = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
+            const remainCount = getEffectiveRegrindCount(p, v.type);
             let usedInfo = "";
             if (p.toolType === "LW (하도)") {
                 const used = p.usedSides || [];
@@ -1869,7 +1869,7 @@
             "마스터 Tool ID": p.id, "Tool Type": p.toolType, "제작사": getResolvedMaker(p.id, p.maker), "현재 상태": p.status,
             "현재 장착 면": p.currentSide || "10.0",
             "사용 완료된 면": JSON.stringify(p.usedSides || []),
-            "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0), 
+            "연마 가능 횟수": getEffectiveRegrindCount(p, p.toolType), 
             "최종 이력 정보": p.lastHistory, "전체 로그": JSON.stringify(p.historyLog || [])
         }));
         const ws = XLSX.utils.json_to_sheet(exportArr);
@@ -1896,6 +1896,27 @@
     const DEFAULT_REGRIND_COUNT = { "LW (하도)": 10 };
     function getDefaultRegrindCount(type) {
         return DEFAULT_REGRIND_COUNT[type] !== undefined ? DEFAULT_REGRIND_COUNT[type] : 16;
+    }
+
+    // ▼ 실제 연마 이력([연마입고] 로그) 횟수 — regrindAvailable=0이 "구버전 등록 로직이 남긴
+    //   미기록 값"인지 "진짜 수명 소진"인지 구분하는 데 사용
+    function countGrindingCycles(part) {
+        if (!part.historyLog) return 0;
+        return part.historyLog.filter(log => log.log && log.log.includes("[연마입고]")).length;
+    }
+
+    // ▼ regrindAvailable=0이면서 연마 이력이 이 횟수 미만이면 구버전 로직이 남긴 미기록 값으로
+    //   보고 신품 기본값을 적용합니다. 연마 이력이 이 횟수 이상 쌓였는데도 0이면 진짜 소진으로 인정합니다.
+    const LEGACY_ZERO_GRACE_CYCLES = 5;
+    function getEffectiveRegrindCount(part, type) {
+        let rawVal = part.regrindAvailable !== undefined ? part.regrindAvailable : (part.regridCount || 0);
+        let raw = parseInt(rawVal, 10);
+        if (isNaN(raw)) raw = 0;
+
+        if (raw === 0 && countGrindingCycles(part) < LEGACY_ZERO_GRACE_CYCLES) {
+            return getDefaultRegrindCount(type);
+        }
+        return raw;
     }
 
     // ▼ 커터 타입별 호기당 주간 소모율 (시뮬레이션 루프와 요약 카드가 항상 같은 값을 쓰도록 통일)
@@ -1949,14 +1970,11 @@
             let type = parseAndValidateToolId(p.id).type || "기타";
             if (!availPools[type]) return;
             
-            let rawRegrindVal = p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0);
-            let rawRegrind = parseInt(rawRegrindVal, 10);
-            if (isNaN(rawRegrind)) rawRegrind = 0;
-
-            // ✅ 수정: "0"을 신품으로 되돌리는 보정을 제거했습니다. 이제 신규/예외 등록 시점에
-            // 타입별 정상 기본값(16회 또는 LW 10회)으로 초기화되므로, 여기서의 "0"은 항상
-            // 진짜로 잔여 연마 횟수가 0(수명 소진)이라는 뜻입니다.
-            let remainRegrinds = rawRegrind;
+            // ✅ 재수정: 신규 등록 로직은 고쳤지만, 이미 등록되어 있던 기존 데이터 중에는
+            // 구버전 로직 때문에 "실제로는 거의 새것인데 0으로 찍힌" 커터가 섞여 있을 수
+            // 있습니다. 값이 0이면서 실제 연마 이력이 5회 미만이면 신품 기본값을, 연마
+            // 이력이 5회 이상인데도 0이면 진짜 소진으로 인정합니다.
+            let remainRegrinds = getEffectiveRegrindCount(p, type);
 
             let currentLife = 0;
             if (type === "LW (하도)") {
