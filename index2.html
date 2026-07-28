@@ -33,13 +33,13 @@
         .summary-table th { background: #495057; color: white; }
         .summary-table .sub-total { background: #f8f9fa; font-weight: bold; color: #0056b3; }
         .summary-table .grand-total { background: #e2e3e5; font-weight: bold; color: #dc3545; }
-
+ 
         .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .matrix-table th, .matrix-table td { border: 1px solid var(--border-color); padding: 12px; text-align: center; font-size: 13px; }
         .matrix-table th { background: #e9ecef; color: #333; font-weight: bold; }
         .matrix-table tr:nth-child(even) { background-color: #fafafa; }
         .empty-tool { color: #adb5bd; font-style: italic; }
-
+ 
         .log-split-container { display: flex; gap: 20px; height: 600px; }
         .log-list-side { flex: 3; border: 1px solid #dee2e6; border-radius: 6px; overflow-y: auto; padding: 0; background: #fff; }
         .log-view-side { flex: 2; border: 1px solid #dee2e6; border-radius: 6px; background: #f8f9fa; padding: 15px; overflow-y: auto; }
@@ -54,7 +54,7 @@
         .status-waiting { background-color: #fd7e14; color: #ffffff; border: 1px solid #e26b0a; } 
         .status-regrind { background-color: #dc3545; color: #ffffff; border: 1px solid #bd2130; } 
         .status-disposal { background-color: #212529; color: #ffffff; border: 1px solid #000000; } 
-
+ 
         .datetime-container { display: flex; gap: 4px; justify-content: center; align-items: center; }
         .datetime-container input { width: 48% !important; padding: 5px; }
         .btn-row-control { padding: 4px 10px; font-size: 12px; cursor: pointer; margin-right: 5px; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
@@ -64,7 +64,7 @@
         
         .invalid-cell { border: 2px solid #dc3545 !important; background-color: #f8d7da !important; color: #721c24; font-weight:bold; }
         .info-text { font-size: 11px; color: #007bff; display: block; margin-top: 4px; font-weight:bold; }
-
+ 
         #loading-indicator {
             display: none; position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.85); color: #fff; font-weight: bold; font-size: 16px;
@@ -80,10 +80,10 @@
         }
         .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
         .toast.error { background-color: #dc3545; }
-
+ 
         .admin-lock-box { background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 6px; text-align: center; max-width: 400px; margin: 50px auto; }
         .admin-panel { background: #fff; padding: 5px; display: none; }
-
+ 
         .sim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; background:#fff; padding:15px; border-radius:6px; border:1px solid #dee2e6;}
         .sim-item { display: flex; flex-direction: column; gap: 5px; }
         .sim-item label { font-size: 13px; font-weight: bold; color: #495057; }
@@ -102,7 +102,7 @@
     </style>
 </head>
 <body>
-
+ 
 <div class="login-banner">
     🔑 <strong>GitHub DB 연동:</strong>
     <input type="password" id="cfg-token" placeholder="GitHub 토큰">
@@ -110,10 +110,10 @@
     <input type="text" id="cfg-repo" placeholder="레포지토리명">
     <button onclick="connectDB()" id="connect-btn">DB 연결 및 동기화</button>
 </div>
-
+ 
 <div id="toast-msg" class="toast"></div>
 <div id="loading-indicator">⏳ 데이터 처리 중...</div>
-
+ 
 <div class="container">
     <div class="sidebar">
         <h2 style="margin-bottom: 20px; font-size: 24px;">Menu</h2>
@@ -130,7 +130,7 @@
         <button class="menu-btn" onclick="switchMenu('10')" style="border-left: 4px solid #17a2b8;">📅 10. 연마 출하/입고 이력 보고서</button>
         <button class="menu-btn" onclick="switchMenu('9')" style="border-left: 4px solid #6f42c1; margin-top:10px;">📈 9. Shortage 예측 시뮬레이션</button>
     </div>
-
+ 
     <div class="main-content">
         <div id="menu-home" class="menu-section">
             <h2>📊 현재 재고 현황 (Home)</h2>
@@ -149,7 +149,7 @@
                 </thead>
                 <tbody id="home-maker-tbody"></tbody>
             </table>
-
+ 
             <h3>■ 2. 커터 타입별 ✕ 현재 상태별 수량</h3>
             <table class="summary-table">
                 <thead>
@@ -166,7 +166,7 @@
                 <tbody id="home-status-tbody"></tbody>
             </table>
         </div>
-
+ 
         <div id="menu-0" class="menu-section" style="display:none;">
             <h2>🖥️ 0. 설비 호기별 / Unit별 실시간 Cutter 장착 현황판</h2>
             <p style="font-size:13px; color:#666;">※ Flip으로 20.0면을 사용 중인 경우 마스터 ID 옆에 (20.0면)으로 통합 표시되며, 하도는 표 하단에 정렬됩니다.</p>
@@ -182,7 +182,7 @@
                 <tbody id="matrix-table-body"></tbody>
             </table>
         </div>
-
+ 
         <div id="menu-1" class="menu-section" style="display:none;">
             <h2>🆕 1. 신규 부품 일괄 등록 (Excel 양식 기입)</h2>
             <p style="font-size:13px; color:#ef4444; font-weight:bold;">※ 하도 커터 20.0 스캔 시 10.0 통합 생성. 백의 자리가 9번대(X9XX)인 공구는 UC1으로 자동 분류됩니다.</p>
@@ -200,7 +200,7 @@
             </table>
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkRegister()">🚀 신규 부품 일괄 등록 실행</button>
         </div>
-
+ 
         <div id="menu-2" class="menu-section" style="display:none;">
             <h2>🔧 2. 장비 장착 / 탈거 일괄 처리 시트</h2>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
@@ -227,7 +227,7 @@
             <button class="action-btn" style="background:#007bff;" onclick="submitBulkEquip('Using')">🛠️ 일괄 장비 장착 승인</button>
             <button class="action-btn" style="background:#fd7e14; color:#fff;" onclick="submitBulkEquip('Waiting')">⚠️ 일괄 장비 탈거 승인</button>
         </div>
-
+ 
         <div id="menu-3" class="menu-section" style="display:none;">
             <h2>🚛 3. 연마 외주 출하 관리 (대기 → 외주 연마 공장)</h2>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
@@ -255,7 +255,7 @@
             </table>
             <button class="action-btn" style="background:#dc3545;" onclick="submitBulkShipment('Regrind')">🚛 외주 연마 일괄 출하 처리 (Regrind)</button>
         </div>
-
+ 
         <div id="menu-4" class="menu-section" style="display:none;">
             <h2>📥 4. 연마 입고 관리 (외주 연마 → Storage 창고)</h2>
             <p style="font-size:13px; color:#0056b3; font-weight:bold;">※ 입고 시 해당 커터의 사용 이력 면(10.0/20.0)이 초기화되며 [연마 가능 횟수]를 갱신합니다.</p>
@@ -281,7 +281,7 @@
             </table>
             <button class="action-btn" style="background:#28a745;" onclick="submitBulkShipIn()">📥 가공 창고 입고 승인</button>
         </div>
-
+ 
         <div id="menu-5" class="menu-section" style="display:none;">
             <h2>🔒 5. 관리자 모드-강제 상태 변경 및 예외 등록</h2>
             
@@ -290,7 +290,7 @@
                 <input type="password" id="admin-password-input" placeholder="비밀번호 입력" style="padding:8px; width:80%; text-align:center; border:1px solid #f5c6cb; border-radius:4px; margin-bottom:10px;"><br>
                 <button class="action-btn" style="background:#dc3545; padding:6px 15px; font-size:13px;" onclick="verifyAdminPassword()">🔐 인증 실행</button>
             </div>
-
+ 
             <div id="admin-panel-zone" class="admin-panel">
                 <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">⚡ 5-1. 상태 및 장착 위치 강제 제어</h3>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
@@ -357,13 +357,13 @@
                     <tbody id="grid-5-forcereg-body"></tbody>
                 </table>
                 <button class="action-btn" style="background:#dc3545; width:100%; margin-top:10px;" onclick="submitAdminForceReg()">⚡ 예외 커터 강제 등록 승인</button>
-
+ 
                 <br><br><br>
                 <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 백업 출력</h3>
                 <button class="action-btn" onclick="downloadExcel()" style="background:#495057; font-size:13px; padding:8px 15px;">📊 현시점 DB 마스터 엑셀 백업 다운로드</button>
             </div>
         </div>
-
+ 
         <div id="menu-6" class="menu-section" style="display:none;">
             <h2>📜 6. 전체 커터 세부 리스트 및 DB Log 조회</h2>
             <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6;">
@@ -397,7 +397,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <div id="menu-7" class="menu-section" style="display:none;">
             <h2>🗑️ 7. 고품 폐기 일괄 등록 (상태 → Disposal)</h2>
             <div><button class="btn-row-control" onclick="addGridRow('7')">➕ 행 추가</button></div>
@@ -414,7 +414,7 @@
             </table>
             <button class="action-btn" style="background:#212529; border: 1px solid #000;" onclick="submitBulkDisposal()">🗑️ 선택 부품 폐기(Disposal) 처리</button>
         </div>
-
+ 
         <div id="menu-8" class="menu-section" style="display:none;">
             <h2>📅 8. 전체 장착/탈거 이력 보고서</h2>
             <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
@@ -440,7 +440,7 @@
                 </tbody>
             </table>
         </div>
-
+ 
         <div id="menu-10" class="menu-section" style="display:none;">
             <h2>📅 10. 연마 출하 / 입고 이력 보고서</h2>
             <div style="background:#f8f9fa; padding:15px; border-radius:6px; border:1px solid #dee2e6; margin-bottom:15px; display:flex; gap:15px; align-items:center;">
@@ -464,7 +464,7 @@
                 </tbody>
             </table>
         </div>
-
+ 
         <div id="menu-9" class="menu-section" style="display:none;">
             <h2>📈 9. 커터 파이프라인 Shortage 이산(Discrete) 궤적 시뮬레이터</h2>
             <p style="font-size:13px; color:#666;">※ 실제 공장 물류 흐름(입고 시 증가, 장착 시 하락)을 개별 커터 수명 단위로 추적하는 리얼타임 알고리즘이 적용되었습니다.</p>
@@ -472,7 +472,7 @@
             <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
                 🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span>개)
             </div>
-
+ 
             <div id="sim-panel-content">
                 <div class="sim-grid">
                     <div class="sim-item">
@@ -511,7 +511,7 @@
                             <tbody id="schedule-tbody"></tbody>
                         </table>
                     </div>
-
+ 
                     <div style="flex:1; background:#fff; border:1px solid #ced4da; padding:15px; border-radius:6px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                             <label style="font-size: 14px; font-weight: bold; color: #495057;">🛒 2. 신규 제작 커터 입고 예정 일정</label>
@@ -532,23 +532,23 @@
                         </table>
                     </div>
                 </div>
-
+ 
                 <div style="text-align:right; margin-bottom:15px;">
                     <button class="action-btn" style="background:#6f42c1; padding:10px 30px; font-size:16px;" onclick="runPrediction()">🚀 리얼타임 이산 궤적 시뮬레이션 가동</button>
                 </div>
-
+ 
                 <h3 style="margin-top:20px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">📊 타입별 Shortage 분석 결과</h3>
                 <div class="result-grid" id="prediction-cards"></div>
-
+ 
                 <div class="chart-container">
                     <canvas id="shortageChart"></canvas>
                 </div>
             </div>
         </div>
-
+ 
     </div>
 </div>
-
+ 
 <script>
     let globalData = [];
     let dbSha = "";
@@ -557,8 +557,8 @@
     
     // 전역 변수 설정
     let machineSchedules = [];
-    const DB_FILE = "parts_db2.json";
-
+    const DB_FILE = "part_db2.json";
+ 
     function utf8_to_b64(str) {
         const bytes = new TextEncoder().encode(str);
         let binString = '';
@@ -566,7 +566,7 @@
         for (let i = 0; i < len; i++) { binString += String.fromCharCode(bytes[i]); }
         return window.btoa(binString);
     }
-
+ 
     function b64_to_utf8(str) {
         const binString = window.atob(str);
         const len = binString.length;
@@ -574,7 +574,7 @@
         for (let i = 0; i < len; i++) { bytes[i] = binString.charCodeAt(i); }
         return new TextDecoder().decode(bytes);
     }
-
+ 
     function showToast(message, isError = false) {
         const toast = document.getElementById("toast-msg");
         toast.innerText = message;
@@ -583,13 +583,13 @@
         toast.classList.add("show");
         setTimeout(() => { toast.classList.remove("show"); }, 3000);
     }
-
+ 
     function showLoading(show, message = "⏳ 데이터 처리 중...") {
         const loader = document.getElementById('loading-indicator');
         if (show) { loader.innerText = message; loader.style.display = 'block'; } 
         else { loader.style.display = 'none'; }
     }
-
+ 
     window.addEventListener('DOMContentLoaded', () => {
         const savedToken = localStorage.getItem('gh_token');
         const savedOwner = localStorage.getItem('gh_owner');
@@ -600,23 +600,23 @@
         const d4 = document.getElementById("bulk-ship4-date");
         if(d3) d3.value = todayStr;
         if(d4) d4.value = todayStr;
-
+ 
         // 리포트 기본 날짜 세팅 (8번, 10번 메뉴)
         const d = new Date();
         const endStr = d.toISOString().split('T')[0];
         d.setDate(d.getDate() - 7);
         const startStr = d.toISOString().split('T')[0];
-
+ 
         const reportStart = document.getElementById("report-start-date");
         const reportEnd = document.getElementById("report-end-date");
         if (reportStart && reportEnd) { reportStart.value = startStr; reportEnd.value = endStr; }
-
+ 
         const grindStart = document.getElementById("grinding-start-date");
         const grindEnd = document.getElementById("grinding-end-date");
         if (grindStart && grindEnd) { grindStart.value = startStr; grindEnd.value = endStr; }
         
         renderScheduleTable();
-
+ 
         if (savedToken && savedOwner && savedRepo) {
             document.getElementById("cfg-token").value = savedToken;
             document.getElementById("cfg-owner").value = savedOwner;
@@ -624,7 +624,7 @@
             fetchDatabase();
         }
     });
-
+ 
     // 💡 3번 메뉴 Waiting 커터 자동 호출 함수
     function loadWaitingCutters() {
         const waitingCutters = globalData.filter(p => p.status === 'Waiting');
@@ -642,7 +642,7 @@
         });
         showToast(`✅ ${waitingCutters.length}개의 Waiting 커터를 모두 불러왔습니다.`);
     }
-
+ 
     function renderScheduleTable() {
         const tbody = document.getElementById('schedule-tbody');
         if(!tbody) return;
@@ -651,17 +651,17 @@
             const today = new Date().toISOString().split('T')[0];
             machineSchedules.push({ start: today, end: '', machines: 14 });
         }
-
+ 
         machineSchedules.forEach((sch, index) => {
             const tr = document.createElement('tr');
             const isFirst = index === 0;
             const isLast = index === machineSchedules.length - 1;
-
+ 
             const startStr = isFirst ? 'Today' : sch.start;
             const startTd = document.createElement('td');
             startTd.innerHTML = `<input type="text" value="${startStr}" readonly style="background:#e9ecef; font-weight:bold; color:#495057;">`;
             tr.appendChild(startTd);
-
+ 
             const endTd = document.createElement('td');
             if (isLast) {
                 const endInput = document.createElement('input');
@@ -673,7 +673,7 @@
                 endTd.innerHTML = `<input type="date" value="${sch.end}" readonly style="background:#f1f3f5; color:#6c757d;">`;
             }
             tr.appendChild(endTd);
-
+ 
             const machTd = document.createElement('td');
             const machInput = document.createElement('input');
             machInput.type = 'number';
@@ -682,7 +682,7 @@
             machInput.onchange = (e) => { machineSchedules[index].machines = parseInt(e.target.value) || 0; };
             machTd.appendChild(machInput);
             tr.appendChild(machTd);
-
+ 
             const actTd = document.createElement('td');
             if (isLast && index > 0) {
                 const delBtn = document.createElement('button');
@@ -698,7 +698,7 @@
             tbody.appendChild(tr);
         });
     }
-
+ 
     function addScheduleRow() {
         const lastSch = machineSchedules[machineSchedules.length - 1];
         if (!lastSch.end) { showToast("⚠️ 이전 기간의 '종료 일자'를 설정해야 다음 기간을 추가할 수 있습니다.", true); return; }
@@ -707,7 +707,7 @@
         machineSchedules.push({ start: nextStart.toISOString().split('T')[0], end: '', machines: lastSch.machines });
         renderScheduleTable();
     }
-
+ 
     function getMachinesForDate(targetDate) {
         for (let i = 0; i < machineSchedules.length; i++) {
             const sch = machineSchedules[i];
@@ -718,12 +718,12 @@
         }
         return machineSchedules[0].machines; 
     }
-
+ 
     function addNewCutterRow() {
         const tbody = document.getElementById('new-cutter-tbody');
         const emptyMsg = document.getElementById('new-cutter-empty-msg');
         if (emptyMsg) emptyMsg.remove();
-
+ 
         const tr = document.createElement('tr');
         tr.className = 'new-cutter-row';
         tr.innerHTML = `
@@ -747,7 +747,7 @@
             tbody.innerHTML = `<tr id="new-cutter-empty-msg"><td colspan="4" style="color:#adb5bd; font-size:12px;">등록된 신규 입고 일정이 없습니다.</td></tr>`;
         }
     }
-
+ 
     function getNewCutterSchedules() {
         let schedules = [];
         const rows = document.querySelectorAll('.new-cutter-row');
@@ -761,7 +761,7 @@
         });
         return schedules;
     }
-
+ 
     function connectDB() {
         const token = document.getElementById("cfg-token").value.trim();
         const owner = document.getElementById("cfg-owner").value.trim();
@@ -773,11 +773,11 @@
         }
         fetchDatabase();
     }
-
+ 
     function getCredentials() {
         return { token: document.getElementById("cfg-token").value.trim(), owner: document.getElementById("cfg-owner").value.trim(), repo: document.getElementById("cfg-repo").value.trim() };
     }
-
+ 
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
@@ -787,13 +787,13 @@
         const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
     }
-
+ 
     function getToolCategory(type) {
         if (type.includes("상도")) return "상도";
         if (type.includes("하도")) return "하도";
         return "기타";
     }
-
+ 
     function getResolvedMaker(id, defaultMaker) {
         if (id && id.length >= 10 && id.charAt(7) === '9') return "UC1";
         if (defaultMaker && defaultMaker !== "미분류" && defaultMaker !== "기타" && defaultMaker !== "") return defaultMaker;
@@ -801,7 +801,7 @@
         if (id && id.includes("YJ")) return "유진";
         return "기타";
     }
-
+ 
     function getMountedLocation(part) {
         if (part.status !== 'Using') return null;
         let foundLine = "", foundUnit = "";
@@ -815,7 +815,7 @@
         }
         return null;
     }
-
+ 
     function verifyAdminPassword() {
         const pass = document.getElementById("admin-password-input").value;
         if (pass === "Jooyupidiot") {
@@ -826,7 +826,7 @@
             showToast("❌ 비밀번호가 올바르지 않습니다.", true);
         }
     }
-
+ 
     function toggleAdminLineUnit(selectEl) {
         const tr = selectEl.closest('tr');
         const line = tr.querySelector('.admin-target-line');
@@ -834,7 +834,7 @@
         if (selectEl.value === 'Using') { line.disabled = false; unit.disabled = false; } 
         else { line.disabled = true; unit.disabled = true; line.value = ''; unit.value = ''; }
     }
-
+ 
     function applyBulkAdminStatus() {
         const targetStatus = document.getElementById("bulk-admin-status").value;
         const rows = document.querySelectorAll("#grid-5-body tr");
@@ -845,7 +845,7 @@
         });
         showToast(`표 전체 행의 목표 상태가 [${targetStatus}]로 일괄 변경되었습니다.`);
     }
-
+ 
     function applyBulkShip3Date() {
         const targetDate = document.getElementById("bulk-ship3-date").value;
         if(!targetDate) { showToast("변경할 출하 날짜를 선택하세요.", true); return; }
@@ -857,7 +857,7 @@
         });
         showToast(`표 전체 행의 출하 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
     }
-
+ 
     function applyBulkShip4Date() {
         const targetDate = document.getElementById("bulk-ship4-date").value;
         if(!targetDate) { showToast("변경할 입고 날짜를 선택하세요.", true); return; }
@@ -869,7 +869,7 @@
         });
         showToast(`표 전체 행의 입고 일자가 [${targetDate}]로 일괄 적용되었습니다.`);
     }
-
+ 
     function setupNumberPasteInterceptor(inputEl) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -888,7 +888,7 @@
             }
         });
     }
-
+ 
     function setupPasteInterceptor(inputEl, menuType) {
         inputEl.addEventListener('paste', function(e) {
             e.preventDefault();
@@ -903,7 +903,7 @@
             else if (menuType === '5_rename') handleIdRenameLive(inputEl);
             else if (menuType === '5_forcereg') { }
             else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
-
+ 
             for (let i = 1; i < lines.length; i++) {
                 addGridRow(menuType);
                 const nextTr = tbody.lastChild;
@@ -918,7 +918,7 @@
             }
         });
     }
-
+ 
     function addGridRow(menu) {
         const tbody = document.getElementById(`grid-${menu}-body`) || document.getElementById(`grid-${menu.replace('_', '-')}-body`);
         if(!tbody) return;
@@ -943,7 +943,7 @@
             for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
             lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
             lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
-
+ 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" onchange="handleEquipIdChange(this)"><span class="info-text"></span></td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="자동 계산"></td>
@@ -983,7 +983,7 @@
             for(let j=1; j<=4; j++) { lineOptions += `<option value="6-${j}">6-${j} 라인</option>`; }
             lineOptions += `<option value="H/C 1">H/C 1 장비</option>`;
             lineOptions += `<option value="H/C 2">H/C 2 장비</option>`;
-
+ 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="ID 입력 (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
                 <td><input type="text" class="tool-type-input" readonly placeholder="상태 자동 조회" style="font-weight:bold;"></td>
@@ -1023,7 +1023,7 @@
         }
         tbody.appendChild(tr);
     }
-
+ 
     function goToHistory(btn) {
         const tr = btn.closest('tr');
         let id = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
@@ -1038,7 +1038,7 @@
             setTimeout(() => { const firstRow = document.querySelector("#master-list-tbody tr.list-row"); if(firstRow) firstRow.click(); }, 100);
         }
     }
-
+ 
     function checkUnitAvailability(el) {
         const tr = el.closest('tr');
         const idInput = tr.querySelector('.tool-id-input').value.trim().toUpperCase();
@@ -1047,7 +1047,7 @@
         const unitEl = tr.querySelector('.equip-unit-select');
         const line = lineEl.value;
         const msgSpan = tr.querySelector('.info-text');
-
+ 
         if (line.startsWith("H/C")) {
             let hasUpper = false;
             for(let opt of unitEl.options) { if(opt.value === 'Upper') hasUpper = true; }
@@ -1065,24 +1065,24 @@
                 unitEl.value = currentVal;
             }
         }
-
+ 
         const unit = unitEl.value;
         if(!idInput || !typeInput) return; 
-
+ 
         let baseId = idInput.endsWith("20.0") ? idInput.replace("20.0", "10.0") : idInput;
         const matchedPart = globalData.find(p => p.id === baseId);
         if (matchedPart && matchedPart.status !== 'Storage') return;
-
+ 
         if (typeInput === "1.2도 상도" && unit !== "Final") { lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell'); msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.2상도는 Final 전용</span>`; return; }
         if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) { lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell'); msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 1.8상도는 Upper/Center 전용</span>`; return; }
-
+ 
         const currentCategory = getToolCategory(typeInput);
         const dbConflict = globalData.find(p => {
             if (p.status !== 'Using' || p.id === baseId) return false;
             const loc = getMountedLocation(p);
             return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
         });
-
+ 
         let screenConflict = false;
         const rows = document.querySelectorAll("#grid-2-body tr");
         for(let r of rows) {
@@ -1094,7 +1094,7 @@
             const rUnit = r.querySelector('.equip-unit-select').value;
             if (rId && rLine === line && rUnit === unit && getToolCategory(rType) === currentCategory) { screenConflict = true; break; }
         }
-
+ 
         if (dbConflict || screenConflict) {
             lineEl.classList.add('invalid-cell'); unitEl.classList.add('invalid-cell');
             msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착불가! ${line}/${unit} 이미 [${currentCategory}] 장착됨</span>`;
@@ -1106,7 +1106,7 @@
             } else msgSpan.innerHTML = "";
         }
     }
-
+ 
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -1141,18 +1141,18 @@
             }
         }
     }
-
+ 
     function handleIdRenameLive(inputEl) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
         if (id.endsWith("20.0")) { id = id.replace("20.0", "10.0"); inputEl.value = id; } 
         else { inputEl.value = id; }
-
+ 
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
         const lineView = tr.querySelector('.equip-line-view');
         const unitView = tr.querySelector('.equip-unit-view');
-
+ 
         if (id.length === 0) {
             inputEl.classList.remove('invalid-cell');
             if (typeInput) typeInput.value = "";
@@ -1160,7 +1160,7 @@
             if (unitView) unitView.value = "";
             return;
         }
-
+ 
         const matched = globalData.find(p => p.id === id);
         if (matched) {
             inputEl.classList.remove('invalid-cell');
@@ -1181,44 +1181,44 @@
             if (lineView) lineView.value = "-"; if (unitView) unitView.value = "-";
         }
     }
-
+ 
     function handleEquipIdChange(inputEl) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
         let is20 = false;
-
+ 
         if (id.endsWith("20.0")) {
             id = id.replace("20.0", "10.0");
             inputEl.value = id;
             is20 = true;
             showToast("💡 20.0 면이 스캔되어 마스터 ID로 변환되며, 장착 면이 20.0면으로 자동 선택됩니다.");
         } else { inputEl.value = id; }
-
+ 
         const tr = inputEl.closest('tr');
         const typeInput = tr.querySelector('.tool-type-input');
         const faceSelect = tr.querySelector('.face-select');
         const lineSelect = tr.querySelector('.equip-line-select');
         const unitSelect = tr.querySelector('.equip-unit-select');
         const msgSpan = tr.querySelector('.info-text');
-
+ 
         const res = parseAndValidateToolId(id);
         if (typeInput) typeInput.value = res.type;
-
+ 
         if (faceSelect) {
             if (res.type === "LW (하도)") { faceSelect.disabled = false; faceSelect.value = is20 ? "20.0" : "10.0"; } 
             else { faceSelect.disabled = true; faceSelect.value = "10.0"; }
         }
-
+ 
         if (!res.valid) {
             if(id.length >= 21) inputEl.classList.add('invalid-cell');
             if(msgSpan) msgSpan.innerText = "";
             return;
         }
         inputEl.classList.remove('invalid-cell');
-
+ 
         const matchedPart = globalData.find(p => p.id === id);
         if (!matchedPart) { if(msgSpan) msgSpan.innerHTML = "<span style='color:red;'>⚠️ DB 미등록</span>"; return; }
-
+ 
         if (matchedPart.status === 'Storage') {
             lineSelect.disabled = false; unitSelect.disabled = false;
             checkUnitAvailability(lineSelect);
@@ -1237,7 +1237,7 @@
             if(msgSpan) msgSpan.innerHTML = `<span style='color:#dc3545;'>🚨 장착/탈거 불가! (현재 상태: ${matchedPart.status})</span>`;
         }
     }
-
+ 
     function switchMenu(menuId) {
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
@@ -1252,7 +1252,7 @@
             if(tbodyRename) { tbodyRename.innerHTML = ""; addGridRow('5_rename'); }
             const tbodyForce = document.getElementById(`grid-5-forcereg-body`);
             if(tbodyForce) { tbodyForce.innerHTML = ""; addGridRow('5_forcereg'); }
-
+ 
             document.getElementById("admin-password-input").value = "";
             document.getElementById("admin-auth-zone").style.display = "block";
             document.getElementById("admin-panel-zone").style.display = "none";
@@ -1263,7 +1263,7 @@
             fetchDatabase();
         }
     }
-
+ 
     async function fetchDatabase() {
         const creds = getCredentials();
         if(!creds.token || !creds.owner || !creds.repo) {
@@ -1278,13 +1278,13 @@
             if (res.status === 200) {
                 const json = await res.json();
                 dbSha = json.sha;
-
+ 
                 if (!json.content) {
                     showToast(`❌ ${DB_FILE} 파일이 1MB를 초과하여 GitHub API로 직접 불러올 수 없습니다. 이력 데이터 정리가 필요합니다.`, true);
                     showLoading(false);
                     return;
                 }
-
+ 
                 try {
                     const content = await b64_to_utf8(json.content);
                     globalData = JSON.parse(content);
@@ -1305,25 +1305,25 @@
         }
         showLoading(false);
     }
-
+ 
     function calculateHomeTables() {
         let t1 = { "1.8도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "1.2도 상도": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "LW (하도)": { hytc:0, yj:0, uc1:0, etc:0, sum:0 }, "기타": { hytc:0, yj:0, uc1:0, etc:0, sum:0 } };
         let t2 = { "1.8도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "1.2도 상도": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "LW (하도)": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 }, "기타": { st:0, us:0, wt:0, rg:0, dp:0, sum:0 } };
         let t1Tot = { hytc:0, yj:0, uc1:0, etc:0, grand:0 };
         let t2Tot = { st:0, us:0, wt:0, rg:0, dp:0, grand:0 };
-
+ 
         globalData.forEach(p => {
             let t = parseAndValidateToolId(p.id).type || "기타";
             if (!t1[t]) t = "기타";
-
+ 
             let makerName = getResolvedMaker(p.id, p.maker);
             let m = "etc";
             if (makerName === "UC1") m = "uc1";
             else if (makerName === "HYTC") m = "hytc";
             else if (makerName === "유진") m = "yj";
-
+ 
             t1[t][m]++; t1[t].sum++; t1Tot[m]++; t1Tot.grand++;
-
+ 
             let s = p.status;
             let sKey = "st";
             if(s==="Storage") sKey = "st";
@@ -1334,7 +1334,7 @@
             
             t2[t][sKey]++; t2[t].sum++; t2Tot[sKey]++; t2Tot.grand++;
         });
-
+ 
         const types = ["1.8도 상도", "1.2도 상도", "LW (하도)", "기타"];
         let h1 = "";
         types.forEach(type => {
@@ -1342,7 +1342,7 @@
         });
         h1 += `<tr class="grand-total"><td>합계</td><td>${t1Tot.hytc}</td><td>${t1Tot.yj}</td><td>${t1Tot.uc1}</td><td>${t1Tot.etc}</td><td>${t1Tot.grand}</td></tr>`;
         document.getElementById("home-maker-tbody").innerHTML = h1;
-
+ 
         let h2 = "";
         types.forEach(type => {
             h2 += `<tr><td><strong>${type}</strong></td><td>${t2[type].st}</td><td>${t2[type].us}</td><td>${t2[type].wt}</td><td>${t2[type].rg}</td><td>${t2[type].dp}</td><td class="sub-total">${t2[type].sum}</td></tr>`;
@@ -1350,19 +1350,19 @@
         h2 += `<tr class="grand-total"><td>합계</td><td>${t2Tot.st}</td><td>${t2Tot.us}</td><td>${t2Tot.wt}</td><td>${t2Tot.rg}</td><td>${t2Tot.dp}</td><td>${t2Tot.grand}</td></tr>`;
         document.getElementById("home-status-tbody").innerHTML = h2;
     }
-
+ 
     function renderMatrixBoard() {
         const matrixBody = document.getElementById("matrix-table-body");
         if (!matrixBody) return;
-
+ 
         let totalLines = [];
         for(let i=1; i<=5; i++) { for(let j=1; j<=3; j++) { totalLines.push(`${i}-${j}`); } }
         for(let j=1; j<=4; j++) { totalLines.push(`6-${j}`); }
         totalLines.push("H/C 1"); totalLines.push("H/C 2");
-
+ 
         let boardMapping = {};
         totalLines.forEach(line => { boardMapping[line] = { Upper: [], Center: [], Final: [] }; });
-
+ 
         globalData.forEach(p => {
             if (p.status === 'Using') {
                 const loc = getMountedLocation(p);
@@ -1376,35 +1376,35 @@
                 }
             }
         });
-
+ 
         let htmlStr = "";
         totalLines.forEach(line => {
             const sortFn = (a, b) => {
                 const isALW = a.type === "LW (하도)"; const isBLW = b.type === "LW (하도)";
                 if (isALW && !isBLW) return 1; if (!isALW && isBLW) return -1; return 0;
             };
-
+ 
             const upperArr = boardMapping[line].Upper.sort(sortFn).map(i => i.html);
             const centerArr = boardMapping[line].Center.sort(sortFn).map(i => i.html);
             const finalArr = boardMapping[line].Final.sort(sortFn).map(i => i.html);
-
+ 
             const upStr = upperArr.length > 0 ? upperArr.join("") : (line.startsWith("H/C") ? "<span class='empty-tool' style='color:#ccc;'>N/A</span>" : "<span class='empty-tool'>-</span>");
             const ctStr = centerArr.length > 0 ? centerArr.join("") : "<span class='empty-tool'>-</span>";
             const fnStr = finalArr.length > 0 ? finalArr.join("") : "<span class='empty-tool'>-</span>";
-
+ 
             htmlStr += `<tr><td><strong>${line} 호기</strong></td><td>${upStr}</td><td>${ctStr}</td><td>${fnStr}</td></tr>`;
         });
         matrixBody.innerHTML = htmlStr;
     }
-
+ 
     function renderMenu6List(searchTerm = "") {
         const tbody = document.getElementById("master-list-tbody");
         if(!tbody) return;
         tbody.innerHTML = "";
-
+ 
         const term = searchTerm.trim().toLowerCase();
         renderRegrindDiagnosticSummary();
-
+ 
         globalData.forEach(p => {
             const v = parseAndValidateToolId(p.id);
             const rMaker = getResolvedMaker(p.id, p.maker);
@@ -1413,7 +1413,7 @@
                 const searchableText = `${p.id} ${v.type} ${rMaker} ${p.status}`.toLowerCase();
                 if (!searchableText.includes(term)) return; 
             }
-
+ 
             const tr = document.createElement("tr");
             tr.className = "list-row";
             tr.onclick = () => showToolLog6(p.id, tr);
@@ -1424,7 +1424,7 @@
             else if(lowStat === 'waiting') sClass = 'status-waiting';
             else if(lowStat === 'disposal') sClass = 'status-disposal';
             else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
-
+ 
             let displayId = p.id;
             if (p.status === 'Using' && p.toolType === "LW (하도)" && p.currentSide === "20.0") displayId = `${p.id} <br><span style="color:#dc3545; font-size:11px;">(20.0면 장착중)</span>`;
             
@@ -1433,22 +1433,22 @@
             const grindCycles = countGrindingCycles(p);
             const remainCount = getEffectiveRegrindCount(p, v.type);
             const wasAdjusted = (parseInt(rawVal, 10) || 0) === 0 && remainCount !== 0;
-
+ 
             let usedInfo = "";
             if (p.toolType === "LW (하도)") {
                 const used = p.usedSides || [];
                 if (used.length > 0) usedInfo = `<br><span style="color:#888; font-size:10px;">(사용된 면: ${used.join(", ")})</span>`;
             }
-
+ 
             const remainCell = wasAdjusted
                 ? `<span style="color:#007bff;">${remainCount}회</span><br><span style="font-size:10px; color:#007bff;">(신품 보정됨)</span>`
                 : `${remainCount}회`;
-
+ 
             tr.innerHTML = `<td style="font-weight:bold; color:#0056b3;">${displayId} ${usedInfo}</td><td>${v.type}</td><td>${rMaker}</td><td><span class="status-badge ${sClass}">${p.status}</span></td><td>${rawVal}회</td><td>${grindCycles}회</td><td style="font-weight:bold;">${remainCell}</td>`;
             tbody.appendChild(tr);
         });
     }
-
+ 
     // ▼ 6번 메뉴 상단 요약 배너 — raw 잔여=0인 커터가 "신품 보정"과 "진짜 소진" 중 어느 쪽으로
     //   얼마나 갈렸는지 전체 데이터 기준으로 한눈에 보여줌
     function renderRegrindDiagnosticSummary() {
@@ -1465,21 +1465,21 @@
         });
         el.innerHTML = `⚙️ raw 잔여값이 0인 커터: 총 <strong>${zeroCount}개</strong> — 신품으로 보정됨(연마이력 &lt; ${LEGACY_ZERO_GRACE_CYCLES}회): <strong style="color:#007bff;">${adjustedCount}개</strong> / 진짜 소진으로 인정됨(연마이력 ≥ ${LEGACY_ZERO_GRACE_CYCLES}회): <strong style="color:#dc3545;">${realZeroCount}개</strong>`;
     }
-
+ 
     function showToolLog6(toolId, rowEl) {
         document.querySelectorAll("#master-list-tbody tr").forEach(r => r.classList.remove("selected"));
         if(rowEl) rowEl.classList.add("selected");
-
+ 
         const item = globalData.find(p => p.id === toolId);
         const titleEl = document.getElementById("selected-tool-title");
         const logContainer = document.getElementById("selected-tool-logs");
         if(!item) return;
-
+ 
         let rMaker = getResolvedMaker(item.id, item.maker);
         titleEl.innerHTML = `🔍 [${item.status}] ${item.id} (${rMaker})`;
         
         if(!item.historyLog || item.historyLog.length === 0) { logContainer.innerHTML = `<p style="color:#888; text-align:center; margin-top:50px;">생애주기 이력이 없습니다.</p>`; return; }
-
+ 
         let html = "";
         for(let i = item.historyLog.length - 1; i >= 0; i--) {
             const logObj = item.historyLog[i];
@@ -1491,23 +1491,23 @@
             else if(lowStat === 'waiting') sClass = 'status-waiting';
             else if(lowStat === 'disposal') sClass = 'status-disposal';
             else if(lowStat === 'regrind' || lowStat === 'out_polishing') sClass = 'status-regrind';
-
+ 
             html += `<div class="log-item"><small>⏰ ${dateStr}</small><div style="font-weight:bold; margin-bottom:5px;"><span class="status-badge ${sClass}" style="padding:2px 6px; font-size:11px;">${logObj.status}</span></div><div style="color:#2b2b2b;">${logObj.log}</div></div>`;
         }
         logContainer.innerHTML = html;
     }
-
+ 
     function generateEquipReport() {
         const startStr = document.getElementById("report-start-date").value;
         const endStr = document.getElementById("report-end-date").value;
         const tbody = document.getElementById("grid-8-body");
         
         if (!startStr || !endStr) { showToast("시작일과 종료일을 모두 선택해주세요.", true); return; }
-
+ 
         const startDate = new Date(startStr + "T00:00:00");
         const endDate = new Date(endStr + "T23:59:59");
         let reportData = [];
-
+ 
         globalData.forEach(p => {
             if (p.historyLog && p.historyLog.length > 0) {
                 p.historyLog.forEach(logObj => {
@@ -1527,14 +1527,14 @@
                 });
             }
         });
-
+ 
         reportData.sort((a, b) => b.time - a.time);
-
+ 
         if (reportData.length === 0) {
             tbody.innerHTML = `<tr><td colspan="6" style="color:#888; padding:30px;">해당 기간에 장착/탈거 이력이 없습니다.</td></tr>`;
             showToast("조건에 맞는 이력이 없습니다.", true); return;
         }
-
+ 
         let html = "";
         reportData.forEach(item => {
             let actionColor = item.action.includes("장착") ? "#0056b3" : "#fd7e14";
@@ -1543,18 +1543,18 @@
         tbody.innerHTML = html;
         showToast(`총 ${reportData.length}건의 이력이 조회되었습니다.`);
     }
-
+ 
     function generateGrindingReport() {
         const startStr = document.getElementById("grinding-start-date").value;
         const endStr = document.getElementById("grinding-end-date").value;
         const tbody = document.getElementById("grid-10-body");
         
         if (!startStr || !endStr) { showToast("시작일과 종료일을 모두 선택해주세요.", true); return; }
-
+ 
         const startDate = new Date(startStr + "T00:00:00");
         const endDate = new Date(endStr + "T23:59:59");
         let reportData = [];
-
+ 
         globalData.forEach(p => {
             if (p.historyLog && p.historyLog.length > 0) {
                 p.historyLog.forEach(logObj => {
@@ -1568,14 +1568,14 @@
                 });
             }
         });
-
+ 
         reportData.sort((a, b) => b.time - a.time);
-
+ 
         if (reportData.length === 0) {
             tbody.innerHTML = `<tr><td colspan="4" style="color:#888; padding:30px;">해당 기간에 연마 출하/입고 이력이 없습니다.</td></tr>`;
             showToast("조건에 맞는 이력이 없습니다.", true); return;
         }
-
+ 
         let html = "";
         reportData.forEach(item => {
             let actionColor = item.action.includes("출하") ? "#dc3545" : "#28a745";
@@ -1589,18 +1589,18 @@
         tbody.innerHTML = html;
         showToast(`총 ${reportData.length}건의 연마 이력이 조회되었습니다.`);
     }
-
+ 
     async function saveDatabase(newData) {
         if (isSaving) { showToast("⏳ 이전 데이터를 저장 중입니다. 잠시만 기다려주세요.", true); return false; }
         const creds = getCredentials();
         if(!creds.token) { showToast("GitHub 토큰이 누락되었습니다.", true); return false; }
         isSaving = true;
         showLoading(true, "⏳ GitHub에 데이터 저장 중...");
-
+ 
         try {
             const jsonString = JSON.stringify(newData, null, 2);
             const base64Content = await utf8_to_b64(jsonString);
-
+ 
             const dbUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DB_FILE}`;
             const saveRes = await fetch(dbUrl, { 
                 method: "PUT", 
@@ -1617,7 +1617,7 @@
                 const newRes = await fetch(dbUrl, { headers: { "Authorization": `token ${creds.token}` } });
                 const newJson = await newRes.json();
                 dbSha = newJson.sha;
-
+ 
                 isSaving = false;
                 showLoading(false); 
                 return true;
@@ -1635,7 +1635,7 @@
         showLoading(false); 
         return false;
     }
-
+ 
     async function submitBulkRegister() {
         const rows = document.querySelectorAll("#grid-1-body tr");
         let tempArr = [...globalData]; let addedCount = 0;
@@ -1647,18 +1647,18 @@
             const vRes = parseAndValidateToolId(id);
             if(!vRes.valid || tempArr.some(p => p.id === id)) continue;
             const finalMaker = getResolvedMaker(id, maker);
-
+ 
             tempArr.push({ id, toolType: vRes.type, maker: finalMaker, status: "Storage", currentSide: "10.0", usedSides: [], regrindAvailable: getDefaultRegrindCount(vRes.type), lastHistory: "신규 등록 입고", historyLog: [{ timestamp: new Date().toISOString(), status: "Storage", log: "신규 생산 라인 등록 입고" }] });
             addedCount++;
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${addedCount}건 등록이 완료되었습니다.`); switchMenu('home'); }
     }
-
+ 
     async function submitBulkEquip(targetStatus) {
         const rows = document.querySelectorAll("#grid-2-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
         const currentBatchSet = new Set();
-
+ 
         for(let row of rows) {
             const idInputEl = row.querySelector('.tool-id-input');
             let originalInput = idInputEl.value.trim().toUpperCase();
@@ -1669,10 +1669,10 @@
             const timeVal = row.querySelector('.equip-time-input').value; 
             
             if(!baseId || !dateVal || !timeVal) continue;
-
+ 
             const pIdx = tempArr.findIndex(p => p.id === baseId);
             if(pIdx === -1) continue;
-
+ 
             const line = row.querySelector('.equip-line-select').value;
             const unit = row.querySelector('.equip-unit-select').value;
             const op = row.querySelector('.equip-op-input').value.trim();
@@ -1680,33 +1680,33 @@
             
             const faceSelect = row.querySelector('.face-select');
             const targetSide = (faceSelect && !faceSelect.disabled) ? faceSelect.value : "10.0";
-
+ 
             let logMsg = `[${targetStatus==='Using'?'장착':'탈거'}] 일시:${dateVal} ${timeVal.split(':')[0]}시 | 라인:${line} | 유닛:${unit} | 작업자:${op} | 비고:${comment}`;
-
+ 
             if (targetStatus === 'Using') {
                 const isDirectFlip = (tempArr[pIdx].status === 'Using' && typeInput === "LW (하도)" && tempArr[pIdx].currentSide !== targetSide);
                 if (tempArr[pIdx].status !== 'Storage' && !isDirectFlip) { showToast(`🚨 [오류] 장착은 'Storage (사용대기)' 상태인 커터만 가능합니다.\n(단, 현재 장착된 하도 커터의 면 스왑은 허용됩니다.)`, true); return; }
-
+ 
                 if (typeInput === "LW (하도)") {
                     if (!tempArr[pIdx].usedSides) tempArr[pIdx].usedSides = [];
                     if (tempArr[pIdx].usedSides.includes(targetSide)) { showToast(`🚨 [오류] ${baseId} 커터의 [${targetSide}면]은 이미 이번 주기에 사용한 이력이 있어 재장착/스왑이 불가능합니다.\n(양면을 모두 썼다면 탈거 후 연마 출하하세요.)`, true); return; }
                 }
-
+ 
                 if (typeInput === "1.2도 상도" && unit !== "Final") { showToast(`🚨 [오류] 1.2도 상도는 Final에만 장착 가능합니다.\n(${baseId} 확인 필요)`, true); return; }
                 if (typeInput === "1.8도 상도" && (unit !== "Upper" && unit !== "Center")) { showToast(`🚨 [오류] 1.8도 상도는 Upper/Center에만 장착 가능합니다.\n(${baseId} 확인 필요)`, true); return; }
-
+ 
                 const currentCategory = getToolCategory(typeInput);
                 const locKey = `${line}|${unit}|${currentCategory}`; 
                 if (currentBatchSet.has(locKey)) { showToast(`🚨 [오류] 표 내부에 ${line} 호기 ${unit} 유닛에 장착하려는 [${currentCategory}] 부품이 중복 작성되었습니다.`, true); return; }
                 currentBatchSet.add(locKey);
-
+ 
                 const conflictPart = tempArr.find(p => {
                     if (p.status !== 'Using' || p.id === baseId) return false;
                     const loc = getMountedLocation(p);
                     return loc && loc.line === line && loc.unit === unit && getToolCategory(p.toolType || "") === currentCategory;
                 });
                 if (conflictPart) { showToast(`🚨 [인터락 발동] ${line} 호기 ${unit} 유닛에는 이미 다른 [${currentCategory}] (${conflictPart.id})이(가) 장착되어 있습니다.\n해당 부품을 먼저 [탈거]해 주세요.`, true); return; }
-
+ 
                 if (typeInput === "LW (하도)") {
                     let previousSide = tempArr[pIdx].currentSide || "10.0";
                     tempArr[pIdx].usedSides.push(targetSide);
@@ -1717,7 +1717,7 @@
             } else if (targetStatus === 'Waiting') {
                 if (tempArr[pIdx].status !== 'Using') { showToast(`🚨 [오류] 탈거는 현재 'Using (사용중)' 상태인 커터만 가능합니다.\n(입력하신 ${originalInput}의 현재 상태: ${tempArr[pIdx].status})`, true); return; }
             }
-
+ 
             tempArr[pIdx].status = targetStatus;
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: targetStatus, log: logMsg });
@@ -1726,7 +1726,7 @@
         
         if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 장착/탈거 처리가 완료되었습니다.`); switchMenu('0'); }
     }
-
+ 
     async function submitBulkShipment(nextStatus) {
         const rows = document.querySelectorAll("#grid-3-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1736,10 +1736,10 @@
             const shipDate = row.querySelector('.ship-out-date').value;
             const comment = row.querySelector('.ship-out-comment').value.trim();
             if(!id) continue;
-
+ 
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) { showToast(`미등록 부품: ${id}`, true); return; }
-
+ 
             tempArr[pIdx].status = nextStatus; 
             const logMsg = `[외주연마출하] 일자:${shipDate} | 비고:${comment}`;
             tempArr[pIdx].lastHistory = logMsg;
@@ -1748,7 +1748,7 @@
         }
         if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 외주 출하가 완료되었습니다.`); switchMenu('home'); }
     }
-
+ 
     async function submitBulkShipIn() {
         const rows = document.querySelectorAll("#grid-4-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1759,10 +1759,10 @@
             const regrindAvailable = parseInt(row.querySelector('.regrind-available-input').value) || 0;
             const comment = row.querySelector('.ship-in-comment').value.trim();
             if(!id) continue;
-
+ 
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) { showToast(`미등록 부품: ${id}`, true); return; }
-
+ 
             tempArr[pIdx].status = "Storage";
             tempArr[pIdx].regrindAvailable = regrindAvailable;
             tempArr[pIdx].usedSides = [];
@@ -1775,11 +1775,11 @@
         }
         if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 연마 입고 완료.`); switchMenu('home'); }
     }
-
+ 
     async function submitAdminOverride() {
         const rows = document.querySelectorAll("#grid-5-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
-
+ 
         for(let row of rows) {
             let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
             if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
@@ -1791,32 +1791,32 @@
             if(!id) continue;
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) { showToast(`🚨 DB에 등록되지 않은 ID가 포함되어 있습니다: ${id}`, true); return; }
-
+ 
             if (nextStatus === 'Using' && (!line || !unit)) { showToast(`🚨 [오류] ${id}의 상태를 'Using'으로 변경하려면 장착 호기와 Unit을 반드시 선택해야 합니다.`, true); return; }
-
+ 
             tempArr[pIdx].status = nextStatus;
             
             if (nextStatus === 'Storage') {
                 tempArr[pIdx].usedSides = [];
                 if (tempArr[pIdx].toolType === "LW (하도)") tempArr[pIdx].currentSide = "10.0";
             }
-
+ 
             let logMsg = `[최고관리자 강제 제어] 상태를 ${nextStatus}로 변경`;
             if(nextStatus === 'Using') logMsg += ` | 강제연동 라인:${line} | 유닛:${unit}`;
             if(comment) logMsg += ` | 변경사유:${comment}`;
-
+ 
             tempArr[pIdx].lastHistory = logMsg;
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: nextStatus, log: logMsg });
             updatedCount++;
         }
-
+ 
         if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 데이터 상태 강제 변경이 성공적으로 승인되었습니다.`); switchMenu('home'); }
     }
-
+ 
     async function submitAdminRename() {
         const rows = document.querySelectorAll("#grid-5-rename-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
-
+ 
         for(let row of rows) {
             let oldId = row.querySelector('.tool-id-input').value.trim().toUpperCase();
             let newId = row.querySelector('.new-tool-id-input').value.trim().toUpperCase();
@@ -1824,17 +1824,17 @@
             if(!oldId || !newId) continue;
             if (oldId.endsWith("20.0")) oldId = oldId.replace("20.0", "10.0");
             if (newId.endsWith("20.0")) newId = newId.replace("20.0", "10.0");
-
+ 
             const pIdx = tempArr.findIndex(p => p.id === oldId);
             if(pIdx === -1) { showToast(`🚨 DB에 등록되지 않은 기존 ID입니다: ${oldId}`, true); return; }
             if(oldId === newId) continue;
-
+ 
             const vRes = parseAndValidateToolId(newId);
             if(!vRes.valid) { showToast(`🚨 신규 ID 형식이 올바르지 않습니다: ${newId}`, true); return; }
-
+ 
             const duplicate = tempArr.find(p => p.id === newId);
             if(duplicate) { showToast(`🚨 신규 ID가 이미 DB에 존재합니다: ${newId}`, true); return; }
-
+ 
             tempArr[pIdx].id = newId;
             tempArr[pIdx].toolType = vRes.type;
             tempArr[pIdx].maker = getResolvedMaker(newId, tempArr[pIdx].maker);
@@ -1844,10 +1844,10 @@
             tempArr[pIdx].historyLog.push({ timestamp: new Date().toISOString(), status: tempArr[pIdx].status, log: logMsg });
             updatedCount++;
         }
-
+ 
         if(updatedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건의 커터 ID가 성공적으로 변경(Rename)되었습니다.`); switchMenu('home'); }
     }
-
+ 
     async function submitAdminForceReg() {
         const rows = document.querySelectorAll("#grid-5-forcereg-body tr");
         let tempArr = [...globalData]; let addedCount = 0;
@@ -1857,9 +1857,9 @@
             const type = row.querySelector('.force-type-select').value;
             const maker = row.querySelector('.maker-input').value.trim() || '미분류';
             if(!id) continue;
-
+ 
             if(tempArr.some(p => p.id === id)) { showToast(`🚨 이미 존재하는 ID입니다: ${id}`, true); return; }
-
+ 
             tempArr.push({ 
                 id, toolType: type, maker: maker, status: "Storage", currentSide: (type === "LW (하도)") ? "10.0" : null, 
                 usedSides: [], regrindAvailable: getDefaultRegrindCount(type), lastHistory: "관리자 강제 예외 등록", 
@@ -1869,7 +1869,7 @@
         }
         if(addedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${addedCount}건 예외 등록 완료.`); switchMenu('home'); }
     }
-
+ 
     async function submitBulkDisposal() {
         const rows = document.querySelectorAll("#grid-7-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -1878,10 +1878,10 @@
             if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
             const comment = row.querySelector('.disposal-comment').value.trim();
             if(!id) continue;
-
+ 
             const pIdx = tempArr.findIndex(p => p.id === id);
             if(pIdx === -1) { showToast(`존재하지 않는 ID: ${id}`, true); return; }
-
+ 
             tempArr[pIdx].status = "Disposal"; 
             const logMsg = `[영구폐기] 사유:${comment || '사유 미기입'}`;
             tempArr[pIdx].lastHistory = logMsg;
@@ -1892,7 +1892,7 @@
             if(await saveDatabase(tempArr)) { showToast(`✅ 총 ${updatedCount}건 영구 폐기 완료.`); switchMenu('6'); }
         }
     }
-
+ 
     function downloadExcel() {
         if(globalData.length === 0) return;
         let exportArr = globalData.map(p => ({
@@ -1907,7 +1907,7 @@
         XLSX.utils.book_append_sheet(wb, ws, "MasterDB");
         XLSX.writeFile(wb, `Cutter_DB_${new Date().toISOString().split('T')[0]}.xlsx`);
     }
-
+ 
     function getWeekLabel(date) {
         const fullMonthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const m = fullMonthNames[date.getMonth()];
@@ -1916,25 +1916,25 @@
         const weekOfMonth = Math.floor((pastDaysOfMonth + firstDay.getDay()) / 7) + 1;
         return `${m} ${weekOfMonth}W`;
     }
-
+ 
     // ⚠️ isSameWeek()와 consumePool()은 수정 과정에서 제거했습니다.
     // - isSameWeek(): "이번 달 몇 번째 주" 라벨 매칭 방식이라 특정 날짜를 시뮬레이션이
     //   조용히 건너뛰는 문제가 있어, runPrediction() 내부에서 날짜 구간 비교로 대체했습니다.
     // - consumePool(): 실제로 어디서도 호출되지 않던 죽은 코드였습니다 (processConsumption이 대신 사용됨).
-
+ 
     // ▼ 신품 커터의 기본 잔여 연마 횟수 (등록 시점 & 신규입고 예정 시뮬레이션에서 공통 사용)
     const DEFAULT_REGRIND_COUNT = { "LW (하도)": 10 };
     function getDefaultRegrindCount(type) {
         return DEFAULT_REGRIND_COUNT[type] !== undefined ? DEFAULT_REGRIND_COUNT[type] : 16;
     }
-
+ 
     // ▼ 실제 연마 이력([연마입고] 로그) 횟수 — regrindAvailable=0이 "구버전 등록 로직이 남긴
     //   미기록 값"인지 "진짜 수명 소진"인지 구분하는 데 사용
     function countGrindingCycles(part) {
         if (!part.historyLog) return 0;
         return part.historyLog.filter(log => log.log && log.log.includes("[연마입고]")).length;
     }
-
+ 
     // ▼ regrindAvailable=0이면서 연마 이력이 이 횟수 미만이면 구버전 로직이 남긴 미기록 값으로
     //   보고 신품 기본값을 적용합니다. 연마 이력이 이 횟수 이상 쌓였는데도 0이면 진짜 소진으로 인정합니다.
     const LEGACY_ZERO_GRACE_CYCLES = 5;
@@ -1942,19 +1942,19 @@
         let rawVal = part.regrindAvailable !== undefined ? part.regrindAvailable : (part.regridCount || 0);
         let raw = parseInt(rawVal, 10);
         if (isNaN(raw)) raw = 0;
-
+ 
         if (raw === 0 && countGrindingCycles(part) < LEGACY_ZERO_GRACE_CYCLES) {
             return getDefaultRegrindCount(type);
         }
         return raw;
     }
-
+ 
     // ▼ 커터 타입별 호기당 주간 소모율 (시뮬레이션 루프와 요약 카드가 항상 같은 값을 쓰도록 통일)
     const CONSUMPTION_RATE = { "1.8도 상도": 2, "1.2도 상도": 1, "LW (하도)": 1.5 };
     function getWeeklyConsumption(type, machines) {
         return Math.ceil(machines * CONSUMPTION_RATE[type]);
     }
-
+ 
     // ▼ 마지막 상태 변경(historyLog) 이후 경과한 주(week) 수
     //   Waiting/Regrind/Out_Polishing 상태로 이미 얼마나 있었는지를 반영해 파이프라인
     //   복귀 시점을 추정하는 데 사용 (예전엔 무조건 1주 후 복귀로 고정되어 있었음)
@@ -1965,36 +1965,36 @@
         const diffMs = refDate - lastDate;
         return Math.max(0, diffMs / (1000 * 60 * 60 * 24 * 7));
     }
-
+ 
     function runPrediction() {
         if (globalData.length === 0) return;
-
+ 
         const activeCutters = globalData.filter(p => p.status !== 'Disposal');
         const totalCount = activeCutters.length;
         
         const warningEl = document.getElementById('sim-panel-warning');
         const contentEl = document.getElementById('sim-panel-content');
         if(document.getElementById('sim-current-total')) document.getElementById('sim-current-total').innerText = totalCount;
-
+ 
         if (totalCount < 30 && warningEl) {
             contentEl.style.display = 'none'; warningEl.style.display = 'block'; return;
         }
         if(contentEl) contentEl.style.display = 'block';
         if(warningEl) warningEl.style.display = 'none';
-
+ 
         const regrindCycle = parseFloat(document.getElementById("sim-regrind-cycle").value) || 1;
         const leadTime = parseFloat(document.getElementById("sim-lead-time").value) || 1;
         const newCutterLT = parseFloat(document.getElementById("sim-new-lt").value) || 15;
         const totalPipelineWeeks = Math.ceil(regrindCycle + leadTime);
-
+ 
         const uc1DateStr = document.getElementById("sim-uc1-date").value;
         const uc1Date = uc1DateStr ? new Date(uc1DateStr + "T00:00:00") : new Date("2099-12-31T00:00:00");
-
+ 
         let newCuttersData = getNewCutterSchedules();
-
+ 
         let availPools = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
         let pipeline = { "1.8도 상도": [], "1.2도 상도": [], "LW (하도)": [] };
-
+ 
         const simNow = new Date();
         activeCutters.forEach(p => {
             let type = parseAndValidateToolId(p.id).type || "기타";
@@ -2005,7 +2005,7 @@
             // 있습니다. 값이 0이면서 실제 연마 이력이 5회 미만이면 신품 기본값을, 연마
             // 이력이 5회 이상인데도 0이면 진짜 소진으로 인정합니다.
             let remainRegrinds = getEffectiveRegrindCount(p, type);
-
+ 
             let currentLife = 0;
             if (type === "LW (하도)") {
                 const usedSidesCount = p.usedSides ? p.usedSides.length : 0;
@@ -2013,7 +2013,7 @@
             } else {
                 currentLife = remainRegrinds + ((p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') ? 0 : 1);
             }
-
+ 
             if(currentLife > 0) {
                 let cutter = { id: p.id, maker: getResolvedMaker(p.id, p.maker), life: currentLife };
                 if (p.status === 'Waiting' || p.status === 'Regrind' || p.status === 'Out_Polishing') {
@@ -2027,7 +2027,7 @@
                 }
             }
         });
-
+ 
         const initialPhys18 = availPools["1.8도 상도"].length + pipeline["1.8도 상도"].length;
         const initialPhys12 = availPools["1.2도 상도"].length + pipeline["1.2도 상도"].length;
         const initialPhysLW = availPools["LW (하도)"].length + pipeline["LW (하도)"].length;
@@ -2036,7 +2036,7 @@
         availPools["1.8도 상도"].concat(pipeline["1.8도 상도"].map(x=>x.cutter)).forEach(c => initialUses18 += c.life);
         availPools["1.2도 상도"].concat(pipeline["1.2도 상도"].map(x=>x.cutter)).forEach(c => initialUses12 += c.life);
         availPools["LW (하도)"].concat(pipeline["LW (하도)"].map(x=>x.cutter)).forEach(c => initialUsesLW += c.life);
-
+ 
         // 🔍 진단용 콘솔 로그 (F12 → Console 탭에서 확인 가능) — "다음주 폐기 발생" 원인 추적용
         console.log('%c=== Shortage 진단 정보 ===', 'font-weight:bold; color:#6f42c1; font-size:14px;');
         ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
@@ -2057,7 +2057,7 @@
                 return { id: p.id, type: t, status: p.status, grindingCycles: countGrindingCycles(p), effectiveRegrind: getEffectiveRegrindCount(p, t) };
             }));
         }
-
+ 
         let chartLabels = [];
         let data18 = [], req18Data = [];
         let data12 = [], req12Data = [];
@@ -2065,26 +2065,30 @@
         let disposalPoints18 = [], arrivalPoints18 = [];
         let disposalPoints12 = [], arrivalPoints12 = [];
         let disposalPointsLW = [], arrivalPointsLW = [];
+        // ✅ 신규: 매주 변동하는 "안전재고 마지노선"을 차트에 선으로도 그리기 위한 시리즈
+        let safeStock18Data = [], safeStock12Data = [], safeStockLWData = [];
+        // ✅ 신규: "폐기(🔻)"는 이제 개별 커터의 life 소진이 아니라, 타입별 가용 수량이
+        // 안전재고 마지노선 밑으로 "맨 처음" 떨어지는 시점 단 한 번만 표시합니다.
+        let safetyBreachRecorded = { "1.8도 상도": false, "1.2도 상도": false, "LW (하도)": false };
         
         let shortageWeeks = { "1.8도 상도": -1, "1.2도 상도": -1, "LW (하도)": -1 };
         
         let simDate = new Date();
         let uc1Dropped = false;
-
+ 
         for (let w = 0; w < 52; w++) {
             let currentMach = getMachinesForDate(simDate);
             let newArr18 = false, newArr12 = false, newArrLW = false;
-            let disp18 = 0, disp12 = 0, dispLW = 0;
-
+ 
             ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
                 let returning = pipeline[type].filter(p => p.returnWeek <= w);
                 pipeline[type] = pipeline[type].filter(p => p.returnWeek > w);
                 returning.forEach(r => availPools[type].push(r.cutter));
             });
-
+ 
             const weekWindowEnd = new Date(simDate);
             weekWindowEnd.setDate(weekWindowEnd.getDate() + 7);
-
+ 
             newCuttersData.forEach(nc => {
                 const ncDate = new Date(nc.date + "T00:00:00");
                 // ✅ 수정: "이번 달 몇 번째 주" 라벨 비교 대신, 이번 주 시뮬레이션 구간
@@ -2098,7 +2102,7 @@
                     if(nc.type === "LW (하도)") newArrLW = true;
                 }
             });
-
+ 
             if (!uc1Dropped && simDate >= uc1Date) {
                 ["1.8도 상도", "1.2도 상도", "LW (하도)"].forEach(type => {
                     availPools[type] = availPools[type].filter(p => p.maker !== 'UC1');
@@ -2106,11 +2110,16 @@
                 });
                 uc1Dropped = true;
             }
-
+ 
             let cons18 = getWeeklyConsumption("1.8도 상도", currentMach);
             let cons12 = getWeeklyConsumption("1.2도 상도", currentMach);
             let consLW = getWeeklyConsumption("LW (하도)", currentMach);
-
+ 
+            // ✅ 신규: 그 주의 소모율 기준 안전재고 마지노선 (카드에 쓰는 공식과 동일하게 통일)
+            let safeStock18 = cons18 + Math.ceil(cons18 * totalPipelineWeeks);
+            let safeStock12 = cons12 + Math.ceil(cons12 * totalPipelineWeeks);
+            let safeStockLW = consLW + Math.ceil(consLW * totalPipelineWeeks);
+ 
             const processConsumption = (type, amount) => {
                 let disposedCount = 0;
                 availPools[type].sort((a, b) => a.life - b.life);
@@ -2127,11 +2136,11 @@
                 }
                 return disposedCount;
             };
-
-            disp18 = processConsumption("1.8도 상도", cons18);
-            disp12 = processConsumption("1.2도 상도", cons12);
-            dispLW = processConsumption("LW (하도)", consLW);
-
+ 
+            processConsumption("1.8도 상도", cons18);
+            processConsumption("1.2도 상도", cons12);
+            processConsumption("LW (하도)", consLW);
+ 
             chartLabels.push(getWeekLabel(new Date(simDate)));
             
             let y18 = availPools["1.8도 상도"].length;
@@ -2145,18 +2154,33 @@
             req18Data.push(cons18);
             req12Data.push(cons12);
             reqLWData.push(consLW);
-
+ 
+            safeStock18Data.push(safeStock18);
+            safeStock12Data.push(safeStock12);
+            safeStockLWData.push(safeStockLW);
+ 
             if(newArr18) arrivalPoints18.push({x: w, y: y18});
             if(newArr12) arrivalPoints12.push({x: w, y: y12});
             if(newArrLW) arrivalPointsLW.push({x: w, y: yLW});
-
-            if(disp18 > 0) disposalPoints18.push({x: w, y: y18}); 
-            if(disp12 > 0) disposalPoints12.push({x: w, y: y12});
-            if(dispLW > 0) disposalPointsLW.push({x: w, y: yLW});
-
+ 
+            // ✅ 수정: "폐기(🔻)"는 그 주에 개별 커터가 소진됐는지가 아니라, 가용 수량이
+            // 안전재고 마지노선 아래로 "맨 처음" 떨어지는 시점을 한 번만 표시합니다.
+            if (!safetyBreachRecorded["1.8도 상도"] && y18 < safeStock18) {
+                disposalPoints18.push({x: w, y: y18});
+                safetyBreachRecorded["1.8도 상도"] = true;
+            }
+            if (!safetyBreachRecorded["1.2도 상도"] && y12 < safeStock12) {
+                disposalPoints12.push({x: w, y: y12});
+                safetyBreachRecorded["1.2도 상도"] = true;
+            }
+            if (!safetyBreachRecorded["LW (하도)"] && yLW < safeStockLW) {
+                disposalPointsLW.push({x: w, y: yLW});
+                safetyBreachRecorded["LW (하도)"] = true;
+            }
+ 
             simDate.setDate(simDate.getDate() + 7);
         }
-
+ 
         const container = document.getElementById("prediction-cards");
         container.innerHTML = "";
         
@@ -2166,13 +2190,13 @@
             { type: "1.2도 상도", phys: initialPhys12, uses: initialUses12, cons: getWeeklyConsumption("1.2도 상도", startMach) },
             { type: "LW (하도)", phys: initialPhysLW, uses: initialUsesLW, cons: getWeeklyConsumption("LW (하도)", startMach) }
         ];
-
+ 
         for (let td of typeData) {
             // ✅ 수정: LW 타입의 "주당 예상 소모량"이 카드엔 *3, 실제 그래프/안전재고
             // 계산엔 *1.5로 서로 다르게 쓰이던 불일치를 해결 — 이제 모든 타입이
             // td.cons(공용 함수로 계산된 동일한 값)를 그대로 사용합니다.
             let reqPhysicalStock = td.cons + Math.ceil(td.cons * totalPipelineWeeks);
-
+ 
             const sw = shortageWeeks[td.type];
             let isPipelineDanger = (td.phys < reqPhysicalStock);
             
@@ -2184,20 +2208,20 @@
             } else {
                 orderPointMsg = `<span style="color:#888;">발주 불필요 (안정)</span>`;
             }
-
+ 
             let cardClass = "result-card";
             let alertHtml = "";
             let statusMessage = `<span style="color:#28a745;">✅ 안정적인 순환 가능</span>`;
-
+ 
             if (isPipelineDanger) {
                 cardClass += " danger";
                 alertHtml = `<div class="alert-badge">단기 재고 부족 경고</div>`;
                 statusMessage = `<span style="color:#dc3545; font-weight:bold;">🚨 순환 마지노선 붕괴 (총량 부족)</span>`;
             }
-
+ 
             let displayShortage = sw === -1 ? "> 52" : sw;
             let displayYears = sw === -1 ? "> 1.0" : (sw / 52).toFixed(1);
-
+ 
             container.innerHTML += `
                 <div class="${cardClass}">
                     ${alertHtml}
@@ -2216,10 +2240,10 @@
                 </div>
             `;
         }
-
+ 
         const ctx = document.getElementById('shortageChart').getContext('2d');
         if (simChartInstance) { simChartInstance.destroy(); }
-
+ 
         simChartInstance = new Chart(ctx, {
             type: 'line',
             data: {
@@ -2227,15 +2251,18 @@
                 datasets: [
                     { label: '1.8도 공장 가용재고', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.8도 필요수량', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: '1.8도 안전재고 마지노선', data: safeStock18Data, borderColor: '#0056b3', borderDash: [8, 4], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.8도 폐기 위험 시점 (🔻)', data: disposalPoints18, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#007bff', pointRadius: 8 },
                     { label: '1.2도 공장 가용재고', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.2도 필요수량', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: '1.2도 안전재고 마지노선', data: safeStock12Data, borderColor: '#1e7e34', borderDash: [8, 4], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: '1.2도 폐기 위험 시점 (🔻)', data: disposalPoints12, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#28a745', pointRadius: 8 },
                     { label: 'LW 공장 가용재고', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
                     { label: 'LW 필요수량', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
+                    { label: 'LW 안전재고 마지노선', data: safeStockLWData, borderColor: '#c9510c', borderDash: [8, 4], pointRadius: 0, fill: false, borderWidth: 1.5 },
+                    { label: 'LW 폐기 위험 시점 (🔻)', data: disposalPointsLW, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
                     { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#fd7e14', pointRadius: 8 }
                 ]
             },
@@ -2245,7 +2272,7 @@
                 plugins: {
                     title: { display: true, text: '향후 1년 간의 실시간 공장 내 가용 재고 시뮬레이션 (톱니바퀴 궤적)', font: {size:16}, padding: {top:10, bottom:20} },
                     tooltip: { mode: 'index', intersect: false },
-                    legend: { labels: { filter: function(item) { return !item.text.includes('폐기') && !item.text.includes('신규'); } } }
+                    legend: { labels: { filter: function(item) { return !item.text.includes('위험 시점') && !item.text.includes('신규'); } } }
                 },
                 scales: {
                     y: { beginAtZero: true, title: { display: true, text: '공장 내 즉시 가용 수량 (개)' } },
@@ -2255,6 +2282,6 @@
         });
     }
 </script>
-
+ 
 </body>
 </html>
