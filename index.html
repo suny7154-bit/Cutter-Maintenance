@@ -2058,13 +2058,14 @@
             req12Data.push(cons12);
             reqLWData.push(consLW);
 
-            if(newArr18) arrivalPoints18.push({x: w, y: y18});
-            if(newArr12) arrivalPoints12.push({x: w, y: y12});
-            if(newArrLW) arrivalPointsLW.push({x: w, y: yLW});
+// 💡 수정됨: scatter 좌표 방식({x,y}) 대신, 이벤트가 없는 주는 null을 넣어 일반 Line 차트와 완벽히 동기화
+            arrivalPoints18.push(newArr18 ? y18 : null);
+            arrivalPoints12.push(newArr12 ? y12 : null);
+            arrivalPointsLW.push(newArrLW ? yLW : null);
 
-            if(disp18 > 0) disposalPoints18.push({x: w, y: y18}); 
-            if(disp12 > 0) disposalPoints12.push({x: w, y: y12});
-            if(dispLW > 0) disposalPointsLW.push({x: w, y: yLW});
+            disposalPoints18.push(disp18 > 0 ? y18 : null);
+            disposalPoints12.push(disp12 > 0 ? y12 : null);
+            disposalPointsLW.push(dispLW > 0 ? yLW : null);
 
             simDate.setDate(simDate.getDate() + 7);
         }
@@ -2141,16 +2142,21 @@
                 datasets: [
                     { label: '1.8도 공장 가용재고', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.8도 필요수량', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
-                    { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#007bff', pointRadius: 8 },
+                    // 💡 수정됨: type을 'line'으로 바꾸고 showLine: false 추가, pointRotation으로 속성명 명확화
+                    { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
+                    { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#007bff', borderColor: '#007bff', pointRadius: 7, pointHoverRadius: 9 },
+                    
                     { label: '1.2도 공장 가용재고', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.2도 필요수량', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
-                    { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#28a745', pointRadius: 8 },
+                    // 💡 수정됨
+                    { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
+                    { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#28a745', borderColor: '#28a745', pointRadius: 7, pointHoverRadius: 9 },
+                    
                     { label: 'LW 공장 가용재고', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
                     { label: 'LW 필요수량', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'scatter', pointStyle: 'triangle', rotation: 180, backgroundColor: '#dc3545', pointRadius: 8 },
-                    { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'scatter', pointStyle: 'triangle', backgroundColor: '#fd7e14', pointRadius: 8 }
+                    // 💡 수정됨
+                    { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
+                    { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#fd7e14', borderColor: '#fd7e14', pointRadius: 7, pointHoverRadius: 9 }
                 ]
             },
             options: {
