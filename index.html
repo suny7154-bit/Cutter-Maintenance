@@ -466,8 +466,7 @@
             <p style="font-size:13px; color:#666;">※ 실제 공장 물류 흐름(입고 시 증가, 장착 시 하락)을 개별 커터 수명 단위로 추적하는 리얼타임 알고리즘이 적용되었습니다.</p>
             
             <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
-                🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span>개)
-            </div>
+                🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span></div>
 
             <div id="sim-panel-content">
                 <div class="sim-grid">
@@ -774,13 +773,15 @@
         return { token: document.getElementById("cfg-token").value.trim(), owner: document.getElementById("cfg-owner").value.trim(), repo: document.getElementById("cfg-repo").value.trim() };
     }
 
+    // 💡 변경된 부분 1: 정규식에 FL 허용 추가
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
         if (id.endsWith("X1.8")) toolType = "1.8도 상도";
         else if (id.endsWith("X1.2")) toolType = "1.2도 상도";
         else if (id.endsWith("10.0") || id.endsWith("20.0")) toolType = "LW (하도)";
-        const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
+        // (CU|FU|CL|FL) 으로 변경하여 FL이 들어간 커터도 모두 허용
+        const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL|FL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
     }
 
@@ -1103,6 +1104,7 @@
         }
     }
 
+    // 💡 변경된 부분 2: 입력시 FL(UC1 포함) 및 정규식 셀 검사 로직 보완
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -1116,14 +1118,17 @@
         
         if (typeInput && !isTriggerMatch) typeInput.value = res.type;
         if (makerInput) {
-            if (id.length >= 10 && id.charAt(7) === '9') makerInput.value = "UC1";
+            // UC1 판단 조건 추가
+            if ((id.length >= 10 && id.charAt(7) === '9') || id.includes("UC1")) makerInput.value = "UC1";
             else if (id.includes("HY")) makerInput.value = "HYTC";
             else if (id.includes("YJ")) makerInput.value = "유진";
             else makerInput.value = "";
         }
         
-        if (id.length >= 21 && !res.valid) inputEl.classList.add('invalid-cell');
-        else {
+        // 정규식을 통과(res.valid === true)하면 21자가 넘어도 빨간불(invalid-cell) 제거
+        if (!res.valid && id.length >= 21) {
+            inputEl.classList.add('invalid-cell');
+        } else {
             inputEl.classList.remove('invalid-cell');
             if (isTriggerMatch && res.valid) {
                 const matched = globalData.find(p => p.id === id);
