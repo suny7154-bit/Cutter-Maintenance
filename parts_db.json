@@ -11566,13 +11566,11 @@
     "id": "LCAJHY0058FL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
+    "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-30 21시 | 라인:2-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Storage로 변경",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:49:34.978Z",
@@ -11603,6 +11601,11 @@
         "timestamp": "2026-07-30T01:43:43.631Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-30 21시 | 라인:2-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-31T20:55:55.257Z",
+        "status": "Storage",
+        "log": "[최고관리자 강제 제어] 상태를 Storage로 변경"
       }
     ]
   },
