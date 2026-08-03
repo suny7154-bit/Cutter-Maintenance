@@ -296,7 +296,7 @@
       "10.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Upper",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Center",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -332,6 +332,11 @@
         "timestamp": "2026-07-31T21:05:58.311Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Upper"
+      },
+      {
+        "timestamp": "2026-08-03T13:52:28.683Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Center"
       }
     ]
   },
