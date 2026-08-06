@@ -3337,11 +3337,11 @@
     "id": "LCAJHY0001CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 13,
-    "lastHistory": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Center | 작업자:Aaron | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -3382,6 +3382,11 @@
         "timestamp": "2026-07-29T20:25:34.376Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T14:11:59.721Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Center | 작업자:Aaron | 비고:"
       }
     ]
   },
@@ -11103,11 +11108,11 @@
     "id": "LCAJHY3012FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Final | 작업자:Paul | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -11198,6 +11203,11 @@
         "timestamp": "2026-07-29T20:25:34.376Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T14:11:59.721Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Final | 작업자:Paul | 비고:"
       }
     ]
   },
@@ -12083,11 +12093,11 @@
     "id": "LCAJHY0003CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Upper | 작업자:Issac | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-13T15:26:09.228Z",
@@ -12098,6 +12108,11 @@
         "timestamp": "2026-07-29T20:25:34.376Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-28 09시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T14:11:59.721Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Upper | 작업자:Issac | 비고:"
       }
     ]
   },
