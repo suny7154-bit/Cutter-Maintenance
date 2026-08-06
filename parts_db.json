@@ -5079,11 +5079,11 @@
     "id": "LCAJHY1919CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5174,6 +5174,11 @@
         "timestamp": "2026-07-29T20:12:55.561Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -6363,11 +6368,11 @@
     "id": "LCAJHY3912FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 5,
-    "lastHistory": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6443,6 +6448,11 @@
         "timestamp": "2026-07-29T20:12:55.561Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -7893,14 +7903,14 @@
     "id": "LCAJHY4041CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -7916,6 +7926,11 @@
         "timestamp": "2026-07-29T20:12:55.561Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -8121,11 +8136,11 @@
     "id": "LCAJHY1016CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -8136,6 +8151,11 @@
         "timestamp": "2026-07-29T20:12:55.561Z",
         "status": "Using",
         "log": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
