@@ -18892,5 +18892,22 @@
         "log": "[장착] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
       }
     ]
+  },
+  {
+    "id": "LCAJHY3123FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-08-11T19:40:01.302Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
