@@ -3749,14 +3749,14 @@
     "id": "LCAJHY4900CL71810.0",
     "toolType": "LW (하도)",
     "maker": "UC1",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 1,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-05 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -3792,6 +3792,11 @@
         "timestamp": "2026-08-06T12:15:10.496Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-05 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-13T14:36:20.004Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-13 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
