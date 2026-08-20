@@ -2289,10 +2289,12 @@
     "toolType": "LW (하도)",
     "maker": "HYTC",
     "status": "Using",
-    "currentSide": "10.0",
-    "usedSides": [],
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:H/C 1 | 유닛:Upper",
+    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 13시 | 라인:H/C 1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2303,6 +2305,11 @@
         "timestamp": "2026-07-16T20:55:34.247Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:H/C 1 | 유닛:Upper"
+      },
+      {
+        "timestamp": "2026-08-20T17:39:15.215Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 13시 | 라인:H/C 1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
