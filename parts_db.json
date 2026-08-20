@@ -8048,12 +8048,13 @@
     "toolType": "LW (하도)",
     "maker": "HYTC",
     "status": "Using",
-    "currentSide": "10.0",
+    "currentSide": "20.0",
     "usedSides": [
-      "10.0"
+      "10.0",
+      "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-05 10시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -8064,6 +8065,11 @@
         "timestamp": "2026-08-06T12:15:10.496Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-05 10시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -9930,16 +9936,21 @@
     "id": "LCAJHY3111FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -10990,12 +11001,13 @@
     "toolType": "LW (하도)",
     "maker": "HYTC",
     "status": "Using",
-    "currentSide": "10.0",
+    "currentSide": "20.0",
     "usedSides": [
-      "10.0"
+      "10.0",
+      "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-13 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -11006,6 +11018,11 @@
         "timestamp": "2026-08-13T14:36:54.618Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-13 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -12956,16 +12973,21 @@
     "id": "LCAJHY1138CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -12973,16 +12995,21 @@
     "id": "LCAJHY1139CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -14070,16 +14097,23 @@
     "id": "LCAJHY4196CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
-    "usedSides": [],
+    "usedSides": [
+      "10.0"
+    ],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-08-20T22:32:27.517Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-08-20 18시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
