@@ -357,9 +357,31 @@
                 </table>
                 <button class="action-btn" style="background:#dc3545; width:100%; margin-top:10px;" onclick="submitAdminForceReg()">⚡ 예외 커터 강제 등록 승인</button>
 
+                <h3 style="margin-top:40px; border-bottom: 1px dashed #ccc; padding-bottom:10px; color:#dc3545;">🗑️ 5-4. 커터 영구 삭제 및 이력 보관 (DB 이관)</h3>
+                <p style="font-size:13px; color:#dc3545; font-weight:bold; margin-top:0;">※ 삭제된 커터는 마스터 DB(parts_db.json)에서 제거되며, 모든 세부 이력이 delete_db.json으로 안전하게 이관 보관됩니다.</p>
+                <div><button class="btn-row-control" onclick="addGridRow('5_delete')">➕ 행 추가</button></div>
+                <table class="grid-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">삭제 대상 Tool ID (Ctrl+V)</th>
+                            <th style="width: 15%;">커터 상태</th>
+                            <th style="width: 15%;">장착 호기</th>
+                            <th style="width: 15%;">장착 Unit</th>
+                            <th style="width: 15%;">사용 중인 면</th>
+                            <th style="width: 10%;">잔여 연마 횟수</th>
+                            <th style="width: 5%;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-5-delete-body"></tbody>
+                </table>
+                <button class="action-btn" style="background:#dc3545; width:100%; margin-top:10px;" onclick="submitAdminDelete()">🗑️ 커터 영구 삭제 및 delete_db 이관 실행</button>
+
                 <br><br><br>
-                <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 백업 출력</h3>
-                <button class="action-btn" onclick="downloadExcel()" style="background:#495057; font-size:13px; padding:8px 15px;">📊 현시점 DB 마스터 엑셀 백업 다운로드</button>
+                <h3 style="border-bottom:1px solid #ccc; padding-bottom:5px; font-size:14px; color:#495057;">📊 마스터 데이터 및 삭제 DB 백업 출력</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button class="action-btn" onclick="downloadExcel()" style="background:#495057; font-size:13px; padding:8px 15px; margin-right:0;">📊 현시점 DB 마스터 엑셀 백업 다운로드</button>
+                    <button class="action-btn" onclick="downloadDeleteDbExcel()" style="background:#6c757d; font-size:13px; padding:8px 15px; margin-right:0;">🗑️ 삭제 이력(delete_db) 엑셀 백업 다운로드</button>
+                </div>
             </div>
         </div>
 
@@ -466,7 +488,7 @@
             <p style="font-size:13px; color:#666;">※ 실제 공장 물류 흐름(입고 시 증가, 장착 시 하락)을 개별 커터 수명 단위로 추적하는 리얼타임 알고리즘이 적용되었습니다.</p>
             
             <div id="sim-panel-warning" style="display:none; color:#dc3545; font-weight:bold; background:#fff5f5; padding:15px; border-radius:6px; border:1px solid #dc3545; margin-bottom:20px;">
-                🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span></div>
+                🚨 DB에 등록된 유효 커터의 총수량이 30개 미만이라 예측 기능이 비활성화되었습니다. (현재 유효수량: <span id="sim-current-total">0</span>)</div>
 
             <div id="sim-panel-content">
                 <div class="sim-grid">
@@ -553,6 +575,7 @@
     // 전역 변수 설정
     let machineSchedules = [];
     const DB_FILE = "parts_db.json";
+    const DELETE_DB_FILE = "delete_db.json";
 
     function utf8_to_b64(str) {
         const bytes = new TextEncoder().encode(str);
@@ -620,20 +643,20 @@
         }
     });
 
-    // 💡 3번 메뉴 Waiting 커터 자동 호출 함수
+    // 3번 메뉴 Waiting 커터 자동 호출 함수
     function loadWaitingCutters() {
         const waitingCutters = globalData.filter(p => p.status === 'Waiting');
         if(waitingCutters.length === 0) { showToast("대기(Waiting) 중인 커터가 없습니다.", true); return; }
         
         const tbody = document.getElementById('grid-3-body');
-        tbody.innerHTML = ''; // 기존 입력 내용 초기화
+        tbody.innerHTML = ''; 
         
         waitingCutters.forEach(p => {
             addGridRow('3');
             const lastRow = tbody.lastElementChild;
             const idInput = lastRow.querySelector('.tool-id-input');
             idInput.value = p.id;
-            handleIdInputLive(idInput, true); // 자동 조회 트리거
+            handleIdInputLive(idInput, true); 
         });
         showToast(`✅ ${waitingCutters.length}개의 Waiting 커터를 모두 불러왔습니다.`);
     }
@@ -773,14 +796,12 @@
         return { token: document.getElementById("cfg-token").value.trim(), owner: document.getElementById("cfg-owner").value.trim(), repo: document.getElementById("cfg-repo").value.trim() };
     }
 
-    // 💡 변경된 부분 1: 정규식에 FL 허용 추가
     function parseAndValidateToolId(id) {
         if (!id) return { valid: false, type: "" };
         let toolType = "";
         if (id.endsWith("X1.8")) toolType = "1.8도 상도";
         else if (id.endsWith("X1.2")) toolType = "1.2도 상도";
         else if (id.endsWith("10.0") || id.endsWith("20.0")) toolType = "LW (하도)";
-        // (CU|FU|CL|FL) 으로 변경하여 FL이 들어간 커터도 모두 허용
         const fullRegex = /^LCAJ(HY|YJ)\d{4}(CU|FU|CL|FL)(656|718)(X1.8|X1.2|10.0|20.0)$/;
         return { valid: fullRegex.test(id), type: toolType || (id.length > 10 ? "기타/분석불가" : "") };
     }
@@ -898,6 +919,7 @@
             inputEl.value = lines[0].toUpperCase();
             if (menuType === '2') handleEquipIdChange(inputEl);
             else if (menuType === '5_rename') handleIdRenameLive(inputEl);
+            else if (menuType === '5_delete') handleIdDeleteLive(inputEl);
             else if (menuType === '5_forcereg') { }
             else handleIdInputLive(inputEl, ['3', '4', '5', '7'].includes(menuType));
 
@@ -909,6 +931,7 @@
                     nextInput.value = lines[i].toUpperCase();
                     if (menuType === '2') handleEquipIdChange(nextInput);
                     else if (menuType === '5_rename') handleIdRenameLive(nextInput);
+                    else if (menuType === '5_delete') handleIdDeleteLive(nextInput);
                     else if (menuType === '5_forcereg') { }
                     else handleIdInputLive(nextInput, ['3', '4', '5', '7'].includes(menuType));
                 }
@@ -1009,6 +1032,17 @@
                 <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
             `;
             setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_forcereg');
+        } else if (menu === '5_delete') {
+            tr.innerHTML = `
+                <td><input type="text" class="tool-id-input" placeholder="삭제 대상 ID (Ctrl+V)" oninput="handleIdDeleteLive(this)"></td>
+                <td><input type="text" class="del-status-view" readonly placeholder="상태 조회" style="font-weight:bold;"></td>
+                <td><input type="text" class="del-line-view" readonly placeholder="-"></td>
+                <td><input type="text" class="del-unit-view" readonly placeholder="-"></td>
+                <td><input type="text" class="del-face-view" readonly placeholder="-"></td>
+                <td><input type="text" class="del-regrind-view" readonly placeholder="0회"></td>
+                <td><button class="btn-row-control" onclick="this.closest('tr').remove()">❌</button></td>
+            `;
+            setupPasteInterceptor(tr.querySelector('.tool-id-input'), '5_delete');
         } else if (menu === '7') { 
             tr.innerHTML = `
                 <td><input type="text" class="tool-id-input" placeholder="폐기 대상 ID (Ctrl+V)" oninput="handleIdInputLive(this, true)"></td>
@@ -1104,7 +1138,6 @@
         }
     }
 
-    // 💡 변경된 부분 2: 입력시 FL(UC1 포함) 및 정규식 셀 검사 로직 보완
     function handleIdInputLive(inputEl, isTriggerMatch = false) {
         let originalId = inputEl.value.trim().toUpperCase();
         let id = originalId;
@@ -1118,14 +1151,12 @@
         
         if (typeInput && !isTriggerMatch) typeInput.value = res.type;
         if (makerInput) {
-            // UC1 판단 조건 추가
             if ((id.length >= 10 && id.charAt(7) === '9') || id.includes("UC1")) makerInput.value = "UC1";
             else if (id.includes("HY")) makerInput.value = "HYTC";
             else if (id.includes("YJ")) makerInput.value = "유진";
             else makerInput.value = "";
         }
         
-        // 정규식을 통과(res.valid === true)하면 21자가 넘어도 빨간불(invalid-cell) 제거
         if (!res.valid && id.length >= 21) {
             inputEl.classList.add('invalid-cell');
         } else {
@@ -1182,6 +1213,68 @@
             if (id.length >= 21) inputEl.classList.add('invalid-cell'); else inputEl.classList.remove('invalid-cell');
             if (typeInput) typeInput.value = "미등록 ID";
             if (lineView) lineView.value = "-"; if (unitView) unitView.value = "-";
+        }
+    }
+
+    // 5-4. 삭제 대상 실시간 조회 함수
+    function handleIdDeleteLive(inputEl) {
+        let originalId = inputEl.value.trim().toUpperCase();
+        let id = originalId;
+        if (id.endsWith("20.0")) { id = id.replace("20.0", "10.0"); inputEl.value = id; }
+        else { inputEl.value = id; }
+
+        const tr = inputEl.closest('tr');
+        const statusView = tr.querySelector('.del-status-view');
+        const lineView = tr.querySelector('.del-line-view');
+        const unitView = tr.querySelector('.del-unit-view');
+        const faceView = tr.querySelector('.del-face-view');
+        const regrindView = tr.querySelector('.del-regrind-view');
+
+        if (id.length === 0) {
+            inputEl.classList.remove('invalid-cell');
+            if (statusView) statusView.value = "";
+            if (lineView) lineView.value = "";
+            if (unitView) unitView.value = "";
+            if (faceView) faceView.value = "";
+            if (regrindView) regrindView.value = "";
+            return;
+        }
+
+        const matched = globalData.find(p => p.id === id);
+        if (matched) {
+            inputEl.classList.remove('invalid-cell');
+            if (statusView) statusView.value = matched.status;
+            
+            const isUsing = (matched.status === 'Using');
+            if (isUsing) {
+                const loc = getMountedLocation(matched);
+                if (loc) {
+                    if (lineView) lineView.value = loc.line;
+                    if (unitView) unitView.value = loc.unit;
+                } else {
+                    if (lineView) lineView.value = "장착중";
+                    if (unitView) unitView.value = "-";
+                }
+            } else {
+                if (lineView) lineView.value = "-";
+                if (unitView) unitView.value = "-";
+            }
+
+            if (matched.toolType === "LW (하도)" && isUsing) {
+                if (faceView) faceView.value = matched.currentSide ? `${matched.currentSide}면` : "10.0면";
+            } else {
+                if (faceView) faceView.value = "-";
+            }
+
+            const regVal = matched.regrindAvailable !== undefined ? matched.regrindAvailable : (matched.regridCount || 0);
+            if (regrindView) regrindView.value = `${regVal}회`;
+        } else {
+            if (id.length >= 21) inputEl.classList.add('invalid-cell'); else inputEl.classList.remove('invalid-cell');
+            if (statusView) statusView.value = "미등록 ID";
+            if (lineView) lineView.value = "-";
+            if (unitView) unitView.value = "-";
+            if (faceView) faceView.value = "-";
+            if (regrindView) regrindView.value = "-";
         }
     }
 
@@ -1255,6 +1348,8 @@
             if(tbodyRename) { tbodyRename.innerHTML = ""; addGridRow('5_rename'); }
             const tbodyForce = document.getElementById(`grid-5-forcereg-body`);
             if(tbodyForce) { tbodyForce.innerHTML = ""; addGridRow('5_forcereg'); }
+            const tbodyDelete = document.getElementById(`grid-5-delete-body`);
+            if(tbodyDelete) { tbodyDelete.innerHTML = ""; addGridRow('5_delete'); }
 
             document.getElementById("admin-password-input").value = "";
             document.getElementById("admin-auth-zone").style.display = "block";
@@ -1836,6 +1931,157 @@
         if(addedCount > 0 && await saveDatabase(tempArr)) { showToast(`✅ 총 ${addedCount}건 예외 등록 완료.`); switchMenu('home'); }
     }
 
+    // 5-4. 커터 영구 삭제 및 delete_db.json 이관
+    async function submitAdminDelete() {
+        const rows = document.querySelectorAll("#grid-5-delete-body tr");
+        let targetIds = [];
+        for(let row of rows) {
+            let id = row.querySelector('.tool-id-input').value.trim().toUpperCase();
+            if(!id) continue;
+            if (id.endsWith("20.0")) id = id.replace("20.0", "10.0");
+            if (!targetIds.includes(id)) targetIds.push(id);
+        }
+
+        if (targetIds.length === 0) {
+            showToast("삭제할 커터 ID를 입력해주세요.", true);
+            return;
+        }
+
+        let itemsToDelete = globalData.filter(p => targetIds.includes(p.id));
+        if (itemsToDelete.length === 0) {
+            alert("입력한 커터 ID 중 DB에 존재하는 커터가 없습니다.");
+            return;
+        }
+
+        const confirmMsg = `⚠️ 정말로 선택한 ${itemsToDelete.length}개의 커터를 영구 삭제하시겠습니까?\n\n- 대상 마스터 DB(parts_db.json)에서 완전히 제거됩니다.\n- 모든 세부 이력은 delete_db.json으로 안전하게 이관 보관됩니다.\n\n진행하시겠습니까?`;
+        if (!confirm(confirmMsg)) return;
+
+        const creds = getCredentials();
+        if(!creds.token || !creds.owner || !creds.repo) {
+            showToast("⚠️ GitHub 토큰 정보를 확인해주세요.", true);
+            return;
+        }
+
+        showLoading(true, "⏳ 삭제 데이터 delete_db.json으로 이관 중...");
+
+        try {
+            // 1. delete_db.json 조회
+            let deleteDbData = [];
+            let deleteDbSha = "";
+            const delUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DELETE_DB_FILE}`;
+            const delRes = await fetch(delUrl, { headers: { "Authorization": `token ${creds.token}` } });
+            
+            if (delRes.status === 200) {
+                const delJson = await delRes.json();
+                deleteDbSha = delJson.sha;
+                try {
+                    const content = await b64_to_utf8(delJson.content);
+                    deleteDbData = JSON.parse(content);
+                } catch(e) { deleteDbData = []; }
+            }
+
+            // 2. 삭제 메타데이터 추가 후 delete_db에 병합
+            const nowIso = new Date().toISOString();
+            itemsToDelete.forEach(item => {
+                let archivedItem = JSON.parse(JSON.stringify(item));
+                archivedItem.deletedAt = nowIso;
+                archivedItem.historyLog.push({
+                    timestamp: nowIso,
+                    status: "DELETED",
+                    log: `[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨`
+                });
+                deleteDbData.push(archivedItem);
+            });
+
+            // 3. delete_db.json 저장
+            const delJsonString = JSON.stringify(deleteDbData, null, 2);
+            const delBase64 = await utf8_to_b64(delJsonString);
+            const saveDelPayload = {
+                message: `🗑️ 커터 ${itemsToDelete.length}건 영구 삭제 이관`,
+                content: delBase64
+            };
+            if (deleteDbSha) saveDelPayload.sha = deleteDbSha;
+
+            const saveDelRes = await fetch(delUrl, {
+                method: "PUT",
+                headers: { "Authorization": `token ${creds.token}`, "Content-Type": "application/json" },
+                body: JSON.stringify(saveDelPayload)
+            });
+
+            if (saveDelRes.status !== 200 && saveDelRes.status !== 201) {
+                throw new Error("delete_db.json 저장에 실패하여 삭제 작업을 중단합니다.");
+            }
+
+            // 4. parts_db.json에서 제거 후 저장
+            const newPartsData = globalData.filter(p => !targetIds.includes(p.id));
+            if (await saveDatabase(newPartsData)) {
+                showToast(`✅ 총 ${itemsToDelete.length}건이 영구 삭제되어 delete_db.json으로 이관되었습니다.`);
+                const tbodyDelete = document.getElementById(`grid-5-delete-body`);
+                if(tbodyDelete) { tbodyDelete.innerHTML = ""; addGridRow('5_delete'); }
+                switchMenu('home');
+            }
+        } catch (err) {
+            console.error(err);
+            showToast(`❌ 삭제 오류: ${err.message}`, true);
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    // delete_db.json 엑셀 다운로드
+    async function downloadDeleteDbExcel() {
+        const creds = getCredentials();
+        if(!creds.token || !creds.owner || !creds.repo) {
+            showToast("⚠️ GitHub 토큰 정보를 확인해주세요.", true);
+            return;
+        }
+
+        showLoading(true, "⏳ delete_db.json 로드 중...");
+        try {
+            const delUrl = `https://api.github.com/repos/${creds.owner}/${creds.repo}/contents/${DELETE_DB_FILE}`;
+            const delRes = await fetch(delUrl, { headers: { "Authorization": `token ${creds.token}` } });
+            
+            if (delRes.status === 200) {
+                const delJson = await delRes.json();
+                const content = await b64_to_utf8(delJson.content);
+                const deleteData = JSON.parse(content);
+
+                if (!deleteData || deleteData.length === 0) {
+                    showToast("삭제된 이력 데이터가 비어 있습니다.", true);
+                    showLoading(false);
+                    return;
+                }
+
+                let exportArr = deleteData.map(p => ({
+                    "마스터 Tool ID": p.id,
+                    "Tool Type": p.toolType,
+                    "제작사": getResolvedMaker(p.id, p.maker),
+                    "삭제 전 최종 상태": p.status,
+                    "현재 장착 면": p.currentSide || "10.0",
+                    "사용 완료된 면": JSON.stringify(p.usedSides || []),
+                    "연마 가능 횟수": p.regrindAvailable !== undefined ? p.regrindAvailable : (p.regridCount || 0),
+                    "최종 이력 정보": p.lastHistory,
+                    "삭제 일시": p.deletedAt || "-",
+                    "전체 로그": JSON.stringify(p.historyLog || [])
+                }));
+
+                const ws = XLSX.utils.json_to_sheet(exportArr);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Deleted_Cutters");
+                XLSX.writeFile(wb, `Cutter_DeleteDB_${new Date().toISOString().split('T')[0]}.xlsx`);
+                showToast(`✅ 삭제 이력 총 ${deleteData.length}건 다운로드 완료.`);
+            } else if (delRes.status === 404) {
+                showToast("delete_db.json 파일이 존재하지 않습니다.", true);
+            } else {
+                showToast(`❌ 삭제 DB 로드 실패 (상태 코드: ${delRes.status})`, true);
+            }
+        } catch (e) {
+            showToast(`❌ 오류: ${e.message}`, true);
+        } finally {
+            showLoading(false);
+        }
+    }
+
     async function submitBulkDisposal() {
         const rows = document.querySelectorAll("#grid-7-body tr");
         let tempArr = [...globalData]; let updatedCount = 0;
@@ -2058,7 +2304,6 @@
             req12Data.push(cons12);
             reqLWData.push(consLW);
 
-// 💡 수정됨: scatter 좌표 방식({x,y}) 대신, 이벤트가 없는 주는 null을 넣어 일반 Line 차트와 완벽히 동기화
             arrivalPoints18.push(newArr18 ? y18 : null);
             arrivalPoints12.push(newArr12 ? y12 : null);
             arrivalPointsLW.push(newArrLW ? yLW : null);
@@ -2142,19 +2387,16 @@
                 datasets: [
                     { label: '1.8도 공장 가용재고', data: data18, borderColor: '#007bff', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.8도 필요수량', data: req18Data, borderColor: 'rgba(0,123,255,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    // 💡 수정됨: type을 'line'으로 바꾸고 showLine: false 추가, pointRotation으로 속성명 명확화
                     { label: '1.8도 폐기 (🔻)', data: disposalPoints18, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
                     { label: '1.8도 신규 입고 (🔺)', data: arrivalPoints18, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#007bff', borderColor: '#007bff', pointRadius: 7, pointHoverRadius: 9 },
                     
                     { label: '1.2도 공장 가용재고', data: data12, borderColor: '#28a745', fill: false, tension: 0, borderWidth: 2 },
                     { label: '1.2도 필요수량', data: req12Data, borderColor: 'rgba(40,167,69,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    // 💡 수정됨
                     { label: '1.2도 폐기 (🔻)', data: disposalPoints12, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
                     { label: '1.2도 신규 입고 (🔺)', data: arrivalPoints12, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#28a745', borderColor: '#28a745', pointRadius: 7, pointHoverRadius: 9 },
                     
                     { label: 'LW 공장 가용재고', data: dataLW, borderColor: '#fd7e14', fill: false, tension: 0, borderWidth: 2 },
                     { label: 'LW 필요수량', data: reqLWData, borderColor: 'rgba(253,126,20,0.4)', borderDash: [5, 5], pointRadius: 0, fill: false, borderWidth: 1.5 },
-                    // 💡 수정됨
                     { label: 'LW 폐기 (🔻)', data: disposalPointsLW, type: 'line', showLine: false, pointStyle: 'triangle', pointRotation: 180, backgroundColor: '#dc3545', borderColor: '#dc3545', pointRadius: 7, pointHoverRadius: 9 },
                     { label: 'LW 신규 입고 (🔺)', data: arrivalPointsLW, type: 'line', showLine: false, pointStyle: 'triangle', backgroundColor: '#fd7e14', borderColor: '#fd7e14', pointRadius: 7, pointHoverRadius: 9 }
                 ]
