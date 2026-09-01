@@ -3,13 +3,13 @@
     "id": "LCAJHY4064CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -45,6 +45,11 @@
         "timestamp": "2026-08-11T19:48:57.425Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -52,14 +57,14 @@
     "id": "LCAJHY4055CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -115,6 +120,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -226,14 +236,14 @@
     "id": "LCAJHY4063CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -259,6 +269,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -338,14 +353,14 @@
     "id": "LCAJHY4062CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "20.0",
       "10.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -396,6 +411,11 @@
         "timestamp": "2026-08-13T15:01:46.685Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -403,14 +423,14 @@
     "id": "LCAJHY4060CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -466,6 +486,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -473,14 +498,14 @@
     "id": "LCAJHY4056CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -531,6 +556,11 @@
         "timestamp": "2026-08-19T15:16:28.208Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -538,11 +568,11 @@
     "id": "LCAJHY3013FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -648,6 +678,11 @@
         "timestamp": "2026-08-06T12:13:58.700Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -655,14 +690,14 @@
     "id": "LCAJHY4004CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "20.0",
       "10.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -698,6 +733,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -757,11 +797,11 @@
     "id": "LCAJHY1045CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -807,6 +847,11 @@
         "timestamp": "2026-08-11T19:47:12.245Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -814,11 +859,11 @@
     "id": "LCAJHY1047CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -864,6 +909,11 @@
         "timestamp": "2026-08-11T19:23:57.566Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -871,11 +921,11 @@
     "id": "LCAJHY0001FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -961,6 +1011,11 @@
         "timestamp": "2026-07-29T20:00:01.485Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1052,13 +1107,13 @@
     "id": "LCAJHY4007CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1104,6 +1159,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1111,14 +1171,14 @@
     "id": "LCAJHY4012CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1144,6 +1204,11 @@
         "timestamp": "2026-07-29T20:00:01.485Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1208,14 +1273,14 @@
     "id": "LCAJHY4009CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1266,6 +1331,11 @@
         "timestamp": "2026-08-11T19:47:12.245Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1273,11 +1343,11 @@
     "id": "LCAJHY0036CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:H/C 2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1293,6 +1363,11 @@
         "timestamp": "2026-08-06T12:48:09.651Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:H/C 2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1382,13 +1457,13 @@
     "id": "LCAJHY4000CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1449,6 +1524,11 @@
         "timestamp": "2026-08-11T19:23:57.566Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1456,11 +1536,11 @@
     "id": "LCAJHY0039FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:H/C 2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1476,6 +1556,11 @@
         "timestamp": "2026-08-06T12:48:09.651Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:H/C 2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1520,11 +1605,11 @@
     "id": "LCAJHY1005CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1555,6 +1640,11 @@
         "timestamp": "2026-08-06T12:13:58.700Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1619,11 +1709,11 @@
     "id": "LCAJHY1004CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1674,6 +1764,11 @@
         "timestamp": "2026-08-04T19:40:44.445Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1723,11 +1818,11 @@
     "id": "LCAJHY0003FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 13,
-    "lastHistory": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1748,6 +1843,11 @@
         "timestamp": "2026-08-04T19:50:39.321Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1772,11 +1872,11 @@
     "id": "LCAJHY3001FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1882,6 +1982,11 @@
         "timestamp": "2026-08-11T19:23:57.566Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -1889,11 +1994,11 @@
     "id": "LCAJHY3000FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1999,6 +2104,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -2113,11 +2223,11 @@
     "id": "LCAJHY1002CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2163,6 +2273,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -2391,11 +2506,11 @@
     "id": "LCAJHY0048FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2496,6 +2611,11 @@
         "timestamp": "2026-08-11T19:37:37.316Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.987Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -2658,11 +2778,11 @@
     "id": "LCAJHY1040CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2713,6 +2833,11 @@
         "timestamp": "2026-08-13T15:01:46.685Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -2720,14 +2845,14 @@
     "id": "LCAJHY4054CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 8,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2778,6 +2903,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -3432,11 +3562,11 @@
     "id": "LCAJHY1007CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-04 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -3482,6 +3612,11 @@
         "timestamp": "2026-08-04T19:46:58.511Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-04 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -3930,11 +4065,11 @@
     "id": "LCAJHY1010CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4035,6 +4170,11 @@
         "timestamp": "2026-07-29T20:00:01.485Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4042,11 +4182,11 @@
     "id": "LCAJHY1011CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4087,6 +4227,11 @@
         "timestamp": "2026-08-11T19:37:37.316Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4136,11 +4281,11 @@
     "id": "LCAJHY1013CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4161,6 +4306,11 @@
         "timestamp": "2026-08-19T15:16:28.208Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4217,14 +4367,14 @@
     "id": "LCAJHY4016CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 8,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4270,6 +4420,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4277,14 +4432,14 @@
     "id": "LCAJHY4017CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 8,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4330,6 +4485,11 @@
         "timestamp": "2026-08-11T19:37:37.316Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4337,14 +4497,14 @@
     "id": "LCAJHY4019CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4390,6 +4550,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -4431,14 +4596,14 @@
     "id": "LCAJHY4021CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 9,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4464,6 +4629,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5092,14 +5262,14 @@
     "id": "LCAJHY4025CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5120,6 +5290,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5157,13 +5332,13 @@
     "id": "LCAJHY4027CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5179,6 +5354,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5223,14 +5403,14 @@
     "id": "LCAJHY4029CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5251,6 +5431,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5275,14 +5460,14 @@
     "id": "LCAJHY4031CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5303,6 +5488,11 @@
         "timestamp": "2026-08-04T19:40:44.445Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5327,13 +5517,13 @@
     "id": "LCAJHY4033CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5349,6 +5539,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5356,14 +5551,14 @@
     "id": "LCAJHY4034CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5384,6 +5579,11 @@
         "timestamp": "2026-08-04T19:40:44.445Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5421,13 +5621,13 @@
     "id": "LCAJHY4036CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5443,6 +5643,11 @@
         "timestamp": "2026-08-11T19:37:37.316Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5497,13 +5702,13 @@
     "id": "LCAJHY4039CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5524,6 +5729,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5531,14 +5741,14 @@
     "id": "LCAJHY4040CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5559,6 +5769,11 @@
         "timestamp": "2026-08-11T19:47:12.245Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5566,14 +5781,14 @@
     "id": "LCAJHY4041CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5594,6 +5809,11 @@
         "timestamp": "2026-08-06T12:54:09.107Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5631,14 +5851,14 @@
     "id": "LCAJHY4043CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5659,6 +5879,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5666,14 +5891,14 @@
     "id": "LCAJHY4044CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5694,6 +5919,11 @@
         "timestamp": "2026-08-06T12:41:19.967Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5718,14 +5948,14 @@
     "id": "LCAJHY4046CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5746,6 +5976,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5753,11 +5988,11 @@
     "id": "LCAJHY1014CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5778,6 +6013,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5785,11 +6025,11 @@
     "id": "LCAJHY1015CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5805,6 +6045,11 @@
         "timestamp": "2026-08-06T12:41:19.967Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5812,11 +6057,11 @@
     "id": "LCAJHY1016CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5832,6 +6077,11 @@
         "timestamp": "2026-08-06T12:54:09.107Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5839,11 +6089,11 @@
     "id": "LCAJHY1017CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5859,6 +6109,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -5930,11 +6185,11 @@
     "id": "LCAJHY1020CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5960,6 +6215,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6026,11 +6286,11 @@
     "id": "LCAJHY1023CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6046,6 +6306,11 @@
         "timestamp": "2026-08-04T19:50:39.321Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6201,11 +6466,11 @@
     "id": "LCAJHY1028CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6221,6 +6486,11 @@
         "timestamp": "2026-08-11T19:23:57.566Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6455,11 +6725,11 @@
     "id": "LCAJHY3008FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6475,6 +6745,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6482,14 +6757,14 @@
     "id": "LCAJHY4049CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 8,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6530,6 +6805,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6656,11 +6936,11 @@
     "id": "LCAJHY1100CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6676,6 +6956,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6683,11 +6968,11 @@
     "id": "LCAJHY1101CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6703,6 +6988,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6710,11 +7000,11 @@
     "id": "LCAJHY1102CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6730,6 +7020,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -6737,11 +7032,11 @@
     "id": "LCAJHY1103CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6757,6 +7052,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7032,11 +7332,11 @@
     "id": "LCAJHY1118CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -7052,6 +7352,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7133,11 +7438,11 @@
     "id": "LCAJHY3101FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7153,6 +7458,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7182,11 +7492,11 @@
     "id": "LCAJHY3103FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7202,6 +7512,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7209,11 +7524,11 @@
     "id": "LCAJHY3104FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7229,6 +7544,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7422,11 +7742,11 @@
     "id": "LCAJHY3113FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -7442,6 +7762,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -7449,11 +7774,11 @@
     "id": "LCAJHY3114FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -7469,6 +7794,11 @@
         "timestamp": "2026-08-13T15:01:46.685Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8203,13 +8533,13 @@
     "id": "LCAJHY4142CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:08:05.762Z",
@@ -8225,6 +8555,11 @@
         "timestamp": "2026-08-13T14:57:01.686Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8429,13 +8764,13 @@
     "id": "LCAJHY4153CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8451,6 +8786,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8684,11 +9024,11 @@
     "id": "LCAJHY1043CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8739,6 +9079,11 @@
         "timestamp": "2026-08-04T19:50:39.321Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-04 15시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8746,11 +9091,11 @@
     "id": "LCAJHY1042CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8796,6 +9141,11 @@
         "timestamp": "2026-08-13T15:01:46.685Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 11시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8803,11 +9153,11 @@
     "id": "LCAJHY3011FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8903,6 +9253,11 @@
         "timestamp": "2026-08-04T19:40:44.445Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -8910,11 +9265,11 @@
     "id": "LCAJHY3012FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Final | 작업자:Paul | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9010,6 +9365,11 @@
         "timestamp": "2026-08-06T14:11:59.721Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Final | 작업자:Paul | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9017,11 +9377,11 @@
     "id": "LCAJHY1041CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 16,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9067,6 +9427,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9074,11 +9439,11 @@
     "id": "LCAJHY3010FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9179,6 +9544,11 @@
         "timestamp": "2026-08-13T14:48:08.477Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9376,11 +9746,11 @@
     "id": "LCAJHY1046CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 14,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9421,6 +9791,11 @@
         "timestamp": "2026-08-06T12:41:19.967Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9512,11 +9887,11 @@
     "id": "LCAJHY1044CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9557,6 +9932,11 @@
         "timestamp": "2026-08-11T19:47:12.245Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9919,11 +10299,11 @@
     "id": "LCAJHY0003CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Upper | 작업자:Issac | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-13T15:26:09.228Z",
@@ -9939,6 +10319,11 @@
         "timestamp": "2026-08-06T14:11:59.721Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 10시 | 라인:6-1 | 유닛:Upper | 작업자:Issac | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -9946,11 +10331,11 @@
     "id": "LCAJHY0005CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-13T15:26:09.228Z",
@@ -9966,6 +10351,11 @@
         "timestamp": "2026-08-04T19:40:44.445Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-03 10시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10109,11 +10499,11 @@
     "id": "LCAJHY1122CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10129,6 +10519,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10136,11 +10531,11 @@
     "id": "LCAJHY1123CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10156,6 +10551,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10163,11 +10563,11 @@
     "id": "LCAJHY1124CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10183,6 +10583,11 @@
         "timestamp": "2026-07-29T20:00:01.484Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-07-29 15시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10229,11 +10634,11 @@
     "id": "LCAJHY1127CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10249,6 +10654,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10339,11 +10749,11 @@
     "id": "LCAJHY1132CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10359,6 +10769,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10505,11 +10920,11 @@
     "id": "LCAJHY1140CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10525,6 +10940,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10739,11 +11159,11 @@
     "id": "LCAJHY1151CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -10759,6 +11179,11 @@
         "timestamp": "2026-08-13T14:57:01.686Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-13 10시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10766,11 +11191,11 @@
     "id": "LCAJHY1152CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -10786,6 +11211,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10810,11 +11240,11 @@
     "id": "LCAJHY1154CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -10830,6 +11260,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -10971,11 +11406,11 @@
     "id": "LCAJHY3125FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -10991,6 +11426,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -11059,11 +11499,11 @@
     "id": "LCAJHY3129FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -11079,6 +11519,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12547,11 +12992,11 @@
     "id": "LCAJHY3120FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-29T20:13:03.839Z",
@@ -12567,6 +13012,11 @@
         "timestamp": "2026-08-06T12:41:19.967Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12574,13 +13024,13 @@
     "id": "LCAJHY0050FL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-31T23:31:34.958Z",
@@ -12596,6 +13046,11 @@
         "timestamp": "2026-08-06T12:13:58.700Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12603,11 +13058,11 @@
     "id": "LCAJHY1120CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-06T12:15:27.304Z",
@@ -12623,6 +13078,11 @@
         "timestamp": "2026-08-19T15:16:28.208Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12630,11 +13090,11 @@
     "id": "LCAJHY3118FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-06T12:15:37.000Z",
@@ -12650,6 +13110,11 @@
         "timestamp": "2026-08-19T15:16:28.208Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12657,11 +13122,11 @@
     "id": "LCAJHY3115FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-06T12:45:54.088Z",
@@ -12677,6 +13142,11 @@
         "timestamp": "2026-08-11T19:47:12.245Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12706,11 +13176,11 @@
     "id": "LCAJHY1121CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-11T19:32:53.017Z",
@@ -12726,6 +13196,11 @@
         "timestamp": "2026-08-19T15:16:28.208Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
@@ -12755,11 +13230,11 @@
     "id": "LCAJHY3123FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[외주연마출하] 일자:2026-08-17 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-11T19:40:01.302Z",
@@ -12775,6 +13250,11 @@
         "timestamp": "2026-08-19T15:16:28.209Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-08-19 11시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:47.988Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-08-17 | 비고:"
       }
     ]
   },
