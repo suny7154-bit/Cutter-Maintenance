@@ -26,5 +26,33 @@
       }
     ],
     "deletedAt": "2026-08-21T22:34:16.821Z"
+  },
+  {
+    "id": "LCAJHY0005CL656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-03-17 | 연마가능잔여:15회 | 비고:",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:07:30.462Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T00:38:01.374Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-03-17 | 연마가능잔여:15회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:42:19.617Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:42:19.617Z"
   }
 ]
