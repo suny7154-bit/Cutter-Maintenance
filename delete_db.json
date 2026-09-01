@@ -54,5 +54,3431 @@
       }
     ],
     "deletedAt": "2026-09-01T17:42:19.617Z"
+  },
+  {
+    "id": "LCAJHY1912CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:07:30.462Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:28:01.072Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.704Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1905CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:07:30.462Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.704Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3900FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:07:30.462Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:48:22.658Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 22시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T19:55:26.619Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-09 15시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.704Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4906CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:07:30.463Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4900CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 1,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.032Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:1회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:12:55.560Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-26 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:15:10.496Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-05 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-13T14:36:20.004Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-13 10시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4901CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [
+      "10.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.032Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1906CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 10,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.032Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:10회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:29:55.932Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-29 09시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-11T19:37:37.316Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-11 15시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1901CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 3,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.032Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T15:51:20.220Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4904CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.032Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4909CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4919CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 8,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1922CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 6,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:6회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-20T18:17:41.549Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-18 14시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.484Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1918CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.122Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1921CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 4,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:4회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-17T13:50:24.825Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-17 09시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.484Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1920CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 13,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1913CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:59:53.202Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:6-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-19T15:16:28.209Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1919CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:12:55.561Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1911CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.122Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3905FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.121Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4905CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:41:47.185Z",
+        "status": "Using",
+        "log": "[면 변경(Flip) 장착] 처음부터 20.0면으로 장착됨 | [장착] 일시:2026-07-04 22시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T19:47:18.549Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-09 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1910CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 12,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:12회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-20T18:17:41.548Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-18 14시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.484Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1909CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:59:53.202Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:6-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-19T15:16:28.209Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1902CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:41:47.185Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 22시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T19:47:18.549Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-09 15시 | 라인:4-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1917CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:12:55.560Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-26 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:13:58.700Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1916CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T17:51:30.944Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-06-27 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1915CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 14,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:14회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1908CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 3,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.398Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.258Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:3회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3909FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:28:01.072Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1903CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 8,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-13T15:51:20.221Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:8회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Upper | 작업자:OEM | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3904FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 7,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.399Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.259Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:7회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3903FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:50:22.728Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3902FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T17:51:30.944Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-06-27 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3901FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:59:53.202Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:6-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-19T15:16:28.209Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3908FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:41:47.185Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 22시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T19:47:18.549Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-09 15시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3912FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 5,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-13T17:38:54.541Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:03.690Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:35.931Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:39:39.645Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:11.173Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:14.676Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:25.399Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:40.155Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:40:55.259Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:04.188Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:15.352Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:41:25.191Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-13T17:42:02.154Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-07-08 | 연마가능잔여:5회 | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:12:55.561Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-27 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-06T12:54:09.107Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-06 08시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3911FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:46:48.214Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-12T15:09:27.917Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-11 09시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3910FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:41:49.228Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-07 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T19:45:02.893Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-2 | 유닛:Final"
+      },
+      {
+        "timestamp": "2026-07-15T13:10:55.854Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-14 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1914CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T19:55:59.121Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:09.482Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:19.957Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T19:56:36.733Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4902CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [
+      "10.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:59:53.202Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:6-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-19T15:16:28.209Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1900CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:38:07.799Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-01 22시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:30:36.539Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-08 09시 | 라인:4-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4907CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [
+      "10.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:59:53.202Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:6-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-08-19T15:16:28.209Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-08-19 11시 | 라인:6-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1907CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:38:07.799Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-01 22시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:30:36.539Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-08 09시 | 라인:4-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4903CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:46:48.214Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-12T15:06:38.874Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-11 09시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-20T18:12:06.569Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-19 14시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3907FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:38:07.798Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-01 22시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:30:36.539Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-08 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4917CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:46:48.215Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-29 22시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-12T15:06:38.874Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-11 09시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-20T18:12:06.569Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-19 14시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4920CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4918CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4921CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [
+      "10.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-22T18:28:41.986Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-20 14시 | 라인:2-3 | 유닛:Final | 작업자:OEM | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4922CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:41:47.185Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 22시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:32:37.368Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Upper | 작업자: | 비고:Harley"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4916CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4914CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4913CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:41:47.185Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 22시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:32:37.368Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-08 09시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-16T20:50:49.653Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-16 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:Nate"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4912CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T02:39:08.967Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-2 | 유닛:Final"
+      },
+      {
+        "timestamp": "2026-07-09T18:28:16.531Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-07 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-15T13:10:55.854Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-14 09시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4911CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:53:35.170Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-28 22시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-17T13:50:24.826Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-17 09시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.485Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4910CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-09T19:56:50.548Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-09 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-12T14:37:03.081Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-12 10시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.484Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1923CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-03T23:31:51.183Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:33.294Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T00:46:36.666Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-07-04T01:17:08.488Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-1 | 유닛:Center"
+      },
+      {
+        "timestamp": "2026-07-09T18:26:00.394Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4908CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "20.0",
+    "usedSides": [
+      "10.0",
+      "20.0"
+    ],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.033Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T02:53:35.170Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-06-28 22시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-17T13:50:24.826Z",
+        "status": "Using",
+        "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-07-17 09시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-29T20:00:01.485Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-29 15시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY1904CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.034Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:28:01.072Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.060Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY3906FU656X1.2",
+    "toolType": "1.2도 상도",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.034Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-04T01:15:51.184Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-07-04 21시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-09T18:26:00.394Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-07-07 09시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
+  },
+  {
+    "id": "LCAJHY4915CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "UC1",
+    "status": "Disposal",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "[영구폐기] 사유:UC 1 Blade",
+    "historyLog": [
+      {
+        "timestamp": "2026-07-02T23:09:36.034Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-07-10T20:55:52.376Z",
+        "status": "Waiting",
+        "log": "[최고관리자 강제 제어] 상태를 Waiting로 변경"
+      },
+      {
+        "timestamp": "2026-07-22T18:04:39.705Z",
+        "status": "Regrind",
+        "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T17:36:22.061Z",
+        "status": "Disposal",
+        "log": "[영구폐기] 사유:UC 1 Blade"
+      },
+      {
+        "timestamp": "2026-09-01T17:49:00.938Z",
+        "status": "DELETED",
+        "log": "[최고관리자 영구 삭제] parts_db.json에서 제거되어 delete_db.json으로 이관됨"
+      }
+    ],
+    "deletedAt": "2026-09-01T17:49:00.938Z"
   }
 ]
