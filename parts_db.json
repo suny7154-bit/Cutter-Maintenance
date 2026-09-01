@@ -122,11 +122,11 @@
     "id": "LCAJHY4022CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 10,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -172,6 +172,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -179,11 +184,11 @@
     "id": "LCAJHY4023CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -209,6 +214,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -256,11 +266,11 @@
     "id": "LCAJHY3007FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 16,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -316,6 +326,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -690,11 +705,11 @@
     "id": "LCAJHY1035CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 11,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:11회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -730,6 +745,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:11회 | 비고:"
       }
     ]
   },
@@ -948,11 +968,11 @@
     "id": "LCAJHY3006FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 16,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -978,6 +998,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -985,11 +1010,11 @@
     "id": "LCAJHY3002FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1015,6 +1040,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -1121,13 +1151,11 @@
     "id": "LCAJHY4050CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
-    "currentSide": "20.0",
-    "usedSides": [
-      "20.0"
-    ],
-    "regrindAvailable": 8,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 7,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1168,6 +1196,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -1297,13 +1330,11 @@
     "id": "LCAJHY4003CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "usedSides": [],
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1339,6 +1370,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -1447,11 +1483,11 @@
     "id": "LCAJHY1000CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1472,6 +1508,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -1521,11 +1562,11 @@
     "id": "LCAJHY0042CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1566,6 +1607,11 @@
         "timestamp": "2026-07-22T18:04:39.704Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -1635,11 +1681,11 @@
     "id": "LCAJHY1006CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 16,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1665,6 +1711,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -2212,14 +2263,11 @@
     "id": "LCAJHY4047CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
-    "currentSide": "20.0",
-    "usedSides": [
-      "10.0",
-      "20.0"
-    ],
-    "regrindAvailable": 8,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 7,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2265,6 +2313,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.858Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -3538,11 +3591,11 @@
     "id": "LCAJHY1037CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 14,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 13,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -3583,6 +3636,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:"
       }
     ]
   },
@@ -3590,11 +3648,11 @@
     "id": "LCAJHY3009FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 14,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 13,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.463Z",
@@ -3630,6 +3688,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:"
       }
     ]
   },
@@ -3788,11 +3851,11 @@
     "id": "LCAJHY1008CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -3813,6 +3876,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -3820,11 +3888,11 @@
     "id": "LCAJHY1009CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -3850,6 +3918,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -4021,11 +4094,11 @@
     "id": "LCAJHY1012CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4051,6 +4124,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -4393,11 +4471,11 @@
     "id": "LCAJHY4048CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4428,6 +4506,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -4435,11 +4518,11 @@
     "id": "LCAJHY4006CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4475,6 +4558,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -4482,11 +4570,11 @@
     "id": "LCAJHY4011CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4512,6 +4600,11 @@
         "timestamp": "2026-07-04T00:46:36.666Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -4541,11 +4634,11 @@
     "id": "LCAJHY0045CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 16,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4576,6 +4669,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -4583,11 +4681,11 @@
     "id": "LCAJHY1038CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4618,6 +4716,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -4625,11 +4728,11 @@
     "id": "LCAJHY4024CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4670,6 +4773,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -4699,11 +4807,11 @@
     "id": "LCAJHY1036CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4759,6 +4867,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -4766,11 +4879,11 @@
     "id": "LCAJHY0043CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4811,6 +4924,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -4875,13 +4993,11 @@
     "id": "LCAJHY4002CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
-    "currentSide": "20.0",
-    "usedSides": [
-      "20.0"
-    ],
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4907,6 +5023,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -4914,11 +5035,11 @@
     "id": "LCAJHY4008CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4959,6 +5080,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -5060,13 +5186,11 @@
     "id": "LCAJHY4028CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5087,6 +5211,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -5737,11 +5866,11 @@
     "id": "LCAJHY1018CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-27 | 비고:7/9 4-1 상부 상도",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5752,6 +5881,11 @@
         "timestamp": "2026-07-09T18:44:51.919Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-27 | 비고:7/9 4-1 상부 상도"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -5759,11 +5893,11 @@
     "id": "LCAJHY1019CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5784,6 +5918,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -5850,11 +5989,11 @@
     "id": "LCAJHY1022CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5875,6 +6014,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -5946,11 +6090,11 @@
     "id": "LCAJHY1025CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5971,6 +6115,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -5978,11 +6127,11 @@
     "id": "LCAJHY1026CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6003,6 +6152,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -6010,11 +6164,11 @@
     "id": "LCAJHY1027CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6035,6 +6189,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:"
       }
     ]
   },
@@ -6069,11 +6228,11 @@
     "id": "LCAJHY1029CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6094,6 +6253,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -6101,11 +6265,11 @@
     "id": "LCAJHY1030CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6126,6 +6290,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -6133,11 +6302,11 @@
     "id": "LCAJHY1031CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -6158,6 +6327,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -6165,11 +6339,11 @@
     "id": "LCAJHY1032CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6195,6 +6369,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -6202,11 +6381,11 @@
     "id": "LCAJHY1033CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6227,6 +6406,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -6234,11 +6418,11 @@
     "id": "LCAJHY1034CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6259,6 +6443,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -6348,11 +6537,11 @@
     "id": "LCAJHY1039CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 14,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 13,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6393,6 +6582,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:"
       }
     ]
   },
@@ -6400,13 +6594,11 @@
     "id": "LCAJHY4051CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
-    "currentSide": "20.0",
-    "usedSides": [
-      "20.0"
-    ],
-    "regrindAvailable": 8,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 7,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6452,6 +6644,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -6567,11 +6764,11 @@
     "id": "LCAJHY1104CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6592,6 +6789,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:"
       }
     ]
   },
@@ -6857,11 +7059,11 @@
     "id": "LCAJHY1119CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -6882,6 +7084,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:"
       }
     ]
   },
@@ -6889,11 +7096,11 @@
     "id": "LCAJHY3100FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -6914,6 +7121,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -7024,11 +7236,11 @@
     "id": "LCAJHY3105FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7049,6 +7261,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -7168,11 +7385,11 @@
     "id": "LCAJHY3112FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -7193,6 +7410,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -9660,13 +9882,11 @@
     "id": "LCAJHY0047CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
-    "currentSide": "20.0",
-    "usedSides": [
-      "20.0"
-    ],
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-07-24 | 비고:",
+    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-04T02:49:40.076Z",
@@ -9687,6 +9907,11 @@
         "timestamp": "2026-07-22T18:04:39.705Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-07-24 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-01T18:05:17.859Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:"
       }
     ]
   },
