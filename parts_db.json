@@ -305,8 +305,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -367,6 +367,11 @@
         "timestamp": "2026-09-01T18:05:17.858Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -1085,8 +1090,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1117,6 +1122,11 @@
         "timestamp": "2026-09-01T18:05:17.858Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -1127,8 +1137,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1159,6 +1169,11 @@
         "timestamp": "2026-09-01T18:05:17.858Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:9회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -7820,8 +7835,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 16,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7847,6 +7862,11 @@
         "timestamp": "2026-09-01T18:05:17.859Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:16회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -8004,8 +8024,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 15,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
+    "regrindAvailable": 14,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8031,6 +8051,11 @@
         "timestamp": "2026-09-01T18:05:17.859Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:14회 | 비고:"
       }
     ]
   },
@@ -11893,11 +11918,11 @@
     "id": "LCAJHY3126FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[외주연마출하] 일자:2026-09-22 | 비고:",
+    "regrindAvailable": 11,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:11회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -11918,6 +11943,11 @@
         "timestamp": "2026-09-22T18:40:18.448Z",
         "status": "Regrind",
         "log": "[외주연마출하] 일자:2026-09-22 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:11회 | 비고:"
       }
     ]
   },
@@ -13577,8 +13607,8 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-29T20:13:03.839Z",
@@ -13604,6 +13634,11 @@
         "timestamp": "2026-09-01T21:34:54.439Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:0회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -13967,13 +14002,18 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "regrindAvailable": 16,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:16회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-09-01T19:54:23.621Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:16회 | 비고:"
       }
     ]
   },
@@ -14035,13 +14075,18 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-09-01T19:54:23.621Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
@@ -14052,13 +14097,18 @@
     "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "regrindAvailable": 15,
+    "lastHistory": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-09-01T19:54:23.621Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-09-22T19:06:16.719Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:15회 | 비고:"
       }
     ]
   },
