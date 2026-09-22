@@ -4975,11 +4975,11 @@
     "id": "LCAJHY4013CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:5-3 | 유닛:Upper",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5025,6 +5025,11 @@
         "timestamp": "2026-08-20T22:47:17.726Z",
         "status": "Using",
         "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:5-3 | 유닛:Upper"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -7645,11 +7650,11 @@
     "id": "LCAJHY3109FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7660,6 +7665,11 @@
         "timestamp": "2026-08-20T22:44:31.926Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -8519,14 +8529,14 @@
     "id": "LCAJHY4141CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:08:05.762Z",
@@ -8542,6 +8552,11 @@
         "timestamp": "2026-08-20T22:44:31.925Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -8671,14 +8686,14 @@
     "id": "LCAJHY4148CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:08:05.762Z",
@@ -8694,6 +8709,11 @@
         "timestamp": "2026-08-20T22:43:17.664Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -8701,13 +8721,13 @@
     "id": "LCAJHY4149CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:08:05.762Z",
@@ -8718,6 +8738,11 @@
         "timestamp": "2026-08-20T22:49:07.612Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -8759,13 +8784,13 @@
     "id": "LCAJHY4152CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8776,6 +8801,11 @@
         "timestamp": "2026-08-20T22:49:07.612Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -8855,14 +8885,14 @@
     "id": "LCAJHY4155CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8878,6 +8908,11 @@
         "timestamp": "2026-08-20T22:44:31.925Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -8885,14 +8920,14 @@
     "id": "LCAJHY4156CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -8908,6 +8943,11 @@
         "timestamp": "2026-08-20T22:44:31.926Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -10412,11 +10452,11 @@
     "id": "LCAJHY1129CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10427,6 +10467,11 @@
         "timestamp": "2026-08-20T22:44:31.925Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -10461,11 +10506,11 @@
     "id": "LCAJHY1131CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10476,6 +10521,11 @@
         "timestamp": "2026-08-20T22:44:31.925Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-2 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -10520,11 +10570,11 @@
     "id": "LCAJHY1133CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10535,6 +10585,11 @@
         "timestamp": "2026-08-20T22:46:30.925Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -10772,11 +10827,11 @@
     "id": "LCAJHY1144CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:26:59.292Z",
@@ -10787,6 +10842,11 @@
         "timestamp": "2026-08-20T22:49:07.611Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -10828,11 +10888,11 @@
     "id": "LCAJHY1146CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.583Z",
@@ -10843,6 +10903,11 @@
         "timestamp": "2026-08-20T22:43:17.664Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -10867,11 +10932,11 @@
     "id": "LCAJHY1148CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -10882,6 +10947,11 @@
         "timestamp": "2026-08-20T22:46:30.925Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -11051,11 +11121,11 @@
     "id": "LCAJHY1155CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -11066,6 +11136,11 @@
         "timestamp": "2026-08-20T22:49:07.612Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -11073,11 +11148,11 @@
     "id": "LCAJHY1156CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T18:28:40.584Z",
@@ -11088,6 +11163,11 @@
         "timestamp": "2026-08-20T22:43:17.663Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -11227,11 +11307,11 @@
     "id": "LCAJHY3126FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -11242,6 +11322,11 @@
         "timestamp": "2026-08-20T22:43:17.664Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -11249,11 +11334,11 @@
     "id": "LCAJHY3127FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -11264,6 +11349,11 @@
         "timestamp": "2026-08-20T22:46:30.926Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -11505,13 +11595,13 @@
     "id": "LCAJHY4175CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -11522,6 +11612,11 @@
         "timestamp": "2026-08-20T22:49:07.612Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:6-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -11950,13 +12045,13 @@
     "id": "LCAJHY4200CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -11967,6 +12062,11 @@
         "timestamp": "2026-08-20T22:43:17.664Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
@@ -11991,13 +12091,13 @@
     "id": "LCAJHY4202CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -12008,6 +12108,11 @@
         "timestamp": "2026-08-20T22:43:17.663Z",
         "status": "Using",
         "log": "[장착] 일시:2026-08-20 18시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-1 | 유닛:Upper | 작업자: | 비고:"
       }
     ]
   },
@@ -12214,14 +12319,14 @@
     "id": "LCAJHY4218CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -12237,6 +12342,11 @@
         "timestamp": "2026-08-20T22:46:30.926Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -12329,14 +12439,14 @@
     "id": "LCAJHY4224CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Using",
+    "status": "Waiting",
     "currentSide": "20.0",
     "usedSides": [
       "10.0",
       "20.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
+    "lastHistory": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -12352,6 +12462,11 @@
         "timestamp": "2026-08-20T22:46:30.926Z",
         "status": "Using",
         "log": "[면 스왑 장착] 10.0면 -> 20.0면으로 변경 | 일시:2026-08-20 18시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-22T18:11:37.160Z",
+        "status": "Waiting",
+        "log": "[탈거] 일시:2026-09-22 14시 | 라인:5-3 | 유닛:Center | 작업자: | 비고:"
       }
     ]
   },
