@@ -1961,11 +1961,11 @@
     "id": "LCAJHY0003FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 13,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-09-25 16시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1996,6 +1996,11 @@
         "timestamp": "2026-09-01T19:26:04.053Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:13회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-25T20:23:30.759Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-09-25 16시 | 라인:4-2 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
@@ -2647,11 +2652,11 @@
     "id": "LCAJHY0048FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 15,
-    "lastHistory": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:",
+    "lastHistory": "[장착] 일시:2026-09-25 16시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -2762,6 +2767,11 @@
         "timestamp": "2026-09-01T19:26:04.053Z",
         "status": "Storage",
         "log": "[연마입고] 일자:2026-09-01 | 연마가능잔여:15회 | 비고:"
+      },
+      {
+        "timestamp": "2026-09-25T20:23:30.759Z",
+        "status": "Using",
+        "log": "[장착] 일시:2026-09-25 16시 | 라인:4-1 | 유닛:Final | 작업자: | 비고:"
       }
     ]
   },
