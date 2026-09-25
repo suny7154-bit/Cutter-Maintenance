@@ -7835,11 +7835,11 @@
     "id": "LCAJHY3101FU656X1.2",
     "toolType": "1.2도 상도",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-09-25 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Final",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.705Z",
@@ -7875,6 +7875,11 @@
         "timestamp": "2026-09-25T20:21:45.482Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-09-25 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-25T20:28:54.587Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Final"
       }
     ]
   },
@@ -8701,13 +8706,13 @@
     "id": "LCAJHY4122CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Waiting",
+    "status": "Using",
     "currentSide": "10.0",
     "usedSides": [
       "10.0"
     ],
     "regrindAvailable": 0,
-    "lastHistory": "[탈거] 일시:2026-09-25 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Final",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8723,6 +8728,11 @@
         "timestamp": "2026-09-25T20:21:45.482Z",
         "status": "Waiting",
         "log": "[탈거] 일시:2026-09-25 16시 | 라인:4-3 | 유닛:Final | 작업자: | 비고:"
+      },
+      {
+        "timestamp": "2026-09-25T20:28:54.587Z",
+        "status": "Using",
+        "log": "[최고관리자 강제 제어] 상태를 Using로 변경 | 강제연동 라인:4-3 | 유닛:Final"
       }
     ]
   },
