@@ -157,11 +157,11 @@
     "id": "LCAJHY4022CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -217,6 +217,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -1382,11 +1387,11 @@
     "id": "LCAJHY4050CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 7,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:07:30.462Z",
@@ -1437,6 +1442,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -4513,11 +4523,11 @@
     "id": "LCAJHY4016CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 8,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 7,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.032Z",
@@ -4578,6 +4588,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -4800,11 +4815,11 @@
     "id": "LCAJHY4048CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4845,6 +4860,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -4909,11 +4929,11 @@
     "id": "LCAJHY4011CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -4949,6 +4969,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -5159,11 +5184,11 @@
     "id": "LCAJHY0046CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5179,6 +5204,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -5444,11 +5474,11 @@
     "id": "LCAJHY4008CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 9,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5499,6 +5529,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -5716,11 +5751,11 @@
     "id": "LCAJHY4030CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5731,6 +5766,11 @@
         "timestamp": "2026-10-06T18:37:30.156Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -5787,11 +5827,11 @@
     "id": "LCAJHY4032CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.033Z",
@@ -5802,6 +5842,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   },
@@ -7443,11 +7488,11 @@
     "id": "LCAJHY4051CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 7,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:09:36.034Z",
@@ -7503,6 +7548,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:7회 | 비고:"
       }
     ]
   },
@@ -8786,11 +8836,11 @@
     "id": "LCAJHY4104CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8801,6 +8851,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -8876,11 +8931,11 @@
     "id": "LCAJHY4109CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8891,6 +8946,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -8898,11 +8958,11 @@
     "id": "LCAJHY4110CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 10,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:10회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8913,6 +8973,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:10회 | 비고:"
       }
     ]
   },
@@ -8937,13 +9002,11 @@
     "id": "LCAJHY4112CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -8964,6 +9027,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9080,13 +9148,11 @@
     "id": "LCAJHY4119CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -9107,6 +9173,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9252,11 +9323,11 @@
     "id": "LCAJHY4126CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -9272,6 +9343,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9301,11 +9377,11 @@
     "id": "LCAJHY4128CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -9316,6 +9392,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9362,11 +9443,11 @@
     "id": "LCAJHY4131CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -9382,6 +9463,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9411,13 +9497,11 @@
     "id": "LCAJHY4133CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-02T23:15:11.706Z",
@@ -9438,6 +9522,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9550,13 +9639,11 @@
     "id": "LCAJHY4139CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:08:05.762Z",
@@ -9577,6 +9664,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -9874,11 +9966,11 @@
     "id": "LCAJHY4151CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -9889,6 +9981,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -10198,11 +10295,11 @@
     "id": "LCAJHY4163CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-03T23:22:00.887Z",
@@ -10213,6 +10310,11 @@
         "timestamp": "2026-10-06T18:37:30.156Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -13195,13 +13297,11 @@
     "id": "LCAJHY4169CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -13227,6 +13327,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -13411,13 +13516,11 @@
     "id": "LCAJHY4177CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.575Z",
@@ -13438,6 +13541,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -14010,13 +14118,11 @@
     "id": "LCAJHY4206CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
-    "usedSides": [
-      "10.0"
-    ],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "usedSides": [],
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -14037,6 +14143,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -14115,11 +14226,11 @@
     "id": "LCAJHY4211CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -14130,6 +14241,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -14276,11 +14392,11 @@
     "id": "LCAJHY4220CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -14291,6 +14407,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -14315,11 +14436,11 @@
     "id": "LCAJHY4222CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-07-14T21:42:27.576Z",
@@ -14330,6 +14451,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.474Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -15118,11 +15244,11 @@
     "id": "LCAJHY4214CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 9,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-08-20T22:27:48.992Z",
@@ -15133,6 +15259,11 @@
         "timestamp": "2026-10-06T18:37:30.155Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:9회 | 비고:"
       }
     ]
   },
@@ -15818,11 +15949,11 @@
     "id": "LCAJHY0044CL71810.0",
     "toolType": "LW (하도)",
     "maker": "HYTC",
-    "status": "Regrind",
+    "status": "Storage",
     "currentSide": "10.0",
     "usedSides": [],
-    "regrindAvailable": 0,
-    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
+    "regrindAvailable": 8,
+    "lastHistory": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:",
     "historyLog": [
       {
         "timestamp": "2026-10-06T18:37:39.255Z",
@@ -15833,6 +15964,11 @@
         "timestamp": "2026-10-06T18:37:50.224Z",
         "status": "Regrind",
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
+      },
+      {
+        "timestamp": "2026-10-06T18:39:15.473Z",
+        "status": "Storage",
+        "log": "[연마입고] 일자:2026-10-05 | 연마가능잔여:8회 | 비고:"
       }
     ]
   }
