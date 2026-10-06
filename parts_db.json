@@ -15271,5 +15271,22 @@
         "log": "[연마입고] 일자:2026-09-22 | 연마가능잔여:9회 | 비고:"
       }
     ]
+  },
+  {
+    "id": "LCAJHY1120CU656X1.8",
+    "toolType": "1.8도 상도",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-10-06T18:36:08.657Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
