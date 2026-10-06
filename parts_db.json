@@ -15583,5 +15583,22 @@
         "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
       }
     ]
+  },
+  {
+    "id": "LCAJHY0044CL71810.0",
+    "toolType": "LW (하도)",
+    "maker": "HYTC",
+    "status": "Storage",
+    "currentSide": "10.0",
+    "usedSides": [],
+    "regrindAvailable": 0,
+    "lastHistory": "신규 등록 입고",
+    "historyLog": [
+      {
+        "timestamp": "2026-10-06T18:37:39.255Z",
+        "status": "Storage",
+        "log": "신규 생산 라인 등록 입고"
+      }
+    ]
   }
 ]
