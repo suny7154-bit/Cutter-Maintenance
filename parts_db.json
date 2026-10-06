@@ -15276,16 +15276,21 @@
     "id": "LCAJHY1120CU656X1.8",
     "toolType": "1.8도 상도",
     "maker": "HYTC",
-    "status": "Storage",
+    "status": "Regrind",
     "currentSide": "10.0",
     "usedSides": [],
     "regrindAvailable": 0,
-    "lastHistory": "신규 등록 입고",
+    "lastHistory": "[최고관리자 강제 제어] 상태를 Regrind로 변경",
     "historyLog": [
       {
         "timestamp": "2026-10-06T18:36:08.657Z",
         "status": "Storage",
         "log": "신규 생산 라인 등록 입고"
+      },
+      {
+        "timestamp": "2026-10-06T18:36:42.304Z",
+        "status": "Regrind",
+        "log": "[최고관리자 강제 제어] 상태를 Regrind로 변경"
       }
     ]
   }
